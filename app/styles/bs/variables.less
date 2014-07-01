@@ -19,6 +19,7 @@
 @brand-info:            #64CDFF;
 @brand-warning:         #F2CD5D;
 @brand-danger:          #D96F2A;
+@brand-offwhite:        #F3F5F4;
 
 
 //== Scaffolding
@@ -40,7 +41,7 @@
 //
 //## Font, line-height, and color for body text, headings, and more.
 
-@font-family-sans-serif:  'Roboto', Helvetica, Arial, sans-serif;
+@font-family-sans-serif:  'Open Sans', Helvetica, Arial, sans-serif;
 @font-family-serif:       Georgia, "Times New Roman", Times, serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 @font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
@@ -174,7 +175,7 @@
 //##
 
 //** `<input>` background color
-@input-bg:                       rgba(255, 255, 255, 0.6);
+@input-bg:                       rgba(255, 255, 255, 0.75);
 //** `<input disabled>` background color
 @input-bg-disabled:              @gray-lighter;
 
@@ -183,9 +184,9 @@
 //** `<input>` border color
 @input-border:                   #ccc;
 //** `<input>` border radius
-@input-border-radius:            2px;
+@input-border-radius:            0px;
 //** Border color for inputs on focus
-@input-border-focus:             @brand-primary;
+@input-border-focus:             @brand-info;
 
 //** Placeholder text color
 @input-color-placeholder:        @gray-light;
@@ -576,16 +577,16 @@
 @modal-title-line-height:     @line-height-base;
 
 //** Background color of modal content area
-@modal-content-bg:                             #fff;
+@modal-content-bg:                             @brand-offwhite;
 //** Modal content border color
 @modal-content-border-color:                   rgba(0,0,0,.2);
 //** Modal content border color **for IE8**
 @modal-content-fallback-border-color:          #999;
 
 //** Modal backdrop background color
-@modal-backdrop-bg:           #000;
+@modal-backdrop-bg:           @brand-default;
 //** Modal backdrop opacity
-@modal-backdrop-opacity:      .5;
+@modal-backdrop-opacity:      .75;
 //** Modal header border color
 @modal-header-border-color:   #e5e5e5;
 //** Modal footer border color

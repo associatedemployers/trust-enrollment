@@ -7,9 +7,9 @@
 // .modal-dialog    - positioning shell for the actual modal
 // .modal-content   - actual modal w/ bg and corners and shit
 
-.customModalAnimation(@x, @y, @z, @rotateX, @rotateY, @scale) {
-  -webkit-transform: translate3d(@x, @y, @z) rotateX(@rotateX) rotateY(@rotateY) scale(@scale);
-  transform: translate3d(@x, @y, @z) rotateX(@rotateX) rotateY(@rotateY) scale(@scale);
+.customModalAnimation(@x, @y, @z, @rotate, @rotateX, @rotateY, @scale) {
+  -webkit-transform: translate3d(@x, @y, @z) rotate(@rotate) rotateX(@rotateX) rotateY(@rotateY) scale(@scale);
+  transform: translate3d(@x, @y, @z) rotate(@rotate) rotateX(@rotateX) rotateY(@rotateY) scale(@scale);
 }
 
 // Kill the scroll on the body
@@ -38,10 +38,10 @@
 
   // When fading in the modal, animate it to slide down
   &.fade .modal-dialog {
-    .customModalAnimation(0, 100%, 0, 60deg, 0, 1.8);
+    .customModalAnimation(100%, 0, 0, 90deg, 0, 0, 1.6);
     .transition-transform(~"0.3s ease");
   } 
-  &.in .modal-dialog { .customModalAnimation(0, 0, 0, 0, 0, 1); }
+  &.in .modal-dialog { .customModalAnimation(0, 0, 0, 0, 0, 0, 1); }
 }
 
 // Shell div to position the modal with bottom padding
@@ -57,7 +57,7 @@
   background-color: @modal-content-bg;
   border: 1px solid @modal-content-fallback-border-color; //old browsers fallback (ie8 etc)
   border: 1px solid @modal-content-border-color;
-  border-radius: @border-radius-large;
+  border-radius: 0px;
   .box-shadow(0 3px 9px rgba(0,0,0,.5));
   background-clip: padding-box;
   // Remove focus outline from opened modal

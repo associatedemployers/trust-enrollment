@@ -121,13 +121,14 @@ output {
   color: @input-color;
   background-color: @input-bg;
   background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
-  border: 1px solid @input-border;
+  border: none;
+  border-bottom: 3px solid @input-border;
   border-radius: @input-border-radius;
 
   @input-height-half: (@input-height-base / 2);
 
-  .box-shadow(~"0 1px 1px rgba(0,0,0,.075) inset, 0 @{input-height-half} 1px rgba(255, 255, 255, 0.3) inset");
-  .transition(~"border-color ease-in-out .15s, box-shadow ease-in-out .15s");
+  .box-shadow(~"0 1px 1px rgba(0,0,0,.075) inset, 0 1px 1px rgba(0, 0, 0, 0.4)");
+  .transition(~"border-color ease-in-out .3s, box-shadow ease-in-out .15s, background-color ease-in-out .15s");
 
   // Customize the `:focus` state to imitate native WebKit styles.
   .form-control-focus();
