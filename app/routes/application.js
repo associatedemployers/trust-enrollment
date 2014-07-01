@@ -1,3 +1,5 @@
+import Ember from 'ember';
+
 var ApplicationRoute = Ember.Route.extend({
 	// Define Global Action Handlers
 	actions: {
