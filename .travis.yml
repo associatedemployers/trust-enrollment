@@ -17,3 +17,6 @@ env:
   global:
   - secure: rnAHxgqucPglEGpB34QdNxSJ2nLui5S192YspAwLpGKKEhCjVkDniuBG8E+l+KN2vGFeTVs95ACeLU4W5DMVOFpM/T9EoZuadKZYirlXZgjcoPMPQDvh7QPHnDNZQKO4AHCf3Z9Z9yftuFIGrE6iG3hnfrQ63nrwbzj0wjRyA5g=
   - secure: pXog30RguMnYQrENbT4IG+K+qYR49FQpav83PwXFBipF6ppfGvDEpDZ6aQ2KzzXCZmnc8QBoaBw7xN2qSQSrNAy30NQ6cfE3BGZkGNRzLldyE2CFfiF7zwRCEMjfLgZHOkPrJF7imnyer9w6QqatsiiBZWYBAVQUeZMl3N5VS38=
+
+notifications:
+  slack: aehr:Onhz0k4eQcFbDbha4LgRTrnw
