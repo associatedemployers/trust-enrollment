@@ -1,0 +1,19 @@
+language: node_js
+
+node_js:
+- '0.10'
+
+before_install:
+- npm install npm -g
+
+before_script:
+- bower install
+
+after_success:
+- ember build env --environment=production
+- find dist -type f -exec curl -u $FUSR:$FPSW --ftp-create-dirs -T {} ftp://trust.associatedemployers.org/{} \;
+
+env:
+  global:
+  - secure: rnAHxgqucPglEGpB34QdNxSJ2nLui5S192YspAwLpGKKEhCjVkDniuBG8E+l+KN2vGFeTVs95ACeLU4W5DMVOFpM/T9EoZuadKZYirlXZgjcoPMPQDvh7QPHnDNZQKO4AHCf3Z9Z9yftuFIGrE6iG3hnfrQ63nrwbzj0wjRyA5g=
+  - secure: pXog30RguMnYQrENbT4IG+K+qYR49FQpav83PwXFBipF6ppfGvDEpDZ6aQ2KzzXCZmnc8QBoaBw7xN2qSQSrNAy30NQ6cfE3BGZkGNRzLldyE2CFfiF7zwRCEMjfLgZHOkPrJF7imnyer9w6QqatsiiBZWYBAVQUeZMl3N5VS38=
