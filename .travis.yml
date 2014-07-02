@@ -11,12 +11,12 @@ before_script:
 
 after_success:
 - ember build env --environment=production
-- find dist -type f -exec curl -u $FUSR:$FPSW --ftp-create-dirs -T {} ftp://trust.associatedemployers.org/{} \;
+- cd dist; find . -type f -exec curl -u $FUSR:$FPSW --ftp-create-dirs -T {} ftp://trust.associatedemployers.org/{} \;
 
 env:
   global:
-  - secure: rnAHxgqucPglEGpB34QdNxSJ2nLui5S192YspAwLpGKKEhCjVkDniuBG8E+l+KN2vGFeTVs95ACeLU4W5DMVOFpM/T9EoZuadKZYirlXZgjcoPMPQDvh7QPHnDNZQKO4AHCf3Z9Z9yftuFIGrE6iG3hnfrQ63nrwbzj0wjRyA5g=
-  - secure: pXog30RguMnYQrENbT4IG+K+qYR49FQpav83PwXFBipF6ppfGvDEpDZ6aQ2KzzXCZmnc8QBoaBw7xN2qSQSrNAy30NQ6cfE3BGZkGNRzLldyE2CFfiF7zwRCEMjfLgZHOkPrJF7imnyer9w6QqatsiiBZWYBAVQUeZMl3N5VS38=
+  - secure: P88DMeWEoDvvkz5ydX3pueLF03I8vtXP2drM/YN+SqHf2Zyzq495fvOxQR06VNEH07n5rUaMlxuh5KrmEffaMqCn/w5XeWYDQTvEixufC4wPA9M3LP5JLx2agM1APHXYoR1d2T2vEsfSV2h3KkMd4DBmSQaJf6yNRbhkeSrdfhQ=
+  - secure: dbgxVNhk8aJxGQnKnCw5Uu9OiLuMR+Rw5j/mdNgJxON00HjSK5o43x2x2l9aZFSjtD1vDzsJVv1bfdqpCcoeoyETbwcy+E82PA9EbzCJJXqx26gCXYlDUeW6L0wL4MsJcLuj313Dflx4Y/AKftUHGXJDkwlHVqQ7j9b0LXspgxo=
 
 notifications:
   slack: aehr:Onhz0k4eQcFbDbha4LgRTrnw
