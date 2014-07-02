@@ -1,0 +1,20 @@
+<div class="card-title">
+  <h1>Please Login</h1>
+</div>
+<div class="card-dialog">
+  <form class="login-form" {{action "login" on="submit"}}>
+    <div class="form-group">
+      {{input class="form-control" value=cid placeholder="Identification Number"}}
+      <span class="help help-right help-sm"><a href="#" {{action "toggleSSN"}}>I don't have an Identification Number</a></span>
+    </div>
+    <div class="row">
+      <div class="col-md-6"></div>
+      <div class="col-md-6">
+        <div class="form-group text-right">
+          <button type="submit" class="btn btn-primary btn-o btn-lg">Start</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

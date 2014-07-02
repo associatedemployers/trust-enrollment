@@ -4,7 +4,8 @@ var Router = Ember.Router.extend({
   location: TrustEnrollmentENV.locationType
 });
 
-Router.map(function() {
+Router.map(function () {
+  this.resource('prototypes');
 });
 
 export default Router;

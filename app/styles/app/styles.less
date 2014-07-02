@@ -9,17 +9,19 @@
   font-weight: normal;
   font-style: normal;
 }
-
-@import "./bs/mixins.less";// import some mixins from bootstrap
+// Vendor Mixins
+@import "./bs/mixins.less";
 
 // Custom Mixins
 @import "mixins.less";
 
 // Routes
-
+@import "index.less";
 
 // Utility Classes
 @import "utility-classes.less";
 
 // Application
-@import "global.less";// global app styles
+@import "global.less";
+@import "footer.less";
+@import "cards.less";
