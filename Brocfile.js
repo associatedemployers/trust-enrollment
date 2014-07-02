@@ -10,6 +10,10 @@ var app = new EmberApp({
     options: {}
   },
 
+  fingerprint: {
+    enabled: true,
+  },
+
   getEnvJSON: require('./config/environment')
 });
 
