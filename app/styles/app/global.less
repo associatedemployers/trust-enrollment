@@ -14,6 +14,7 @@ body, html {
 .help {
   display: block;
   width: 100%;
+  font-size: 80%;
 
   a {
     color: @brand-default;
@@ -25,5 +26,86 @@ body, html {
   }
   &.help-right {
     text-align: right;
+  }
+}
+
+a {
+  color: @brand-primary;
+  text-decoration: none !important;
+
+  &.light {
+    color: darken(@brand-info, 20%);
+
+    &:hover {
+      color: @brand-info;
+    }
+  }
+
+  .transition(~"all ease-in-out 0.35s");
+
+  &:hover {
+    color: lighten(@brand-primary, 20%);
+  }
+}
+
+.hide-slide {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  tab-index: 999;
+
+  .transition(~"opacity ease-in-out 0.4s, max-height ease-in-out 0.25s");
+  
+  &.show {
+    opacity: 1;
+    max-height: 400px;
+    tab-index: auto;
+  }
+}
+
+.logo-container {
+  padding: 5px;// To achieve that bordered box
+  background: fade(#FFF, 80%);
+  width: unit( ( (250 / 3) * 2 ), px);
+  height: unit( ( (173 / 3) * 2 ), px);
+  position: absolute;
+  margin: 0 auto;
+  top: 0;
+  left: 15px;
+  overflow: hidden;
+
+  .logo {
+    .square(100%);
+    background-image: url('images/ae_logo.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .trust-text {
+    opacity: 0;
+    max-width: 0;
+
+    .transition(~"all ease-in-out 0.35s");
+  }
+
+  &.show-trust-text {
+    @orginal-width: unit( ( ( (250 / 3) * 2 ) ), px);
+    @width-modifer: 220px;
+
+    width: @orginal-width + @width-modifer;
+
+    .logo {
+      float: left;
+      width: unit( ( ( (250 / 3) * 2 ) - 10 ), px);
+    }
+
+    .trust-text {
+      padding-left: 15px;
+      float: left;
+      opacity: 1;
+      max-width: 400px;
+      font-size: 35px;
+      width: @width-modifer;
+    }
   }
 }
