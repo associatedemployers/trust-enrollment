@@ -5,7 +5,7 @@ import loadInitializers from 'ember/load-initializers';
 Ember.MODEL_FACTORY_INJECTIONS = true;
 
 var App = Ember.Application.extend({
-  modulePrefix: 'trust-enrollment', // TODO: loaded via config
+  modulePrefix: 'trust-enrollment',
   Resolver: Resolver
 });
 
