@@ -9,8 +9,9 @@
   z-index: @zindex-tooltip;
   display: block;
   visibility: visible;
-  font-size: @font-size-small;
+  font-size: @font-size-small - 1;
   line-height: 1.4;
+
   .opacity(0);
 
   &.in     { .opacity(@tooltip-opacity); }
