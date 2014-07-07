@@ -26,16 +26,17 @@
       <span {{bind-attr class=":text-addon idIsValid:success:danger"}}>{{cid_formatted}}{{#if idIsValid}}<i class="fa fa-fw fa-check"></i>{{/if}}</span>
       <div {{bind-attr class=":helpers :hide-slide idIsValid::show"}}>
         {{! Tab index is set below to disable helps from being the next element when the parent element is hidden}}
-        <span class="help help-right help-sm"><a href="#" tabindex="10" {{action toggleProperty "newEnrollment"}}>I don't have an ID#</a></span>
+        <span class="help help-right help-sm tooltip-trigger" data-toggle="tooltip" data-placement="right" data-container="body" title="Enrolling for the first time? Click this to start a new enrollment."><a href="#" tabindex="10" {{action toggleProperty "newEnrollment"}}>I don't have an ID#</a></span>
         <span class="help help-right help-sm"><a href="#" tabindex="11" {{action toggleProperty "showIDCard"}}>Where can I find my ID#?</a></span>
       </div>
     </div>
 
-    <div {{bind-attr class=":form-group :left-inner-addon :hide-slide idIsValid:show newEnrollment:show"}}>
+    <div {{bind-attr class=":form-group :left-inner-addon :right-inner-text-addon :hide-slide idIsValid:show newEnrollment:show"}}>
       {{input class="form-control" value=ssn placeholder="SSN"}}
+      <span {{bind-attr class=":text-addon ssnIsValid:success:danger"}}>{{ssn_formatted}}{{#if ssnIsValid}}<i class="fa fa-fw fa-check"></i>{{/if}}</span>
       <i class="fa fa-fw fa-lock"></i>
       {{#if newEnrollment}}
-        <span class="help help-right help-sm"><a href="#" tabindex="10" {{action toggleProperty "newEnrollment"}}>I have an ID#</a></span>
+        <p class="help help-right help-sm"><a href="#" tabindex="10" {{action toggleProperty "newEnrollment"}}>I have an ID#</a></p>
       {{/if}}
     </div>
 
