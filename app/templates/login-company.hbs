@@ -1,0 +1,25 @@
+{{! card header}}
+<div class="card-title">
+  <h1>Please Login</h1>
+</div>
+{{! ./ card header}}
+{{! card body}}
+<div class="card-dialog">
+
+  <form class="login-form" {{action "login" true on="submit"}}>
+    <div class="form-group right-inner-text-addon">
+      {{input class="form-control" value=companyId placeholder="Company ID"}}
+      <span {{bind-attr class=":text-addon companyIdIsValid:success:danger"}}>{{companyId}}{{#if companyIdIsValid}}<i class="fa fa-fw fa-check"></i>{{/if}}</span>
+    </div>
+
+    <div {{bind-attr class=":form-group :hide-slide companyIdIsValid:show"}}>
+      {{input class="form-control" value=password placeholder="Company Password"}}
+    </div>
+
+    <div class="form-group text-right">
+      <button type="submit" class="btn btn-success btn-lg" {{bind-attr disabled=loginIsNotValid}}>Login</button>
+    </div>
+  </form>
+
+</div>
+{{! ./ card body}}
