@@ -20,5 +20,41 @@ footer.app-footer {
   &:hover {
     color: @brand-offwhite !important;
     background-color: @footer-background-hover;
+
+    ul.footer-links li a {
+      color: darken(@brand-offwhite, 15%);
+
+      &:hover {
+        color: @brand-offwhite;
+      }
+    }
+  }
+
+  ul.footer-links {
+    list-style: none;
+    text-align: right;
+
+    li {
+      display: inline-block;
+      
+      &:after {
+        content: ' | ';
+      }
+
+      &:last-of-type {
+        &:after {
+          content: '';
+        }
+      }
+      
+      a {
+        color: @brand-primary;
+        display: inline-block;
+
+        
+      }
+
+
+    }
   }
 }
