@@ -15,6 +15,7 @@
     "ember-qunit-notifications": "^0.0.1",
     "ember-cli-test-loader": "rjackson/ember-cli-test-loader#0.0.2",
     "font-awesome": "~4.1.0",
-    "bootstrap": "~3.2.0"
+    "bootstrap": "~3.2.0",
+    "qunit-theme-ninja": "git://github.com/Krinkle/qunit-theme-ninja.git#~1.1.0"
   }
 }
