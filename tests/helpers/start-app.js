@@ -1,3 +1,4 @@
+import Ember from 'ember';
 /* global require */
 
 var Application = require('trust-enrollment/app')['default'];
