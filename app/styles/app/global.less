@@ -2,13 +2,26 @@
 	Global Styles
 */
 
-body, html {
+* {
+  margin: 0;
+}
+
+body, html, .app-view {
   height: 100%;
 }
 
-.ember-view.app-wrapper {
-	height: 100%;
+.app-wrapper {
   position: relative;
+  height: 100%;
+  min-height: 800px;
+  /* equal to footer height */
+  margin-bottom: -83px;
+
+  &:after {
+    height: 83px;
+    content: "";
+    display: block;
+  }
 }
 
 .help {

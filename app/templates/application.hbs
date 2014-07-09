@@ -1,6 +1,8 @@
-<div {{bind-attr class=":logo-container onIndex:show-trust-text"}}>
-  <div class="logo"></div>
-  <span class="trust-text">Trust Enrollment</span>
+<div class="app-wrapper">
+  <div {{bind-attr class=":logo-container onIndex:show-trust-text"}}>
+    <div class="logo"></div>
+    <span class="trust-text">Trust Enrollment</span>
+  </div>
+  {{outlet}}
 </div>
-{{outlet}}
 {{render "footer"}}
