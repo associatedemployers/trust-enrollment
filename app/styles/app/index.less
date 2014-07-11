@@ -2,16 +2,21 @@
   Index Styles
 */
 
-.full-background {
+.index-full-background {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: -100;
+  .trbl();
+  margin-top: 116px;
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.9) inset;
 
   .at2x('images/landing_image.jpg', cover, null, true);
+
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+
+  .overlay {
+    position: absolute;
+    background: url('images/pattern_overlay.png') repeat;
+    .trbl();
+  }
 }

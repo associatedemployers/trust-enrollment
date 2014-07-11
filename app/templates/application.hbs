@@ -1,8 +1,5 @@
 <div class="app-wrapper">
-  <div {{bind-attr class=":logo-container onIndex:show-trust-text"}}>
-    <div class="logo"></div>
-    <span class="trust-text">Trust Enrollment</span>
-  </div>
+  {{render "header"}}
   {{outlet}}
 </div>
 {{render "footer"}}

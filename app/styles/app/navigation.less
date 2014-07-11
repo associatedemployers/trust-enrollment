@@ -1,0 +1,94 @@
+/*
+  Navigation Styles
+*/
+
+nav.app-header {
+  .transition(~'all ease-in-out .4s');
+
+  // Override the margin
+  .row {
+    margin: 0 !important;
+  }
+
+  // Left
+  .header-left {
+    .logo-container {
+      padding: 10px;
+      width: 100%;
+      height: unit( ( (173 / 3) * 2 ), px);
+      margin-left: 10px;
+      .perspective(20px);
+      
+      .logo {
+        display: inline-block;
+        width: unit( ( ( (250 / 3) * 2 ) - 10 ), px);
+        height: 100%;
+        background-image: url(images/ae_logo.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+      }
+
+      .trust-text {
+        display: inline-block;
+        opacity: 0;
+        height: 100%;
+        width: 220px;
+        font-weight: 100;
+        padding-left: 6px;
+        font-size: 35px;
+        vertical-align: top;
+
+        .transition(~"all ease-in-out .25s");
+        .transform-origin(0%);
+        .rotateY(90deg);
+      }
+
+      &.show-trust-text {
+        width: 100%;
+
+        .trust-text {
+          opacity: 1;
+
+          .rotateY(0deg);
+        }
+      }
+    }
+  }
+
+  // Right
+  .header-right {
+
+    .right-container-media-queries();
+
+    ul.header-links {
+      list-style: none;
+      text-align: right;
+      padding: 41px;
+      margin: 0;
+
+      .ul-media-queries();
+
+      li {
+        display: inline-block;
+        
+        a {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  // Local Mixin Definitions
+  .ul-media-queries() {
+    @media all and (max-width: @screen-md) {
+      padding: 10px;
+    }
+  }
+
+  .right-container-media-queries() {
+    @media all and (max-width: @screen-md) {
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.7);
+    }
+  }
+}
