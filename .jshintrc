@@ -3,7 +3,8 @@
     "document": true,
     "window": true,
     "TrustEnrollmentENV": true,
-    "$": true
+    "$": true,
+    "moment": true
   },
   "browser" : true,
   "boss" : true,
