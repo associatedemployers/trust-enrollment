@@ -16,8 +16,7 @@ module.exports = {
 
   afterInstall: function (options) {
     if(options.addManifest) {
-      console.log("adding to manifest");
-      //addStyleToManifest(options.entity.name);
+      addStyleToManifest(options.entity.name);
     }
   }
 };

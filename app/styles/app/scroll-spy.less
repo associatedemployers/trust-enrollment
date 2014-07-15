@@ -1,0 +1,49 @@
+/*
+  Scroll Spy Styles
+*/
+
+@scroll-spy-transition: ~"all ease-in-out 0.4s";
+
+.scroll-spy-view {
+  background-color: @enrollment-panel-color;
+  width: 240px;
+  padding: 20px;
+
+  .transition(@scroll-spy-transition);
+
+  /* ul -> li -> ul -> li */
+  ul.titles {
+    padding-left: 0;
+
+    li.title {
+      font-weight: 100;
+      z-index: 2;
+
+      ul.subtitles {
+        padding-left: 10px;
+        max-height: 0;
+        visibility: hidden;
+        opacity: 0;
+        z-index: 1;
+
+        &.active {
+          visibility: visible;
+          opacity: 1;
+          max-height: 300px;
+        }
+
+        li.subtitle {
+          font-size: 85%;
+
+          &.active {
+            color: @brand-primary;
+          }
+        }
+      }
+    }
+  }
+
+  ul {
+    list-style: none;
+  }
+}

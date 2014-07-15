@@ -77,3 +77,26 @@ a {
   }
 }
 
+.full-background {
+  position: absolute;
+  .trbl();
+  margin-top: 116px;
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.9) inset;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  .meshed-overlay {
+    position: absolute;
+    background: url('images/pattern_overlay.png') repeat;
+    .trbl();
+  }
+
+  &.index-full-background {
+    .at2x('images/landing_image.jpg', cover, null, true);
+  }
+
+  &.enrollment-full-background {
+    .gradient(lighten(@brand-primary, 10%), darken(@brand-primary, 10%));
+  }
+}

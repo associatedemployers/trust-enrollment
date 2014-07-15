@@ -2,3 +2,34 @@
   Enrollment Styles
 */
 
+.enrollment-view {
+
+  .enrollment-wrapper {
+    width: 80%;
+    margin: 0 auto;
+
+    .scroll-spy-section {
+      padding-top: 20px;
+    }
+
+    .scroll-section {
+      padding-top: 10px;
+      overflow: hidden;
+
+      .enrollment-card {
+        padding: 20px;
+        background-color: @enrollment-panel-color;
+        margin-bottom: 20px;
+
+        hr {
+          margin: 0 !important;
+          border-top: 1px solid fade(@brand-default, 30%);
+        }
+
+        .enrollment-subtitle {
+          font-size: 150%;
+        }
+      }
+    }
+  }
+}

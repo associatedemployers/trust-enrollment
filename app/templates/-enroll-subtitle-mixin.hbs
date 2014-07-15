@@ -1,0 +1,4 @@
+{{#each subtitle in section.subtitles}}
+  <h2 {{bind-attr id=subtitle.title}} class="enrollment-subtitle">{{subtitle.display}}</h2>
+  {{partial subtitle.title}}
+{{/each}}

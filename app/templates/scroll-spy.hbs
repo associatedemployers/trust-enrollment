@@ -1,0 +1,14 @@
+<ul class="titles">
+  {{#each section in content}}
+    <li {{bind-attr class=":title section.isActive:active"}}>
+      <a href="#" {{action "changeActive" section.title}}>{{section.display}}</a>
+      {{#if section.subtitles}}
+        <ul class="subtitles section.isActive:active">
+          {{#each subtitle in section.subtitles}}
+            <li {{bind-attr class=":subtitle subtitle.isActive:active"}}><a href="#" {{action "changeActive" subtitle.title}}>{{subtitle.display}}</a></li>
+          {{/each}}
+        </ul>
+      {{/if}}
+    </li>
+  {{/each}}
+</ul>

@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="form-inline">
+    <div class="form-group">
+      {{view Ember.Select class="form-control" content=years value=enrollment.dob_year prompt="YYYY"}}
+    </div>
+    <div class="form-group">
+      {{view Ember.Select class="form-control" content=months value=enrollment.dob_month prompt="MM"}}
+    </div>
+    <div {{bind-attr class=":form-group :hide-slide enrollmentData.etc.dob.day:show"}}>
+      {{view Ember.Select class="form-control" content=days value=enrollment.dob_day prompt="DD"}}
+    </div>
+  </div>
+</div>
