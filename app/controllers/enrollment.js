@@ -120,7 +120,7 @@ export default Ember.Controller.extend({
       self.get('content').set(update, val);
       // Return for validity parsing
       return val;
-    }
+    };
     
     this.set('validity', v.map(function (obj) {
       // Set current and cache for comparison

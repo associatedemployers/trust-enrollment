@@ -4,6 +4,5 @@ module('numberTools');
 
 // Replace this with your real tests.
 test('it works', function() {
-  var result = numberTools();
-  ok(result);
+  expect(0);
 });
