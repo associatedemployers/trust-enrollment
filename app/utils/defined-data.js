@@ -52,4 +52,9 @@ var states = [
   { v: "WY", l: "Wyoming" }
 ];
 
-export { states };
+// Not sure we will be using this.
+var suffixes = [
+  "test"
+];
+
+export { states, suffixes };

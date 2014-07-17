@@ -8,6 +8,8 @@
     width: 80%;
     margin: 0 auto;
 
+    .enrollment-media-queries();
+
     .scroll-spy-section {
       padding-top: 20px;
     }
@@ -31,5 +33,11 @@
         }
       }
     }
+  }
+}
+
+.enrollment-media-queries() {
+  @media all and (max-width: 1600px) {
+    width: 98% !important;
   }
 }

@@ -4,6 +4,7 @@ import { caseTitle } from '../utils/text-tools';
 export default Ember.Controller.extend({
   queryParams: [ 'item' ],
   item: null,
+  validity: Ember.Object.create(),
   _contentCache: Ember.Object.create(),
 
   /*
@@ -43,6 +44,18 @@ export default Ember.Controller.extend({
     {
       title: "enroll-personal-information",
       display: "Personal Information"
+    },
+    {
+      title: "enroll-test-section",
+      display: "Test Section #1"
+    },
+    {
+      title: "enroll-test-section2",
+      display: "Test Section #2"
+    },
+    {
+      title: "enroll-test-section3",
+      display: "Test Section #3"
     }
   ],
 
@@ -107,7 +120,68 @@ export default Ember.Controller.extend({
         _check: function (txt) {
           return (txt && txt.length > 4);
         },
-        description: "Last Name"
+        description: "Address Street"
+      }
+    },
+    {
+      _valName: 'address_city',
+      format: function (v) {
+        return caseTitle(v);
+      },
+      validity: {
+        _check: function (txt) {
+          return (txt && txt.length > 1);
+        },
+        description: "City"
+      }
+    },
+    {
+      _valName: 'address_state',
+      validity: {
+        _check: function (txt) {
+          return (txt && txt.length === 2);
+        },
+        description: "State"
+      }
+    },
+    {
+      _valName: 'address_zipcode',
+      format: function (v) {
+        var minlen = v.length - 1;
+        return (isNaN(v.charAt(minlen))) ? v.substring(0, minlen) : v.substring(0, 5);
+      },
+      validity: {
+        _check: function (txt) {
+          return (txt && txt.length === 5 && !isNaN(txt));
+        },
+        description: "State"
+      }
+    },
+    {
+      _valName: 'dob_year',
+      validity: {
+        _check: function (txt) {
+          return (txt && !isNaN(txt));
+        },
+        description: "Year of Birth"
+      }
+    },
+    {
+      _valName: 'dob_month',
+      validity: {
+        _check: function (txt) {
+          return (txt && !isNaN(txt));
+        },
+        description: "Month of Birth"
+      }
+    },
+    {
+      _valName: 'dob_day',
+      validity: {
+        _check: function (txt) {
+          return (txt && !isNaN(txt));
+        },
+        description: "Day of Birth"
       }
     }
   ],
@@ -115,7 +189,19 @@ export default Ember.Controller.extend({
   /* Bind all of these entries to the contentDidChange function */
   contentDidChange: function () {
     Ember.run.once(this, this.validityChecker);
-  }.observes('content.name_first', 'content.name_mi', 'content.name_last', 'content.address_line1', 'content.address_line2', 'content.address_city', 'content.address_state', 'content.address_zipcode'),
+  }.observes(
+    'content.name_first', 
+    'content.name_mi', 
+    'content.name_last', 
+    'content.address_line1', 
+    'content.address_line2', 
+    'content.address_city', 
+    'content.address_state', 
+    'content.address_zipcode', 
+    'content.dob_day', 
+    'content.dob_month', 
+    'content.dob_year'
+  ),
 
   /* Check validity amung other things */
   validityChecker: function () {
@@ -123,9 +209,12 @@ export default Ember.Controller.extend({
         self = this;
     
     var verifyValidity = function (validityObject, val) {
-      console.debug("checking");
       // Do the validity check
       validityObject.valid = validityObject.validity._check(val);
+
+      // Set it for template access
+      self.get('validity').set(validityObject._valName, validityObject.valid);
+
       // Return the validityObject to the mapper
       return validityObject;
     };
@@ -143,7 +232,7 @@ export default Ember.Controller.extend({
       return val;
     };
     
-    this.set('validity', v.map(function (obj) {
+    this.set('entries', v.map(function (obj) {
       // Set current and cache for comparison
       var current   = self.get('content').get(obj._valName),
           cache     = self.get('_contentCache') || null,
@@ -172,5 +261,15 @@ export default Ember.Controller.extend({
     }
 
     return this.set('progress', Math.round( ( prog / entriesLen ) * 100));
+  },
+
+  actions: {
+    changeActive: function (id) {
+      Ember.run.scheduleOnce('afterRender', this, function () {
+        $('html, body').animate({
+          scrollTop: $("#" + id).offset().top - 50
+        }, 1000);
+      });
+    }
   }
 });

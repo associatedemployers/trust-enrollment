@@ -3,9 +3,10 @@
 */
 
 @scroll-spy-transition: ~"all ease-in-out 0.4s";
+@active-box-shadow: 3px 0 0 rgba(255, 255, 255, 0.8);
 
 .scroll-spy-view {
-  background-color: @enrollment-panel-color;
+  //background-color: @enrollment-panel-color;
   width: 240px;
   padding: 20px;
 
@@ -14,10 +15,38 @@
   /* ul -> li -> ul -> li */
   ul.titles {
     padding-left: 0;
+    margin-bottom: 20px;
 
     li.title {
       font-weight: 100;
       z-index: 2;
+
+      a {
+        display: block;
+        color: lighten(@brand-default, 50%);
+      }
+
+      &.active {
+
+        & > a {
+          .active-style();
+        }
+
+        ul.subtitles {
+          visibility: visible;
+          opacity: 1;
+          max-height: 300px;
+
+          li.active {
+
+            & > a {
+              .active-style();
+            }
+
+          }
+
+        }
+      }
 
       ul.subtitles {
         padding-left: 10px;
@@ -25,12 +54,6 @@
         visibility: hidden;
         opacity: 0;
         z-index: 1;
-
-        &.active {
-          visibility: visible;
-          opacity: 1;
-          max-height: 300px;
-        }
 
         li.subtitle {
           font-size: 85%;
@@ -46,4 +69,9 @@
   ul {
     list-style: none;
   }
+}
+
+.active-style() {
+  color: white;
+  .box-shadow(@active-box-shadow);
 }

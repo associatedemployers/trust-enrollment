@@ -5,12 +5,16 @@ export default Ember.Controller.extend({
 
   /* Aliases */
   states: Ember.computed.alias('controllers.application.states'),
+  suffixes: Ember.computed.alias('controllers.application.suffixes'),
+  validity: Ember.computed.alias('parentController.validity'),
   // We need to directly bind to the parent controller
   // content here because the render helper doesn't allow
   // us to bind properties. Take that, render helper.
   enrollment: Ember.computed.alias('parentController.content'),
 
   /* Computed */
+  noDays: Ember.computed.not('days'),
+
   // Simple year generator
   years: function () {
     var years = [];
@@ -26,5 +30,14 @@ export default Ember.Controller.extend({
       months.push(i);
     }
     return months;
-  }.property()
+  }.property(),
+
+  days: function () {
+    var year = this.get('enrollment.dob_year'),
+        month = this.get('enrollment.dob_month');
+    
+    return (!year || !month) ? null : Array.apply(null, { length: moment(year + "-" + month, "YYYY-MM").daysInMonth() }).map(function (v, index) {
+      return index + 1;
+    });
+  }.property('enrollment.dob_month', 'enrollment.dob_year')
 });

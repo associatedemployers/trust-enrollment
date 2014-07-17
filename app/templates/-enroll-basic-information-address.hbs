@@ -1,23 +1,23 @@
-<div class="form-group">
+{{#validation-wrapper formgroup=true valid=validity.address_line1}}
   {{input class="form-control" value=enrollment.address_line1 placeholder="Street Address"}}
-</div>
+{{/validation-wrapper}}
 <div class="form-group">
   {{input class="form-control" value=enrollment.address_line2 placeholder="Apt./Suite #"}}
 </div>
 <div class="row">
   <div class="col-xs-4">
-    <div class="form-group">
+    {{#validation-wrapper formgroup=true valid=validity.address_city}}
       {{input class="form-control" value=enrollment.address_city placeholder="City"}}
-    </div>
+    {{/validation-wrapper}}
   </div>
   <div class="col-xs-4">
-    <div class="form-group">
+    {{#validation-wrapper formgroup=true valid=validity.address_state}}
       {{view Ember.Select class="form-control" content=states optionLabelPath="content.l" optionValuePath="content.v" value=enrollment.address_state prompt="--Select a State--"}}
-    </div>
+    {{/validation-wrapper}}
   </div>
   <div class="col-xs-4">
-    <div class="form-group">
+    {{#validation-wrapper formgroup=true valid=validity.address_zipcode}}
       {{input class="form-control" value=enrollment.address_zipcode placeholder="Zipcode"}}
-    </div>
+    {{/validation-wrapper}}
   </div>
 </div>

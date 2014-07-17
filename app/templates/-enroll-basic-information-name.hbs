@@ -1,17 +1,17 @@
 <div class="row">
   <div class="col-md-5">
-    <div class="form-group">
+    {{#validation-wrapper formgroup=true valid=validity.name_first}}
       {{input class="form-control" value=enrollment.name_first placeholder="First Name"}}
-    </div>
+    {{/validation-wrapper}}
   </div>
   <div class="col-md-2">
-    <div class="form-group">
+    {{#validation-wrapper formgroup=true valid=validity.name_mi}}
       {{input class="form-control" value=enrollment.name_mi placeholder="M.I."}}
-    </div>
+    {{/validation-wrapper}}
   </div>
   <div class="col-md-5">
-    <div class="form-group">
+   {{#validation-wrapper formgroup=true valid=validity.name_last}}
       {{input class="form-control" value=enrollment.name_last placeholder="Last Name"}}
-    </div>
+    {{/validation-wrapper}}
   </div>
 </div>

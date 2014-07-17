@@ -20,6 +20,9 @@ export default Ember.Mixin.create({
   },
 
   _bindToProperties: function ( event ) {
-    event.data.emEl.set('did' + event.type.charAt(0).toUpperCase() + event.type.slice(1), true);
+    var fn = eval('event.data.emEl.windowDid' + event.type.charAt(0).toUpperCase() + event.type.slice(1));
+    if(typeof fn === "function") {
+      Ember.run.throttle(event.data.emEl, fn, 250);
+    }
   }
 });

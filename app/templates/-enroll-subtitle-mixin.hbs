@@ -1,4 +1,6 @@
 {{#each subtitle in section.subtitles}}
-  <h2 {{bind-attr id=subtitle.title}} class="enrollment-subtitle">{{subtitle.display}}</h2>
-  {{partial subtitle.title}}
+  <div {{bind-attr id=subtitle.title}} class="sub-section">
+    <h2 class="enrollment-subtitle">{{subtitle.display}}</h2>
+    {{partial subtitle.title}}
+  </div>
 {{/each}}
