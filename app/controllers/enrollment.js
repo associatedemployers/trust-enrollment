@@ -4,6 +4,7 @@ import { caseTitle } from '../utils/text-tools';
 export default Ember.Controller.extend({
   queryParams: [ 'item' ],
   item: null,
+  _contentCache: Ember.Object.create(),
 
   /*
     Here we manifest the enrollment sections we want rendered into
@@ -24,7 +25,8 @@ export default Ember.Controller.extend({
     to manifest your inputs into entries for
     validation and formatting.
   */
-  sections: [ {
+  sections: [
+    {
       title: "enroll-basic-information",
       display: "Basic Information",
       subtitles: [
@@ -54,6 +56,10 @@ export default Ember.Controller.extend({
     The "validityChecker" also updates the content
     with the return value located in object.format.
     Format is optional when using validity._check
+
+    The updateProgress function also accesses this
+    manifest to determine the progress of the form
+    entry.
   */
   entries: [
     {
@@ -63,7 +69,7 @@ export default Ember.Controller.extend({
       },
       validity: {
         _check: function (txt) {
-          return txt !== null;
+          return (txt && txt.length > 0);
         },  
         description: "First Name"
       }
@@ -75,7 +81,7 @@ export default Ember.Controller.extend({
       },
       validity: {
         _check: function (txt) {
-          return (txt !== null && txt.length === 1);
+          return (txt && txt.length > 0);
         },  
         description: "Middle Initial"
       }
@@ -87,22 +93,37 @@ export default Ember.Controller.extend({
       },
       validity: {
         _check: function (txt) {
-          return txt !== null;
+          return (txt && txt.length > 0);
+        },
+        description: "Last Name"
+      }
+    },
+    {
+      _valName: 'address_line1',
+      format: function (v) {
+        return caseTitle(v);
+      },
+      validity: {
+        _check: function (txt) {
+          return (txt && txt.length > 4);
         },
         description: "Last Name"
       }
     }
   ],
 
+  /* Bind all of these entries to the contentDidChange function */
   contentDidChange: function () {
     Ember.run.once(this, this.validityChecker);
   }.observes('content.name_first', 'content.name_mi', 'content.name_last', 'content.address_line1', 'content.address_line2', 'content.address_city', 'content.address_state', 'content.address_zipcode'),
 
+  /* Check validity amung other things */
   validityChecker: function () {
     var v = this.get('entries'),
         self = this;
     
     var verifyValidity = function (validityObject, val) {
+      console.debug("checking");
       // Do the validity check
       validityObject.valid = validityObject.validity._check(val);
       // Return the validityObject to the mapper
@@ -124,18 +145,32 @@ export default Ember.Controller.extend({
     
     this.set('validity', v.map(function (obj) {
       // Set current and cache for comparison
-      var current = self.get('content').get(obj._valName),
-          cache   = self.get('_contentCache') || null;
-      // Return the object to the mapper only if the value hasn't changed. If it has, pass it to the verifyValidity function
-      return ( (cache) ? self.get('_contentCache').get(obj._valName) : undefined !== current) ? verifyValidity(obj, runFormat(current, obj.format, obj._valName)) : obj;
+      var current   = self.get('content').get(obj._valName),
+          cache     = self.get('_contentCache') || null,
+          cached    = ( cache ) ? cache.get(obj._valName) : null,
+          formatted = ( current ) ? runFormat(current, obj.format, obj._valName) : null,
+          // Return the object to the mapper only if the value hasn't changed. If it has, pass it to the verifyValidity function
+          returnObj = ( cached !== formatted ) ? verifyValidity(obj, formatted) : obj;
+      if(cache) {
+        cache.set(obj._valName, formatted);
+      }
+      return returnObj;
     }));
 
-    return Ember.run.once(this, this._setCache);
+    return Ember.run.once(this, this._updateProgress);
   }.observes('content.name_first'),
 
-  _setCache: function () {
-    // This function is used by validityChecker to ensure no redundant action is made,
-    // keeping the app from slowing down.
-    this.set('_contentCache', this.get('content'));
+  _updateProgress: function () {
+    var prog = 0,
+        entries = this.get('entries'),
+        entriesLen = entries.length;
+    
+    for (var k in entries) {
+      if(entries[k] && entries[k].valid) {
+        prog++;
+      }
+    }
+
+    return this.set('progress', Math.round( ( prog / entriesLen ) * 100));
   }
 });
