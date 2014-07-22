@@ -53,3 +53,25 @@
   right: 0;
   left: 0;
 }
+
+.prefix-display-flex() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.prefix-flex(@f) {
+  -webkit-box-flex: @f;
+  -moz-box-flex: @f;
+  -webkit-flex: @f;
+  -ms-flex: @f;
+  flex: @f;
+}
+
+.prefix-flex-direction(@dir) {
+  -webkit-flex-direction: @dir;
+  -ms-flex-direction:     @dir;
+  flex-direction:         @dir;
+}

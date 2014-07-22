@@ -1,7 +1,5 @@
 import Ember from 'ember';
 
-// This mixin binds callbacks to events.
-
 export default Ember.Mixin.create({
   /*
     Mixin setup
