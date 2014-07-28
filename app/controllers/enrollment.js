@@ -38,16 +38,19 @@ export default Ember.Controller.extend({
         {
           title: "enroll-basic-information-address",
           display: "Address"
+        },
+        {
+          title: "enroll-personal-information",
+          display: "Personal"
         }
       ],
+      scrolledPast: function () {
+        console.log("SCROLLED PAST BASIC INFO");
+      }
     },
     {
-      title: "enroll-personal-information",
-      display: "Personal Information"
-    },
-    {
-      title: "enroll-test-section",
-      display: "Test Section #1"
+      title: "enroll-dependents",
+      display: "Dependents"
     },
     {
       title: "enroll-test-section2",
@@ -183,6 +186,24 @@ export default Ember.Controller.extend({
         },
         description: "Day of Birth"
       }
+    },
+    {
+      _valName: 'gender',
+      validity: {
+        _check: function (txt) {
+          return (txt != undefined);
+        },
+        description: "Gender"
+      }
+    },
+    {
+      _valName: 'marital',
+      validity: {
+        _check: function (txt) {
+          return (txt != undefined);
+        },
+        description: "Marital Status"
+      }
     }
   ],
 
@@ -200,7 +221,9 @@ export default Ember.Controller.extend({
     'content.address_zipcode', 
     'content.dob_day', 
     'content.dob_month', 
-    'content.dob_year'
+    'content.dob_year',
+    'content.gender',
+    'content.marital'
   ),
 
   /* Check validity amung other things */
@@ -211,6 +234,8 @@ export default Ember.Controller.extend({
     var verifyValidity = function (validityObject, val) {
       // Do the validity check
       validityObject.valid = validityObject.validity._check(val);
+
+      console.debug(validityObject._valName, 'is', validityObject.valid, 'with property', val);
 
       // Set it for template access
       self.get('validity').set(validityObject._valName, validityObject.valid);
@@ -267,7 +292,7 @@ export default Ember.Controller.extend({
     changeActive: function (id) {
       Ember.run.scheduleOnce('afterRender', this, function () {
         $('html, body').animate({
-          scrollTop: $("#" + id).offset().top - 50
+          scrollTop: $("#" + id).offset().top - ( $('.app-header').height() + 20 )
         }, 1000);
       });
     }

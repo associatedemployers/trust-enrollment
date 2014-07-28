@@ -1,7 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: [ 'progress' ],
+  classNames: [ 'progress', 'hide-slide' ],
+  classNameBindings: [ 'atZero::show' ],
   
   // Defaults
   min: 0,
@@ -11,5 +12,10 @@ export default Ember.Component.extend({
   style: function () {
     var width = this.get('progress') || 0;
     return "width: " + width + "%;";
+  }.property('progress'),
+
+  atZero: function () {
+    var p = this.get('progress') || 0;
+    return p === 0;
   }.property('progress')
 });

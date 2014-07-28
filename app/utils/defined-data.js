@@ -57,4 +57,14 @@ var suffixes = [
   "test"
 ];
 
-export { states, suffixes };
+var genders = [
+  "Male",
+  "Female"
+];
+
+var marital_statuses = [
+  "Single",
+  "Married"
+]
+
+export { states, suffixes, genders, marital_statuses };

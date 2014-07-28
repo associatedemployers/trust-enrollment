@@ -4,13 +4,15 @@ export default Ember.Controller.extend({
   needs: [ 'application' ],
 
   /* Aliases */
-  states: Ember.computed.alias('controllers.application.states'),
-  suffixes: Ember.computed.alias('controllers.application.suffixes'),
-  validity: Ember.computed.alias('parentController.validity'),
+  states:           Ember.computed.alias('controllers.application.states'),
+  suffixes:         Ember.computed.alias('controllers.application.suffixes'),
+  genders:          Ember.computed.alias('controllers.application.genders'),
+  marital_statuses: Ember.computed.alias('controllers.application.marital_statuses'),
+  validity:         Ember.computed.alias('parentController.validity'),
   // We need to directly bind to the parent controller
   // content here because the render helper doesn't allow
   // us to bind properties. Take that, render helper.
-  enrollment: Ember.computed.alias('parentController.content'),
+  enrollment:       Ember.computed.alias('parentController.content'),
 
   /* Computed */
   noDays: Ember.computed.not('days'),
@@ -39,5 +41,9 @@ export default Ember.Controller.extend({
     return (!year || !month) ? null : Array.apply(null, { length: moment(year + "-" + month, "YYYY-MM").daysInMonth() }).map(function (v, index) {
       return index + 1;
     });
-  }.property('enrollment.dob_month', 'enrollment.dob_year')
+  }.property('enrollment.dob_month', 'enrollment.dob_year'),
+
+  isMarried: function () {
+    return this.get('enrollment.marital') === "married";
+  }.property('enrollment.marital')
 });
