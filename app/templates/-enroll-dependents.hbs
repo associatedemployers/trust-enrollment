@@ -1,2 +1,11 @@
-<div class="central-question-overlay">
-</div>
+{{#unless isMarried}}
+  <div {{bind-attr class=":question-overlay :hide-slide dependentQuestionDismissed::show"}}>  
+    <h1>Do you have dependents? (ex. Children)</h1>
+    <h2>
+      <span class="answer" {{action "answerDependentQuestion" true}}>Yes</span>
+      <span class="answer" {{action "answerDependentQuestion" false}}>No</span>
+    </h2>
+  </div>
+{{/unless}}
+
+{{render "dependents-list" enrollment.dependents}}

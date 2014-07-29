@@ -44,6 +44,6 @@ export default Ember.Controller.extend({
   }.property('enrollment.dob_month', 'enrollment.dob_year'),
 
   isMarried: function () {
-    return this.get('enrollment.marital') === "married";
+    return this.get('enrollment.marital') === "Married";
   }.property('enrollment.marital')
 });

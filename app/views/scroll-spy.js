@@ -15,7 +15,8 @@ export default Ember.View.extend(windowBinderMixin, {
   },
 
   windowDidScroll: function () {
-    var $this = this.$(),
+    var self = this,
+        $this = this.$(),
         spyOffset = $this.offset();
 
     this.set('controller.content', this.get('controller.content').map(function (section) {
@@ -36,7 +37,7 @@ export default Ember.View.extend(windowBinderMixin, {
       }
       // Fire scrolledPast hook
       if(cache && !section.active && typeof section.scrolledPast === 'function') {
-        section.scrolledPast();
+        section.scrolledPast.call(self.get('controller.controllers.enrollment'));
       }
 
       return section;

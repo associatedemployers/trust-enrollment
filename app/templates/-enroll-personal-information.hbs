@@ -23,3 +23,14 @@
 
   </div>
 </div>
+
+<button type="submit" class="btn btn-success btn-block">Next</button>
+
+{{#bs-modal id="test-modal" dismissible=true title='<h2>Dude!</h2>'}}
+  <div class="modal-body">
+    <p class="text-center">You forgot your name dude.</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-lg btn-primary btn-block" data-dismiss="modal">Ok, dude.</button>
+  </div>
+{{/bs-modal}}

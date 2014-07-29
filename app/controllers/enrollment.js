@@ -45,7 +45,11 @@ export default Ember.Controller.extend({
         }
       ],
       scrolledPast: function () {
-        console.log("SCROLLED PAST BASIC INFO");
+        var enrollment = this.get('content');
+        if(!enrollment.get('name_first')) {
+          this.send('showModal', 'test-modal', false, 'body');
+        }
+        
       }
     },
     {
@@ -278,13 +282,13 @@ export default Ember.Controller.extend({
     var prog = 0,
         entries = this.get('entries'),
         entriesLen = entries.length;
-    
+    // Loop through entries
     for (var k in entries) {
       if(entries[k] && entries[k].valid) {
         prog++;
       }
     }
-
+    // Return progress
     return this.set('progress', Math.round( ( prog / entriesLen ) * 100));
   },
 
@@ -295,6 +299,22 @@ export default Ember.Controller.extend({
           scrollTop: $("#" + id).offset().top - ( $('.app-header').height() + 20 )
         }, 1000);
       });
+    },
+    jumpToNext: function () {
+      var sections = this.get('sections'),
+          sectionIndex;
+      // Find index of current active
+      sections.find(function (section, index) {
+        if(section.active === true) {
+          return sectionIndex = index;
+        }
+      });
+      // Increment to next section
+      sectionIndex++;
+      // Set toShow for easy access on the return statement
+      var toShow = sections.objectAt(sectionIndex);
+      // Only fire changeActive action if we have a "next" section
+      return (toShow) ? this.send('changeActive', toShow.title) : null;
     }
   }
 });
