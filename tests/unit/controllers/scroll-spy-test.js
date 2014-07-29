@@ -2,7 +2,7 @@ import { test, moduleFor } from 'ember-qunit';
 
 moduleFor('controller:scroll-spy', 'ScrollSpyController', {
   // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  needs: [ 'controller:enrollment' ]
 });
 
 // Replace this with your real tests.
