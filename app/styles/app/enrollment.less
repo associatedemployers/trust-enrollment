@@ -19,6 +19,7 @@
       overflow: hidden;
 
       .enrollment-card {
+        position: relative;
         padding: 20px;
         background-color: @enrollment-panel-color;
         margin-bottom: 20px;
@@ -45,5 +46,26 @@
 .enrollment-card[data-section="enroll-personal-information"] {
   form .row {
     padding-top: 20px;
+  }
+}
+
+.question-overlay {
+  position: absolute;
+  background-color: fade(@brand-default, 60%);
+  color: @brand-offwhite;
+  text-align: center;
+  padding: 15px;
+
+  .trbl();
+
+  .answer {
+    padding: 10px;
+    cursor: pointer;
+    
+    .transition-all();
+
+    &:hover {
+      color: darken(@brand-offwhite, 20%);
+    }
   }
 }
