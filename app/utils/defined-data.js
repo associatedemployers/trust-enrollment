@@ -65,6 +65,6 @@ var genders = [
 var marital_statuses = [
   "Single",
   "Married"
-]
+];
 
 export { states, suffixes, genders, marital_statuses };

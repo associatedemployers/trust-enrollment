@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { caseTitle } from '../utils/text-tools';
+import { caseTitle } from '../utils/text-tools'; // jshint ignore:line
 
 export default Ember.Controller.extend({
   queryParams: [ 'item' ],
@@ -81,6 +81,7 @@ export default Ember.Controller.extend({
     manifest to determine the progress of the form
     entry.
   */
+  /* jshint ignore:start */
   entries: [
     {
       _valName: 'name_first',
@@ -210,6 +211,7 @@ export default Ember.Controller.extend({
       }
     }
   ],
+  /* jshint ignore:end */
 
   /* Bind all of these entries to the contentDidChange function */
   contentDidChange: function () {
