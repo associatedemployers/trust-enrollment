@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { states as staticStates, suffixes as staticSuffixes, genders as staticGenders, marital_statuses } from '../utils/defined-data';
+import { states as staticStates, suffixes as staticSuffixes, genders as staticGenders, marital_statuses, dependent_relationships as dependentRelationshipsStatic } from '../utils/defined-data';
 
 var ApplicationController = Ember.Controller.extend({
   // Static Properties
@@ -7,6 +7,7 @@ var ApplicationController = Ember.Controller.extend({
   suffixes: staticSuffixes,
   marital_statuses: marital_statuses,
   genders: staticGenders,
+  dependent_relationships: dependentRelationshipsStatic,
 
   // Computed Properties
   onIndex: function () {

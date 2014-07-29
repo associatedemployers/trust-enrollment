@@ -67,4 +67,9 @@ var marital_statuses = [
   "Married"
 ];
 
-export { states, suffixes, genders, marital_statuses };
+var dependent_relationships = [
+  "Spouse",
+  "Child"
+]
+
+export { states, suffixes, genders, marital_statuses, dependent_relationships };

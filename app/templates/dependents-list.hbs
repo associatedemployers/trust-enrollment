@@ -1,0 +1,53 @@
+<div class="list-group dependent-list-group">
+  {{#each dependent in dependents}}
+    {{dependent-static data=dependent}}
+  {{/each}}
+</div>
+
+<form class="dependent-form" {{action on="submit"}}>
+  <div class="list-group-item">
+    <div class="form-inline">
+      <div class="form-group">
+        <label>How is this dependent related to you?</label>
+        {{relationship-picker relationship=relationship removeOptions=removeRelationships}}
+      </div>
+      <div {{bind-attr class=":form-group :hide-slide relationship:show"}}>
+        <label>{{relationship}}'s first name</label>
+        {{input class="form-control" value=firstName placeholder="First Name"}}
+      </div>
+      <div {{bind-attr class=":form-group :hide-slide firstName:show"}}>
+        <label>M.I.</label>
+        {{input class="form-control inline-sm" value=middleInitial placeholder="M.I."}}
+      </div>
+      <div {{bind-attr class=":form-group :hide-slide middleInitial:show"}}>
+        <label>{{relationship}}'s last name</label>
+        {{input class="form-control" value=lastName placeholder="Last Name"}}
+      </div>
+      <div {{bind-attr class=":form-group :left-inner-addon :right-inner-text-addon :addon-with-label :hide-slide lastName:show"}}>
+        <label>{{relationship}}'s SSN</label>
+        {{input class="form-control" value=ssn placeholder="SSN"}}
+        <span {{bind-attr class=":text-addon ssnIsValid:success:danger"}}>{{ssn_formatted}}{{#if ssnIsValid}}<i class="fa fa-fw fa-check"></i>{{/if}}</span>
+        <i class="fa fa-fw fa-lock left"></i>
+      </div>
+      <div {{bind-attr class=":form-group :hide-slide ssn:show"}}>
+        <label>{{relationship}}'s Date of Birth</label>
+        {{dob-picker year=dob_year month=dob_month day=dob_day}}
+      </div>
+      <div {{bind-attr class=":form-group :hide-slide dob_day:show"}}>
+        <label>{{relationship}}'s gender</label>
+        {{gender-picker value=gender removeOptions=removeGenders}}
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="dependent-controls">
+  <div class="row">
+    <div class="col-md-6">
+      {{#unless isMarried}}<a href="#" class="text-muted" {{action "answerDependentQuestion" false}}>I do not have dependents</a>{{/unless}}
+    </div>
+    <div class="col-md-6 text-right">
+      <button type="button" class="btn btn-success" {{bind-attr disabled=cannotAddDependent}} {{action "addDependent"}}><i class="fa fa-fw fa-plus"></i> Add Dependent...</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<h1 {{bind-attr id=content.title}} class="enrollment-title">{{content.display}}</h1>
+<hr />
+{{#if content.subtitles}}
+  {{partial "enroll-subtitle-mixin"}}
+{{else}}
+  {{partial content.title}}
+{{/if}}

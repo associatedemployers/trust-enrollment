@@ -54,7 +54,8 @@ export default Ember.Controller.extend({
     },
     {
       title: "enroll-dependents",
-      display: "Dependents"
+      display: "Dependents",
+      noForm: true
     },
     {
       title: "enroll-test-section2",

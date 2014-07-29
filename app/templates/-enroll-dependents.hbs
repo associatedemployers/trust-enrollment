@@ -1,5 +1,5 @@
 {{#unless isMarried}}
-  <div {{bind-attr class=":question-overlay :hide-slide dependentQuestionDismissed::show"}}>  
+  <div {{bind-attr class=":question-overlay :hide-slide dependentQuestionDismissed::show"}}>
     <h1>Do you have dependents? (ex. Children)</h1>
     <h2>
       <span class="answer" {{action "answerDependentQuestion" true}}>Yes</span>
@@ -7,5 +7,10 @@
     </h2>
   </div>
 {{/unless}}
+
+<div {{bind-attr class=":question-overlay :hide-slide enrollment.noDependents:show"}}>
+  <h1>You have marked that you do not have dependents.</h1>
+  <h2><span class="answer" {{action "answerDependentQuestion" true}}>Nevermind, I do have dependents</span></h2>
+</div>
 
 {{render "dependents-list" enrollment.dependents}}

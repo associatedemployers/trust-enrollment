@@ -1,15 +1,13 @@
 <div class="row text-center">
   <div class="col-md-3">
     <div class="form-inline form-group">
-      {{view Ember.Select class="form-control" content=years value=enrollment.dob_year prompt="YYYY"}}
-      {{view Ember.Select class="form-control" content=months value=enrollment.dob_month prompt="MM"}}
-      {{view Ember.Select class="form-control" content=days value=enrollment.dob_day prompt="DD" disabled=noDays}}
+      {{dob-picker year=enrollment.dob_year month=enrollment.dob_month day=enrollment.dob_day}}
       <p class="help-block">Date of Birth</p>
     </div>
   </div>
   <div class="col-md-3">
     {{#validation-wrapper formgroup=true valid=validity.gender}}
-      {{view Ember.Select class="form-control" content=genders value=enrollment.gender prompt="Gender"}}
+      {{gender-picker value=enrollment.gender}}
       <p class="help-block">Gender</p>
     {{/validation-wrapper}}
   </div>

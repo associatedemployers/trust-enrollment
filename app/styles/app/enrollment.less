@@ -51,21 +51,45 @@
 
 .question-overlay {
   position: absolute;
-  background-color: fade(@brand-default, 60%);
+  background-color: lighten(@brand-default, 10%);
   color: @brand-offwhite;
   text-align: center;
-  padding: 15px;
+  padding: 3% 15px 15px 15px;
+  z-index: 1;
 
   .trbl();
 
   .answer {
+    color: @brand-info;
     padding: 10px;
     cursor: pointer;
-    
+    text-decoration: underline;
+
     .transition-all();
 
     &:hover {
-      color: darken(@brand-offwhite, 20%);
+      color: @brand-offwhite;
+      text-decoration: none;
     }
   }
+}
+
+.dependent-form {
+  .form-inline {
+    .form-group {
+      text-align: center;
+
+      label {
+        display: block;
+        font-size: 80%;
+        font-weight: 300;
+        -webkit-font-smoothing: antialiased;
+        font-smoothing: antialiased;
+      }
+    }
+  }
+}
+
+.dependent-controls {
+  margin-top: 15px;
 }
