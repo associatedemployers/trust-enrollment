@@ -2,8 +2,8 @@ import Ember from 'ember';
 import { caseTitle } from '../utils/text-tools'; // jshint ignore:line
 
 export default Ember.Controller.extend({
-  queryParams: [ 'item' ],
-  item: null,
+  queryParams: [ 'section' ],
+  section: null,
   validity: Ember.Object.create(),
   _contentCache: Ember.Object.create(),
 
@@ -45,17 +45,31 @@ export default Ember.Controller.extend({
         }
       ],
       scrolledPast: function () {
-        var enrollment = this.get('content');
-        if(!enrollment.get('name_first')) {
-          this.send('showModal', 'test-modal', false, 'body');
-        }
-        
+        /*var validity = this.get('validity'),
+            entries  = this.get('entries'),
+            valid, invalidEntries = [];
+
+        entries.forEach(function (entry) {
+          if(entry.sectionIndex === 1 && validity[entry._valName] !== true) {
+            invalidEntries.push(entry.validity.description);
+            valid = false;
+          }
+        });
+
+        if(valid === false) {
+          this.setProperties({
+            validationText: 'Please complete the following items:<br />' + invalidEntries.join('<br />'),
+            toActive: 'enroll-basic-information'
+          });
+          this.send('showModal', 'validation-modal', true, 'body');
+        }*/
       }
     },
     {
       title: "enroll-dependents",
       display: "Dependents",
-      noForm: true
+      noForm: true,
+      noBreak: true
     },
     {
       title: "enroll-test-section2",
@@ -85,7 +99,8 @@ export default Ember.Controller.extend({
   /* jshint ignore:start */
   entries: [
     {
-      _valName: 'name_first',
+      _valName: 'firstName',
+      sectionIndex: 1,
       format: function (v) {
         return caseTitle(v);
       },
@@ -97,7 +112,8 @@ export default Ember.Controller.extend({
       }
     },
     {
-      _valName: 'name_mi',
+      _valName: 'middleInitial',
+      sectionIndex: 1,
       format: function (v) {
         return v.charAt(0).toUpperCase();
       },
@@ -109,7 +125,8 @@ export default Ember.Controller.extend({
       }
     },
     {
-      _valName: 'name_last',
+      _valName: 'lastName',
+      sectionIndex: 1,
       format: function (v) {
         return caseTitle(v);
       },
@@ -121,7 +138,8 @@ export default Ember.Controller.extend({
       }
     },
     {
-      _valName: 'address_line1',
+      _valName: 'addressLine1',
+      sectionIndex: 1,
       format: function (v) {
         return caseTitle(v);
       },
@@ -129,11 +147,12 @@ export default Ember.Controller.extend({
         _check: function (txt) {
           return (txt && txt.length > 4);
         },
-        description: "Address Street"
+        description: "Street Address"
       }
     },
     {
-      _valName: 'address_city',
+      _valName: 'addressCity',
+      sectionIndex: 1,
       format: function (v) {
         return caseTitle(v);
       },
@@ -145,7 +164,8 @@ export default Ember.Controller.extend({
       }
     },
     {
-      _valName: 'address_state',
+      _valName: 'addressState',
+      sectionIndex: 1,
       validity: {
         _check: function (txt) {
           return (txt && txt.length === 2);
@@ -154,7 +174,8 @@ export default Ember.Controller.extend({
       }
     },
     {
-      _valName: 'address_zipcode',
+      _valName: 'addressZipcode',
+      sectionIndex: 1,
       format: function (v) {
         var minlen = v.length - 1;
         return (isNaN(v.charAt(minlen))) ? v.substring(0, minlen) : v.substring(0, 5);
@@ -163,11 +184,12 @@ export default Ember.Controller.extend({
         _check: function (txt) {
           return (txt && txt.length === 5 && !isNaN(txt));
         },
-        description: "State"
+        description: "Zipcode"
       }
     },
     {
-      _valName: 'dob_year',
+      _valName: 'dobYear',
+      sectionIndex: 1,
       validity: {
         _check: function (txt) {
           return (txt && !isNaN(txt));
@@ -176,7 +198,8 @@ export default Ember.Controller.extend({
       }
     },
     {
-      _valName: 'dob_month',
+      _valName: 'dobMonth',
+      sectionIndex: 1,
       validity: {
         _check: function (txt) {
           return (txt && !isNaN(txt));
@@ -185,7 +208,8 @@ export default Ember.Controller.extend({
       }
     },
     {
-      _valName: 'dob_day',
+      _valName: 'dobDay',
+      sectionIndex: 1,
       validity: {
         _check: function (txt) {
           return (txt && !isNaN(txt));
@@ -195,6 +219,7 @@ export default Ember.Controller.extend({
     },
     {
       _valName: 'gender',
+      sectionIndex: 1,
       validity: {
         _check: function (txt) {
           return (txt != undefined);
@@ -204,6 +229,7 @@ export default Ember.Controller.extend({
     },
     {
       _valName: 'marital',
+      sectionIndex: 1,
       validity: {
         _check: function (txt) {
           return (txt != undefined);
@@ -218,23 +244,23 @@ export default Ember.Controller.extend({
   contentDidChange: function () {
     Ember.run.once(this, this.validityChecker);
   }.observes(
-    'content.name_first', 
-    'content.name_mi', 
-    'content.name_last', 
-    'content.address_line1', 
-    'content.address_line2', 
-    'content.address_city', 
-    'content.address_state', 
-    'content.address_zipcode', 
-    'content.dob_day', 
-    'content.dob_month', 
-    'content.dob_year',
+    'content.firstName', 
+    'content.middleInitial', 
+    'content.lastName', 
+    'content.addressLine1', 
+    'content.addressLine2', 
+    'content.addressCity', 
+    'content.addressState', 
+    'content.addressZipcode', 
+    'content.dobDay', 
+    'content.dobMonth', 
+    'content.dobYear',
     'content.gender',
     'content.marital'
   ),
 
   /* Check validity amung other things */
-  validityChecker: function () {
+  validityChecker: function (callback) {
     var v = this.get('entries'),
         self = this;
     
@@ -278,8 +304,12 @@ export default Ember.Controller.extend({
       return returnObj;
     }));
 
+    if(callback && typeof callback === 'function') {
+      callback();
+    }
+
     return Ember.run.once(this, this._updateProgress);
-  }.observes('content.name_first'),
+  }.observes('content.firstName'),
 
   _updateProgress: function () {
     var prog = 0,
@@ -298,9 +328,13 @@ export default Ember.Controller.extend({
   actions: {
     changeActive: function (id) {
       Ember.run.scheduleOnce('afterRender', this, function () {
-        $('html, body').animate({
-          scrollTop: $("#" + id).offset().top - ( $('.app-header').height() + 20 )
-        }, 1000);
+        var $section = $("#" + id);
+
+        if($section.length > 0) {
+          $('html, body').animate({
+            scrollTop: $section.offset().top - ( $('.app-header').height() + 20 )
+          }, 1000);
+        }
       });
     },
     jumpToNext: function () {

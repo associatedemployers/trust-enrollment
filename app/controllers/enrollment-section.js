@@ -18,11 +18,16 @@ export default Ember.Controller.extend({
     return this.get('enrollment.marital') === "Married";
   }.property('enrollment.marital'),
 
+  maritalStatusDidChange: function () {
+    if(this.get('isMarried')) {
+      this.get('enrollment').set('noDependents', false);
+    }
+  }.observes('isMarried'),
+
   actions: {
     answerDependentQuestion: function (answer) {
       this.set('dependentQuestionDismissed', true);
       this.get('enrollment').set('noDependents', !answer);
-      console.log(this.get('enrollment.noDependents'));
     }
   }
 });

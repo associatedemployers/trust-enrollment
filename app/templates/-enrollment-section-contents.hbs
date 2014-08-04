@@ -1,5 +1,5 @@
 <h1 {{bind-attr id=content.title}} class="enrollment-title">{{content.display}}</h1>
-<hr />
+{{#unless content.noBreak}}<hr />{{/unless}}
 {{#if content.subtitles}}
   {{partial "enroll-subtitle-mixin"}}
 {{else}}

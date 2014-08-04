@@ -35,6 +35,10 @@ export default Ember.View.extend(windowBinderMixin, {
           return subtitle;
         });
       }
+
+      if(cache && section.active) {
+        self.get('controller.controllers.enrollment').set('section', section.title);
+      }
       // Fire scrolledPast hook
       if(cache && !section.active && typeof section.scrolledPast === 'function') {
         section.scrolledPast.call(self.get('controller.controllers.enrollment'));

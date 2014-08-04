@@ -75,16 +75,22 @@
 }
 
 .dependent-form {
-  .form-inline {
-    .form-group {
-      text-align: center;
+  .form-group {
+    text-align: center;
 
-      label {
-        display: block;
-        font-size: 80%;
-        font-weight: 300;
-        -webkit-font-smoothing: antialiased;
-        font-smoothing: antialiased;
+    &.pad-top {
+      margin-top: 10px;
+    }
+
+    label {
+      display: block;
+      font-size: 80%;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      font-smoothing: antialiased;
+
+      &.big {
+        font-size: 120%;
       }
     }
   }

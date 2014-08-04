@@ -1,7 +1,7 @@
 <div class="row text-center">
   <div class="col-md-3">
     <div class="form-inline form-group">
-      {{dob-picker year=enrollment.dob_year month=enrollment.dob_month day=enrollment.dob_day}}
+      {{dob-picker year=enrollment.dobYear month=enrollment.dobMonth day=enrollment.dobDay}}
       <p class="help-block">Date of Birth</p>
     </div>
   </div>
@@ -23,12 +23,3 @@
 </div>
 
 <button type="submit" class="btn btn-success btn-block">Next</button>
-
-{{#bs-modal id="test-modal" dismissible=true title='<h2>Dude!</h2>'}}
-  <div class="modal-body">
-    <p class="text-center">You forgot your name dude.</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-lg btn-primary btn-block" data-dismiss="modal">Ok, dude.</button>
-  </div>
-{{/bs-modal}}

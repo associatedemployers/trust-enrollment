@@ -3,8 +3,11 @@ import { caseTitle } from '../utils/text-tools';
 
 export default Ember.Controller.extend({
   needs: [ 'application' ],
-  isMarried:     Ember.computed.alias('parentController.isMarried'),
-  enrollment:    Ember.computed.alias('parentController.enrollment'),
+
+  isMarried:  Ember.computed.alias('parentController.isMarried'),
+  enrollment: Ember.computed.alias('parentController.enrollment'),
+
+  formIsNotComplete: Ember.computed.not('formIsComplete'),
 
   entries: [
     {
@@ -43,7 +46,6 @@ export default Ember.Controller.extend({
       
       return self.set(entry._valName, formatted);
     });
-
   }.observes(
     'firstName',
     'middleInitial',
@@ -79,5 +81,60 @@ export default Ember.Controller.extend({
     if(this.get('enrollment.marital') === "Single") {
       return "Spouse";
     }
-  }.property('enrollment.marital')
+  }.property('enrollment.marital'),
+
+  isSpouse: function () {
+    return this.get('relationship') === "Spouse";
+  }.property('relationship'),
+
+  formIsComplete: function () {
+    var v = this.getProperties('relationship', 'firstName', 'middleInitial', 'lastName', 'ssn', 'dobYear', 'dobMonth', 'dobDay', 'gender'),
+        complete;
+
+    if(v) {
+      for (var k in v) {
+        if(!v[k]) {
+          complete = false;
+        }
+      }
+    }
+
+    return complete !== false;
+  }.property(
+    'relationship',
+    'firstName',
+    'middleInitial',
+    'lastName',
+    'ssn',
+    'dobYear',
+    'dobMonth',
+    'dobDay',
+    'gender'
+  ),
+
+  actions: {
+    addDependent: function () {
+      if(this.get('formIsComplete')) {
+        // Fetch dependent data
+        var dependent_data = this.getProperties('relationship', 'firstName', 'middleInitial', 'lastName', 'ssn', 'dobYear', 'dobMonth', 'dobDay', 'gender', 'additionalProvider');
+        // Create the record (This does not persist)
+        var dependent = this.store.createRecord('dependent', dependent_data);
+        // Push the new record into the enrollment model
+        this.get('enrollment.dependents').pushObject(dependent);
+        // Reset the form
+        this.setProperties({
+          relationship: null,
+          firstName: null,
+          middleInitial: null,
+          lastName: null,
+          ssn: null,
+          dobYear: null,
+          dobMonth: null,
+          dobDay: null,
+          gender: null,
+          additionalProvider: null
+        });
+      }
+    }
+  }
 });

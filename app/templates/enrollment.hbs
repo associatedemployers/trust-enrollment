@@ -11,3 +11,12 @@
     {{/each}}
   </div>
 </div>
+
+{{#bs-modal id="validation-modal" dismissible=false title='<h2><i class="fa fa-fw fa-exclamation-triangle"></i> Please complete before continuing</h2>'}}
+  <div class="modal-body">
+    <p>{{{validationText}}}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-lg btn-primary btn-block" data-dismiss="modal" {{action "changeActive" toActive}}>Ok</button>
+  </div>
+{{/bs-modal}}
