@@ -40,5 +40,11 @@ export default DS.Model.extend({
     var contextual = depContexts[ m.relationship ];
 
     return ( m.gender && contextual[ m.gender ] ) ? contextual[ m.gender ] : m.relationship;
-  }.property('relationship', 'gender')
+  }.property('relationship', 'gender'),
+
+  maskedSSN: function () {
+    var ssn = this.get('ssn');
+
+    return ( ssn ) ? this.get('ssn').replace(/(\d{3})(\d{2})(\d{4})/, '***-**-$3') : ssn; 
+  }.property('ssn')
 });

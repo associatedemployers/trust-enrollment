@@ -1,5 +1,5 @@
 {{#each dependent in enrollment.dependents}}
-  {{dependent-static data=dependent}}
+  {{render "dependent-item-static" dependent}}
 {{/each}}
 
 <form class="dependent-form" {{action "addDependent" on="submit"}}>
