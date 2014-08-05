@@ -1,4 +1,5 @@
-<ul class="titles">
+<a href="#" class="hidden-md show-sm-menu-link" {{action "toggleProperty" "showSmallMenu"}}>{{#if showSmallMenu}}Hide{{else}}Show{{/if}} Form Menu</a>
+<ul {{bind-attr class=":titles showSmallMenu:show-sm-menu"}}>
   {{#each section in content}}
     <li {{bind-attr class=":title section.active:active"}}>
       <a href="#" {{action "changeActive" section.title}}>{{section.display}}</a>

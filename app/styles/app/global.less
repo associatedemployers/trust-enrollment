@@ -22,7 +22,8 @@ body, html {
 
   .app-wrapper {
     padding-top: @header-height;
-    
+
+    .app-wrapper-media-queries();
     .prefix-flex(1);
     /* equal to footer height */
     /*margin-bottom: 0 - @footer-height;
@@ -33,6 +34,16 @@ body, html {
       content: "";
       display: block;
     }*/
+  }
+}
+
+.app-wrapper-media-queries() {
+  @media all and ( max-width: @screen-md ) {
+    padding-top: 169px;
+
+    .full-background {
+      margin-top: 169px;
+    }
   }
 }
 
