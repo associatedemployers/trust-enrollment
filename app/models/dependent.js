@@ -39,7 +39,7 @@ export default DS.Model.extend({
 
     var contextual = depContexts[ m.relationship ];
 
-    return ( m.gender && contextual[ m.gender ] ) ? contextual[ m.gender ] : m.relationship;
+    return ( m.gender && contextual && contextual[ m.gender ] ) ? contextual[ m.gender ] : m.relationship;
   }.property('relationship', 'gender'),
 
   maskedSSN: function () {
