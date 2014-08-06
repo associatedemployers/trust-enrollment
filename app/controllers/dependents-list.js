@@ -53,11 +53,32 @@ export default Ember.ArrayController.extend({
     'ssn'
   ),
 
-  maritalStatusDidChange: function () {
-    var spouse = this.get('enrollment.dependents').findBy('relationship', 'Spouse');
+  checkForDepedentIssues: function () {
+    var enrollment      = this.get('enrollment').getProperties('dependents', 'gender'),
+        spouse          = enrollment.dependents.findBy('relationship', 'Spouse'),
+        domesticPartner = enrollment.dependents.findBy('relationship', 'Domestic Partner'),
+        gender          = enrollment.gender,
+        isSingle        = this.get('isSingle'),
+        msg, msgContext;
 
-    if(spouse) {
+    if( spouse && isSingle ) {
+      msg        = "You can not be single and list a dependent as a spouse.";
+      msgContext = "Marital Status";
+    } else if( domesticPartner && !isSingle ) {
+      msg        = "You can not be married and list a dependent as a domestic partner.";
+      msgContext = "Marital Status";
+    } else if( spouse && gender === spouse.get('gender') ) {
+      msg        = "You can not list a dependent as a spouse with the same gender. Trust plans do not allow same-sex marriage enrollments.";
+      msgContext = "Gender";
+    }
 
+    if(msg && msgContext) {
+      this.setProperties({
+        dependentIssueText: msg,
+        dependentIssueContext: msgContext
+      });
+
+      this.send('showModal', 'dependent-issue-modal', true, 'body');
     }
   }.observes('enrollment.marital'),
 

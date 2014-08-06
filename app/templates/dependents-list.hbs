@@ -82,11 +82,18 @@
   <div class="modal-footer">
     <div class="row">
       <div class="col-md-6">
-        <button type="button" class="btn btn-lg btn-primary btn-block" data-dismiss="modal" {{action "resolveDependentIssue" true}}>Change Relationship</button>
+        <div class="form-group">
+          <button type="button" class="btn btn-lg btn-primary btn-block" data-dismiss="modal" {{action "resolveDependentIssue" "Relationship"}}>Change Relationship</button>
+        </div>
       </div>
       <div class="col-md-6">
-        <button type="button" class="btn btn-lg btn-primary btn-block" data-dismiss="modal" {{action "resolveDependentIssue" false}}>Remove Dependent</button>
+        <div class="form-group">        
+          <button type="button" class="btn btn-lg btn-danger btn-block" data-dismiss="modal" {{action "resolveDependentIssue" "Remove"}}>Remove Dependent</button>
+        </div>
       </div>
+    </div>
+    <div class="form-group">
+      <button type="button" class="btn btn-lg btn-info btn-block" data-dismiss="modal" {{action "resolveDependentIssue" "Reset"}}>I chose the wrong {{dependentIssueContext}}.</button>      
     </div>
   </div>
 {{/bs-modal}}
