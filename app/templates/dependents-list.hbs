@@ -74,3 +74,19 @@
     </div>
   </div>
 </div>
+
+{{#bs-modal id="dependent-issue-modal" dismissible=false title='<h2><i class="fa fa-fw fa-exclamation-triangle"></i> There is a problem with your enrollment</h2>'}}
+  <div class="modal-body">
+    <p>{{dependentIssueText}}</p>
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-md-6">
+        <button type="button" class="btn btn-lg btn-primary btn-block" data-dismiss="modal" {{action "resolveDependentIssue" true}}>Change Relationship</button>
+      </div>
+      <div class="col-md-6">
+        <button type="button" class="btn btn-lg btn-primary btn-block" data-dismiss="modal" {{action "resolveDependentIssue" false}}>Remove Dependent</button>
+      </div>
+    </div>
+  </div>
+{{/bs-modal}}
