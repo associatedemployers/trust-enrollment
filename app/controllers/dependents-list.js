@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { caseTitle } from '../utils/text-tools';
 
-export default Ember.Controller.extend({
+export default Ember.ArrayController.extend({
   needs: [ 'application' ],
 
   isMarried:  Ember.computed.alias('parentController.isMarried'),
@@ -42,7 +42,7 @@ export default Ember.Controller.extend({
 
     entries.forEach(function (entry) {
       var val = self.get(entry._valName),
-          formatted = (typeof entry.format === "function" && val) ? entry.format(val) : val;
+          formatted = (typeof entry.format === 'function' && val) ? entry.format(val) : val;
       
       return self.set(entry._valName, formatted);
     });
@@ -52,6 +52,14 @@ export default Ember.Controller.extend({
     'lastName',
     'ssn'
   ),
+
+  maritalStatusDidChange: function () {
+    var spouse = this.get('enrollment.dependents').findBy('relationship', 'Spouse');
+
+    if(spouse) {
+
+    }
+  }.observes('enrollment.marital'),
 
   ssnIsValid: function () {
     var ssn = this.get('ssn');
@@ -71,24 +79,29 @@ export default Ember.Controller.extend({
 
   removeGenders: function () {
     // Don't allow same-sex spouses
-    if(this.get('relationship') === "Spouse" && this.get("enrollment.gender")) {
-      return this.get("enrollment.gender");
+    if(this.get('relationship') === 'Spouse' && this.get('enrollment.gender')) {
+      return this.get('enrollment.gender');
     }
   }.property('relationship', 'enrollment.gender'),
 
   removeRelationships: function () {
-    // Don't allow single people to select spouse or polygamy (:
-    var hasSpouse = this.get('enrollment.dependents').findBy('relationship', 'Spouse');
-    console.log("checking for spouse");
-    console.log(hasSpouse);
+    // Some form logic to control relationship entry
+    var dependents      = this.get('enrollment.dependents'),
+        spouse          = dependents.findBy('relationship', 'Spouse'),
+        domesticPartner = dependents.findBy('relationship', 'Domestic Partner'),
+        marital         = this.get('enrollment.marital');
 
-    if(this.get('enrollment.marital') === "Single" || hasSpouse) {
-      return "Spouse";
+    if( marital === 'Single' && !domesticPartner ) {
+      return 'Spouse';
+    } else if( spouse || domesticPartner ) {
+      return [ 'Spouse', 'Domestic Partner' ];
+    } else if( marital === 'Married' ) {
+      return 'Domestic Partner';
     }
-  }.property('enrollment.marital', 'enrollment.dependents'),
+  }.property('enrollment.marital', 'content.@each'),
 
   isSpouse: function () {
-    return this.get('relationship') === "Spouse";
+    return this.get('relationship') === 'Spouse';
   }.property('relationship'),
 
   formIsComplete: function () {
