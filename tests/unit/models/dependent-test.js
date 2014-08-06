@@ -2,7 +2,7 @@ import { test, moduleForModel } from 'ember-qunit';
 
 moduleForModel('dependent', 'Dependent', {
   // Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:enrollment']
 });
 
 test('it exists', function() {
