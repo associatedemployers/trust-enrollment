@@ -1,6 +1,10 @@
-{{#each dependent in enrollment.dependents}}
-  {{render "dependent-item-static" dependent}}
-{{/each}}
+{{#unless enrollment.noDependents}}
+  <div class="static-dependents list-group dependent-list-group">
+    {{#each dependent in enrollment.dependents}}
+      {{render "dependent-item-static" dependent}}
+    {{/each}}
+  </div>
+{{/unless}}
 
 <form class="dependent-form" {{action "addDependent" on="submit"}}>
   <div class="list-group-item">
@@ -51,7 +55,8 @@
     </div>
 
     <div {{bind-attr class=":text-center :pad-top :form-group :hide-slide gender:show"}}>
-      <label class="big">If {{#if relationship}}your {{relationship}} has{{else}}they have{{/if}} health insurance, please specify the provider below.</label>
+      <label class="big">If {{#if relationship}}your {{relationship}} has{{else}}they have{{/if}} health insurance, please specify the provider below<i class="fa fa-fw fa-question-circle tooltip-trigger" data-placement="left" title="If your spouse or child has current health insurance that you intend on cancelling, do not specify a provider"></i>
+      </label>
       {{input class="form-control" value=additionalProvider placeholder="Health Insurance Provider"}}
     </div>
     

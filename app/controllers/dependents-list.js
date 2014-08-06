@@ -77,11 +77,15 @@ export default Ember.Controller.extend({
   }.property('relationship', 'enrollment.gender'),
 
   removeRelationships: function () {
-    // Don't allow single people to select spouse
-    if(this.get('enrollment.marital') === "Single") {
+    // Don't allow single people to select spouse or polygamy (:
+    var hasSpouse = this.get('enrollment.dependents').findBy('relationship', 'Spouse');
+    console.log("checking for spouse");
+    console.log(hasSpouse);
+
+    if(this.get('enrollment.marital') === "Single" || hasSpouse) {
       return "Spouse";
     }
-  }.property('enrollment.marital'),
+  }.property('enrollment.marital', 'enrollment.dependents'),
 
   isSpouse: function () {
     return this.get('relationship') === "Spouse";

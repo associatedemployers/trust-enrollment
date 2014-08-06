@@ -72,8 +72,8 @@ export default Ember.Controller.extend({
       noBreak: true
     },
     {
-      title: "enroll-test-section2",
-      display: "Test Section #2"
+      title: "enroll-plan",
+      display: "Select a Plan"
     },
     {
       title: "enroll-test-section3",
