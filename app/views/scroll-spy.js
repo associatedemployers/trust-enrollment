@@ -39,9 +39,17 @@ export default Ember.View.extend(windowBinderMixin, {
       if(cache && section.active) {
         self.get('controller.controllers.enrollment').set('section', section.title);
       }
-      // Fire scrolledPast hook
-      if(cache && !section.active && typeof section.scrolledPast === 'function') {
-        section.scrolledPast.call(self.get('controller.controllers.enrollment'));
+      
+      if(cache && !section.active) {
+        $secEl.removeClass('active');
+        if(typeof section.scrolledPast === 'function') {
+          // Fire scrolledPast hook
+          section.scrolledPast.call(self.get('controller.controllers.enrollment'));
+        }
+      }
+
+      if(!cache && section.active) {
+        $secEl.addClass('active');
       }
 
       return section;
