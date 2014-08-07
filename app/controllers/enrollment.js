@@ -242,7 +242,9 @@ export default Ember.Controller.extend({
 
   /* Bind all of these entries to the contentDidChange function */
   contentDidChange: function () {
-    Ember.run.once(this, this.validityChecker);
+    if(!this.get('isUpdatingValidity')) {
+      Ember.run.once(this, this.validityChecker);
+    }
   }.observes(
     'content.firstName', 
     'content.middleInitial', 
@@ -263,7 +265,9 @@ export default Ember.Controller.extend({
   validityChecker: function (callback) {
     var v = this.get('entries'),
         self = this;
-    
+
+    this.set('isUpdatingValidity', true);
+
     var verifyValidity = function (validityObject, val) {
       // Do the validity check
       validityObject.valid = validityObject.validity._check(val);
@@ -308,8 +312,10 @@ export default Ember.Controller.extend({
       callback();
     }
 
+    this.set('isUpdatingValidity', false);
+
     return Ember.run.once(this, this._updateProgress);
-  }.observes('content.firstName'),
+  },
 
   _updateProgress: function () {
     var prog = 0,
