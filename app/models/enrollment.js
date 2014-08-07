@@ -19,6 +19,8 @@ export default DS.Model.extend({
   dobDay:         attribute('number'),
   dobMonth:       attribute('number'),
   dobYear:        attribute('number'),
+  marital:        attribute('string'),
+  gender:         attribute('string'),
   
   // Relational
   dependents:     DS.hasMany('dependent'),
