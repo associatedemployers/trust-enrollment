@@ -6,6 +6,7 @@ export default Ember.ArrayController.extend({
 
   isMarried:  Ember.computed.alias('parentController.isMarried'),
   enrollment: Ember.computed.alias('parentController.enrollment'),
+  isSingle:   Ember.computed.not('parentController.isMarried'),
 
   formIsNotComplete: Ember.computed.not('formIsComplete'),
 
@@ -53,34 +54,38 @@ export default Ember.ArrayController.extend({
     'ssn'
   ),
 
-  checkForDepedentIssues: function () {
-    var enrollment      = this.get('enrollment').getProperties('dependents', 'gender'),
+  checkForDependentIssues: function () {
+    var enrollment      = this.get('enrollment').getProperties('dependents', 'marital', 'gender'),
         spouse          = enrollment.dependents.findBy('relationship', 'Spouse'),
         domesticPartner = enrollment.dependents.findBy('relationship', 'Domestic Partner'),
         gender          = enrollment.gender,
         isSingle        = this.get('isSingle'),
-        msg, msgContext;
+        msg, msgContext, relationshipTo;
 
-    if( spouse && isSingle ) {
-      msg        = "You can not be single and list a dependent as a spouse.";
-      msgContext = "Marital Status";
-    } else if( domesticPartner && !isSingle ) {
-      msg        = "You can not be married and list a dependent as a domestic partner.";
-      msgContext = "Marital Status";
+    if( spouse && enrollment.marital && isSingle ) {
+      msg            = "You can not be single and list a dependent as a spouse.";
+      msgContext     = "Marital Status";
+      relationshipTo = "Domestic Partner";
+    } else if( domesticPartner && enrollment.marital && !isSingle ) {
+      msg            = "You can not be married and list a dependent as a domestic partner.";
+      msgContext     = "Marital Status";
+      relationshipTo = "Spouse";
     } else if( spouse && gender === spouse.get('gender') ) {
-      msg        = "You can not list a dependent as a spouse with the same gender. Trust plans do not allow same-sex marriage enrollments.";
-      msgContext = "Gender";
+      msg            = "You can not list a dependent as a spouse with the same gender. Trust plans do not allow same-sex marriage enrollments.";
+      msgContext     = "Gender";
+      relationshipTo = "Domestic Partner";
     }
 
     if(msg && msgContext) {
       this.setProperties({
         dependentIssueText: msg,
-        dependentIssueContext: msgContext
+        dependentIssueContext: msgContext,
+        relationshipTo: relationshipTo
       });
 
-      this.send('showModal', 'dependent-issue-modal', true, 'body');
+      this.send('showModal', 'dependent-issue-modal', true);
     }
-  }.observes('enrollment.marital'),
+  }.observes('enrollment.marital', 'enrollment.gender', 'content.@each.relationship'),
 
   ssnIsValid: function () {
     var ssn = this.get('ssn');
@@ -119,7 +124,7 @@ export default Ember.ArrayController.extend({
     } else if( marital === 'Married' ) {
       return 'Domestic Partner';
     }
-  }.property('enrollment.marital', 'content.@each'),
+  }.property('enrollment.marital', 'content.@each.relationship'),
 
   isSpouse: function () {
     return this.get('relationship') === 'Spouse';
@@ -172,6 +177,25 @@ export default Ember.ArrayController.extend({
           gender: null,
           additionalProvider: null
         });
+      }
+    },
+    resolveDependentIssue: function (option) {
+      var dependents     = this.get('content'),
+          issueContext   = this.get('dependentIssueContext'),
+          relationshipTo = this.get('relationshipTo'),
+          relationship   = ( relationshipTo === 'Spouse') ? 'Domestic Partner' : 'Spouse',
+          dependent      = dependents.findBy('relationship', relationship);
+      
+      this.send('hideModal', 'dependent-issue-modal');
+
+      if( option === 'Relationship' ) {
+        dependent.set('relationship', relationshipTo);
+      } else if( option === 'Remove' ) {
+        dependent.deleteRecord();
+      } else if( option === 'Reset' ) {
+        var op = ( issueContext === 'Gender' ) ? 'gender' : 'marital';
+
+        this.get('enrollment').set(op, null);
       }
     }
   }

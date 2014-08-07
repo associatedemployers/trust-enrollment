@@ -75,7 +75,7 @@
   </div>
 </div>
 
-{{#bs-modal id="dependent-issue-modal" dismissible=false title='<h2><i class="fa fa-fw fa-exclamation-triangle"></i> There is a problem with your enrollment</h2>'}}
+{{#bs-modal id="dependent-issue-modal" dismissible=false modal-lg=true title='<h2><i class="fa fa-fw fa-exclamation-triangle"></i> There is a problem with your enrollment</h2>'}}
   <div class="modal-body">
     <p>{{dependentIssueText}}</p>
   </div>
@@ -83,17 +83,17 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <button type="button" class="btn btn-lg btn-primary btn-block" data-dismiss="modal" {{action "resolveDependentIssue" "Relationship"}}>Change Relationship</button>
+          <button type="button" class="btn btn-primary btn-block" {{action "resolveDependentIssue" "Relationship"}}>Change Dependent's Relationship to {{relationshipTo}}</button>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">        
-          <button type="button" class="btn btn-lg btn-danger btn-block" data-dismiss="modal" {{action "resolveDependentIssue" "Remove"}}>Remove Dependent</button>
+          <button type="button" class="btn btn-danger btn-block" {{action "resolveDependentIssue" "Remove"}}>Remove Dependent</button>
         </div>
       </div>
     </div>
     <div class="form-group">
-      <button type="button" class="btn btn-lg btn-info btn-block" data-dismiss="modal" {{action "resolveDependentIssue" "Reset"}}>I chose the wrong {{dependentIssueContext}}.</button>      
+      <button type="button" class="btn btn-info btn-block" {{action "resolveDependentIssue" "Reset"}}>I chose the wrong {{dependentIssueContext}}.</button>      
     </div>
   </div>
 {{/bs-modal}}
