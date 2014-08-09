@@ -65,14 +65,7 @@
 </form>
 
 <div class="dependent-controls">
-  <div class="row">
-    <div class="col-md-6">
-      {{#unless isMarried}}<a href="#" class="text-muted" {{action "answerDependentQuestion" false}}>I do not have dependents</a>{{/unless}}
-    </div>
-    <div class="col-md-6 text-right">
-      <!--<button type="button" class="btn btn-success" {{bind-attr disabled=cannotAddDependent}} {{action "addDependent"}}><i class="fa fa-fw fa-plus"></i> Add Dependent...</button>-->
-    </div>
-  </div>
+  {{#unless isMarried}}<a href="#" class="text-muted" {{action "answerDependentQuestion" false}}>I do not have dependents</a>{{/unless}}
 </div>
 
 {{#bs-modal id="dependent-issue-modal" dismissible=false modal-lg=true title='<h2><i class="fa fa-fw fa-exclamation-triangle"></i> There is a problem with your enrollment</h2>'}}
