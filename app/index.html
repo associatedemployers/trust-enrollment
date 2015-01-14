@@ -3,24 +3,23 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AE Trust Enrollment</title>
+    <title>TrustEnrollment</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {{BASE_TAG}}
+    {{content-for 'head'}}
 
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/trust-enrollment.css">
+
+    {{content-for 'head-footer'}}
   </head>
   <body>
-    <script>
-      window.TrustEnrollmentENV = {{ENV}};
-      window.EmberENV = window.TrustEnrollmentENV.EmberENV;
-    </script>
+    {{content-for 'body'}}
+
     <script src="assets/vendor.js"></script>
     <script src="assets/trust-enrollment.js"></script>
-    <script>
-      window.TrustEnrollment = require('trust-enrollment/app')['default'].create(TrustEnrollmentENV.APP);
-    </script>
+
+    {{content-for 'body-footer'}}
   </body>
 </html>

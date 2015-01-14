@@ -1,0 +1,75 @@
+/*
+  Blurb Styles
+*/
+
+.blurbs {
+  margin: 0 auto;
+  width: 80%;
+  padding: 10px;
+
+  .blurb {
+    padding: 0 20px;
+    color: white;
+    text-shadow: 0 1px 1px fade(@brand-default, 90%);
+    text-align: center;
+
+    .blurb-content {
+      position: relative;
+      padding: 20px;
+      background-color: @brand-primary;
+      border-radius: 2px;
+     
+      .box-shadow(5px 5px 1px fade(@brand-default, 10%));
+      .transition-all();
+
+      &:hover {
+        background-color: @brand-warning;
+      }
+
+      &:after {
+        content: '';
+        display: block;
+        background-color: lighten(@brand-primary, 10%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 10px;
+      }
+
+      .blurb-link {
+        display: block;
+
+        &:before {
+          content: '';
+          display: block;
+          width: 10%;
+          margin: 10px auto 8px auto;
+          border-bottom: 1px fade(white, 30%) solid;
+        }
+      }
+
+      h3 {
+        margin: 0 0 8px 0;
+        text-transform: uppercase;
+      }
+
+      p {
+        font-size: 85%;
+      }
+
+      a {
+        @lightened-primary: lighten(@brand-primary, 40%);
+        @hover-primary: lighten(@lightened-primary, 20%);
+        text-decoration: none;
+        border-bottom: 1px @lightened-primary dotted;
+        color: @lightened-primary;
+
+        &:hover {
+          color: @hover-primary;
+          border-bottom: 1px @hover-primary dotted;
+        }
+      }
+    }
+  }
+}

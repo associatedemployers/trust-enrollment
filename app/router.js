@@ -1,12 +1,13 @@
 import Ember from 'ember';
+import config from './config/environment';
 
 var Router = Ember.Router.extend({
-  location: TrustEnrollmentENV.locationType
+  location: config.locationType
 });
 
 Router.map(function() {
-  this.route('prototypes');
-  this.route('company-login', { path: '/login' });
+  this.route('employee-login', { path: '/employee/login' });
+  this.route('company-login', { path: '/company/login' });
   this.route('enrollment', { path: '/enroll' });
 });
 

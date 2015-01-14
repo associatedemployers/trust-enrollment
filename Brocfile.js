@@ -1,6 +1,8 @@
 /* global require, module */
 
-var EmberApp = require('ember-cli/lib/broccoli/ember-app');
+var EmberApp  = require('ember-cli/lib/broccoli/ember-app'),
+    fs        = require('fs'),
+    vendorDir = JSON.parse(fs.readFileSync('./.bowerrc')).directory + '/';
 
 var app = new EmberApp({
   fingerprint: {
@@ -8,17 +10,11 @@ var app = new EmberApp({
   },
 });
 
-// Use this to add additional libraries to the generated output files.
-app.import({
-  development: 'vendor/ember-data/ember-data.js',
-  production:  'vendor/ember-data/ember-data.prod.js'
-});
+// Vendor CSS
+app.import(vendorDir + 'font-awesome/css/font-awesome.css'); // Font-Awesome
 
-/* Vendor CSS */
-app.import('vendor/font-awesome/css/font-awesome.css');
-
-/* Vendor JS */
-app.import('vendor/bootstrap/dist/js/bootstrap.min.js');
-app.import('vendor/moment/moment.js');
+// Vendor JS
+app.import(vendorDir + 'bootstrap/dist/js/bootstrap.min.js'); // Bootstrap JS
+app.import(vendorDir + 'moment/moment.js'); // Moment JS
 
 module.exports = app.toTree();

@@ -2,3 +2,58 @@
   Index Styles
 */
 
+.jumbotron.jumbotron-index {
+  background: @brand-primary;
+  position: relative;
+  padding-bottom: 80px;
+
+  .bottom-callout {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 6px 0;
+    background-color: darken(@brand-primary, 10%);
+
+    color: white;
+    font-size: 80%;
+    text-align: center;
+  }
+
+  .jumbo-button {
+    width: 30%;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 375%;
+
+    &:after {
+      content: '';
+      display: block;
+      width: 80%;
+      margin: 20px auto 25px auto;
+      border-bottom: 1px white solid;
+    }
+  }
+
+  h1, h2, h3 {
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+
+  a.jumbotron-link {
+    @lightened-primary: lighten(@brand-primary, 40%);
+    @hover-primary: lighten(@lightened-primary, 20%);
+    text-decoration: none;
+    border-bottom: 1px @lightened-primary dotted;
+    color: @lightened-primary;
+
+    &:hover {
+      color: @hover-primary;
+      border-bottom: 1px @hover-primary dotted;
+    }
+  }
+}
