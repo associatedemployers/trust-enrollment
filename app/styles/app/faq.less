@@ -1,0 +1,46 @@
+/*
+  Faq Styles
+*/
+
+.faq {
+  padding: 25px 45px;
+  color: @brand-default;
+  text-shadow: 0 1px 0 fade(white, 25%);
+  margin: 20px 0;
+  .gradient(fade(white, 70%), fade(darken(white, 8%), 70%));
+  
+  &.expanded {
+    .gradient(fade(lighten(@brand-primary, 10%), 70%), fade(darken(@brand-primary, 10%), 70%));
+
+    .faq-body {
+      opacity: 1;
+      max-height: 800px;
+    }
+
+    .faq-title {
+      border-bottom: 1px solid fade(lighten(@brand-default, 20%), 50%);
+      margin-bottom: 10px;
+
+
+      h1, h2, h3, h4, h5, h6 {
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .faq-title {
+    .transition-all();
+
+    h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+    }
+  }
+
+  .faq-body {
+    .transition-all();
+
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+  }
+}

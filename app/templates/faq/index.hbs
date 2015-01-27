@@ -1,0 +1,19 @@
+{{#each faq in content itemController="faq-item"}}
+  <div {{bind-attr class=":faq faq.expanded"}}>
+    <div class="faq-title">
+      <h4 class="clickable" {{action "toggleProperty" "expanded"}}>
+        {{faq.question}}
+
+        <span class="pull-right">
+          <i {{bind-attr class=":fa :fa-fw faq.expanded:fa-angle-up:fa-angle-down"}}></i>
+        </span>
+      </h4>
+    </div>
+    <div class="faq-body">
+      <p>{{{faq.answer}}}</p>
+      <small class='pull-right'>Updated: {{format-moment faq.time_stamp "M/DD"}}</small>
+    </div>
+  </div>
+{{else}}
+  <h2 class="text-center text-warning"><i class="fa fa-fw fa-exclamation-triangle"></i> No FAQ available.</h2>
+{{/each}}

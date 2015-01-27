@@ -5,28 +5,30 @@
 nav.app-header {
   position: fixed;
   z-index: 99;
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.8);
 
   .trl();
   .transition(~'all ease-in-out .4s');
 
-  // Override the margin
-  .row {
-    margin: 0 !important;
+  &.fill-primary {
+    background: @brand-primary;
   }
 
-  // Left
+  .row {
+    margin: 0;
+  }
+
   .header-left {
     .logo-container {
       padding: 10px;
       width: 100%;
-      height: unit( ( (173 / 3) * 2 ), px);
+      height: 80px;
       margin-left: 10px;
       .perspective(20px);
       
       .logo {
         display: inline-block;
-        width: unit( ( ( (250 / 3) * 2 ) - 10 ), px);
+        width: 80px;
         height: 100%;
         background-image: url(images/ae_logo.png);
         background-repeat: no-repeat;
@@ -40,8 +42,10 @@ nav.app-header {
         width: 220px;
         font-weight: 100;
         padding-left: 6px;
-        font-size: 35px;
+        font-size: 30px;
+        line-height: 1;
         vertical-align: top;
+        color: white;
 
         .transition(~"all ease-in-out .25s");
         .transform-origin(0%);
@@ -60,7 +64,6 @@ nav.app-header {
     }
   }
 
-  // Right
   .header-right {
 
     .right-container-media-queries();
@@ -68,7 +71,7 @@ nav.app-header {
     ul.header-links {
       list-style: none;
       text-align: right;
-      padding: 41px;
+      padding: 23px;
       margin: 0;
 
       .ul-media-queries();

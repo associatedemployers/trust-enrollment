@@ -11,8 +11,8 @@ body, html {
   background-color: @brand-offwhite;
 }
 
-@header-height: 116px;
-@footer-height: 42px;
+@header-height: 80px;
+@footer-height: 200px;
 
 
 .app-view {
@@ -22,6 +22,7 @@ body, html {
 
   .app-wrapper {
     padding-top: @header-height;
+    min-height: @footer-height;
 
     .app-wrapper-media-queries();
     .prefix-flex(1);
@@ -97,26 +98,11 @@ a {
   }
 }
 
-.full-background {
-  position: fixed;
-  .trbl();
-  margin-top: @header-height;
-  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.9) inset;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+.page-gutters {
+  width: 80%;
+  margin: 0 auto;
+}
 
-  .meshed-overlay {
-    position: absolute;
-    background: url('images/pattern_overlay.png') repeat;
-    .trbl();
-  }
-
-  &.index-full-background {
-    .at2x('images/landing_image.jpg', cover, null, true);
-  }
-
-  &.enrollment-full-background {
-    .gradient(lighten(@brand-primary, 10%), darken(@brand-primary, 10%));
-  }
+.clickable {
+  cursor: pointer;
 }

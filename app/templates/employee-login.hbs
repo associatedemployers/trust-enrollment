@@ -1,52 +1,37 @@
-<div class="full-background index-full-background">
+<div class="full-background login-full-background">
   <div class="meshed-overlay"></div>
 </div>
-{{! card header}}
-<div class="card-title">
-  <h1>Please Login</h1>
-</div>
-{{! ./ card header}}
-{{! card body}}
-<div class="card-dialog">
-  {{! sample card}}
-  <div {{bind-attr class=":id-card-dialog showIDCard:show"}}>
-    <div {{bind-attr class=":id-card flipCard:flip"}}>
-      <div class="card-front"></div>
-      <div class="card-back"></div>
-      <div class="card-overlay"></div>
-      <div class="card-flip-button">
-        <button class="btn btn-primary" {{action toggleProperty "flipCard"}}><i class="fa fa-fw fa-reply"></i></button>
-      </div>
-    </div>
-    <small>Hover to enlarge</small>
-    <a href="#" class="light" {{action toggleProperty "showIDCard"}}>Return to login</a>
+
+<div class="card pad">
+  <div class="card-title">
+    <h1>Log in or Enroll</h1>
   </div>
-  {{! ./ sample card}}
-
-  <form class="login-form" {{action "login" on="submit"}}>
-    <div {{bind-attr class=":form-group :right-inner-text-addon :hide-slide newEnrollment::show"}}>
-      {{input class="form-control" value=cid placeholder="ID# from your medical card"}}
-      <span {{bind-attr class=":text-addon idIsValid:success:danger"}}>{{cid_formatted}}{{#if idIsValid}}<i class="fa fa-fw fa-check"></i>{{/if}}</span>
-      <div {{bind-attr class=":helpers :hide-slide idIsValid::show"}}>
-        {{! Tab index is set below to disable helps from being the next element when the parent element is hidden}}
-        <span class="help help-right help-sm tooltip-trigger" data-toggle="tooltip" data-placement="right" data-container="body" title="Enrolling for the first time? Click this to start a new enrollment."><a href="#" tabindex="10" {{action toggleProperty "newEnrollment"}}>I don't have an ID#</a></span>
-        <span class="help help-right help-sm"><a href="#" tabindex="11" {{action toggleProperty "showIDCard"}}>Where can I find my ID#?</a></span>
+  <div class="card-dialog">
+    <form class="login-form" {{action "login" on="submit"}}>
+      <div class="form-group left-inner-addon right-inner-text-addon">
+        {{input type="password" class="form-control" value=ssn placeholder="Enter Your SSN"}}
+        <span {{bind-attr class=":text-addon ssnIsValid:success:danger"}}>
+          {{ssnFormatted}}
+          {{#if ssnIsValid}}
+            <i class="fa fa-fw fa-check"></i>
+          {{/if}}
+        </span>
+        <i class="fa fa-fw fa-lock left"></i>
       </div>
-    </div>
 
-    <div {{bind-attr class=":form-group :left-inner-addon :right-inner-text-addon :hide-slide idIsValid:show newEnrollment:show"}}>
-      {{input class="form-control" value=ssn placeholder="SSN"}}
-      <span {{bind-attr class=":text-addon ssnIsValid:success:danger"}}>{{ssn_formatted}}{{#if ssnIsValid}}<i class="fa fa-fw fa-check"></i>{{/if}}</span>
-      <i class="fa fa-fw fa-lock"></i>
-      {{#if newEnrollment}}
-        <p class="help help-right help-sm"><a href="#" tabindex="10" {{action toggleProperty "newEnrollment"}}>I have an ID#</a></p>
+      {{#if loginError}}
+        <p class="text-center text-danger">
+          <strong>Error logging in:</strong> {{loginError}}
+        </p>
       {{/if}}
-    </div>
 
-    <div class="form-group text-right">
-      <button type="submit" class="btn btn-success btn-lg" {{bind-attr disabled=loginIsNotValid}}>{{#if newEnrollment}}Start Enrollment{{else}}Login{{/if}}</button>
-    </div>
-  </form>
-
+      <div {{bind-attr class=":hide-slide ssnIsValid:show"}}>
+        <button type="submit" class="btn btn-success btn-block" {{bind-attr disabled=loginIsNotValid}}>
+          Log in{{#if loggingIn}}<i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
-{{! ./ card body}}
+
+{{outlet}}

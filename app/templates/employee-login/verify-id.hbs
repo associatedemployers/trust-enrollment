@@ -1,0 +1,38 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 class="modal-title"><i class="fa fa-lock"></i> Verify your Member ID</h2>
+    </div>
+    <form {{action "verify" on="submit"}}>
+      <div class="modal-body">
+        <div class="member-card"></div>
+
+        <div class="form-group">
+          
+        </div>
+
+        <div class="form-group left-inner-addon right-inner-text-addon">
+          {{input class="form-control" value=memberId placeholder="Enter your Member ID (ex. 943000000)"}}
+          <span {{bind-attr class=":text-addon memberIdIsValid:success:danger"}}>
+            {{memberIdFormatted}}
+            {{#if memberIdIsValid}}
+              <i class="fa fa-fw fa-check"></i>
+            {{/if}}
+          </span>
+          <i class="fa fa-credit-card left"></i>
+        </div>
+
+        <div class="text-center text-muted">Why am I being asked to enter my Member ID?</div>
+        <small class="text-muted">For your security, we ask that you verify your Member ID when your last log in is longer than 6 months ago or when this is your first time logging in from this computer.</small>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-warning btn-block" {{bind-attr disabled=memberIdIsNotValid}}>
+          Verify{{#if verifying}}<i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}
+        </button>
+        <small class="text-right">
+          {{#link-to 'faq.single' '54c7da12bd7543000017149e' class="text-danger"}}I don't have a Member ID (943 #){{/link-to}}
+        </small>
+      </div>
+    </form>
+  </div>
+</div>

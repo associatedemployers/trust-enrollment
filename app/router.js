@@ -6,9 +6,17 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('employee-login', { path: '/employee/login' });
+  this.route('employee-login', { path: '/employee/login' }, function () {
+    this.route('verify-id', { path: '/verify-membership/:token' });
+  });
+
   this.route('company-login', { path: '/company/login' });
   this.route('enrollment', { path: '/enroll' });
+
+  this.route('faq', { path: '/frequently-asked-questions' }, function () {
+    this.route('index', { path: '/' });
+    this.route('single', { path: '/:id' });
+  });
 });
 
 export default Router;

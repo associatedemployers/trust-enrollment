@@ -1,13 +1,9 @@
-{{!--{{#link-to 'employee-login' class="btn btn-success btn-block"}}
-  Login or Start Enrollment
-{{/link-to}}--}}
-
 <div class="jumbotron jumbotron-index">
   <h1>Say hello to the new AE...</h1>
 
   <div class="jumbo-button">
     {{#link-to 'employee-login' class="btn btn-success btn-lg btn-block"}}
-      Login or Start Enrollment
+      Log in or Start Enrollment
     {{/link-to}}
   </div>
 
@@ -20,13 +16,13 @@
   <div class="col-md-4 blurb">
     <div class="blurb-content">
       <hgroup>
-        <h2><i class="fa fa-fw fa-2x fa-file-text"></i></h2>
-        <h3>Plan Documents</h3>
+        <h2><i class="fa fa-fw fa-2x fa-check-circle"></i></h2>
+        <h3>Easy Enrollment</h3>
       </hgroup>
       <p>
-        Access all of your enrollment documents in one place. No more paper and no more losing important coverage information.
+        Changing jobs can be stressful. Applying for your benefits is not.
         <span class="blurb-link">
-          <a href="#">Access your documents</a>
+          {{#link-to 'employee-login'}}Get started{{/link-to}}
         </span>
       </p>
     </div>
@@ -48,13 +44,13 @@
   <div class="col-md-4 blurb">
     <div class="blurb-content">
       <hgroup>
-        <h2><i class="fa fa-fw fa-2x fa-check-circle"></i></h2>
-        <h3>Easy Enrollment</h3>
+        <h2><i class="fa fa-fw fa-2x fa-file-text"></i></h2>
+        <h3>Plan Documents</h3>
       </hgroup>
       <p>
-        Changing jobs can be stressful. Applying for your benefits is not.
+        Access all of your enrollment documents in one place. No more paper and no more losing important coverage information.
         <span class="blurb-link">
-          {{#link-to 'employee-login'}}Get started{{/link-to}}
+          <a href="#">Access your documents</a>
         </span>
       </p>
     </div>
