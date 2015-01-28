@@ -14,6 +14,7 @@ var app = new EmberApp({
 app.import(vendorDir + 'font-awesome/css/font-awesome.css'); // Font-Awesome
 
 // Vendor JS
+app.import(vendorDir + 'ember-localstorage-adapter/localstorage_adapter.js'); // LS Adapter
 app.import(vendorDir + 'bootstrap/dist/js/bootstrap.min.js'); // Bootstrap JS
 app.import(vendorDir + 'moment/moment.js'); // Moment JS
 

@@ -28,4 +28,46 @@ export default Ember.Controller.extend({
       this.set('memberId', format);
     });
   }.observesImmediately('memberId'),
+
+  actions: {
+    verify: function () {
+      var memberId = this.get('memberId'),
+          valid    = this.get('memberIdIsValid'),
+          token    = this.get('content'),
+          self     = this;
+
+      var cancel = function ( err ) {
+        console.log(err);
+        if ( err ) {
+          err = ( typeof err === 'string' ) ? err : ( err.responseText ) ? err.responseText : err.statusText;
+        }
+
+        self.setProperties({
+          verifying:   false,
+          verifyError: err
+        });
+      };
+
+      if ( !valid ) {
+        return cancel('Invalid Member ID');
+      }
+
+      self.setProperties({
+        verifying:   true,
+        verifyError: null
+      });
+
+      Ember.$.post('/api/employee/login/verify', { token: token, memberId: memberId }).then(function ( res ) {
+        cancel();
+
+        var auth = res;
+        delete auth.verificationRequired;
+
+        return self.session.createSession( auth );
+      })
+      .then(function ( session ) {
+        self.transitionToRoute('employee-account', session.user);
+      }).fail( cancel );
+    }
+  }
 });

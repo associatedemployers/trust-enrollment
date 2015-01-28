@@ -12,12 +12,10 @@
     "ember-qunit": "0.1.8",
     "ember-qunit-notifications": "0.0.4",
     "qunit": "~1.15.0",
-    "ember-data": "canary",
+    "ember-data": "1.0.0-beta.14.1",
     "font-awesome": "~4.1.0",
     "bootstrap": "~3.2.0",
-    "moment": "~2.7.0"
-  },
-  "resolutions": {
-    "ember-data": "canary"
+    "moment": "~2.7.0",
+    "ember-localstorage-adapter": "~0.5.1"
   }
 }

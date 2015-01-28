@@ -26,6 +26,11 @@
         <small class="text-muted">For your security, we ask that you verify your Member ID when your last log in is longer than 6 months ago or when this is your first time logging in from this computer.</small>
       </div>
       <div class="modal-footer">
+        {{#if verifyError}}
+          <p class="text-center text-danger">
+            <strong>Error verifying:</strong> {{verifyError}}
+          </p>
+        {{/if}}
         <button type="submit" class="btn btn-warning btn-block" {{bind-attr disabled=memberIdIsNotValid}}>
           Verify{{#if verifying}}<i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}
         </button>

@@ -17,6 +17,7 @@ Router.map(function() {
     this.route('index', { path: '/' });
     this.route('single', { path: '/:id' });
   });
+  this.route("employee-account");
 });
 
 export default Router;
