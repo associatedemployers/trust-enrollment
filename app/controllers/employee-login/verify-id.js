@@ -65,8 +65,8 @@ export default Ember.Controller.extend({
 
         return self.session.createSession( auth );
       })
-      .then(function ( session ) {
-        self.transitionToRoute('employee-account', session.user);
+      .then(function ( /* session */ ) {
+        self.transitionToRoute('employee-account');
       }).fail( cancel );
     }
   }
