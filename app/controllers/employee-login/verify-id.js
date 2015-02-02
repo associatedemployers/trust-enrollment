@@ -37,7 +37,8 @@ export default Ember.Controller.extend({
           self     = this;
 
       var cancel = function ( err ) {
-        console.log(err);
+        console.error( err );
+
         if ( err ) {
           err = ( typeof err === 'string' ) ? err : ( err.responseText ) ? err.responseText : err.statusText;
         }
@@ -57,7 +58,7 @@ export default Ember.Controller.extend({
         verifyError: null
       });
 
-      Ember.$.post('/api/employee/login/verify', { token: token, memberId: memberId }).then(function ( res ) {
+      Ember.$.post('/client-api/employee/login/verify', { token: token, memberId: memberId }).then(function ( res ) {
         cancel();
 
         var auth = res;

@@ -59,14 +59,22 @@ export default Ember.Controller.extend({
         loginError: null
       });
 
-      Ember.$.post('/api/employee/login', { ssn: ssn }).then(function ( res ) {
+      Ember.$.post('/client-api/employee/login', { ssn: ssn }).then(function ( res ) {
+        cancel();
+
         if ( res.verificationRequired === true ) {
           cancel();
           self.transitionToRoute('employee-login.verify-id', res.token);
           console.debug('Route debug: Verification required.');
         } else {
-          self.transitionToRoute('employee-account');
           console.debug('Route debug: Verification not required.');
+
+          var auth = res;
+          delete auth.verificationRequired;
+
+          self.session.createSession( auth ).then(function ( /* session */ ) {
+            self.transitionToRoute('employee-account');
+          });
         }
       }).fail( cancel );
     }
