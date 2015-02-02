@@ -43,6 +43,10 @@ var ApplicationRoute = Ember.Route.extend({
 			$('#' + id).modal('hide').one('hidden.bs.modal', function () {
 				self.set('previousModal', null);
 			});
+		},
+
+		logout: function () {
+			this.session.destroySession();
 		}
 	}
 });

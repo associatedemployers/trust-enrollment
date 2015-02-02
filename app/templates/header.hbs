@@ -7,8 +7,24 @@
   </div>
   <div class="col-md-6 header-right">
     <ul class="header-links">
-      <li>{{#link-to 'company-login' class="btn btn-primary btn-sm"}}Company Login{{/link-to}}</li>
-      <li><a href="#" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-life-ring"></i> Get Help</a></li>
+      <li>
+        {{#if session.authenticated}}
+          <div class="btn-group">
+            <button class="btn btn-primary btn-sm" data-toggle="dropdown" aria-expanded="false">
+              Logged in as {{session.currentUser.firstName}}
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li>{{#link-to 'employee-account'}}My account{{/link-to}}</li>
+              <li><a href="#" {{action "logout"}}>Log out</a></li>
+            </ul>
+        {{else}}
+          {{#link-to 'company-login' class="btn btn-primary btn-sm"}}Company Login{{/link-to}}
+        {{/if}}
+      </li>
+      <li>
+        <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-life-ring"></i> Get Help</a>
+      </li>
     </ul>
   </div>
 </div>

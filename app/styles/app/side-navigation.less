@@ -1,0 +1,62 @@
+/*
+  Side Navigation Styles
+*/
+
+.page-gutters {
+  overflow: hidden;
+  position: relative;
+}
+
+.side-navigation {
+  max-width: 80%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -80%;
+  background-color: fade(@brand-default, 95%);
+  color: white;
+  padding: 20px 40px;
+
+  .nav-close {
+    position: absolute;
+    top: 0;
+    right: 3px;
+    color: white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 12px 0;
+    padding: 0 0 12px 0;
+    border-bottom: 1px solid @brand-default;
+
+    a {
+      color: white;
+
+      &:hover {
+        color: lighten(@brand-primary, 15%);
+      }
+    }
+  }
+
+  ul.nav-links {
+    padding: 0;
+    list-style: none;
+
+    li.nav-link {
+      a {
+        color: white;
+
+        &:hover {
+          color: lighten(@brand-primary, 15%);
+        }
+      }
+    }
+  }
+
+  .transition-all();
+
+  &.expanded {
+    left: 0;
+    overflow-x: scroll;
+  }
+}

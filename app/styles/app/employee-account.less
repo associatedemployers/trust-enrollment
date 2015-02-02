@@ -1,0 +1,21 @@
+/*
+  Employee Account Styles
+*/
+
+.jumbotron.account-enroll-hero {
+  text-align: center;
+  color: @gray-lighter;
+
+  background: url('images/pattern_overlay.png') repeat, linear-gradient( lighten(@brand-default, 5%), transparent ), linear-gradient( 90deg, @brand-primary, transparent ), linear-gradient( -90deg, @brand-success, transparent );
+
+  hgroup {
+    &:after {
+      content: '';
+      display: block;
+      margin: 20px auto;
+      width: 30%;
+      border-bottom: 1px solid fade(@brand-default, 20%);
+    }
+  }
+
+}

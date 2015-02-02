@@ -3,7 +3,7 @@ var express = require('express'),
     apiProxy = httpProxy.createProxyServer();
 
 module.exports = function(app) {
-  app.all('/api/*', function (req, res) {
+  app.all('/client-api/*', function (req, res) {
     apiProxy.web(req, res, { target: 'http://localhost:3000' });
   });
 };

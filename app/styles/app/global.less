@@ -99,8 +99,15 @@ a {
 }
 
 .page-gutters {
-  width: 80%;
+  width: 85%;
   margin: 0 auto;
+
+  @media all and (max-width: @screen-md) and (min-width: @screen-sm) {
+    width: 90%
+  }
+  @media all and (max-width: @screen-sm) {
+    width: 95%
+  }
 }
 
 .clickable {

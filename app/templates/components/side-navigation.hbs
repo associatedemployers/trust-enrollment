@@ -1,0 +1,17 @@
+<h2>
+  <a href="#" {{action "toggleProperty" "toggle"}}>
+    <i class="fa fa-angle-left"></i> {{#if title}}{{title}}{{else}}Menu{{/if}}
+  </a>
+</h2>
+
+<ul class="nav-links">
+  {{#each link in links}}
+    <li class="nav-link">
+      {{#link-to link.path}}
+        <i {{bind-attr class=":fa :fa-fw link.icon"}}></i> &nbsp;{{link.title}}
+      {{/link-to}}
+    </li>
+  {{else}}
+    <i class="fa fa-fw fa-exclamation-triangle"></i> No links to show.
+  {{/each}}
+</ul>

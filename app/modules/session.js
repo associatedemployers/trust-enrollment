@@ -8,7 +8,7 @@ export default Ember.Object.extend({
 
     var token = this.get('content.token');
 
-    if( token ) {
+    if ( token ) {
       console.debug("Session :: Setting up headers...");
       this._setupHeaders( token );
     }
@@ -19,7 +19,7 @@ export default Ember.Object.extend({
   destroySession: function () {
     var self = this;
 
-    if( this.get('content.id') ) {
+    if ( this.get('content.id') ) {
       this.store.find('session', this.get('content.id')).then(function ( session ) {
         session.destroyRecord();
 
@@ -76,7 +76,7 @@ export default Ember.Object.extend({
   },
 
   currentUser: function () {
-    if(!this.get('content.user') || !this.get('authenticated')) {
+    if ( !this.get('content.user') || !this.get('authenticated') ) {
       return;
     }
 
