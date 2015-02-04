@@ -3,6 +3,9 @@
 // Easily pump out default styles, as well as :hover, :focus, :active,
 // and disabled options for all buttons
 
+
+@shadow: ~"0 115px 0 -100px rgba(255, 255, 255, 0.1) inset";
+
 .button-variant(@color; @background; @border) {
   color: @color;
   background: @background;
@@ -10,13 +13,14 @@
   font-weight: 100;
   transition: background-color ease-in-out .15s, border-color ease-in-out .15s;
   border-bottom: 2px solid darken(@border, 10%);
-  .box-shadow(~"0 115px 0 -100px rgba(255, 255, 255, 0.1) inset");
+  .box-shadow(@shadow);
 
   &.btn-o {
     color: @background;
     background: none;
     border-color: @border;
     border: 1px solid;
+    box-shadow: none;
   }
 
   &:hover,
@@ -27,8 +31,10 @@
     color: @color;
     background-color: lighten(@background, 10%);
     border-color: lighten(@border, 10%);
+
     &.btn-o {
       background-color: @background;
+      .box-shadow(@shadow);
     }
   }
   &:active,

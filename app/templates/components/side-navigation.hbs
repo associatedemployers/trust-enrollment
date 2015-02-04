@@ -8,7 +8,7 @@
   {{#each link in links}}
     <li class="nav-link">
       {{#link-to link.path}}
-        <i {{bind-attr class=":fa :fa-fw link.icon"}}></i> &nbsp;{{link.title}}
+        <i {{bind-attr class=":fa :fa-fw link.icon"}}></i> {{link.title}}
       {{/link-to}}
     </li>
   {{else}}

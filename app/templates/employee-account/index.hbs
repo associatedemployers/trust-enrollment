@@ -1,12 +1,13 @@
-<div class="jumbotron account-enroll-hero">
-  <hgroup>
-    <h2><i class="fa fa-exclamation-triangle"></i> You haven't enrolled for your benefits yet.</h2>
-    <h5>Click below to get started. Average enrollments take around 10 minutes to complete.</h5>
-  </hgroup>
+{{#if content.enrolled}}
 
-  <button class="btn btn-success btn-lg">Enroll For Your Benefits</button>
-</div>
+{{else}}
 
-{{#unless content.enrolled}}
-  
-{{/unless}}
+{{/if}}
+  <div class="jumbotron account-enroll-hero">
+    <hgroup>
+      <h2><i class="fa fa-exclamation-triangle"></i> You haven't enrolled for your benefits yet.</h2>
+      <h5>Click below to get started. Average enrollments take around 10 minutes to complete.</h5>
+    </hgroup>
+
+    <button class="btn btn-o btn-success btn-lg">Enroll For Your Benefits</button>
+  </div>

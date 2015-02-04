@@ -1,14 +1,10 @@
-<div {{bind-attr class=":page-gutters showNavigation:nav-expanded"}}>
-  {{side-navigation links=navigationLinks toggle=showNavigation title="Account Menu"}}
-  <hgroup>
-    <h2>
-      <a href="#" title="Open Account Menu" class="tooltip-trigger employee-account-title" data-placement="bottom" {{action "toggleProperty" "showNavigation"}}>
-        <i class="fa fa-bars"></i>
-        My Account
-      </a>
-    </h2>
-    <h4>Welcome to your account summary{{#if session.currentUser.firstName}}, {{session.currentUser.firstName}}{{/if}}.</h4>
-  </hgroup>
+{{side-navigation links=navigationLinks toggle=showNavigation title="I would like to..."}}
 
-  {{outlet}}
-</div>
+<hgroup class="employee-account-header">
+  <a href="#" title="Open Account Menu" class="tooltip-trigger employee-account-title" data-placement="bottom" data-container='body' {{action "toggleProperty" "showNavigation"}}>
+    <i class="fa fa-bars"></i>
+    My Account
+  </a>
+</hgroup>
+
+{{outlet}}

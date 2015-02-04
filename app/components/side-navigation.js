@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: [ 'side-navigation' ],
+  classNames:        [ 'side-navigation' ],
   classNameBindings: [ 'toggle:expanded' ],
 
   actions: {

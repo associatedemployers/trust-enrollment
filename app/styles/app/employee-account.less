@@ -2,11 +2,34 @@
   Employee Account Styles
 */
 
+.employee-account-view {
+  background: url('images/pattern_overlay.png') repeat, linear-gradient( lighten(@brand-default, 5%), transparent ), linear-gradient( 90deg, @brand-primary, transparent ), linear-gradient( -90deg, @brand-success, transparent );
+}
+
+hgroup.employee-account-header {
+  margin: 10px 10px;
+
+  .employee-account-title {
+    font-size: @font-size-h1;
+    font-family: @headings-font-family;
+    font-weight: @headings-font-weight;
+    line-height: @headings-line-height;
+    margin-top: 20px;
+    margin-bottom: (@line-height-computed / 2);
+    -webkit-font-smoothing: antialiased !important;
+    color: white;
+
+    &:hover {
+      color: lighten(@brand-primary, 10%);
+    }
+  }
+}
+
 .jumbotron.account-enroll-hero {
   text-align: center;
   color: @gray-lighter;
-
-  background: url('images/pattern_overlay.png') repeat, linear-gradient( lighten(@brand-default, 5%), transparent ), linear-gradient( 90deg, @brand-primary, transparent ), linear-gradient( -90deg, @brand-success, transparent );
+  background: none;
+  // url('images/pattern_overlay.png') repeat, linear-gradient( lighten(@brand-default, 5%), transparent ), linear-gradient( 90deg, @brand-primary, transparent ), linear-gradient( -90deg, @brand-success, transparent );
 
   hgroup {
     &:after {
@@ -17,5 +40,4 @@
       border-bottom: 1px solid fade(@brand-default, 20%);
     }
   }
-
 }

@@ -12,6 +12,8 @@ Router.map(function() {
 
   this.route('employee-account', { path: '/my-account' }, function () {
     this.route('index', { path: '/' });
+    this.route("edit");
+    this.route("documents");
   });
 
   this.route('company-login', { path: '/company/login' });
