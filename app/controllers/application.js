@@ -12,6 +12,10 @@ var ApplicationController = Ember.Controller.extend({
   // Computed Properties
   onIndex: function () {
     return this.get('currentPath') === "index";
+  }.property('currentPath'),
+
+  onEmployeeAccount: function () {
+    return this.get('currentPath').indexOf('employee-account') > -1;
   }.property('currentPath')
 });
 

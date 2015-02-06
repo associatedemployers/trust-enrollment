@@ -44,6 +44,8 @@ export default DS.Model.extend({
   gender:        attribute('string'),
   maritalStatus: attribute('string'),
 
+  lastLogin:     DS.belongsTo('login', { inverse: false }),
+
   // Relational
   dependents:     DS.hasMany('dependent', { async: true }),
   contactMethods: DS.hasMany('contact-method'),

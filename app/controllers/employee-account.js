@@ -27,6 +27,13 @@ export default Ember.ObjectController.extend({
     this.set('showNavigation', false);
   }.observes('controllers.application.currentPath'),
 
+  // Computed
+  lastLoginDescription: function () {
+    var login = this.get('content.lastLogin');
+
+    return ( !login ) ? 'Last Login: Now' : 'Last Login: %@'.fmt( moment(login.time_stamp).format('M/D/YY') );
+  }.property('content.lastLogin.[]'),
+
   actions: {
     toggleProperty: function ( prop ) {
       this.toggleProperty( prop );

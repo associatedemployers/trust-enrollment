@@ -5,6 +5,10 @@
     <i class="fa fa-bars"></i>
     My Account
   </a>
+
+  <span class="pull-right tooltip-trigger" {{bind-attr title=lastLoginDescription}} data-placement="left">
+    <i class="fa fa-fw fa-history"></i>
+  </span>
 </hgroup>
 
 {{outlet}}

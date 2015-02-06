@@ -44,7 +44,9 @@
     "andThen",
     "currentURL",
     "currentPath",
-    "currentRouteName"
+    "currentRouteName",
+    "moment",
+    "NProgress"
   ],
   "node": false,
   "browser": false,

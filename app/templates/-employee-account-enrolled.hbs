@@ -1,0 +1,67 @@
+{{#viewport-max class="with-separation"}}
+  <div class="row">
+    <div class="col-md-5 hero-data">
+      <div class="data-item">
+        <h4><i class="fa fa-fw fa-money"></i> Out of Pocket</h4>
+        <p>{{format-currency content.medicalRates.firstObject.deductible}}</p>
+      </div>
+      <div class="data-item">
+        <h4><i class="fa fa-fw fa-users"></i> Dependents</h4>
+        <p>{{silent-count content 'dependents'}}</p>
+      </div>
+      <div class="data-item">
+        <h4>Other data</h4>
+        <p>Data</p>
+      </div>
+      <div class="data-item">
+        <h4>Other data</h4>
+        <p>Data</p>
+      </div>
+    </div>
+
+    <div class="col-md-7">
+      <h3 class="text-center">
+        <i class="fa fa-fw fa-angle-left"></i>Co-insurance<i class="fa fa-fw fa-angle-right"></i>
+      </h3>
+
+      {{general-chart class="no-arc-color chart-dark align-chart-center" dataset=coinsuranceDataset chartOptions=coinsuranceChart.chartOptions dataOptions=coinsuranceChart.dataOptions height='300'}}
+    </div>
+  </div>
+
+  {{page-separation class="separation-bottom"}}
+{{/viewport-max}}
+
+<div class="page-color-break">
+  <h1 class="text-center text-uppercase">Your Plans</h1>
+
+  <div class="row employee-account-data-sections">
+    {{#if content.medicalRates.firstObject}}
+      <div class="col-md-4">
+        <h3>Medical</h3>
+        <p>
+          {{content.medicalPlan.name}} {{content.medicalRates.firstObject.coInsurance}} - {{format-currency content.medicalRates.firstObject.deductible}} Deductible
+        </p>
+      </div>
+    {{/if}}
+    {{#if content.dentalRates.firstObject}}
+      {{#with content.dentalRates.firstObject as dentalRate}}
+        <div class="col-md-4">
+          <h3>Dental</h3>
+          <p>
+            {{dentalRate.name}} - {{format-currency dentalRate.deductible}} Deductible
+          </p>
+        </div>
+      {{/with}}
+    {{/if}}
+    {{#if content.visionRates.firstObject}}
+      {{#with content.visionRates.firstObject as visionRate}}
+        <div class="col-md-4">
+          <h3>Vision</h3>
+          <p>
+            {{visionRate.name}}{{#if visionRate.deductible}} - {{format-currency visionRate.deductible}} Deductible{{/if}}
+          </p>
+        </div>
+      {{/with}}
+    {{/if}}
+  </div>
+</div>

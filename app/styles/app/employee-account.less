@@ -3,14 +3,30 @@
 */
 
 .employee-account-view {
+  color: white;
   background: url('images/pattern_overlay.png') repeat, linear-gradient( lighten(@brand-default, 5%), transparent ), linear-gradient( 90deg, @brand-primary, transparent ), linear-gradient( -90deg, @brand-success, transparent );
+
+  .align-chart-center {
+    margin-left: 58px;
+  }
+
+  .page-color-break {
+    background-color: fade(white, 80%);
+    width: 100%;
+    min-height: 500px;
+    color: @brand-default;
+    text-shadow: 0 1px 0 fade(white, 50%);
+    padding: 10px 12px;
+
+    .box-shadow(0 -10px 10px fade(@brand-default, 50%));
+  }
 }
 
 hgroup.employee-account-header {
-  margin: 10px 10px;
+  margin: 10px 35px;
 
   .employee-account-title {
-    font-size: @font-size-h1;
+    font-size: @font-size-h2;
     font-family: @headings-font-family;
     font-weight: @headings-font-weight;
     line-height: @headings-line-height;
@@ -39,5 +55,30 @@ hgroup.employee-account-header {
       width: 30%;
       border-bottom: 1px solid fade(@brand-default, 20%);
     }
+  }
+}
+
+.employee-account-data-sections {
+  .col-md-4 {
+    text-align: center;
+
+    h1, h2, h3, h4, h5, h6 {
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+  }
+}
+
+.hero-data {
+  text-align: center;
+  font-weight: 100;
+  margin-top: 50px;
+
+  .data-item {
+    h1, h2, h3, h4, h5, h6 {
+      margin-bottom: 2px;
+    }
+
+    margin-bottom: 60px;
   }
 }

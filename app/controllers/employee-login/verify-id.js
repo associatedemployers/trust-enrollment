@@ -37,9 +37,8 @@ export default Ember.Controller.extend({
           self     = this;
 
       var cancel = function ( err ) {
-        console.error( err );
-
         if ( err ) {
+          console.error( err );
           err = ( typeof err === 'string' ) ? err : ( err.responseText ) ? err.responseText : err.statusText;
         }
 
