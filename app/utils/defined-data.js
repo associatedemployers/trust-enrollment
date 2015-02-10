@@ -70,7 +70,8 @@ var marital_statuses = [
 var dependent_relationships = [
   'Spouse',
   'Child',
-  'Domestic Partner'
+  'Domestic Partner',
+  'Legal Dependent'
 ];
 
 var dependent_relationships_context = {

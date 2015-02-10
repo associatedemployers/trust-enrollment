@@ -32,36 +32,83 @@
 {{/viewport-max}}
 
 <div class="page-color-break">
-  <h1 class="text-center text-uppercase">Your Plans</h1>
+  <h1 class="employee-data-heading">
+    Your Plans
+    <small>
+      {{#link-to 'employee-account.edit'}}<i class="fa fa-edit"></i>{{/link-to}}
+    </small>
+  </h1>
 
-  <div class="row employee-account-data-sections">
-    {{#if content.medicalRates.firstObject}}
-      <div class="col-md-4">
-        <h3>Medical</h3>
-        <p>
-          {{content.medicalPlan.name}} {{content.medicalRates.firstObject.coInsurance}} - {{format-currency content.medicalRates.firstObject.deductible}} Deductible
-        </p>
+  <div class="row employee-account-data">
+    {{#with content.medicalRates.firstObject as medicalRate}}
+      <div class="col-md-3">
+        <div {{bind-attr class=":data-circle medicalRate::disabled"}}>
+          <h3>Medical</h3>
+          <p>
+            {{#if medicalRate}}
+              {{content.medicalPlan.name}} {{medicalRate.coInsurance}} - {{format-currency medicalRate.deductible}} Deductible
+            {{else}}
+              Not Carried
+            {{/if}}
+          </p>
+        </div>
       </div>
-    {{/if}}
-    {{#if content.dentalRates.firstObject}}
-      {{#with content.dentalRates.firstObject as dentalRate}}
-        <div class="col-md-4">
+    {{/with}}
+
+    {{#with content.dentalRates.firstObject as dentalRate}}
+      <div class="col-md-3">
+        <div {{bind-attr class=":data-circle dentalRate::disabled"}}>
           <h3>Dental</h3>
           <p>
-            {{dentalRate.name}} - {{format-currency dentalRate.deductible}} Deductible
+            {{#if dentalRate}}
+              {{dentalRate.name}} - {{format-currency dentalRate.deductible}} Deductible
+            {{else}}
+              Not Carried
+            {{/if}}
           </p>
         </div>
-      {{/with}}
-    {{/if}}
-    {{#if content.visionRates.firstObject}}
-      {{#with content.visionRates.firstObject as visionRate}}
-        <div class="col-md-4">
+      </div>
+    {{/with}}
+
+    {{#with content.visionRates.firstObject as visionRate}}
+      <div class="col-md-3">
+        <div {{bind-attr class=":data-circle visionRate::disabled"}}>
           <h3>Vision</h3>
           <p>
-            {{visionRate.name}}{{#if visionRate.deductible}} - {{format-currency visionRate.deductible}} Deductible{{/if}}
+            {{#if visionRate}}
+              {{visionRate.name}}{{#if visionRate.deductible}} - {{format-currency visionRate.deductible}} Deductible{{/if}}
+            {{else}}
+              Not Carried
+            {{/if}}
           </p>
         </div>
-      {{/with}}
-    {{/if}}
+      </div>
+    {{/with}}
+
+    {{#with content.lifeRates.firstObject as lifeRate}}
+      <div class="col-md-3">
+        <div {{bind-attr class=":data-circle lifeRate::disabled"}}>
+          <h3>Life</h3>
+          <p>
+            {{#if lifeRate}}
+              {{lifeRate.name}}
+            {{else}}
+              Not Carried
+            {{/if}}
+          </p>
+        </div>
+      </div>
+    {{/with}}
   </div>
+
+  <hr />
+
+  <h1 class="employee-data-heading">
+    You &amp; Your Dependents
+    <small>
+      {{#link-to 'employee-account.edit'}}<i class="fa fa-edit"></i>{{/link-to}}
+    </small>
+  </h1>
+
+  {{employee-info-viewer employee=content}}
 </div>

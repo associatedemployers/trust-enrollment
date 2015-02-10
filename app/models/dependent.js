@@ -65,6 +65,20 @@ export default DS.Model.extend({
     return ( m.gender && contextual && contextual[ m.gender ] ) ? contextual[ m.gender ] : m.relationship;
   }.property('relationship', 'gender'),
 
+  isSpouse: function () {
+    return this.get('relationship') === 'Spouse';
+  }.property('relationship'),
+
+  isChild: function () {
+    return this.get('relationship') === 'Child';
+  }.property('relationship'),
+
+  isOtherRelationship: function () {
+    var rel = this.get('relationship');
+
+    return rel !== 'Spouse' && rel !== 'Child';
+  }.property('relationship'),
+
   maskedSSN: function () {
     var ssn = this.get('ssn');
 

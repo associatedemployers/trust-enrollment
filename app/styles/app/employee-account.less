@@ -19,6 +19,11 @@
     padding: 10px 12px;
 
     .box-shadow(0 -10px 10px fade(@brand-default, 50%));
+
+    hr {
+      margin: 50px 20%;
+      border: 1px solid fade(@brand-default, 5%);
+    }
   }
 }
 
@@ -45,7 +50,6 @@ hgroup.employee-account-header {
   text-align: center;
   color: @gray-lighter;
   background: none;
-  // url('images/pattern_overlay.png') repeat, linear-gradient( lighten(@brand-default, 5%), transparent ), linear-gradient( 90deg, @brand-primary, transparent ), linear-gradient( -90deg, @brand-success, transparent );
 
   hgroup {
     &:after {
@@ -58,12 +62,46 @@ hgroup.employee-account-header {
   }
 }
 
-.employee-account-data-sections {
-  .col-md-4 {
+.employee-data-heading {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.employee-account-data {
+
+  .data-circle {
+    border-radius: 50%;
+    overflow: hidden;
+    background: @brand-success;
     text-align: center;
+    color: white;
+    font-weight: 100;
+    text-shadow: none;
+    margin: 0 auto 10px auto;
+    padding: 60px 20px;
+
+    width: 250px;
+    height: 250px;
+
+    .box-shadow(0 0 5px fade(@brand-default, 60%) inset);
+    .transition(all 0.2s ease-in-out);
+
+    &:hover {
+      background: lighten(@brand-success, 10%);
+    }
+
+    &.disabled {
+      background: @gray;
+      color: @gray-light;
+
+      &:hover {
+        background: lighten(@gray, 10%);
+      }
+    }
 
     h1, h2, h3, h4, h5, h6 {
-      text-transform: uppercase;
+      margin-top: 20px;
+      margin-bottom: 3px;
       font-weight: 500;
     }
   }
@@ -75,10 +113,10 @@ hgroup.employee-account-header {
   margin-top: 50px;
 
   .data-item {
+    margin-bottom: 40px;
+
     h1, h2, h3, h4, h5, h6 {
       margin-bottom: 2px;
     }
-
-    margin-bottom: 60px;
   }
 }

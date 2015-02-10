@@ -1,0 +1,64 @@
+<div class="info-viewer-pane">
+  <ul class="info-viewer-tabs">
+    <li {{bind-attr class=":tooltip-trigger employee.selected:selected" title=employee.firstName}} data-placement="left">
+      <a href="#" {{action 'selectObject' employee}}>
+        <i class="fa fa-fw fa-star"></i>
+      </a>
+    </li>
+    {{#each dependent in employee.dependents}}
+      <li {{bind-attr class=":tooltip-trigger dependent.selected:selected" title=dependent.firstName}} data-placement="left">
+        <a href="#" {{action 'selectObject' dependent}}>
+          <i {{bind-attr class=":fa :fa-fw isChild:fa-child:fa-user"}}></i>
+        </a>
+      </li>
+    {{/each}}
+  </ul>
+
+  <hgroup class="viewer-heading">
+    <h2>
+      <i {{bind-attr class=":fa :fa-fw selectedIsMale:fa-male:fa-female"}}></i>
+      {{selectedInfo.firstName}}
+
+      <small class="pull-right">
+        {{#each status in coverage}}
+          {{#if status.covered}}
+            <span class="label label-success">{{title-case status.type}}</span>
+          {{/if}}
+        {{/each}}
+      </small>
+    </h2>
+
+    <h5 class="text-right">
+      {{#if selectedInfo.relationship}}
+        {{selectedInfo.relationship}}
+      {{else}}
+        Primary
+      {{/if}}
+    </h5>
+  </hgroup>
+
+  <div class="row">
+    <div class="col-md-4 viewer-content-section">
+      <div class="viewer-content">
+        <h3><i class="fa fa-home"></i> Address</h3>
+        <p>
+          {{#if selectedInfo.hasAddress}}
+            {{selectedInfo.addressLine1}}<br />
+            {{#if selectedInfo.addressLine2}}{{selectedInfo.addressLine2}}<br />{{/if}}
+            {{selectedInfo.city}}, {{selectedInfo.state}} {{selectedInfo.zipcode}}
+          {{else}}
+            Same as employee
+          {{/if}}
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      
+    </div>
+
+    <div class="col-md-4">
+      
+    </div>
+  </div>
+</div>

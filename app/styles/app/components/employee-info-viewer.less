@@ -1,0 +1,77 @@
+/*
+  Employee Info Viewer Styles
+*/
+
+.employee-info-viewer {
+  width: 80%;
+  margin: 0 auto 50px auto;
+  color: @gray-lighter;
+
+  .info-viewer-pane {
+    position: relative;
+    background: fade(@brand-default, 90%);
+    padding: 20px 40px;
+    text-shadow: none;
+    font-weight: 100;
+
+    .box-shadow(0 60px 40px -50px fade(@brand-default, 60%));
+
+    hgroup.viewer-heading {
+      margin: 5px 0;
+
+      h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+
+        small.pull-right .label {
+          font-size: 60%;
+          font-weight: 100;
+          vertical-align: middle;
+
+          &:last-of-type {
+            margin-right: -2px;
+          }
+        }
+      }
+    }
+
+    .viewer-content-section {
+      text-align: center;
+    }
+
+    .viewer-content {
+      margin: 0 auto;
+      display: inline-block;
+    }
+
+    .info-viewer-tabs {
+      width: 35px;
+      padding: 0;
+      list-style: none;
+      position: absolute;
+      top: 0;
+      left: -35px;
+      text-align: center;
+
+      li {
+        background: fade(white, 90%);
+        padding: 2px 5px;
+        font-size: 130%;
+
+        .transition-all();
+
+        &.selected {
+          background-color: fade(@brand-default, 90%);
+
+          a {
+            color: white;
+          }
+        }
+
+        a {
+          display: block;
+          color: @brand-default;
+        }
+      }
+    }
+  }
+}
