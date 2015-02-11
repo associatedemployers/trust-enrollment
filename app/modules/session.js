@@ -83,5 +83,13 @@ export default Ember.Object.extend({
     Ember.assert('Session must have user id to fetch currentUser', this.get('content.user'));
 
     return this.store.find('employee', this.get('content.user'));
-  }.property('content.user', 'authenticated')
+  }.property('content.user', 'authenticated'),
+
+  enrollmentPeriods: function () {
+    if ( !this.get('authenticated') ) {
+      return;
+    }
+
+    return this.store.find('enrollment-period', { super: true });
+  }.property('currentUser', 'authenticated')
 });

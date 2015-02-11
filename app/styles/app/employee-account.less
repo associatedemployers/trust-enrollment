@@ -4,10 +4,16 @@
 
 .employee-account-view {
   color: white;
+  font-weight: 100;
   background: url('images/pattern_overlay.png') repeat, linear-gradient( lighten(@brand-default, 5%), transparent ), linear-gradient( 90deg, @brand-primary, transparent ), linear-gradient( -90deg, @brand-success, transparent );
 
   .align-chart-center {
     margin-left: 58px;
+  }
+
+  hr {
+    margin: 50px 20%;
+    border: 1px solid fade(@brand-default, 15%);
   }
 
   .page-color-break {
@@ -19,11 +25,6 @@
     padding: 10px 12px;
 
     .box-shadow(0 -10px 10px fade(@brand-default, 50%));
-
-    hr {
-      margin: 50px 20%;
-      border: 1px solid fade(@brand-default, 5%);
-    }
   }
 }
 

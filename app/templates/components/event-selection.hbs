@@ -1,0 +1,10 @@
+<div class="form-group">
+  {{view 'select' class='form-control' content=events optionLabelPath='content.name' prompt='Select a life event' value=eventSelection}}
+</div>
+
+{{#if eventSelection}}
+  <h3>
+    When did {{eventSelection.whenDid}}?
+  </h3>
+  Date picker
+{{/if}}

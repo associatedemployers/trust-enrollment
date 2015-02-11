@@ -27,5 +27,5 @@ export default Ember.ObjectController.extend({
       [ 'Plan', sCoin[ 0 ] ],
       [ 'You',  sCoin[ 1 ] ]
     ]);
-  }.property('content.medicalRates.@each.coInsurance'),
+  }.property('content.medicalRates.@each.coInsurance')
 });
