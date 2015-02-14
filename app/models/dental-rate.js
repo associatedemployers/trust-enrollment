@@ -1,4 +1,6 @@
-// import DS from 'ember-data';
+import DS from 'ember-data';
 import RateModel from './rate';
 
-export default RateModel.extend({});
+export default RateModel.extend({
+  voluntary: DS.attr('boolean')
+});

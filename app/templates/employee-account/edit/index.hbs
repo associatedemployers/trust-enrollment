@@ -1,19 +1,27 @@
-<div {{bind-attr class=":enrollment-period-info :text-center activeEnrollmentPeriod.isActive::text-warning"}}>
-  <i {{bind-attr class=":fa :fa-fw activeEnrollmentPeriod.isActive:fa-check:fa-exclamation-triangle"}}></i>
-  Plan changes due to reasons other than the events below are 
-  {{#if activeEnrollmentPeriod.isActive}}
-    <strong>allowed</strong> as we are in open enrollment<br/>
-    <small>Current open enrollment: <i>{{format-moment activeEnrollmentPeriod.start}} - {{format-moment activeEnrollmentPeriod.end}}</i></small>
-  {{else}}
-    <strong>not allowed</strong> as we are not in open enrollment<br />
-    <small>
-      {{#if nextEnrollmentPeriod}}
-        The next open enrollment period will start on {{format-moment nextEnrollmentPeriod.start}}
-      {{else}}
-        No upcoming open enrollments found
-      {{/if}}
-    </small>
+<div class="form-wrapper">
+  <div {{bind-attr class=":enrollment-period-info :text-center activeEnrollmentPeriod.isActive:text-success:text-warning"}}>
+    <i {{bind-attr class=":fa :fa-fw activeEnrollmentPeriod.isActive:fa-check:fa-exclamation-triangle"}}></i>
+    Plan changes due to reasons other than the events below are 
+    {{#if activeEnrollmentPeriod.isActive}}
+      <strong>allowed</strong> as we are in open enrollment<br/>
+      <small>Current open enrollment: <i>{{format-moment activeEnrollmentPeriod.start}} - {{format-moment activeEnrollmentPeriod.end}}</i></small>
+    {{else}}
+      <strong>not allowed</strong> as we are not in open enrollment<br />
+      <small>
+        {{#if nextEnrollmentPeriod}}
+          The next open enrollment period will start on {{format-moment nextEnrollmentPeriod.start}}
+        {{else}}
+          No upcoming open enrollments found
+        {{/if}}
+      </small>
+    {{/if}}
+  </div>
+
+  {{event-selection class="animated fadeInLeft" events=eventButtons dateSelection=eventDate valid=eventValid value=eventSelection}}
+
+  {{#if eventSelection}}
+    {{#link-to 'employee-account.edit.qualify-event' class='animated fadeInUp btn btn-success btn-block'}}
+      Next
+    {{/link-to}}
   {{/if}}
 </div>
-
-{{event-selection events=eventButtons dateSelection=eventDate valid=eventValid}}

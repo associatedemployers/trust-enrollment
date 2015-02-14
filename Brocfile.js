@@ -10,17 +10,26 @@ var app = new EmberApp({
   },
 });
 
-// Vendor CSS
-app.import(vendorDir + 'font-awesome/css/font-awesome.css'); // Font-Awesome
-app.import(vendorDir + 'nprogress/nprogress.css');           // NProgess CSS
-app.import(vendorDir + 'c3js-chart/c3.css');                 // c3.js CSS
+var bowerIncludes = [
+  'font-awesome/css/font-awesome.css',
+  'nprogress/nprogress.css',
+  'c3js-chart/c3.css',
+  'd3/d3.js',
+  'ember-localstorage-adapter/localstorage_adapter.js',
+  'bootstrap/dist/js/bootstrap.min.js',
+  'moment/moment.js',
+  'c3js-chart/c3.js',
+  'nprogress/nprogress.js',
+  'pickadate/lib/themes/default.css',
+  'pickadate/lib/themes/default.date.css',
+  'pickadate/lib/picker.js',
+  'pickadate/lib/picker.date.js',
+  'pickadate/lib/legacy.js',
+  'animate.css/animate.css'
+];
 
-// Vendor JS
-app.import(vendorDir + 'd3/d3.js');                                           // d3.js
-app.import(vendorDir + 'ember-localstorage-adapter/localstorage_adapter.js'); // LS Adapter
-app.import(vendorDir + 'bootstrap/dist/js/bootstrap.min.js');                 // Bootstrap JS
-app.import(vendorDir + 'moment/moment.js');                                   // Moment JS
-app.import(vendorDir + 'c3js-chart/c3.js');                                   // c3.js
-app.import(vendorDir + 'nprogress/nprogress.js');                             // NProgress JS
+bowerIncludes.forEach(function ( path ) {
+  app.import( vendorDir + path );
+});
 
 module.exports = app.toTree();

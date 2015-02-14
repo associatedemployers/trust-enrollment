@@ -9,7 +9,7 @@ export default [
   },
   {
     name:           'I now have a Domestic Partner',
-    whenDid:        'you file for domestic partnership',
+    whenDid:        'you establish your domestic partnership',
     code:           'domesticPartnership',
     timeAfterEvent: 30
   },

@@ -1,0 +1,13 @@
+<h3 class="text-center animated rubberBand">
+  When did {{eventSelection.whenDid}}?
+</h3>
+
+<div class="form-wrapper">
+  {{date-picker value=dateSelection textValue=textValue clear=false min=datePickerSettings.min max=datePickerSettings.max}}
+
+  {{#link-to 'employee-account.edit.upload-documents' class='animated fadeInUp btn btn-success btn-block'}}
+    Next
+  {{/link-to}}
+
+  <!--span class="text-center text-muted">-->
+</div>

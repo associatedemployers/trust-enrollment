@@ -1,5 +1,12 @@
 {{#viewport-max}}
-  <h2 class="text-center">Edit your enrollment</h2>
+  <h2 class="text-center">
+    Edit your enrollment<br />
+    {{#if eventSelection}}
+      <small class="animated fadeInUp">
+        Event <i class="fa fa-arrow-circle-right"></i> {{eventSelection.name}}
+      </small>
+    {{/if}}
+  </h2>
   <hr />
   {{outlet}}
 {{/viewport-max}}

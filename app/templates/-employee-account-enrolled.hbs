@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-5 hero-data">
       <div class="data-item">
-        <h4><i class="fa fa-fw fa-money"></i> Out of Pocket</h4>
+        <h4><i class="fa fa-fw fa-money"></i> Medical Deductible</h4>
         <p>{{format-currency content.medicalRates.firstObject.deductible}}</p>
       </div>
       <div class="data-item">
@@ -61,6 +61,7 @@
           <h3>Dental</h3>
           <p>
             {{#if dentalRate}}
+              {{#if dentalRate.voluntary}}Voluntary{{else}}Non-Voluntary{{/if}}
               {{dentalRate.name}} - {{format-currency dentalRate.deductible}} Deductible
             {{else}}
               Not Carried
@@ -76,6 +77,7 @@
           <h3>Vision</h3>
           <p>
             {{#if visionRate}}
+              {{#if visionRate.voluntary}}Voluntary{{else}}Non-Voluntary{{/if}}
               {{visionRate.name}}{{#if visionRate.deductible}} - {{format-currency visionRate.deductible}} Deductible{{/if}}
             {{else}}
               Not Carried

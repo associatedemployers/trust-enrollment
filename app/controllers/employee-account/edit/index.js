@@ -7,5 +7,6 @@ export default Ember.Controller.extend({
   eventButtons: events,
 
   activeEnrollmentPeriod: Ember.computed.alias('controllers.employee-account/edit.activeEnrollmentPeriod'),
-  nextEnrollmentPeriod:   Ember.computed.alias('controllers.employee-account/edit.nextEnrollmentPeriod')
+  nextEnrollmentPeriod:   Ember.computed.alias('controllers.employee-account/edit.nextEnrollmentPeriod'),
+  eventSelection:         Ember.computed.alias('controllers.employee-account/edit.eventSelection')
 });

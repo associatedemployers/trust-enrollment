@@ -10,10 +10,12 @@ Router.map(function() {
     this.route('verify-id', { path: '/verify-membership/:token' });
   });
 
-  this.route('employee-account', { path: '/my-account' }, function () {
+  this.route('employee-account', { path: '/account' }, function () {
     this.route('index', { path: '/' });
     this.route('edit', function () {
       this.route('index', { path: '/select' });
+      this.route('qualify-event');
+      this.route('upload-documents');
     });
     this.route('documents');
   });

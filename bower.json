@@ -19,6 +19,8 @@
     "ember-localstorage-adapter": "~0.5.1",
     "d3": "~<=3.5.0",
     "nprogress": "~0.1.6",
-    "c3js-chart": "~0.4.9"
+    "c3js-chart": "~0.4.9",
+    "pickadate": "~3.5.5",
+    "animate.css": "~3.2.0"
   }
 }

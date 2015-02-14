@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   activeEnrollmentPeriod: null,
   nextEnrollmentPeriod:   null,
+  eventSelection:         null,
 
   getActiveEnrollmentPeriod: function () {
     var self = this;
@@ -10,7 +11,7 @@ export default Ember.Controller.extend({
     this.session.get('enrollmentPeriods').then(function ( enrollmentPeriods ) {
       self.set('activeEnrollmentPeriod', enrollmentPeriods.findBy('isActive', true));
     });
-  }.observes('session.enrollmentPeriods').on('init'),
+  }.observes('session.enrollmentPeriods.@each.isActive').on('init'),
 
   getNextEnrollmentPeriod: function () {
     var self = this,
@@ -23,5 +24,5 @@ export default Ember.Controller.extend({
     this.session.get('enrollmentPeriods').then(function ( enrollmentPeriods ) {
       self.set('nextEnrollmentPeriod', enrollmentPeriods.sortBy('start').find(nextPeriod));
     });
-  }.observes('session.enrollmentPeriods').on('init')
+  }.observes('session.enrollmentPeriods.@each.start').on('init')
 });
