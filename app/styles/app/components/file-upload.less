@@ -1,0 +1,42 @@
+/*
+  File Upload Styles
+*/
+
+.file-upload {
+  padding: 35px;
+
+  .transition-all();
+
+  &.dropzone {
+    padding: 90px 10px 100px 10px;
+    height: 300px;
+    background: fade(@brand-default, 50%);
+    border: 2px dashed fade(@brand-default, 80%);
+
+    &.activated {
+      background: fade(@brand-success, 50%);
+    }
+
+    .file-upload-dropzone-text {
+      text-align: center;
+      margin: 20px 0 5px 0;
+      color: @gray-light
+    }
+  }
+
+  .file-upload-hidden-input {
+    display: none;
+    visibility: hidden;
+  }
+
+  ul.file-upload-file-list {
+    width: 250px;
+    padding: 0 10px;
+    margin: 0 auto;
+
+    li {
+      font-size: 70%;
+      color: @gray-light;
+    }
+  }
+}
