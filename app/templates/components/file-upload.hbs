@@ -1,12 +1,3 @@
-<p class="text-center text-muted">
-  <small>
-    Supported file types are
-    {{#each ext in allowedExtensions}}
-      <span class="label label-default text-small">{{ext}}</span>
-    {{/each}}
-  </small>
-</p>
-
 {{#if fileError}}
   <p class="text-center text-danger">
     <i class="fa fa-exclamation-triangle"></i> {{fileError}}
@@ -22,21 +13,29 @@
     {{/if}}
   </button>
 
-  {{#if hasFiles}}
-    <button class="btn btn-success btn-o" {{action "upload"}}>Upload</button>
-  {{/if}}
-
   {{#if showDropzoneText}}
     <h5 class="file-upload-dropzone-text">
-      <i class="fa fa-fw fa-thumb-tack"></i> Or Drag And Drop File{{#if multi}}s{{/if}} Here
+      <i class="fa fa-fw fa-hand-o-up"></i> Or Drag And Drop File{{#if multi}}s{{/if}} Here
     </h5>
   {{/if}}
+
+  <p class="text-center text-muted">
+    <small>
+      Supported file types are
+      {{#each ext in allowedExtensions}}
+        <span class="label label-default text-small">{{ext}}</span>
+      {{/each}}
+    </small>
+  </p>
 </div>
 
 <input type="file" class="file-upload-hidden-input" {{bind-attr id=inputId multiple=multi}} {{action "selectFile" on="change"}} />
 
 <ul class="file-upload-file-list">
   {{#each file in files}}
-    <li>{{file.name}}</li>
+    <li>
+      {{file.name}}
+      <a href="#" {{action "removeFile" file}}><i class="fa fa-times-circle"></i></a>
+    </li>
   {{/each}}
 </ul>

@@ -17,7 +17,7 @@
     {{/if}}
   </div>
 
-  {{event-selection class="animated fadeInLeft" events=eventButtons dateSelection=eventDate valid=eventValid value=eventSelection}}
+  {{event-selection class="animated fadeInLeft" events=eventsQualified dateSelection=eventDate valid=eventValid value=eventSelection}}
 
   {{#if eventSelection}}
     {{#link-to 'employee-account.edit.qualify-event' class='animated fadeInUp btn btn-success btn-block'}}

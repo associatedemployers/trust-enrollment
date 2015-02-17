@@ -25,7 +25,7 @@ var componentEventManager = Ember.Object.create({
     e.preventDefault();
 
     component.$().removeClass('activated');
-    component._validateFiles( e.dataTransfer.files );
+    component._validateFiles( e.dataTransfer.files, false );
   }
 });
 
@@ -40,16 +40,19 @@ export default Ember.Component.extend({
   maxSize:  8, // in mb
   allowedExtensions: [ 'pdf', 'jpg', 'jpeg' ],
 
-  files: [],
+  files:            Ember.A(),
   doesNotHaveFiles: Ember.computed.not('hasFiles'),
   showDropzoneText: Ember.computed.and('dropzone', 'doesNotHaveFiles'),
 
   eventManager: componentEventManager,
 
   // Private
-  _validateFiles: function ( files ) {
+  _validateFiles: function ( files, clear ) {
     this._clearError();
-    this._clearFiles();
+
+    if ( clear !== false ) {
+      this._clearFiles();
+    }
 
     var self   = this,
         multi  = this.get('multi'),
@@ -78,7 +81,7 @@ export default Ember.Component.extend({
       } else if ( Math.floor( file.size / 1000000 ) > this.get('maxSize') ) {
         handleError('Max file size exceeded.');
       } else {
-        _files.pushObject( file );
+        _files.addObject( file );
       }
     }
   },
@@ -100,9 +103,9 @@ export default Ember.Component.extend({
     return this.get('elementId') + '-dropzone';
   }.property('elementId'),
 
-  hasFiles: function () {
-    return this.get('files') && this.get('files.length') > 0;
-  }.property('files.[]'),
+  shouldSetHasFiles: function () {
+    this.set('hasFiles', this.get('files') && this.get('files.length') > 0);
+  }.observes('files.[]'),
 
   actions: {
     triggerFileInput: function () {
@@ -113,10 +116,8 @@ export default Ember.Component.extend({
       this._validateFiles( this.$().find('#' + this.get('inputId'))[0].files );
     },
 
-    upload: function () {
-      var dataUrl = this.get('dataUrl');
-
-      Ember.assert('File upload component :: dataUrl must be specified', !!dataUrl);
+    removeFile: function ( file ) {
+      this.get('files').removeObject( file );
     }
   }
 });

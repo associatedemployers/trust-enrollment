@@ -3,11 +3,13 @@
 </h3>
 
 <div class="form-wrapper">
+  <p class="text-center text-muted text-sm">
+    Enrollment changes are allowed up to {{eventSelection.timeAfterEvent}} days after the event has taken place
+  </p>
+
   {{date-picker value=dateSelection textValue=textValue clear=false min=datePickerSettings.min max=datePickerSettings.max}}
 
   {{#link-to 'employee-account.edit.upload-documents' class='animated fadeInUp btn btn-success btn-block'}}
     Next
   {{/link-to}}
-
-  <!--span class="text-center text-muted">-->
 </div>

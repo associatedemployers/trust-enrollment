@@ -1,1 +1,70 @@
-{{outlet}}
+<div class="form-wrapper">
+  <h3 class="text-center animated rubberBand">
+    Upload supporting documentation<br />
+    <small>
+      <i class="fa fa-fw fa-info-circle"></i> We require supporting documentation for this event in order to approve plan changes
+    </small>
+  </h3>
+
+  {{#if eventSelection.supportingDocuments}}
+    <div class="accepted-supporting-documents">
+      <p>
+        Acceptable supporting documents
+      </p>
+      <ul>
+        {{#each doc in eventSelection.supportingDocuments}}
+          <li>{{doc}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+
+  {{file-upload class="animated fadeInUp" multi=true max=3 dropzone=true hasFiles=hasFiles}}
+
+  <div class="form-group">
+    {{#if hasFiles}}
+      <button class="btn btn-success btn-block">Upload Supporting Documents</button>
+    {{else}}
+      <p class="text-center extra-padding">
+        You may choose to send supporting documentation to our office via fax or mail. Click "Skip" below.
+      </p>
+    {{/if}}
+
+    <button class="btn btn-o btn-sm btn-danger btn-block" {{action "showModal" "skip-file-upload-information" true}}>Skip</button>
+  </div>
+</div>
+
+{{#bs-modal id='skip-file-upload-information' title='<i class="fa fa-fw fa-share"></i> Skipping uploading supporting documentation'}}
+  <div class="modal-body">
+    <p class="text-center">
+      You may choose to skip uploading supporting documents online if you would rather mail or fax them. Please note the following before proceeding.
+    </p>
+
+    <ul>
+      <li>Review of your enrollment changes will be delayed until we receive your supporting documentation</li>
+      <li>Your enrollment changes may be <strong>rejected</strong> if you do not include your <strong>Member ID</strong> with a cover sheet or attached paper</li>
+      <li>Proof of supporting documentation will not be available in your account after changes are accepted</li>
+    </ul>
+
+    <p>Member ID: <strong>{{content.memberId}}</strong></p>
+
+    <p>
+      <i>Send to:</i><br />
+      Blah Blah Blah<br />
+      1234 Easy Street<br />
+      Billings, MT 59102<br />
+      FAX: (800) 123-1234
+    </p>
+  </div>
+  <div class="modal-footer">
+    <p class="text-center">
+      Are you sure you want to skip uploading supporting documents?
+    </p>
+    <div class="form-group">
+      <button class="btn btn-warning btn-block">Continue without uploading</button>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-success btn-block btn-sm" data-dismiss="modal">Cancel</button>
+    </div>
+  </div>
+{{/bs-modal}}
