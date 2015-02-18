@@ -1,8 +1,8 @@
 // Progress bars
 
 .progress-bar-variant(@color) {
-  background-color: @color;
+  background-color: fade(@color, 80%);
   .progress-striped & {
-    #gradient > .striped();
+    #gradient > .striped(rgba(255,255,255,.15), 50deg);
   }
 }

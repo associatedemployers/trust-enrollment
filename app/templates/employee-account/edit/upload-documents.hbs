@@ -19,11 +19,25 @@
     </div>
   {{/if}}
 
-  {{file-upload class="animated fadeInUp" multi=true max=3 dropzone=true hasFiles=hasFiles}}
+  {{file-upload class="animated fadeInUp" multi=true max=3 dropzone=true hasFiles=hasFiles files=supportingFiles}}
 
   <div class="form-group">
     {{#if hasFiles}}
-      <button class="btn btn-success btn-block">Upload Supporting Documents</button>
+      <hr />
+      <h4 class="text-center">
+        What kind of file are you uploading?
+      </h4>
+      <div class="form-group">
+        {{view 'select' class="form-control" content=eventSelection.supportingDocuments value=selfTag}}
+      </div>
+
+      {{error-display prefix="Error uploading file" message=uploadError}}
+
+      {{#if uploadingFiles}}
+        {{progress-bar class="animated fadeInUp" min=0 max=100 value=uploadProgress striped=true barClass="progress-bar-success"}}
+      {{/if}}
+
+      <button class="btn btn-success btn-block btn-lg" {{bind-attr disabled=uploadingFiles}} {{action "upload"}}>Upload Supporting Documents</button>
     {{else}}
       <p class="text-center extra-padding">
         You may choose to send supporting documentation to our office via fax or mail. Click "Skip" below.
@@ -43,7 +57,7 @@
     <ul>
       <li>Review of your enrollment changes will be delayed until we receive your supporting documentation</li>
       <li>Your enrollment changes may be <strong>rejected</strong> if you do not include your <strong>Member ID</strong> with a cover sheet or attached paper</li>
-      <li>Proof of supporting documentation will not be available in your account after changes are accepted</li>
+      <li>Proof of supporting documentation will not be viewable in your account after changes are accepted</li>
     </ul>
 
     <p>Member ID: <strong>{{content.memberId}}</strong></p>
