@@ -15,10 +15,14 @@ export default Ember.Controller.extend({
   },
 
   _endUpload: function ( err ) {
-    err = ( err && err.responseText ) ? err.responseText : err;
+    var errMsg = ( err && err.responseText ) ? err.responseText : err;
+
+    if ( err ) {
+      console.error(err);
+    }
 
     this.setProperties({
-      uploadError:    err,
+      uploadError:    errMsg,
       uploadingFiles: false
     });
   },
@@ -33,8 +37,9 @@ export default Ember.Controller.extend({
     return new Ember.RSVP.Promise(function ( resolve, reject ) {
       Ember.$.ajax({
         type: 'POST',
-        url: '/client-api/file',
+        url: '/client-api/files/',
         data: new FormData( files ),
+        processData: false,
         xhr: function () {
           var xhr = new window.XMLHttpRequest();
 
@@ -69,13 +74,13 @@ export default Ember.Controller.extend({
       this._startUpload();
 
       var self  = this,
-          files = this.get('supportingFiles');
+          files = this.get('supportingFiles').toArray();
 
-      self._asyncFileUpload( files )
+      self._asyncFileUpload.call( self, files )
       .then(function ( response ) {
         console.log(response);
       })
-      .catch( self._endUpload );
+      .catch( self._endUpload.bind(self) );
     }
   }
 });
