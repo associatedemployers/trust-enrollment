@@ -32,14 +32,21 @@ export default Ember.Controller.extend({
   // IE 10+, Firefox 4.0+, Chrome 7+, Safari 5+, Opera 12+
   // Will need a polyfill to support less than versions
   _asyncFileUpload: function ( files ) {
-    var self = this;
+    var self     = this,
+        formData = new FormData();
+
+    files.toArray().forEach(function ( file, index ) {
+      formData.append( 'file' + index, file );
+    });
 
     return new Ember.RSVP.Promise(function ( resolve, reject ) {
       Ember.$.ajax({
         type: 'POST',
         url: '/client-api/files/',
-        data: new FormData( files ),
+        data: formData,
         processData: false,
+        contentType: false,
+        cache: false,
         xhr: function () {
           var xhr = new window.XMLHttpRequest();
 
