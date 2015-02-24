@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: [ 'employee-account/edit' ],
+  needs: [ 'employee-account/edit', 'employee-account/edit/qualify-event' ],
 
   eventSelection:  Ember.computed.alias('controllers.employee-account/edit.eventSelection'),
   supportingFiles: Ember.A(),
@@ -33,10 +33,12 @@ export default Ember.Controller.extend({
   // Will need a polyfill to support less than versions
   _asyncFileUpload: function ( files ) {
     var self     = this,
-        formData = new FormData();
+        formData = new FormData(),
+        tag      = this.get('selfTag');
 
     files.toArray().forEach(function ( file, index ) {
-      formData.append( 'file' + index, file );
+      formData.append('file' + index, file);
+      formData.append(file.name + '-label', tag);
     });
 
     return new Ember.RSVP.Promise(function ( resolve, reject ) {
@@ -64,30 +66,53 @@ export default Ember.Controller.extend({
     });
   },
 
-  // uploadProgress: function () {
-  //   if ( !this.get('uploadingFiles') ) {
-  //     return 0;
-  //   }
+  _createReview: function ( attachments ) {
+    var enrollmentReview = this.store.createRecord('enrollment-review', {
+      employee:   this.session.get('currentUser'),
+      eventType:  this.get('eventSelection.code'),
+      eventTitle: this.get('eventSelection.title'),
+      eventDate:  this.get('controllers.employee-account/edit/qualify-event.dateSelection')
+    });
 
-  //   var sum = this.get('fileProgress').reduce(function ( s, p ) {
-  //     return s + p.computed;
-  //   }, 0);
+    if ( attachments ) {
+      enrollmentReview.get('attachments').addObjects(attachments);
+    }
 
-  //   return Math.round( sum );
-  // }.property('fileProgress', 'supportingFiles.[]', 'uploadingFiles'),
+    return enrollmentReview;
+  },
 
   actions: {
     upload: function () {
       this._startUpload();
 
-      var self  = this,
-          files = this.get('supportingFiles').toArray();
+      var self      = this,
+          files     = this.get('supportingFiles').toArray(),
+          endUpload = this._endUpload.bind( this );
 
       self._asyncFileUpload.call( self, files )
       .then(function ( response ) {
-        console.log(response);
+        if ( !response.file || response.file.length < 1 ) {
+          return endUpload('Unexpected error. Missing files in response.');
+        }
+
+        self.store.pushPayload('file', response);
+        endUpload();
+
+        Ember.run.next(self, function () {
+          var promises = response.file.map(function ( file ) {
+            return self.store.find('file', file.id);
+          });
+
+          Ember.RSVP.all(promises).then(function ( fileModels ) {
+            self.transitionToRoute('employee-account.edit.review', self._createReview.call(self, fileModels));
+          });
+        });
       })
-      .catch( self._endUpload.bind(self) );
+      .catch( endUpload );
+    },
+
+    skipUpload: function () {
+      this.transitionToRoute('employee-account.edit.review', this._createReview.call(this));
     }
   }
 });

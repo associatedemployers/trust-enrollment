@@ -16,6 +16,7 @@ Router.map(function() {
       this.route('index', { path: '/select' });
       this.route('qualify-event');
       this.route('upload-documents');
+      this.route('review', { path: '/review/:id' });
     });
     this.route('documents');
   });

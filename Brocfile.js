@@ -25,6 +25,7 @@ var bowerIncludes = [
   'pickadate/lib/picker.js',
   'pickadate/lib/picker.date.js',
   'pickadate/lib/legacy.js',
+  'signature_pad/signature_pad.js',
   'animate.css/animate.css'
 ];
 

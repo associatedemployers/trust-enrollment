@@ -3,6 +3,7 @@ import titleCase from 'trust-enrollment/utils/title-case';
 export default [
   {
     name:            'I got married',
+    title:           'Marriage',
     whenDid:         'you get married',
     code:            'marriage',
     timeAfterEvent:  30,
@@ -14,6 +15,7 @@ export default [
   },
   {
     name:            'I now have a Domestic Partner',
+    title:           'Domestic Partnership',
     whenDid:         'you establish your domestic partnership',
     code:            'domesticPartnership',
     timeAfterEvent:  30,
@@ -24,7 +26,8 @@ export default [
   },
   {
     name:            'I had or adopted a child',
-    whenDid:         'you birth or adopt this child',
+    title:           'Birth/Adoption',
+    whenDid:         'you add this dependent (birth/adoption date)',
     code:            'birthAdoption',
     timeAfterEvent:  30,
     requiresSupport: true,
@@ -36,19 +39,20 @@ export default [
   },
   {
     name:            'I or my dependent lost other coverage',
+    title:           'Loss of Coverage',
     whenDid:         'you or your dependent lose coverage',
     code:            'lostCoverage',
     timeAfterEvent:  30,
     requiresSupport: true,
     supportingDocuments: [
       'COBRA Documents',
-      'Letter from Previous Carrier or Employer Showing Loss of Coverage',
-      'Certificate of Creditable Coverage Documents will NOT be accepted on their own'
+      'Letter from Previous Carrier or Employer Showing Loss of Coverage'
     ]
   },
   {
     name:            'I divorced or separated from my spouse',
-    whenDid:         'you separate',
+    title:           'Divorce/Separation',
+    whenDid:         'you divorce or separate',
     code:            'divorce',
     timeAfterEvent:  30,
     requiresSupport: true,
@@ -60,7 +64,8 @@ export default [
   },
   {
     name:            'I have a Court Order',
-    whenDid:         'you receive the court order',
+    title:           'Court Order',
+    whenDid:         'the court issue the order',
     code:            'courtOrder',
     timeAfterEvent:  30,
     requiresSupport: true,
@@ -70,6 +75,7 @@ export default [
   },
   {
     name:            'I changed addresses or moved',
+    title:           'Changed Address',
     whenDid:         'you change addresses',
     code:            'addressChange',
     timeAfterEvent:  30,
@@ -77,6 +83,7 @@ export default [
   },
   {
     name:            'My Spouse is deceased',
+    title:           'Spouse Deceased',
     whenDid:         'your spouse die',
     code:            'spouseDeath',
     timeAfterEvent:  30,
@@ -88,6 +95,7 @@ export default [
   },
   {
     name:            'My Dependent is deceased',
+    title:           'Dependent deceased',
     whenDid:         'your dependent die',
     code:            'dependentDeath',
     timeAfterEvent:  30,
@@ -98,13 +106,15 @@ export default [
     ]
   },
   {
-    name:            'Dependent is over allowed age',
-    whenDid:         'your dependent go over age',
+    name:            'Dependent is over age 26',
+    title:           'Dependent over age',
+    whenDid:         'your dependent reach age 26',
     code:            'dependentOverAge',
     timeAfterEvent:  30,
     requiresSupport: false
   }
 ].map(function ( ev ) {
-  ev.name = titleCase( ev.name );
+  ev.name  = titleCase( ev.name );
+  ev.title = titleCase( ev.title );
   return ev;
 });

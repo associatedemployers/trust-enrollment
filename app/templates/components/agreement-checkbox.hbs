@@ -1,0 +1,14 @@
+<div class="agreement-panel">
+  {{yield}}
+</div>
+
+<div class="text-center">
+  <label>
+    {{input type="checkbox" checked=value}}
+    {{#if display}}
+      {{{display}}}
+    {{else}}
+      I have read and agree to the terms and conditions stated above
+    {{/if}}
+  </label>
+</div>

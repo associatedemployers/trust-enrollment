@@ -8,10 +8,14 @@ export default Ember.Component.extend({
   max: undefined,
   clear: 'Clear',
 
-  shouldSetComponentValue: function () {
+  _setComponentValue: function () {
     var date = moment( this.get('textValue'), 'DD MMMM, YYYY' ).toDate();
     this.set('value', date);
-  }.observes('textValue'),
+  },
+
+  shouldSetComponentValue: function () {
+    Ember.run.next(this, this._setComponentValue);
+  }.observes('textValue').on('init'),
 
   didInsertElement: function () {
     this._super.apply(this, arguments);

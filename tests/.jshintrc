@@ -46,7 +46,8 @@
     "currentPath",
     "currentRouteName",
     "moment",
-    "NProgress"
+    "NProgress",
+    "SignaturePad"
   ],
   "node": false,
   "browser": false,
