@@ -6,7 +6,8 @@
     "$",
     "moment",
     "NProgress",
-    "SignaturePad"
+    "SignaturePad",
+    "io"
   ],
   "browser": true,
   "boss": true,

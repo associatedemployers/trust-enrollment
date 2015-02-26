@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Object.extend({
   contentDidChange: function () {
-    console.debug("Session :: Session did change");
+    console.debug('Session :: Content Change');
 
     this.set('didSetHeaders', false);
 
@@ -12,6 +12,8 @@ export default Ember.Object.extend({
       console.debug("Session :: Setting up headers...");
       this._setupHeaders( token );
     }
+
+    console.log(this.socket);
 
     this.set('authenticated', !!token);
   }.observes('content'),
