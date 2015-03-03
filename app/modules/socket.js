@@ -28,16 +28,8 @@ export default Ember.Object.extend({
       console.debug('Socket Module :: Connected');
     });
 
-    socket.on('connect_timeout', function ( err ) {
-      console.error( err );
-    });
-
-    socket.on('connect_error', function ( err ) {
-      console.error( err );
-    });
-
-    socket.on('error', function ( err ) {
-      console.error( err );
+    [ 'connect_timeout', 'connect_error', 'error' ].map(function ( e ) {
+      socket.on(e, self.__socketError);
     });
 
     socket.on('disconnect', function () {
@@ -60,5 +52,9 @@ export default Ember.Object.extend({
 
       socket.on(name, ev.hook.bind( self ));
     });
+  },
+
+  __socketError: function ( err ) {
+    console.error( err );
   }
 });
