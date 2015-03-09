@@ -1,30 +1,35 @@
-<div class="row">
-  <div class="col-md-6 header-left">
+<div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#trust-nav">
+      <span class="sr-only">Toggle navigation</span>
+      <i class="fa fa-bars"></i>
+    </button>
     <div {{bind-attr class=":logo-container onIndex:show-trust-text"}}>
-      {{#link-to 'index' class="logo"}}{{/link-to}}
+      {{#link-to 'index' class="logo navbar-brand"}}{{/link-to}}
       <span class="trust-text">Trust Enrollment</span>
     </div>
   </div>
-  <div class="col-md-6 header-right">
-    <ul class="header-links">
+
+  <div class="collapse navbar-collapse" id="trust-nav">
+    <ul class="nav navbar-nav navbar-right">
+      {{#if session.authenticated}}
+        <li class="dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            Logged in as {{session.currentUser.firstName}}
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li>{{#link-to 'employee-account'}}My account{{/link-to}}</li>
+            <li><a href="#" {{action "logout"}}>Log out</a></li>
+          </ul>
+      {{else}}
+        <li>
+          {{#link-to 'company-login' class="nav-link"}}Company Login{{/link-to}}
+        </li>
+      {{/if}}
       <li>
-        {{#if session.authenticated}}
-          <div class="btn-group">
-            <button class="btn btn-primary btn-sm" data-toggle="dropdown" aria-expanded="false">
-              Logged in as {{session.currentUser.firstName}}
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              <li>{{#link-to 'employee-account'}}My account{{/link-to}}</li>
-              <li><a href="#" {{action "logout"}}>Log out</a></li>
-            </ul>
-        {{else}}
-          {{#link-to 'company-login' class="btn btn-primary btn-sm"}}Company Login{{/link-to}}
-        {{/if}}
-      </li>
-      <li>
-        <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-life-ring"></i> Get Help</a>
+        <a href="#" class="nav-link"><i class="fa fa-fw fa-life-ring"></i> Get Help</a>
       </li>
     </ul>
-  </div>
-</div>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->

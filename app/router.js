@@ -29,6 +29,8 @@ Router.map(function() {
     this.route('index', { path: '/' });
     this.route('single', { path: '/:id' });
   });
+
+  this.route('sign');
 });
 
 export default Router;

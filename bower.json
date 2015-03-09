@@ -22,6 +22,7 @@
     "c3js-chart": "~0.4.9",
     "pickadate": "~3.5.5",
     "animate.css": "~3.2.0",
-    "socket.io-client": "~1.3.4"
+    "socket.io-client": "~1.3.4",
+    "modernizr": "~2.8.3"
   }
 }

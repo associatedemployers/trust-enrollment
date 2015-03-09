@@ -7,7 +7,8 @@
     "moment",
     "NProgress",
     "SignaturePad",
-    "io"
+    "io",
+    "Modernizr"
   ],
   "browser": true,
   "boss": true,

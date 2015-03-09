@@ -2,8 +2,59 @@
   Signature Pad Styles
 */
 
+@sp-background: white;
+@sp-border: 2px solid @gray-lighter;
+
 .signature-pad {
-  background: fade(white, 80%);
-  cursor: crosshair;
-  width: 100%;
+  text-align: center;
+
+  &.signature-pad-fullscreen {
+    width: 100%;
+
+    .signature-pad-controls {
+      
+    }
+  }
+
+  &:not(.signature-pad-fullscreen) {
+    margin: 10px auto;
+
+    canvas.signature-pad-canvas {
+      border: @sp-border;
+      .box-shadow(0 5px 5px -4px fade(@brand-default, 60%));
+    }
+
+    .signature-pad-controls {
+      margin: -7px 0 0 0;
+      position: relative;
+
+      a {
+        background: @sp-background;
+        padding: 8px 12px;
+        border-radius: 0 0 3px 3px;
+        border-top: 1px solid @gray-lighter;
+        border-left: @sp-border;
+        border-right: @sp-border;
+        border-bottom: @sp-border;
+        font-weight: 100;
+
+        &.left {
+          float: left;
+        }
+
+        &.right {
+          float: right;
+        }
+      }
+    }
+  }
+
+  canvas.signature-pad-canvas {
+    background: @sp-background;
+    cursor: crosshair;
+  }
+
+  .canvas-container {
+    display: inline-block;
+  }
 }

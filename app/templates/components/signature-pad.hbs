@@ -1,1 +1,16 @@
-{{yield}}
+<div class="canvas-container">
+  {{#signature-pad-canvas width=width height=height fullscreen=fullscreen}}
+
+  {{/signature-pad-canvas}}
+
+  <div class="signature-pad-controls">
+    <a href="#" class="left" {{action "clear"}}>Clear</a>
+    {{#if handoff}}
+      <a href="#" class="right" {{action "submitSignature"}}>Submit</a>
+    {{/if}}
+  </div>
+
+  {{#if touchDevice}}
+    Touchy!!
+  {{/if}}
+</div>

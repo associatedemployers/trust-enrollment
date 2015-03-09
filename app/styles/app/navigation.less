@@ -6,9 +6,72 @@ nav.app-header {
   position: fixed;
   z-index: 99;
   background: rgba(255, 255, 255, 0.8);
+  color: @brand-primary;
+  font-weight: 100;
+  border-radius: 0;
+  border: none;
 
   .trl();
   .transition(~'all ease-in-out .4s');
+
+  .transition-duration(.5s);
+  .transition-timing-function(cubic-bezier( 0.215, 0.610, 0.355, 1.000 ));
+  .transition-property(~"transform, height, padding-top, padding-left");
+
+        
+  &.header-hidden {
+    .translateY( -100% );
+  }
+
+  &.header-narrow {
+    .logo-container {
+      height: 40px;
+    }
+
+    .navbar-nav {
+      padding: 0;
+
+      a.nav-link {
+        font-size: 80%;
+      }
+    }
+
+    .navbar-toggle {
+      padding: 0;
+      font-size: 145%;
+    }
+  }
+
+  .navbar-toggle {
+    color: @brand-primary;
+    border: none;
+    font-size: 180%;
+
+    &:hover, &:focus {
+      color: lighten(@brand-primary, 15%) !important;
+      background: none;
+    }
+  }
+
+  a.nav-link {
+    &:hover {
+      color: darken(white, 30%);
+
+      &:not(.dropdown-toggle):before {
+        content: '> ';
+      }
+    }
+  }
+
+  &.fill-primary, &.fill-dark {
+    .navbar-toggle {
+      color: white;
+    }
+
+    a.nav-link {
+      color: white;
+    }
+  }
 
   &.fill-primary {
     background: @brand-primary;
@@ -18,89 +81,58 @@ nav.app-header {
     background: @brand-default;
   }
 
-  .row {
-    margin: 0;
+  .logo-container {
+    padding: 10px;
+    height: 80px;
+    margin-left: 2px;
+    display: inline-block;
+    .perspective(20px);
+
+    .logo {
+      display: inline-block;
+      width: 80px;
+      height: 100%;
+      background-image: url(images/ae_logo.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    .trust-text {
+      display: none;
+      visibility: hidden;
+    }
   }
 
-  .header-left {
-    .logo-container {
-      padding: 10px;
-      width: 100%;
-      height: 80px;
-      margin-left: 10px;
-      .perspective(20px);
-      
-      .logo {
-        display: inline-block;
-        width: 80px;
-        height: 100%;
-        background-image: url(images/ae_logo.png);
-        background-repeat: no-repeat;
-        background-size: contain;
-      }
+  @media all and (min-width: 400px) {
+    
+    &:not(.header-narrow) .trust-text {
+      display: inline-block;
+      visibility: visible;
+      opacity: 0;
+      height: 100%;
+      width: 220px;
+      font-weight: 100;
+      padding-left: 6px;
+      font-size: 29px;
+      line-height: 1;
+      vertical-align: top;
+      color: white;
+
+      .transition(~"all ease-in-out .25s");
+      .transform-origin(0%);
+      .rotateY(90deg);
+    }
+
+    &.show-trust-text {
 
       .trust-text {
-        display: inline-block;
-        opacity: 0;
-        height: 100%;
-        width: 220px;
-        font-weight: 100;
-        padding-left: 6px;
-        font-size: 30px;
-        line-height: 1;
-        vertical-align: top;
-        color: white;
-
-        .transition(~"all ease-in-out .25s");
-        .transform-origin(0%);
-        .rotateY(90deg);
-      }
-
-      &.show-trust-text {
-        width: 100%;
-
-        .trust-text {
-          opacity: 1;
-
-          .rotateY(0deg);
-        }
+        opacity: 1;
+        .rotateY(0deg);
       }
     }
   }
 
-  .header-right {
-
-    .right-container-media-queries();
-
-    ul.header-links {
-      list-style: none;
-      text-align: right;
-      padding: 23px;
-      margin: 0;
-
-      .ul-media-queries();
-
-      li {
-        display: inline-block;
-        
-        a {
-          display: inline-block;
-        }
-      }
-    }
-  }
-
-  // Local Mixin Definitions
-  .ul-media-queries() {
-    @media all and (max-width: @screen-md) {
-      padding: 10px;
-    }
-  }
-
-  .right-container-media-queries() {
-    @media all and (max-width: @screen-md) {
-      z-index: 1;
-      background: rgba(255, 255, 255, 0.6);
-    }
+  .navbar-nav {
+    padding: 14px;
   }
 }

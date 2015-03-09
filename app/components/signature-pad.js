@@ -1,28 +1,20 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  tagName: 'canvas',
+  tagName: 'div',
   classNames: [ 'signature-pad' ],
-  attributeBindings: [ 'width', 'height' ],
+  classNameBindings: [ 'fullscreen:signature-pad-fullscreen' ],
 
-  width:          '800px',
-  height:         '200px',
+  width:  '800',
+  height: '200',
+
   handoff:        false,
   handoffEnabled: true,
 
   didInsertElement: function () {
     this._super.apply(this, arguments);
 
-    if ( this.get('fullscreen') ) {
-      this.setProperties({
-        width: '100%',
-        height: '100%'
-      });
-    }
-
-    this.set('signaturePad', new SignaturePad( this.$()[0] ));
-    window.onresize = this._resizeCanvas.bind(this);
-    this._resizeCanvas();
+    this.set('signaturePad', new SignaturePad( this.$('canvas.signature-pad-canvas')[0], { velocityFilterWeight: 0.75 } ));
   },
 
   setSvgData: function ( svgData ) {
@@ -33,13 +25,9 @@ export default Ember.Component.extend({
     this.get('signaturePad').clear();
   },
 
-  _resizeCanvas: function () {
-    var canvas = this.$()[0];
-    var ratio =  window.devicePixelRatio || 1;
-    canvas.width = canvas.offsetWidth * ratio;
-    canvas.height = canvas.offsetHeight * ratio;
-    canvas.getContext("2d").scale(ratio, ratio);
-  },
+  touchDevice: function () {
+    return !!Modernizr.touch;
+  }.property(),
 
   // Socket Events
   __receiveSignature: function ( data ) {
@@ -65,12 +53,13 @@ export default Ember.Component.extend({
       });
     },
 
-    transmitHandoffData: function () {
-      this.setProperties({
-        transmittingHandoff: true,
-        transmittedHandoff: true
-      });
-      this.send('transmitHandoff', this.get('signaturePad').toDataURL());
+    submitSignature: function () {
+      this.set('transmittedHandoff', true);
+      this.sendAction('submit', this.get('signaturePad').toDataURL());
+    },
+
+    clear: function () {
+      this.clear();
     }
   }
 });

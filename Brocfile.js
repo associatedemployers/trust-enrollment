@@ -27,7 +27,8 @@ var bowerIncludes = [
   'pickadate/lib/legacy.js',
   'signature_pad/signature_pad.js',
   'animate.css/animate.css',
-  'socket.io-client/socket.io.js'
+  'socket.io-client/socket.io.js',
+  'modernizr/modernizr.js'
 ];
 
 bowerIncludes.forEach(function ( path ) {
