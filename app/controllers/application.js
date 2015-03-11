@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import { states as staticStates, suffixes as staticSuffixes, genders as staticGenders, marital_statuses, dependent_relationships as dependentRelationshipsStatic } from '../utils/defined-data';
 
+//var fullBackgroundRoutes = [ '' ];
+
 var ApplicationController = Ember.Controller.extend({
   // Static Properties
   states: staticStates,

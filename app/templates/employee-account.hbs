@@ -1,4 +1,4 @@
-{{side-navigation links=navigationLinks toggle=showNavigation title="I would like to..."}}
+{{side-navigation links=navigationLinks toggle=showNavigation title="I would like to..." hideWithChange=controllers.application.currentRouteName}}
 
 <hgroup class="employee-account-header">
   <a href="#" title="Open Account Menu" class="tooltip-trigger employee-account-title" data-placement="bottom" data-container='body' {{action "toggleProperty" "showNavigation"}}>
@@ -11,4 +11,4 @@
   </span>
 </hgroup>
 
-{{outlet}}
+{{liquid-outlet class="employee-account--nested-transition-container"}}

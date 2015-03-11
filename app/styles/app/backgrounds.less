@@ -2,27 +2,24 @@
   Background Styles
 */
 
-.full-background {
-  position: fixed;
-  margin-top: @header-height;
-  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.9) inset;
+.meshed-overlay {
+  position: absolute;
+  background: url('images/pattern_overlay.png') repeat;
+
+  .trbl();
+}
+
+.login-background {
+  position: absolute;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-
+  z-index: -1;
+  
   .trbl();
+  .at2x('images/landing_image.jpg', cover, null, true);
+}
 
-  .meshed-overlay {
-    position: absolute;
-    background: url('images/pattern_overlay.png') repeat;
-    .trbl();
-  }
-
-  &.login-full-background {
-    .at2x('images/landing_image.jpg', cover, null, true);
-  }
-
-  &.enrollment-full-background {
-    .gradient(lighten(@brand-primary, 10%), darken(@brand-primary, 10%));
-  }
+.enrollment-background {
+  .gradient(lighten(@brand-primary, 10%), darken(@brand-primary, 10%));
 }

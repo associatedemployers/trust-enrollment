@@ -7,11 +7,13 @@ export default Ember.View.extend({
     this.$().modal({
       show:     true,
       backdrop: 'static',
-      keyboard: false
-    });
+      keyboard: false,
+    }).appendTo('body');
   },
 
   willDestroyElement: function () {
-    this.$().modal('hide');
+    $('#' + this.get('elementId')).modal('hide').one('hidden.bs.modal', function ( e ) {
+      e.currentTarget.remove();
+    });
   }
 });

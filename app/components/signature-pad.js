@@ -5,16 +5,25 @@ export default Ember.Component.extend({
   classNames: [ 'signature-pad' ],
   classNameBindings: [ 'fullscreen:signature-pad-fullscreen' ],
 
+  displayHandoffDialog: Ember.computed.and('notTouchDevice', 'handoffEnabled', 'notHandoff'),
+  notTouchDevice:       Ember.computed.not('touchDevice'),
+  notHandoff:           Ember.computed.not('handoff'),
+
   width:  '800',
   height: '200',
 
   handoff:        false,
   handoffEnabled: true,
+  isEmpty:        true,
 
   didInsertElement: function () {
     this._super.apply(this, arguments);
 
-    this.set('signaturePad', new SignaturePad( this.$('canvas.signature-pad-canvas')[0], { velocityFilterWeight: 0.75 } ));
+    this.set('signaturePad', new SignaturePad( this.$('canvas.signature-pad-canvas')[0], {
+      velocityFilterWeight: 0.75,
+      onBegin: this._strokeStart.bind(this),
+      onEnd: this._strokeEnd.bind(this)
+    }));
   },
 
   setSvgData: function ( svgData ) {
@@ -22,12 +31,27 @@ export default Ember.Component.extend({
   },
 
   clear: function () {
-    this.get('signaturePad').clear();
+    if ( this.get('signaturePad') ) {
+      this.get('signaturePad').clear();
+    }
+
+    this.set('isEmpty', true);
   },
 
   touchDevice: function () {
     return !!Modernizr.touch;
   }.property(),
+
+  _strokeStart: function () {
+    this.set('isSigning', true);
+  },
+
+  _strokeEnd: function () {
+    this.setProperties({
+      isEmpty: this.get('signaturePad').isEmpty(),
+      isSigning: false
+    });
+  },
 
   // Socket Events
   __receiveSignature: function ( data ) {
@@ -43,19 +67,27 @@ export default Ember.Component.extend({
       var self = this;
 
       this.set('registeringHandoff', true);
-      this.socket.emit('signature-handoff', { user: this.session.get('currentUser.id') });
-      this.socket.on('signature-push', this.__receiveSignature.bind(this));
-      this.socket.on('signature-registered', function ( /* data */ ) {
+      this.socket.get('connection').emit('signature-handoff', { user: this.session.get('currentUser.id') });
+      this.socket.get('connection').on('signature-push', this.__receiveSignature.bind(this));
+      this.socket.get('connection').on('signature-verification', function ( data ) {
         self.setProperties({
           registeringHandoff: false,
-          pendingHandoff:     true
+          pendingHandoff:     true,
+          handoffId:          data
         });
       });
     },
 
-    submitSignature: function () {
+    transmitSignature: function () {
+      this.socket.get('connection').emit('signature-transmission', {
+        svgData: this.get('signaturePad').toDataURL(),
+        verificationKey: this.get('handoffVerificationKey')
+      });
       this.set('transmittedHandoff', true);
-      this.sendAction('submit', this.get('signaturePad').toDataURL());
+    },
+
+    submitSignature: function () {
+      this.sendAction(this.get('signaturePad').toDataURL());
     },
 
     clear: function () {

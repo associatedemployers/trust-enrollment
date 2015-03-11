@@ -12,6 +12,10 @@ export default Ember.Component.extend({
   },
 
   _resizeCanvas: function () {
+    if ( !this.$() ) {
+      return;
+    }
+
     var canvas  = this.$()[0],
         width   = this.get('width'),
         height  = this.get('height'),
@@ -25,5 +29,7 @@ export default Ember.Component.extend({
 
     canvas.height = ( fs ) ? wHeight - hHeight : ( hPercent ) ? height.slice(0, -1) / 100 * wHeight : height;
     canvas.width  = ( fs ) ? wWidth : ( wPercent ) ? width.slice(0, -1) / 100 * wWidth : width;
+
+    this.sendAction();
   }
 });

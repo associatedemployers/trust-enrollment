@@ -2,7 +2,6 @@ import Ember from 'ember';
 import windowBinderMixin from '../mixins/window-binder';
 
 export default Ember.View.extend(windowBinderMixin, {
-  templateName: 'scroll-spy',
   classNames: [ 'scroll-spy-view', 'affix' ],
 
   // Bind the window events on view insertion

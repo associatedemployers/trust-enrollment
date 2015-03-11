@@ -23,14 +23,12 @@ Router.map(function() {
 
   this.route('company-login', { path: '/company/login' });
   this.route('enrollment', { path: '/enroll' });
-  this.route('sign', { path: '/sign/:key' });
+  this.route('sign', { path: '/sign/:handoffId' });
 
   this.route('faq', { path: '/frequently-asked-questions' }, function () {
     this.route('index', { path: '/' });
     this.route('single', { path: '/:id' });
   });
-
-  this.route('sign');
 });
 
 export default Router;

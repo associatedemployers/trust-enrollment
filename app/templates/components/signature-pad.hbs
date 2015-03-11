@@ -1,16 +1,46 @@
 <div class="canvas-container">
-  {{#signature-pad-canvas width=width height=height fullscreen=fullscreen}}
+  <div class="signature-pad-helper">
+    <span class="signature-pad-text">
+      {{#liquid-if isSigning use="fade"}}
+        <i class="fa fa-pencil"></i> Signing...
+      {{else}}
+        {{#liquid-if isEmpty use="fade"}}
+          <i class="fa fa-pencil"></i>
+          Use your {{#if touchDevice}}finger{{else}}mouse{{/if}} to sign below.
+        {{else}}
+          <i class="fa fa-check"></i> Signature collected.
+        {{/liquid-if}}
+      {{/liquid-if}}
+    </span>
+  </div>
 
-  {{/signature-pad-canvas}}
+  {{#if displayHandoffDialog}}
+    <div class="handoff-dialog">
+      {{#if pendingHandoff}}
+        <i class="fa fa-mobile"></i> Visit <a href="#" href="http://aetrust.org/sign/{{handoffId}}">http://aetrust.org/sign/{{handoffId}}</a> on your mobile device.<br />
+        Check back here when you are done.
+      {{else}}
+        <a href="#" {{action "registerHandoff"}} disabled="{{registeringHandoff}}">
+          <i {{bind-attr class=":fa registeringHandoff:fa-spinner:fa-retweet"}}></i> Rather use your smartphone? Hand it off.
+        </a>
+      {{/if}}
+    </div>
+  {{/if}}
+
+  {{signature-pad-canvas width=width height=height fullscreen=fullscreen action="clear"}}
 
   <div class="signature-pad-controls">
     <a href="#" class="left" {{action "clear"}}>Clear</a>
-    {{#if handoff}}
-      <a href="#" class="right" {{action "submitSignature"}}>Submit</a>
-    {{/if}}
+    {{#liquid-unless isEmpty use="fade"}}
+      {{#if handoff}}
+        {{#if transmittedHandoff}}
+          <i class="fa fa-check"></i> Transmitted signature. Please check your original device.
+        {{else}}
+          <a href="#" class="right" {{action "transmitSignature"}}>Transmit Signature</a>
+        {{/if}}
+      {{else}}
+        <a href="#" class="right" {{action "submitSignature"}}>Submit</a>
+      {{/if}}
+    {{/liquid-unless}}
   </div>
-
-  {{#if touchDevice}}
-    Touchy!!
-  {{/if}}
 </div>

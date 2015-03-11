@@ -7,9 +7,9 @@ export function initialize( container, application ) {
 
   socketModule.connect();
 
-  container.typeInjection('controller', 'session', 'modules:session');
-  container.typeInjection('route', 'session', 'modules:session');
-  container.typeInjection('component', 'session', 'modules:session');
+  container.typeInjection('controller', 'socket', 'modules:socket');
+  container.typeInjection('route', 'socket', 'modules:socket');
+  container.typeInjection('component', 'socket', 'modules:socket');
 
   application.advanceReadiness();
 }

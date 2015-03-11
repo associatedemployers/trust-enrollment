@@ -56,14 +56,5 @@ export default Ember.Object.extend({
 
   __socketError: function ( err ) {
     console.error( err );
-  },
-
-  // Prototype Proxies
-  emit: function () {
-    this.get('connection').emit.apply(this, arguments);
-  },
-
-  on: function () {
-    this.get('connection').on.apply(this, arguments);
   }
 });

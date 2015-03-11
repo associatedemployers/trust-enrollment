@@ -19,11 +19,17 @@ body, html {
   min-height: 100vh;
   .prefix-flex-direction(column);
 
-  .app-wrapper {
-    padding-top: @header-height;
-    min-height: @footer-height;
+  .transition-container {
+    margin-top: @header-height;
+    min-height: 100vh;
 
     .prefix-flex(1);
+
+    > .liquid-child {
+      min-height: 100vh;
+
+      .prefix-flex(1);
+    }
   }
 }
 

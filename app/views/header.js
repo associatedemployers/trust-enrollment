@@ -16,7 +16,7 @@ export default Ember.View.extend(BindToWindowMixin, {
   didInsertElement: function () {
     this._super.apply( this, arguments );
 
-    this.setupWindowBindings('scroll', 80);
+    this.setupWindowBindings('scroll', 20);
   },
 
   fill: function () {
