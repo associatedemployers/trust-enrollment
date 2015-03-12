@@ -11,6 +11,10 @@ export default Ember.Component.extend({
     this._resizeCanvas();
   },
 
+  fullscreenDidChange: function () {
+    this._resizeCanvas();
+  }.observes('fullscreen'),
+
   _resizeCanvas: function () {
     if ( !this.$() ) {
       return;

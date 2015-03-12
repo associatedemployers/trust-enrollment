@@ -5,16 +5,18 @@ export default Ember.Component.extend({
   classNames: [ 'signature-pad' ],
   classNameBindings: [ 'fullscreen:signature-pad-fullscreen' ],
 
-  displayHandoffDialog: Ember.computed.and('notTouchDevice', 'handoffEnabled', 'notHandoff'),
+  displayHandoffDialog: Ember.computed.and('notTouchDevice', 'handoffEnabled', 'notHandoff', 'noHandoffData'),
   notTouchDevice:       Ember.computed.not('touchDevice'),
   notHandoff:           Ember.computed.not('handoff'),
+  noHandoffData:        Ember.computed.not('receivedHandoff'),
 
   width:  '800',
   height: '200',
 
-  handoff:        false,
-  handoffEnabled: true,
-  isEmpty:        true,
+  handoff:               false,
+  handoffEnabled:        true,
+  allowFullscreenToggle: true,
+  isEmpty:               true,
 
   didInsertElement: function () {
     this._super.apply(this, arguments);
@@ -51,6 +53,41 @@ export default Ember.Component.extend({
       isEmpty: this.get('signaturePad').isEmpty(),
       isSigning: false
     });
+  },
+
+  goFullscreen: function () {
+    var inRoot = this.get('inRoot'),
+        allow  = this.get('allowFullscreenToggle'),
+        fs     = this.get('fullscreen');
+
+    if ( !allow && !fs ) {
+      return;
+    }
+
+    var parentClass = this.get('elementId') + '-' + 'parent',
+        bodyClass   = 'signature-pad-lock';
+
+    if ( fs && !inRoot ) {
+      this.$().after('<div class="' + parentClass + '"></div>');
+      this.$().appendTo('.ember-view.app-view');
+      $('html, body').addClass(bodyClass);
+      this.set('inRoot', true);
+    } else if ( inRoot && !fs ) {
+      $('.' + parentClass).replaceWith( $('#' + this.get('elementId')) );
+      $('html, body').removeClass(bodyClass);
+      this.set('inRoot', false);
+    }
+  }.observes('fullscreen').on('didInsertElement'),
+
+  willDestroy: function () {
+    if ( this.get('inRoot') ) {
+      var elId        = this.get('elementId'),
+          parentClass = elId + '-parent';
+
+      $('#' + elId).remove();
+      $('.' + parentClass).remove();
+      $('html, body').removeClass('signature-pad-lock');
+    }
   },
 
   // Socket Events
@@ -92,6 +129,10 @@ export default Ember.Component.extend({
 
     clear: function () {
       this.clear();
+    },
+
+    toggleFullscreen: function () {
+      this.toggleProperty('fullscreen');
     }
   }
 });

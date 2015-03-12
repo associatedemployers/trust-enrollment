@@ -5,16 +5,42 @@
 @sp-background: white;
 @sp-border: 2px solid @gray-lighter;
 
+.signature-pad-lock {
+  overflow: hidden;
+}
+
 .signature-pad {
   text-align: center;
 
   .user-select(none);
 
   &.signature-pad-fullscreen {
+    position: absolute;
     width: 100%;
+    z-index: @zindex-navbar-fixed + 1;
+
+    .trbl();
+
+    .canvas-container {
+      height: 100%;
+    }
 
     .signature-pad-controls {
-      
+      bottom: 0;
+
+      a {
+        background: @brand-primary;
+        font-size: 110%;
+        color: white;
+
+        &.left {
+          border-radius: 0 10px 0 0;
+        }
+
+        &.right {
+          border-radius: 10px 0 0 0;
+        }
+      }
     }
   }
 
@@ -23,45 +49,15 @@
 
     canvas.signature-pad-canvas {
       position: relative;
-
     }
 
-    .signature-pad-controls {
-      margin: 1px 0 0 0;
-      position: absolute;
-      left: 0;
-      right: 0;
-
-      a {
-        background: @sp-background;
-        padding: 8px 12px;
-        border-radius: 0 0 3px 3px;
-        border-top: 1px solid @gray-lighter;
-        border-left: @sp-border;
-        border-right: @sp-border;
-        border-bottom: @sp-border;
-        font-weight: 100;
-
-        &.left {
-          float: left;
-        }
-
-        &.right {
-          float: right;
-        }
-      }
-    }
-
-    .signature-pad-helper {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      text-align: center;
-      font-weight: 100;
-      color: @gray-light;
-      font-size: 80%;
-      padding: 11px 0;
+    .signature-pad-controls a {
+      background: @sp-background;
+      border-radius: 0 0 3px 3px;
+      border-top: 1px solid @gray-lighter;
+      border-left: @sp-border;
+      border-right: @sp-border;
+      border-bottom: @sp-border;
     }
   }
 
@@ -77,13 +73,54 @@
     .box-shadow(0 5px 5px -4px fade(@brand-default, 60%));
   }
 
-  .handoff-dialog {
+  .signature-pad-controls {
+    margin: 1px 0 0 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+
+    a {
+      padding: 8px 12px;
+      font-weight: 100;
+
+      &.left {
+        float: left;
+      }
+
+      &.right {
+        float: right;
+      }
+    }
+  }
+
+  .handoff-dialog, .fullscreen-toggle {
     position: absolute;
     top: 0;
-    right: 0;
-    padding: 11px;
-    font-size: 70%;
-    text-align: right;
     z-index: 1;
+  }
+
+  .handoff-dialog {
+    padding: 11px;
+    left: 0;
+    font-size: 70%;
+    text-align: left;
+    max-width: 30%;
+  }
+
+  .fullscreen-toggle {
+    padding: 5px 10px;
+    right: 0;
+  }
+
+  .signature-pad-helper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-weight: 100;
+    color: @gray-light;
+    font-size: 80%;
+    padding: 11px 0;
   }
 }
