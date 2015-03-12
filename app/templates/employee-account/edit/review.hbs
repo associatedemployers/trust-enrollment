@@ -1,7 +1,7 @@
 <h3 class="text-center animated rubberBand">
-  Review your change request<br />
+  Review your event<br />
   <small>
-    After you review and accept your change request, you will be forwarded to make changes
+    After you review your event selection, you will be forwarded to make changes
   </small>
 </h3>
 
@@ -14,20 +14,26 @@
       </h4>
     </div>
     <div class="data-large">
-      <h3>
-        Supplemental Documents
-      </h3>
-      <h4>
-        {{#if content.attachments}}
-          {{content.attachments.length}} Attachments [{{content.attachments.firstObject.labels.firstObject}}]
-        {{else}}
-          <i class="fa fa-exclamation-triangle"></i> Documents not supplied
-        {{/if}}
-      </h4>
+      {{#if eventSelection.requiresSupport}}
+        <h3>
+          Supporting Documents
+        </h3>
+        <h4>
+          {{#if content.attachments}}
+            {{content.attachments.length}} Attachments [{{content.attachments.firstObject.labels.firstObject}}]
+          {{else}}
+            <i class="fa fa-exclamation-triangle"></i> Documents not supplied. Your changes will be delayed until we receive your supporting documentation.
+          {{/if}}
+        </h4>
+      {{else}}
+        <h3>
+          Supporting documents not required for this event
+        </h3>
+      {{/if}}
     </div>
   </hgroup>
 
-  {{#agreement-checkbox}}
+  {{#agreement-checkbox value=agreement}}
     <p>
       By agreeing to these terms and conditions you are agreeing the following items:
     </p>
@@ -46,8 +52,6 @@
       </ul>
     </p>
   {{/agreement-checkbox}}
-
-  {{signature-pad}}
 
   <button class="btn btn-success btn-block" {{action "saveEnrollmentReview"}}>
     Next

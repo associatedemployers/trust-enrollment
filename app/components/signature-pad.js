@@ -97,6 +97,7 @@ export default Ember.Component.extend({
       pendingHandoff:  false,
       receivedHandoff: true
     });
+    this._strokeEnd();
   },
 
   actions: {
