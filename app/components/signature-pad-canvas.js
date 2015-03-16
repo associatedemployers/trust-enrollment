@@ -25,13 +25,12 @@ export default Ember.Component.extend({
         height  = this.get('height'),
         wWidth  = $(window).width(),
         wHeight = $(window).height(),
-        hHeight = $('.app-header').height(),
         fs      = this.get('fullscreen');
 
     var wPercent = width.indexOf('%') > -1,
         hPercent = height.indexOf('%') > -1;
 
-    canvas.height = ( fs ) ? wHeight - hHeight : ( hPercent ) ? height.slice(0, -1) / 100 * wHeight : height;
+    canvas.height = ( fs ) ? wHeight : ( hPercent ) ? height.slice(0, -1) / 100 * wHeight : height;
     canvas.width  = ( fs ) ? wWidth : ( wPercent ) ? width.slice(0, -1) / 100 * wWidth : width;
 
     this.sendAction();

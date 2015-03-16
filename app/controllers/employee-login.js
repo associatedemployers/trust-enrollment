@@ -63,7 +63,6 @@ export default Ember.Controller.extend({
         cancel();
 
         if ( res.verificationRequired === true ) {
-          cancel();
           self.transitionToRoute('employee-login.verify-id', res.token);
           console.debug('Route debug: Verification required.');
         } else {

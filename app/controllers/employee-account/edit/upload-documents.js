@@ -54,7 +54,7 @@ export default Ember.Controller.extend({
 
           xhr.upload.addEventListener('progress', function ( evt ) {
             if ( evt && evt.lengthComputable ) {
-              self.set('uploadProgress', evt.loaded / evt.total);
+              self.set('uploadProgress', Math.round((evt.loaded / evt.total) * 100));
             }
           }, false);
 

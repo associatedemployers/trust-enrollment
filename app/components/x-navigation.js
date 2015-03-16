@@ -1,12 +1,14 @@
 import Ember from 'ember';
 import BindToWindowMixin from '../mixins/bind-to-window';
+import layout from '../templates/components/x-navigation';
 
 var fillMap = {
   primary: [ 'index' ],
   dark:    [ 'employee-account' ]
 };
 
-export default Ember.View.extend(BindToWindowMixin, {
+export default Ember.Component.extend(BindToWindowMixin, {
+  layout: layout,
   tagName: 'nav',
   role: 'navigation',
   classNames: [ 'navbar', 'navbar-default', 'app-header' ],
@@ -20,7 +22,7 @@ export default Ember.View.extend(BindToWindowMixin, {
   },
 
   fill: function () {
-    var path = this.get('controller.parentController.currentPath'),
+    var path = this.get('currentPath'),
         ret;
 
     if ( !path ) {
@@ -44,7 +46,7 @@ export default Ember.View.extend(BindToWindowMixin, {
     }
 
     return ret;
-  }.property('controller.parentController.currentPath'),
+  }.property('currentPath'),
 
   windowDidScroll: function () {
     var elClassHidden   = 'header-hidden',

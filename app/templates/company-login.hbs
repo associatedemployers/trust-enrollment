@@ -1,4 +1,28 @@
-<div class="full-background index-full-background">
-  <div class="meshed-overlay"></div>
+<div class="meshed-overlay"></div>
+<div class="login-background"></div>
+
+<div class="card pad">
+  <div class="card-title">
+    <h1>Please Login</h1>
+  </div>
+  <div class="card-dialog">
+    <form class="login-form" {{action "login" on="submit"}}>
+      <div {{bind-attr class=":form-group companyIdIsValid:valid"}}>
+        {{input class="form-control" value=companyId placeholder="Company ID"}}
+      </div>
+
+      <div {{bind-attr class=":form-group :left-inner-addon password:valid"}}>
+        <span class="text-addon-left"><i class="fa fa-lock"></i></span>
+        {{input type="password" class="form-control" value=password placeholder="Password"}}
+      </div>
+
+      {{error-display prefix="Error logging in:" message=loginError}}
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-success btn-block" disabled={{loginIsNotValid}}>Login {{#liquid-if loggingIn}}<i class="fa fa-spin fa-spinner"></i>{{/liquid-if}}</button>
+      </div>
+    </form>
+  </div>
 </div>
-{{render "login-company"}}
+
+{{outlet}}

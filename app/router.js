@@ -29,6 +29,13 @@ Router.map(function() {
     this.route('index', { path: '/' });
     this.route('single', { path: '/:id' });
   });
+
+  this.route('support', function() {
+    this.route('company', function() {
+      this.route('employees');
+    });
+    this.route('employee');
+  });
 });
 
 export default Router;
