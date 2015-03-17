@@ -18,7 +18,7 @@
         <i class="fa fa-fw fa-lock text-addon-left"></i>
       </div>
 
-      {{error-display prefix="Error logging in:" message=loginError}}
+      {{error-display prefix="Error logging in" message=loginError bg=false}}
 
       <div {{bind-attr class=":hide-slide ssnIsValid:show"}}>
         <button type="submit" class="btn btn-success btn-block" {{bind-attr disabled=loginIsNotValid}}>
