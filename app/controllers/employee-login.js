@@ -71,7 +71,7 @@ export default Ember.Controller.extend({
           var auth = res;
           delete auth.verificationRequired;
 
-          self.session.createSession( auth ).then(function ( /* session */ ) {
+          self.session.createSession( auth, 'employee' ).then(function ( /* session */ ) {
             self.transitionToRoute('employee-account');
           });
         }

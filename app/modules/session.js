@@ -13,8 +13,6 @@ export default Ember.Object.extend({
       this._setupHeaders( token );
     }
 
-    console.log(this.socket);
-
     this.set('authenticated', !!token);
   }.observes('content'),
 
@@ -39,7 +37,7 @@ export default Ember.Object.extend({
     });
   },
   
-  createSession: function ( data ) {
+  createSession: function ( data, type ) {
     var self = this;
 
     return new Ember.RSVP.Promise(function ( resolve, reject ) {
@@ -49,7 +47,8 @@ export default Ember.Object.extend({
       var session = self.store.createRecord('session', {
         token:   data.token,
         expires: data.expiration,
-        user:    data.user
+        user:    data.user,
+        type:    type || 'employee'
       });
 
       session.save().then(function ( record ) {
@@ -83,8 +82,8 @@ export default Ember.Object.extend({
     }
 
     Ember.assert('Session must have user id to fetch currentUser', this.get('content.user'));
-
-    return this.store.find('employee', this.get('content.user'));
+    console.log(this.get('content.type'));
+    return this.store.find(this.get('content.type'), this.get('content.user'));
   }.property('content.user', 'authenticated'),
 
   enrollmentPeriods: function () {

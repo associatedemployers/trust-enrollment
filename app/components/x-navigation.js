@@ -76,5 +76,11 @@ export default Ember.Component.extend(BindToWindowMixin, {
     }
 
     this.set('windowScrollPos', wScrollCurrent);
+  },
+
+  actions: {
+    logout: function () {
+      this.sendAction('logout');
+    }
   }
 });

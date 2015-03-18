@@ -1,15 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  loginIsValid:    Ember.computed.and('companyIdIsValid', 'password', 'notLoggingIn'),
+  loginIsValid:    Ember.computed.and('key', 'password', 'notLoggingIn'),
   loginIsNotValid: Ember.computed.not('loginIsValid'),
   notLoggingIn:    Ember.computed.not('loggingIn'),
-
-  companyIdIsValid: function () {
-    var companyId = this.get('companyId');
-
-    return companyId && companyId.length === 5;
-  }.property('companyId'),
 
   actions: {
     toggleProperty: function (prop) {
@@ -17,7 +11,7 @@ export default Ember.Controller.extend({
     },
 
     login: function () {
-      var data  = this.getProperties('companyId', 'password'),
+      var data  = this.getProperties('key', 'password'),
           valid = this.get('loginIsValid'),
           self  = this;
 
@@ -41,11 +35,13 @@ export default Ember.Controller.extend({
         loginError: null
       });
 
-      Ember.$.post('/client-api/company/login', { companyId: data.companyId, password: data.password }).then(function ( res ) {
+      var query = ( data.key.indexOf('@') < 0 ) ? { companyId: data.key } : { email: data.key };
+
+      Ember.$.post('/client-api/company/login', Ember.$.extend({ password: data.password }, query)).then(function ( res ) {
         cancel();
 
-        self.session.createSession( res ).then(function ( /* session */ ) {
-          self.transitionToRoute('company');
+        self.session.createSession( res, 'company' ).then(function ( /* session */ ) {
+          self.transitionToRoute('company-account');
         });
       }).fail( cancel );
     }

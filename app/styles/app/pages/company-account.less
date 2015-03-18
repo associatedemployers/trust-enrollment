@@ -1,0 +1,41 @@
+/*
+  Company Account Styles
+*/
+
+.company-account-view {
+  color: @gray;
+  font-weight: 100;
+  background: white;
+
+  .viewport-max {
+    background: linear-gradient( fade(white, 100%), transparent ), linear-gradient( 90deg, fade(lighten(@gray-light, 40%), 80%), transparent ), linear-gradient( -90deg, fade(lighten(@gray-lighter, 40%), 80%), transparent ), url('images/pattern_overlay.png') repeat;
+  }
+
+  .company-analytics {
+    margin: 40px auto;
+    width: 80%;
+
+    h1, h2, h3, h4, h5, h6 {
+      text-align: center;
+    }
+  }
+}
+
+hgroup.company-account-header {
+  margin: 10px 15px;
+
+  .company-account-title {
+    font-size: @font-size-h2;
+    font-family: @headings-font-family;
+    font-weight: @headings-font-weight;
+    line-height: @headings-line-height;
+    margin-top: 20px;
+    margin-bottom: (@line-height-computed / 2);
+    -webkit-font-smoothing: antialiased !important;
+    color: @gray;
+
+    &:hover {
+      color: lighten(@brand-primary, 10%);
+    }
+  }
+}

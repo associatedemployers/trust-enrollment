@@ -15,21 +15,37 @@
       {{#if session.authenticated}}
         <li class="dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-            Logged in as {{session.currentUser.firstName}}
+            {{#if session.content.isCompany}}
+              {{session.currentUser.companyName}}
+            {{else}}
+              Hello, {{session.currentUser.firstName}}
+            {{/if}}
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" role="menu">
-            <li>{{#link-to 'employee-account'}}My account{{/link-to}}</li>
+            <li>
+              {{#if session.content.isEmployee}}
+                {{#link-to 'employee-account'}}My account{{/link-to}}
+              {{else}}
+                {{#link-to 'company-account'}}Account{{/link-to}}
+              {{/if}}
+              </li>
             <li><a href="#" {{action "logout"}}>Log out</a></li>
           </ul>
         </li>
       {{else}}
-        <li>
-          {{#link-to 'company-login' class="nav-link"}}Company Login{{/link-to}}
+        <li class="dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            Login <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li>{{#link-to 'employee-login'}}Employees{{/link-to}}</li>
+            <li>{{#link-to 'company-login'}}Companies{{/link-to}}</li>
+          </ul>
         </li>
       {{/if}}
       <li>
-        {{#link-to 'support' class="nav-link"}}<i class="fa fa-fw fa-life-ring"></i> Get Help{{/link-to}}
+        {{#link-to 'support'}}<i class="fa fa-fw fa-life-ring"></i> Get Help{{/link-to}}
       </li>
     </ul>
   </div><!-- /.navbar-collapse -->

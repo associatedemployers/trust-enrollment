@@ -5,7 +5,7 @@ export default Ember.Route.extend({
     var user = this.session.get('currentUser');
 
     if ( user ) {
-      return this.transitionTo('employee-account');
+      return this.transitionTo(this.session.get('content.type') + '-account');
     }
   }
 });

@@ -1,0 +1,14 @@
+{{side-navigation links=navigationLinks toggle=showNavigation title="Menu" hideWithChange=controllers.application.currentRouteName}}
+
+<hgroup class="company-account-header">
+  <a href="#" title="Open Account Menu" class="tooltip-trigger company-account-title" data-placement="bottom" data-container='body' {{action "toggleProperty" "showNavigation"}}>
+    <i class="fa fa-bars"></i>
+    {{content.nameAbbreviated}} ({{content.companyId}})
+  </a>
+
+  <span class="pull-right tooltip-trigger" {{bind-attr title=lastLoginDescription}} data-placement="left">
+    <i class="fa fa-fw fa-history"></i>
+  </span>
+</hgroup>
+
+{{liquid-outlet class="company-account--nested-transition-container"}}

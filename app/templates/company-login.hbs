@@ -7,8 +7,8 @@
   </div>
   <div class="card-dialog">
     <form class="login-form" {{action "login" on="submit"}}>
-      <div {{bind-attr class=":form-group companyIdIsValid:valid"}}>
-        {{input class="form-control" value=companyId placeholder="Company ID"}}
+      <div {{bind-attr class=":form-group key:valid"}}>
+        {{input class="form-control" value=key placeholder="Company ID or Email Address"}}
       </div>
 
       <div {{bind-attr class=":form-group :left-inner-addon password:valid"}}>

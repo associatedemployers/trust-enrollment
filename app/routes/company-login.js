@@ -1,7 +1,11 @@
 import Ember from 'ember';
 
-var CompanyLoginRoute = Ember.Route.extend({
+export default Ember.Route.extend({
+  beforeModel: function () {
+    var user = this.session.get('currentUser');
 
+    if ( user ) {
+      return this.transitionTo(this.session.get('content.type') + '-account');
+    }
+  }
 });
-
-export default CompanyLoginRoute;

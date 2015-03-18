@@ -53,12 +53,16 @@ nav.app-header {
     }
   }
 
-  a.nav-link {
+  .nav > li > a {
     &:hover {
       color: darken(white, 30%);
 
       &:not(.dropdown-toggle):before {
-        content: '> ';
+        content: '\f101';
+        width: (18em / 14);
+        text-align: center;
+
+        .fa();
       }
     }
   }
@@ -68,7 +72,7 @@ nav.app-header {
       color: white;
     }
 
-    a.nav-link {
+    .nav > li > a {
       color: white;
     }
   }

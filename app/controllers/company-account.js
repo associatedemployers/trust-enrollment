@@ -1,24 +1,23 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   needs: [ 'application' ],
 
-  showNavigation: false,
   navigationLinks: [
     {
-      title: 'View Summary',
-      path:  'employee-account.index',
-      icon:  'fa-file-text-o'
+      title: 'Summary',
+      path:  'company-account.index',
+      icon:  'fa-bar-chart'
     },
     {
-      title: 'Change Info & Coverage',
-      path:  'employee-account.edit',
-      icon:  'fa-pencil-square-o'
+      title: 'Employees',
+      path:  'company-account.employees',
+      icon:  'fa-users'
     },
     {
-      title: 'View Plan Documents',
-      path:  'employee-account.documents',
-      icon:  'fa-folder-open-o'
+      title: 'Forms',
+      path:  'company-account.forms',
+      icon:  'fa-file-text'
     }
   ],
 

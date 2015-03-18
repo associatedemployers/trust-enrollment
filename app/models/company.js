@@ -4,7 +4,9 @@ import addressFormatter from 'trust-enrollment/utils/address-formatter';
 var attribute = DS.attr;
 
 export default DS.Model.extend({
-  name: attribute('string'),
+  companyName: attribute('string'),
+  email:       attribute('string'),
+  companyId:   attribute('string'),
 
   contactName:  attribute('string'),
   contactPhone: attribute('string'),
@@ -14,12 +16,17 @@ export default DS.Model.extend({
   addressLine2: attribute('string'),
   city:         attribute('string'),
   state:        attribute('string'),
-  zipcode:      attribute('string'),
+  zipcode:      attribute('string'),  
 
   // Relational
-  medicalRates: DS.hasMany('medical-rate', { async: true, inverse: 'company' }),
-  employees:    DS.hasMany('employee', { async: true }),
-  locations:    DS.hasMany('locations', { async: true }),
+  medicalRates:      DS.hasMany('medical-rate', { async: true, inverse: 'company' }),
+  dentalRates:       DS.hasMany('dental-rate', { async: true, inverse: false }),
+  visionRates:       DS.hasMany('vision-rate', { async: true, inverse: false }),
+  employees:         DS.hasMany('employee', { async: true, inverse: 'company' }),
+  locations:         DS.hasMany('location', { async: true, inverse: 'company' }),
+  files:             DS.hasMany('file', { async: true }),
+  enrollmentPeriods: DS.hasMany('enrollment-period', { async: true }),
+  lastLogin:         DS.belongsTo('login', { inverse: false }),
 
   // Legacy Fields and Flags
   legacyCompanyNumber:     attribute('string'),
@@ -34,9 +41,6 @@ export default DS.Model.extend({
   legacyLoa:               attribute('string'),
   legacyContribution:      attribute('string'),
   legacyNotes:             attribute('string'),
-  legacyWebId:             attribute('string'),
-  legacyWebPassword:       attribute('string'),
-  legacyWebEmail:          attribute('string'),
   legacyAffiliated:        attribute('string'),
   legacyCoverLifeIfWaived: attribute('string'),
   legacyBrightChoicesFlag: attribute('string'),
@@ -48,6 +52,7 @@ export default DS.Model.extend({
 
   legacyCompEffectDate:    attribute('date'),
   legacyBrokerEffectDate:  attribute('date'),
+  removedOn:               attribute('date'),
 
   // System
   time_stamp: attribute('date', {
@@ -57,5 +62,14 @@ export default DS.Model.extend({
   }),
 
   // Computed
-  addressFormatted: addressFormatter.property('addressLine1', 'addressLine2', 'city', 'state', 'zipcode')
+  addressFormatted: addressFormatter.property('addressLine1', 'addressLine2', 'city', 'state', 'zipcode'),
+
+  nameAbbreviated: function () {
+    var nameArray = this.get('companyName').split(' ');
+
+    return nameArray.reduce(function ( abbrv, namePart ) {
+      var addition = ( /([A-Z]){2,}/.test(namePart) ) ? namePart : namePart.charAt(0).toUpperCase();
+      return abbrv + addition;
+    }, '');
+  }.property('companyName')
 });

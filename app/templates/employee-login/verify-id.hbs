@@ -13,13 +13,13 @@
 
         <div class="form-group left-inner-addon right-inner-text-addon">
           {{input class="form-control" value=memberId placeholder="Enter your Member ID (ex. 943000000)"}}
-          <span {{bind-attr class=":text-addon memberIdIsValid:success:danger"}}>
+          <span {{bind-attr class=":text-addon-right memberIdIsValid:success:danger"}}>
             {{memberIdFormatted}}
             {{#if memberIdIsValid}}
               <i class="fa fa-fw fa-check"></i>
             {{/if}}
           </span>
-          <i class="fa fa-credit-card left"></i>
+          <i class="fa fa-credit-card text-addon-left"></i>
         </div>
 
         <div class="text-center text-muted">Why am I being asked to enter my Member ID?</div>

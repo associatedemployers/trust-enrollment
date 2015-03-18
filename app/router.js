@@ -9,6 +9,7 @@ Router.map(function() {
   this.route('employee-login', { path: '/employee/login' }, function () {
     this.route('verify-id', { path: '/verify-membership/:token' });
   });
+  this.route('company-login', { path: '/company/login' });
 
   this.route('employee-account', { path: '/account' }, function () {
     this.route('index', { path: '/' });
@@ -21,7 +22,15 @@ Router.map(function() {
     this.route('documents');
   });
 
-  this.route('company-login', { path: '/company/login' });
+  this.route('company-account', { path: '/company' }, function () {
+    this.route('index', { path: '/summary' });
+    this.route('employees', function() {
+      this.route('add');
+    });
+    this.route('forms');
+    this.route('employee');
+  });
+
   this.route('enrollment', { path: '/enroll' });
   this.route('sign', { path: '/sign/:handoffId' });
 
