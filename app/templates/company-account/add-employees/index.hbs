@@ -1,0 +1,17 @@
+{{#form-steps class="employee-form" for=this validWith=validWith qualification=validityQualification submitText="HELLOWORLD" includeStepNames=true}}
+  {{#form-step submitText="OMGOSH"}}
+    {{form-input type="text" value=firstName}}
+    {{input type="text" class="form-control" value=lastName}}
+  {{/form-step}}
+
+  {{#form-step name="Test Step"}}
+    Test2
+  {{/form-step}}
+{{/form-steps}}
+
+<div class="text-center">
+  {{#link-to 'company-account.add-employees.bulk'}}
+    <i class="fa fa-fw fa-exchange"></i>
+    Switch to <strong>bulk addition</strong> mode (CSV/XLS/XLSX)
+  {{/link-to}}
+</div>

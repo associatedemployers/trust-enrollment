@@ -19,10 +19,42 @@
       text-align: center;
     }
   }
+
+  .page-title {
+    margin: 0 15px 10px 15px;
+
+    &.row {
+      margin: 5px 0 10px 0;
+
+      h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+      }
+    }
+  }
+
+  .page-margins {
+    margin: 0 15px;
+
+    .page-title .col-md-6 {
+      padding: 0;
+    }
+  }
+
+  ul.option-list {
+    margin-top: 40px;
+    font-size: 140%;
+  }
+
+  .employee-form {
+    width: 80%;
+    margin: 10px auto;
+  }
 }
 
 hgroup.company-account-header {
   margin: 10px 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px dotted fade(@brand-default, 30%);
 
   .company-account-title {
     font-size: @font-size-h2;
@@ -37,5 +69,14 @@ hgroup.company-account-header {
     &:hover {
       color: lighten(@brand-primary, 10%);
     }
+  }
+}
+
+ul.option-list {
+  list-style: none;
+  padding: 0;
+
+  li {
+    margin-bottom: 15px;
   }
 }

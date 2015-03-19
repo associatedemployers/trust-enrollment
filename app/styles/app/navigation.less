@@ -31,7 +31,7 @@ nav.app-header {
     .navbar-nav {
       padding: 0;
 
-      a.nav-link {
+      > li > a {
         font-size: 80%;
       }
     }
@@ -138,5 +138,16 @@ nav.app-header {
 
   .navbar-nav {
     padding: 14px;
+  }
+}
+
+ul.page-controls {
+  list-style: none;
+  padding: 0;
+  text-align: right;
+  font-size: @font-size-h4;
+
+  li {
+    display: inline-block;
   }
 }

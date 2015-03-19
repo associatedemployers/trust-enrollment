@@ -21,6 +21,8 @@ export default Ember.Controller.extend({
     }
   },
 
+  employeesOverTimeDataset: Ember.A(),
+
   getEmployeesOverTimeDataset: function () {
     var company = this.get('content'),
         self    = this;
@@ -82,5 +84,5 @@ export default Ember.Controller.extend({
 
       self.set('employeesOverTimeDataset', dataSet);
     });
-  }.observes('content.employees.[]'),
+  }.observes('content.employees.[]')
 });

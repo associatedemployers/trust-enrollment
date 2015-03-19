@@ -24,11 +24,15 @@ Router.map(function() {
 
   this.route('company-account', { path: '/company' }, function () {
     this.route('index', { path: '/summary' });
-    this.route('employees', function() {
-      this.route('add');
-    });
+    this.route('employees');
     this.route('forms');
-    this.route('employee');
+    this.route('employee', { path: '/employee/:id' }, function () {
+      this.route('terminate');
+    });
+    this.route('add-employees', { path: '/employees/add' }, function () {
+      this.route('index', { path: '/' });
+      this.route('bulk');
+    });
   });
 
   this.route('enrollment', { path: '/enroll' });
@@ -40,9 +44,7 @@ Router.map(function() {
   });
 
   this.route('support', function() {
-    this.route('company', function() {
-      this.route('employees');
-    });
+    this.route('company');
     this.route('employee');
   });
 });

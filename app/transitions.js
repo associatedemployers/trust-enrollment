@@ -29,6 +29,20 @@ export default function () {
   );
 
   this.transition(
+    this.hasClass('company-account--nested-transition-container'),
+    this.fromRoute('company-account.index'),
+    this.toRoute(_regexMatch(/^company-account./)),
+    this.use('toLeft'),
+    this.reverse('toRight')
+  );
+
+  this.transition(
+    this.hasClass('company-account--nested-transition-container'),
+    this.withinRoute(_regexMatch(/^company-account.(?!index)/)),
+    this.use('toDown')
+  );
+
+  this.transition(
     this.hasClass('employee-account-edit--nested-transition-container'),
     this.withinRoute(_regexMatch(/^employee-account.edit./)),
     this.use('toLeft'),
