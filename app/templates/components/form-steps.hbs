@@ -15,4 +15,12 @@
 
 <div class="form-group">
   <button type="submit" class="btn btn-success btn-block" disabled={{disableSubmit}}>{{contextualButtonText}}</button>
+  {{#if allowSkip}}
+    <button type="button" class="btn btn-warning btn-block btn-xs btn-o" {{action "skip"}}>
+      Skip
+      {{#if onLast}}
+        and {{#if finishText}}{{finishText}}{{else}}Finish{{/if}}
+      {{/if}}
+    </button>
+  {{/if}}
 </div>

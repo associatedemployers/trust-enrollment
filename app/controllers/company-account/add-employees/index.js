@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
     },
     lastName: titleCaseValue,
     ssn: function ( value ) {
-      return ( value ) ? ( value.length > 9 ) ? value.substr(0, 9) : value.length === 9 && !isNaN( value ) : false;
+      return ( value ) ? ( value.length > 9 ) ? value.replace(/\D/g, '').substr(0, 9) : value.length === 9 && !isNaN( value ) : false;
     }
   }
 });
