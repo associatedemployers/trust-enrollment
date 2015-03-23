@@ -22,63 +22,87 @@ export default Ember.Component.extend({
   stepDidChange: function () {
     console.debug('Form Component :: Step index changed');
 
-    var step      = this.get('step'),
+    var step = this.get('step'),
         formBindings = this.get('_formBindings'),
         validWith = this.get('validWith').objectAt(step);
+
+    if ( formBindings.length > 0 ) {
+      this._removeObservers(formBindings, this._setStepValid);
+    }
 
     if ( validWith ) {
       console.debug('Form Component :: Setting up observers for', validWith.join(', '));
       this._addObservers(validWith, this._setStepValid);
     }
 
-    if ( formBindings.length > 0 ) {
-      this._removeObservers(formBindings, this._setStepValid);
-    }
-
     this._setStepValid();
+    Ember.run.scheduleOnce('afterRender', this, this._autofocus);
   }.observes('step').on('didInsertElement'),
 
   _addObservers: function ( keys, method ) {
-    var self = this;
+    var self = this,
+        added = [];
 
     keys.forEach(function ( key ) {
+      added.push(key);
       self.get('_formBindings').pushObject(key);
-      self.get('for').addObserver(key, method.bind(self));
+      self.get('for').addObserver(key, self, method);
     });
 
-    console.debug('Form Component :: Added observers!');
+    console.debug('Form Component :: Added observers for', added.join(', ') + '!');
   },
 
   _removeObservers: function ( keys, method ) {
-    var self = this;
+    var self = this,
+        removed = [];
 
     keys.forEach(function ( key ) {
-      self.get('_formBindings').removeObject(key);
-      self.get('for').removeObserver(key, method.bind(self));
+      removed.push(key);
+      self.get('for').removeObserver(key, self, method);
     });
 
-    console.debug('Form Component :: Removed observers!');
+    self.set('_formBindings', Ember.A());
+
+    console.debug('Form Component :: Removed observers for', removed.join(', ') + '!');
   },
 
   _setStepValid: function () {
-    console.debug('Form Component :: Setting step validity');
-    var formContext = this.get('for'),
-        qual = this.get('qualification'),
-        validWith = this.get('validWith').objectAt(this.get('step'));
+    Ember.run.debounce(this, function () {
+      console.debug('Form Component :: Setting step validity');
 
-    if ( !validWith ) {
-      console.debug('Form Component :: No step validity definition, setting to true');
-      return this.set('stepValid', true);
+      var self = this,
+          formContext = this.get('for'),
+          qual = this.get('qualification'),
+          validWith = this.get('validWith').objectAt(this.get('step'));
+
+      if ( !validWith ) {
+        console.warning('Form Component :: No step validity definition, setting to true');
+        return this.set('stepValid', true);
+      }
+
+      var invalid = validWith.filter(function ( key ) {
+        var value = formContext.get(key),
+            ret   = ( qual && qual[key] && typeof qual[key] === 'function' ) ? qual[key].call(formContext, value) : !!value;
+
+        if ( typeof ret === 'string' && formContext.get(key) !== ret ) {
+          self.get('for').set(key, ret);
+        }
+
+        return !ret;
+      });
+
+      this.set('stepValid', invalid.length < 1);
+    }, 100);
+  },
+
+  _autofocus: function () {
+    var step = this.get('steps').objectAt(this.get('step'));
+
+    if ( !step ) {
+      return;
     }
 
-    var invalid = validWith.filter(function ( key ) {
-      var value = formContext.get(key);
-      return ( qual && qual[key] && typeof qual[key] === 'function' ) ? !qual[key].call(formContext, value) : !value;
-    });
-
-    console.debug('Form Component :: Any invalid?', invalid.join(', '));
-
-    this.set('stepValid', invalid.length < 1);
+    step._focus.call(step);
   },
 
   onLast: function () {
@@ -101,9 +125,19 @@ export default Ember.Component.extend({
     return ( showStepNames && stepName ) ? text + ': ' + stepName : text;
   }.property('submitText', 'step'),
 
+  currentTitle: function () {
+    var step = this.get('steps').objectAt(this.get('step'));
+    return ( step ) ? step.get('title') : false;
+  }.property('step', 'steps.@each.title'),
+
   submit: function ( e ) {
     e.preventDefault();
-
     this.incrementProperty('step');
+  },
+
+  actions: {
+    back: function () {
+      this.decrementProperty('step');
+    }
   }
 });

@@ -1,6 +1,18 @@
+{{#if currentTitle}}
+  <h3 class="text-center">
+    {{#unless disableBack}}
+      <a href="#" {{action "back"}}>
+        <i class="fa fa-fw fa-angle-left"></i>
+      </a>
+    {{/unless}}
+    {{currentTitle}}
+  </h3>
+{{/if}}
+
 {{yield}}
 
 <hr />
+
 <div class="form-group">
   <button type="submit" class="btn btn-success btn-block" disabled={{disableSubmit}}>{{contextualButtonText}}</button>
 </div>

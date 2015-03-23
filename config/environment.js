@@ -26,7 +26,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.socketAddress = 'localhost:3002';
+    ENV.socketAddress = '192.168.1.218:3002';
   }
 
   if (environment === 'test') {

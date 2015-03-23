@@ -8,5 +8,12 @@ export default Ember.Component.extend({
 
   show: function () {
     return this.get('form.step') === this.get('_formIndex');
-  }.property('form.step')
+  }.property('form.step'),
+
+  _focus: function () {
+    Ember.run.scheduleOnce('afterRender', this, function () {
+      console.log(this.$().find('input:first').focus());
+      this.$().find('input:first')[0].focus();
+    });
+  }
 });

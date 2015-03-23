@@ -1,0 +1,54 @@
+/*
+  Employee Card Template Styles
+*/
+
+.employee-card {
+  @border-color: lighten(@brand-default, 70%);
+  @filler-color: @border-color;
+
+  background: linear-gradient(white, transparent), linear-gradient(90deg, lighten(@brand-default, 70%), transparent), linear-gradient(-90deg, lighten(@brand-success, 20%), transparent);
+  min-height: 300px;
+  margin: 40px 20px;
+  padding: 20px;
+  border: 1px solid @border-color;
+  border-radius: 20px;
+  box-shadow: 0 35px 35px -30px fade(@brand-default, 50%);
+
+  h1, h2, h3, h4, h5 {
+    margin-top: 0;
+  }
+
+  .employee-card-heading {
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px dotted @border-color;
+  }
+
+  .card-filler {
+    display: block;
+
+    &:before, &:after {
+      content: '';
+      display: block;
+      background: fade(@filler-color, 50%);
+      margin-bottom: 10px;
+      height: 15px;
+
+      .box-sizing(content-box);
+    }
+
+    &.short {
+      width: 75%;
+    }
+
+    &.various-length {
+      &:before {
+        width: 90%;
+      }
+
+      &:after {
+        width: 60%;
+      }
+    }
+  }
+}

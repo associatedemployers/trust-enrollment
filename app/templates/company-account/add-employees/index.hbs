@@ -1,15 +1,49 @@
-{{#form-steps class="employee-form" for=this validWith=validWith qualification=validityQualification submitText="HELLOWORLD" includeStepNames=true}}
-  {{#form-step submitText="OMGOSH"}}
-    {{form-input type="text" value=firstName}}
-    {{input type="text" class="form-control" value=lastName}}
-  {{/form-step}}
+<div class="row employee-form-container">
+  <div class="col-md-6">
+    {{#form-steps class="employee-form" for=this validWith=validWith qualification=validityQualification includeStepNames=true}}
+      {{#form-step title="Employee's Name"}}
+        <div class="row">
+          <div class="form-group col-md-5">
+            {{form-input type="text" value=firstName placeholder="First Name"}}
+          </div>
+          <div class="col-md-2">
+            {{form-input type="text" value=middleInitial placeholder="M.I."}}
+          </div>
+          <div class="form-group col-md-5">
+            {{form-input type="text" value=lastName placeholder="Last Name"}}
+          </div>
+        </div>
+      {{/form-step}}
 
-  {{#form-step name="Test Step"}}
-    Test2
-  {{/form-step}}
-{{/form-steps}}
+      {{#form-step name="SSN" title="Employee's Social Security Number"}}
+        <div class="form-group">
+          {{form-input type="password" value=ssn placeholder="Social Security #"}}
+        </div>
+      {{/form-step}}
+    {{/form-steps}}
+  </div>
+  <div class="col-md-6">
+    <div class="employee-card">
+      <div class="employee-card-heading">
+        {{#if name}}
+          <h3>{{firstName}} {{middleInitial}} {{lastName}}</h3>
+        {{else}}
+          <span class="card-filler"></span>
+        {{/if}}
+      </div>
+      <div class="employee-card-body">
+        {{#if ssn}}
+          {{ssnMasked}}
+        {{else}}
+          <span class="card-filler short various-length"></span>
+        {{/if}}
+        <span class="card-filler short various-length"></span>
+      </div>
+    </div>
+  </div>
+</div>
 
-<div class="text-center">
+<div class="text-center text-sm bulk-mode">
   {{#link-to 'company-account.add-employees.bulk'}}
     <i class="fa fa-fw fa-exchange"></i>
     Switch to <strong>bulk addition</strong> mode (CSV/XLS/XLSX)
