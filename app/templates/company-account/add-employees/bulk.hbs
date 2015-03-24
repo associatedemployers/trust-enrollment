@@ -1,1 +1,24 @@
-{{outlet}}
+<form class="form-wrapper" {{action "processFile" on="submit"}}>
+
+  <h3 class="text-center">
+    Select an employee spreadsheet<br />
+    <small>
+      This option supports CSV, XLS, or XLSX files with standard column data. We will attempt to process your column labels, but look at and <a href="#"><i class="fa fa-fw fa-download"></i> Download our Excel spreadsheet template</a> if you are having trouble.
+    </small>
+  </h3>
+
+  {{file-upload class="animated fadeInUp file-upload-light" multi=false dropzone=true hasFiles=hasFile files=file allowedExtensions=fileExtensions}}
+
+  {{#liquid-if file}}
+    <div class="form-group">
+      <button type="submit" class="btn btn-success btn-block"><i class="fa fa-fw fa-gear"></i> Process File</button>      
+    </div>
+  {{/liquid-if}}
+</form>
+
+<div class="text-center text-sm bulk-mode">
+  {{#link-to 'company-account.add-employees.index'}}
+    <i class="fa fa-fw fa-exchange"></i>
+    Switch to <strong>single addition</strong> mode
+  {{/link-to}}
+</div>

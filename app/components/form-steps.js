@@ -76,7 +76,7 @@ export default Ember.Component.extend({
           validWith = this.get('validWith').objectAt(this.get('step'));
 
       if ( !validWith ) {
-        console.warning('Form Component :: No step validity definition, setting to true');
+        console.warn('Form Component :: No step validity definition, setting to true');
         return this.set('stepValid', true);
       }
 
@@ -130,14 +130,31 @@ export default Ember.Component.extend({
     return ( step ) ? step.get('title') : false;
   }.property('step', 'steps.@each.title'),
 
+  allowSkip: function () {
+    var step = this.get('steps').objectAt(this.get('step'));
+    return ( step ) ? step.get('allowSkip') : false;
+  }.property('step', 'steps.@each.allowSkip'),
+
   submit: function ( e ) {
     e.preventDefault();
-    this.incrementProperty('step');
+    this._next();
+  },
+
+  _next: function () {
+    if ( this.get('onLast') ) {
+      this.sendAction('finish');
+    } else {
+      this.incrementProperty('step');
+    }
   },
 
   actions: {
     back: function () {
       this.decrementProperty('step');
+    },
+
+    skip: function () {
+      this._next();
     }
   }
 });

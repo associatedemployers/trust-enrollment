@@ -19,7 +19,7 @@
       {{error-display prefix="Error logging in" message=loginError bg=false}}
 
       <div class="form-group">
-        <button type="submit" class="btn btn-success btn-block" disabled={{loginIsNotValid}}>Login {{#liquid-if loggingIn}}<i class="fa fa-spin fa-spinner"></i>{{/liquid-if}}</button>
+        <button type="submit" class="btn btn-success btn-block" disabled={{loginIsNotValid}}>Login {{#liquid-if loggingIn class="liquid-inline"}}<i class="fa fa-spin fa-spinner"></i>{{/liquid-if}}</button>
       </div>
     </form>
   </div>

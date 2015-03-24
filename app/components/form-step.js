@@ -11,8 +11,11 @@ export default Ember.Component.extend({
   }.property('form.step'),
 
   _focus: function () {
+    if ( this.get('autofocus') === false ) {
+      return;
+    }
+
     Ember.run.scheduleOnce('afterRender', this, function () {
-      console.log(this.$().find('input:first').focus());
       this.$().find('input:first')[0].focus();
     });
   }

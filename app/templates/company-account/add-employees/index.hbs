@@ -1,7 +1,7 @@
 <div class="row employee-form-container">
   <div class="col-md-6">
-    {{#form-steps class="employee-form" for=this validWith=validWith qualification=validityQualification includeStepNames=true}}
-      {{#form-step title="Employee's Name"}}
+    {{#form-steps class="employee-form" for=this validWith=validWith qualification=validityQualification includeStepNames=true finish="submit"}}
+      {{#form-step title="Name" allowSkip=true}}
         <div class="row">
           <div class="form-group col-md-5">
             {{form-input type="text" value=firstName placeholder="First Name"}}
@@ -15,15 +15,58 @@
         </div>
       {{/form-step}}
 
-      {{#form-step name="SSN" title="Employee's Social Security Number"}}
+      {{#form-step title="Hire Date" autofocus=false}}
+        <div class="form-group left-inner-addon">
+          <i class="fa fa-fw fa-calendar text-addon-left"></i>
+          {{date-picker value=legacyClientEmploymentDate textValue=employmentTextValue clear=false min=datePickerSettings.min max=datePickerSettings.max}}          
+        </div>
+      {{/form-step}}
+
+      {{#form-step name="SSN" title="Social Security Number"}}
         <div class="form-group">
           {{form-input type="password" value=ssn placeholder="Social Security #"}}
+        </div>
+      {{/form-step}}
+
+      {{#form-step name="Address" title="Address" allowSkip=true}}
+        <div class="form-group">
+          {{form-input type="text" value=addressLine1 placeholder="Address"}}
+        </div>
+        <div class="form-group">
+          {{form-input type="text" value=addressLine2 placeholder="Suite/Apt."}}
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              {{form-input type="text" value=city placeholder="City"}}
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              {{view "select" content=states optionLabelPath="content.l" optionValuePath="content.v" value=state class="form-control"}}
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              {{form-input type="text" value=zipcode placeholder="Zipcode"}}
+            </div>
+          </div>
         </div>
       {{/form-step}}
     {{/form-steps}}
   </div>
   <div class="col-md-6">
     <div class="employee-card">
+      <div class="bottom-right-corner text-muted">
+        <i {{bind-attr class=":fa :fa-fw ssn:fa-check-circle:fa-ellipsis-h"}}></i>
+      </div>
+
+      {{#if legacyClientEmploymentDate}}
+        <div class="top-right-corner text-muted text-sm">
+          {{format-moment legacyClientEmploymentDate}}
+        </div>
+      {{/if}}
+
       <div class="employee-card-heading">
         {{#if name}}
           <h3>{{firstName}} {{middleInitial}} {{lastName}}</h3>
@@ -31,13 +74,25 @@
           <span class="card-filler"></span>
         {{/if}}
       </div>
+
       <div class="employee-card-body">
         {{#if ssn}}
-          {{ssnMasked}}
+          <i class="fa fa-fw fa-lock"></i> {{ssnMasked}}
         {{else}}
           <span class="card-filler short various-length"></span>
         {{/if}}
-        <span class="card-filler short various-length"></span>
+
+        {{#if address}}
+          <p>
+            {{addressLine1}}
+            {{#if addressLine2}}
+              <br />{{addressLine2}}
+            {{/if}}
+            <br />{{city}}, {{state}} {{zipcode}}
+          </p>
+        {{else}}
+          <span class="card-filler short various-length"></span>
+        {{/if}}
       </div>
     </div>
   </div>

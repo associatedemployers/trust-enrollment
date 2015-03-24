@@ -6,11 +6,20 @@ var titleCaseValue = function ( value ) {
 };
 
 export default Ember.Controller.extend({
+  needs: [ 'application' ],
+
+  states: Ember.computed.alias('controllers.application.states'),
   name: Ember.computed.or('firstName', 'lastName'),
+  address: Ember.computed.and('addressLine1', 'city'),
+
+  employmentTextValue: moment().format('DD MMMM, YYYY'),
+  state: 'MT',
 
   validWith: [
     [ 'firstName', 'lastName', 'middleInitial' ],
-    [ 'ssn' ]
+    [ 'legacyClientEmploymentDate' ],
+    [ 'ssn' ],
+    [ 'addressLine1', 'city', 'state', 'zipcode' ]
   ],
 
   ssnMasked: function () {
@@ -26,6 +35,7 @@ export default Ember.Controller.extend({
     lastName: titleCaseValue,
     ssn: function ( value ) {
       return ( value ) ? ( value.length > 9 ) ? value.replace(/\D/g, '').substr(0, 9) : value.length === 9 && !isNaN( value ) : false;
-    }
+    },
+    city: titleCaseValue
   }
 });

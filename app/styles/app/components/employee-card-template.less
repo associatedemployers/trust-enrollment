@@ -6,6 +6,7 @@
   @border-color: lighten(@brand-default, 70%);
   @filler-color: @border-color;
 
+  position: relative;
   background: linear-gradient(white, transparent), linear-gradient(90deg, lighten(@brand-default, 70%), transparent), linear-gradient(-90deg, lighten(@brand-success, 20%), transparent);
   min-height: 300px;
   margin: 40px 20px;
@@ -16,6 +17,20 @@
 
   h1, h2, h3, h4, h5 {
     margin-top: 0;
+  }
+
+  .bottom-right-corner, .top-right-corner {
+    position: absolute;
+    right: 0;
+    padding: 10px;
+  }
+
+  .bottom-right-corner {
+    bottom: 0;
+  }
+
+  .top-right-corner {
+    top: 0;
   }
 
   .employee-card-heading {
