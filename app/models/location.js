@@ -4,7 +4,6 @@ import addressFormatter from 'trust-enrollment/utils/address-formatter';
 var attribute = DS.attr;
 
 export default DS.Model.extend({
-  ebmsNumber:          attribute('string'),
   legacyCompanyNumber: attribute('string'),
   soleProprietorship:  attribute('boolean'),
   embeddedDeductible:  attribute('boolean'),
@@ -19,8 +18,9 @@ export default DS.Model.extend({
   phone: attribute('string'),
   fax:   attribute('string'),
 
-  company:   DS.belongsTo('company'),
-  employees: DS.hasMany('employee'),
+  ebmsNumbers: attribute('array'),
+  company:     DS.belongsTo('company'),
+  employees:   DS.hasMany('employee'),
 
   legacyEffectiveDate: attribute('date'),
   time_stamp:          attribute('date'),

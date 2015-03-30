@@ -24,7 +24,6 @@ export default Ember.Component.extend(TooltipsMixin, {
   }.property('selectedInfo', 'selectedInfo.medicalRates', 'selectedInfo.dentalRates', 'selectedInfo.visionRates', 'selectedInfo.lifeRates'),
 
   employeeDidChange: function () {
-    console.log('employee changed');
     Ember.run.scheduleOnce('afterRender', this, function () {
       this._renderTooltips();
     });

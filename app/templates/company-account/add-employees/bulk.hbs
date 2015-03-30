@@ -1,24 +1,95 @@
-<form class="form-wrapper" {{action "processFile" on="submit"}}>
+<div class="container">
+  {{#liquid-if parsedArray use="toLeft"}}
+    <h3 class="text-center">
+      <a href="#" class="pull-left text-danger" title="Reset" {{action "resetData"}}>
+        <i class="fa fa-fw fa-eject"></i>
+      </a>
+      Confirm data
+      {{#if invalidFile}}
+        <br />
+        <small class="text-danger">
+          <i class="fa fa-fw fa-times-circle"></i>
+          Your file is missing required information.
+          {{#if missingRequiredCol}}
+            Missing required column(s): {{#each missingRequiredCol as |col|}}{{col}}{{/each}}
+          {{else}}
+            One or more rows does not contain required information.
+          {{/if}}
+        </small>
+      {{/if}}
+    </h3>
+    <hr />
+    {{#bs-table striped=true}}
+      <tr class="headers">
+        {{#each columnData.headers as |header|}}
+          <th {{bind-attr class="header.mapsTo::text-warning header.missingFields:text-danger"}}>
+            {{header.originalHeader}} 
+            {{#if header.matchedWith}}
+              ({{header.matchedWith}})
+            {{else}}
+              <i class="fa fa-fw fa-exclamation-triangle tooltip-trigger" title="No matched column. We will not be able to add this data to the employee." data-placement="bottom"></i>
+            {{/if}}
+            {{#if header.missingFields}}
+              <i class="fa fa-fw fa-exclamation-circle tooltip-trigger" title="One or more rows is missing this required data!" data-placement="bottom"></i>
+            {{/if}}
+          </th>
+        {{/each}}
+      </tr>
+      {{#each columnData.rows as |row|}}
+        <tr>
+        {{#each row as |rowColumn|}}
+          <td>{{#if rowColumn}}{{rowColumn}}{{else}}-{{/if}}</td>
+        {{/each}}
+        </tr>
+      {{/each}}
+    {{/bs-table}}
 
-  <h3 class="text-center">
-    Select an employee spreadsheet<br />
-    <small>
-      This option supports CSV, XLS, or XLSX files with standard column data. We will attempt to process your column labels, but look at and <a href="#"><i class="fa fa-fw fa-download"></i> Download our Excel spreadsheet template</a> if you are having trouble.
-    </small>
-  </h3>
+    <button type="button" class="btn btn-primary btn-block" disabled={{invalidFile}}>
+      Save {{columnData.rows.length}} Employees<br />
+      <small>to {{location.addressFormatted}}</small>
+    </button>
+  {{else}}
+    <form class="form-wrapper" {{action "processFile" on="submit"}}>
+      <h3 class="text-center">
+        Select an employee spreadsheet<br />
+        <small>
+          This option supports CSV files with valid standard data. We will attempt to process your column labels, but look at and <a href="#"><i class="fa fa-fw fa-download"></i> Download our CSV template</a> if you are having trouble.
+        </small>
+      </h3>
 
-  {{file-upload class="animated fadeInUp file-upload-light" multi=false dropzone=true hasFiles=hasFile files=file allowedExtensions=fileExtensions}}
+      {{file-upload class="animated fadeInUp file-upload-light" multi=false dropzone=true hasFiles=hasFile files=file allowedExtensions=fileExtensions}}
 
-  {{#liquid-if file}}
-    <div class="form-group">
-      <button type="submit" class="btn btn-success btn-block"><i class="fa fa-fw fa-gear"></i> Process File</button>      
-    </div>
+      {{error-display prefix="Error uploading file" message=uploadError bg=false}}
+
+      {{#if uploadingFiles}}
+        {{progress-bar class="animated fadeInUp" min=0 max=100 value=uploadProgress striped=true barClass="progress-bar-success"}}
+      {{/if}}
+      
+      {{#liquid-if file}}
+        <div class="form-group">
+          {{error-display prefix="Error fetching locations" message=locationsError bg=false}}
+          <label for="add-to-location">Select a location for these employees</label>
+          {{view "select" class="form-control" content=companyLocations optionLabelPath="content.addressFormatted" value=location}}
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-success btn-block" disabled={{locationNotSelected}}>
+            {{#if uploadingFiles}}
+              <i class="fa fa-fw fa-spin fa-gear"></i>
+            {{else}}
+              <i class="fa fa-fw fa-gear"></i>
+            {{/if}}
+            Process File
+          </button>      
+        </div>
+      {{/liquid-if}}
+    </form>
   {{/liquid-if}}
-</form>
 
-<div class="text-center text-sm bulk-mode">
-  {{#link-to 'company-account.add-employees.index'}}
-    <i class="fa fa-fw fa-exchange"></i>
-    Switch to <strong>single addition</strong> mode
-  {{/link-to}}
+  <div class="text-center text-sm bulk-mode">
+    {{#link-to 'company-account.add-employees.index'}}
+      <i class="fa fa-fw fa-exchange"></i>
+      Switch to <strong>single addition</strong> mode
+    {{/link-to}}
+  </div>
 </div>

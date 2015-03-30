@@ -148,6 +148,10 @@ export default Ember.Component.extend({
     }
   },
 
+  willDestroyElement: function () {
+    this._removeObservers(this.get('_formBindings'), this._setStepValid);
+  },
+
   actions: {
     back: function () {
       this.decrementProperty('step');
