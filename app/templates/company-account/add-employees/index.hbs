@@ -1,5 +1,6 @@
 <div class="row employee-form-container">
   <div class="col-md-6">
+    {{error-display prefix="Error fetching locations" message=locationsError bg=false}}
     {{#form-steps class="employee-form" for=this validWith=validWith qualification=validityQualification includeStepNames=true finish="submit"}}
       {{#form-step title="Name" allowSkip=true}}
         <div class="row">
@@ -12,6 +13,12 @@
           <div class="form-group col-md-5">
             {{form-input type="text" value=lastName placeholder="Last Name"}}
           </div>
+        </div>
+      {{/form-step}}
+
+      {{#form-step title="Select Work Location"}}
+        <div class="form-group">
+          {{view "select" class="form-control" content=companyLocations optionLabelPath="content.addressFormatted" value=location}}
         </div>
       {{/form-step}}
 

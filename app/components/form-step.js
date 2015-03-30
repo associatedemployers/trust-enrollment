@@ -16,7 +16,11 @@ export default Ember.Component.extend({
     }
 
     Ember.run.scheduleOnce('afterRender', this, function () {
-      this.$().find('input:first')[0].focus();
+      var $input = this.$().find('input:first') || this.$().find('select:first');
+
+      if ( $input ) {
+        $input.focus();
+      }
     });
   }
 });

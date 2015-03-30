@@ -17,6 +17,7 @@ export default Ember.Controller.extend({
 
   validWith: [
     [ 'firstName', 'lastName', 'middleInitial' ],
+    [ 'location' ],
     [ 'legacyClientEmploymentDate' ],
     [ 'ssn' ],
     [ 'addressLine1', 'city', 'state', 'zipcode' ]
@@ -37,5 +38,18 @@ export default Ember.Controller.extend({
       return ( value ) ? ( value.length > 9 ) ? value.replace(/\D/g, '').substr(0, 9) : value.length === 9 && !isNaN( value ) : false;
     },
     city: titleCaseValue
-  }
+  },
+
+  shouldGetCompanyLocations: function () {
+    var self = this;
+
+    this.set('locationsError', null);
+
+    return this.store.find('location').then(function ( locations ) {
+      self.set('companyLocations', locations.get('content'));
+    }).catch(function ( err ) {
+      console.error(err);
+      self.set('locationsError', ( err && err.responseText ) ? err.responseText : err);
+    });
+  }.observes('session.currentUser').on('init'),
 });
