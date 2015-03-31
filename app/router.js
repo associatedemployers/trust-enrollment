@@ -33,6 +33,10 @@ Router.map(function() {
       this.route('index', { path: '/' });
       this.route('bulk');
     });
+    this.route('settings', function() {
+      this.route('communications');
+      this.route('account');
+    });
   });
 
   this.route('enrollment', { path: '/enroll' });

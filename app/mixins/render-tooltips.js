@@ -13,12 +13,22 @@ var RenderTooltips = Ember.Mixin.create({
   },
 
   _renderTooltips: function () {
-    // Get jQuery object from view, find tooltip elements, destroy
-    // any existing elements and then render the tooltips
-    var $tooltips = this.$().find('.tooltip-trigger');
+    Ember.run.scheduleOnce('afterRender', this, function () {
+      if ( !this.$() ) {
+        return;
+      }
 
-    $tooltips.tooltip('destroy');
-    $tooltips.tooltip();
+      // Get jQuery object from view, find tooltip elements, destroy
+      // any existing elements and then render the tooltips
+      var $tooltips = this.$().find('.tooltip-trigger');
+
+      if ( !$tooltips || !$tooltips.tooltip ) {
+        return;
+      }
+
+      $tooltips.tooltip('destroy');
+      $tooltips.tooltip();
+    });
   }
 });
 

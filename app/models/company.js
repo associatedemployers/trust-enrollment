@@ -16,7 +16,9 @@ export default DS.Model.extend({
   addressLine2: attribute('string'),
   city:         attribute('string'),
   state:        attribute('string'),
-  zipcode:      attribute('string'),  
+  zipcode:      attribute('string'),
+
+  automaticEmailNotifications: attribute('boolean'),
 
   // Relational
   medicalRates:      DS.hasMany('medical-rate', { async: true, inverse: 'company' }),

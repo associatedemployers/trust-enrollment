@@ -1,0 +1,15 @@
+<h3 class="page-title">
+  {{#if routeContext}}
+    {{#link-to 'company-account.settings.index'}}
+      Settings
+    {{/link-to}}
+    <span class="text-muted">
+      <i class="fa fa-angle-right"></i>
+      {{routeContext}}
+    </span>
+  {{else}}
+    Settings
+  {{/if}}
+</h3>
+
+{{outlet}}

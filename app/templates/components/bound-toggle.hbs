@@ -1,0 +1,8 @@
+{{yield}}
+
+{{#if label}}
+  <h5>{{{label}}}</h5>
+{{/if}}
+
+{{input type="checkbox" id=inputId class=toggleClass checked=value}}
+<label {{bind-attr class=":toggle-btn sm:toggle-sm"}} {{bind-attr for=inputId}}></label>

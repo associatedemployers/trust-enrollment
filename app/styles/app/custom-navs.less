@@ -1,0 +1,61 @@
+/*
+  Custom Nav Styles
+*/
+
+.six-pack-nav {
+  display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  .make-row(12);
+
+  li {
+    display: block;
+    padding: 5px;
+    .make-sm-column(6, 12);
+
+    a {
+      display: block;
+      min-height: 200px;
+      text-align: center;
+      font-size: 150%;
+      color: darken(@brand-primary, 8%);
+      padding: 10px 10px 45px 10px;
+      text-shadow: 0 1px 0 fade(lighten(@gray-light, 10%), 50%);
+
+      &:hover {
+        text-shadow: none;
+      }
+
+      .pack-icon {
+        display: block;
+        font-size: 400%;
+      }
+    }
+  }
+
+  &.six-pack-nav-backgrounds {
+    li a {
+      margin: 2px;
+      color: darken(@brand-primary, 10%);
+      background: linear-gradient(lighten(@brand-success, 30%), transparent), linear-gradient(90deg, lighten(@brand-default, 30%), transparent), linear-gradient(-90deg, lighten(@brand-primary, 20%), transparent);
+
+      &:hover {
+        color: @brand-primary;
+      }
+    }
+  }
+
+  &.six-pack-nav-borders {
+    li a {
+      margin: 2px;
+      border: 1px solid fade(@brand-default, 20%);
+
+      &:hover {
+        background: @brand-primary;
+        color: white;
+        border-color: white;
+      }
+    }
+  }
+}

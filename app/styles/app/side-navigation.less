@@ -5,7 +5,7 @@
 .side-navigation-wrapper {
   overflow: hidden;
   position: relative;
-  min-height: 500px;
+  min-height: 90vh;
 }
 
 .side-navigation {
@@ -50,12 +50,19 @@
     li.nav-link {
       margin: 5px 0;
 
+      ul.nav-link-sub-links {
+        margin-top: 6px;
+        font-size: 90%;
+        list-style: none;
+        padding-left: 25px;
+      }
+
       a {
         color: white;
         font-weight: 100;
 
         &.active {
-          @nav-link-active-color: lighten(@brand-primary, 40%);
+          @nav-link-active-color: lighten(@brand-success, 20%);
           color: @nav-link-active-color;
 
           &:hover {

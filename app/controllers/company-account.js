@@ -12,12 +12,29 @@ export default Ember.Controller.extend({
     {
       title: 'Employees',
       path:  'company-account.employees',
-      icon:  'fa-users'
+      icon:  'fa-users',
+      subLinks: [
+        {
+          title: 'Add Employees',
+          path: 'company-account.add-employees'
+        }
+      ]
     },
     {
       title: 'Forms',
       path:  'company-account.forms',
       icon:  'fa-file-text'
+    },
+    {
+      title: 'Settings',
+      path:  'company-account.settings',
+      icon:  'fa-gears',
+      subLinks: [
+        {
+          title: 'Communication Preferences',
+          path: 'company-account.settings.communications'
+        }
+      ]
     }
   ],
 

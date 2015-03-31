@@ -5,11 +5,34 @@
 </h2>
 
 <ul class="nav-links">
-  {{#each link in links}}
+  {{#each links as |link|}}
     <li class="nav-link">
-      {{#link-to link.path}}
-        <i {{bind-attr class=":fa :fa-fw link.icon"}}></i> {{link.title}}
-      {{/link-to}}
+      {{#if link.subLinks}}
+        <a href="#" {{action "toggleSubLinks" link}}>
+          <i class="fa fa-fw {{link.icon}}"></i> {{link.title}} <i {{bind-attr class=":fa :fa-fw link.expanded:fa-caret-up:fa-caret-down"}}></i>
+        </a>
+      {{else}}
+        {{#link-to link.path}}
+          <i class="fa fa-fw {{link.icon}}"></i> {{link.title}}
+        {{/link-to}}
+      {{/if}}
+
+      {{#liquid-if link.expanded}}
+        <ul class="nav-link-sub-links">
+          <li class="sub-link">
+            {{#link-to link.path}}
+              {{link.title}}
+            {{/link-to}}
+          </li>
+          {{#each link.subLinks as |subLink|}}
+            <li class="sub-link">
+              {{#link-to subLink.path}}
+                {{subLink.title}}
+              {{/link-to}}
+            </li>
+          {{/each}}
+        </ul>
+      {{/liquid-if}}
     </li>
   {{else}}
     <i class="fa fa-fw fa-exclamation-triangle"></i> No links to show.
