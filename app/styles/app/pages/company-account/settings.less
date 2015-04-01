@@ -9,3 +9,20 @@
     padding-top: 20px;
   }
 }
+
+section.setting-section {
+  padding-bottom: 30px;
+  margin-top: 30px;
+
+  &:first-child {
+    margin-top: 10px;
+  }
+
+  &:not(:last-child) {
+    border-bottom: 2px dotted fade(@brand-default, 10%);
+  }
+  
+  .section-title {
+    margin: 0;
+  }
+}

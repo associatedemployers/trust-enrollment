@@ -15,4 +15,11 @@
       </div>
     </div>
   </div>
+
+  {{#liquid-if model.isDirty}}
+    <hr />
+    <div class="form-group">
+      <button type="button" class="btn btn-success btn-block" {{action "saveChanges"}}>Save Changes</button>
+    </div>
+  {{/liquid-if}}
 </div>
