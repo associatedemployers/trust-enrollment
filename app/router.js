@@ -36,6 +36,12 @@ Router.map(function() {
     this.route('settings', function() {
       this.route('communications');
       this.route('account');
+      this.route('enrollment', function () {
+        this.route('index', { path: '/' });
+        this.route('enrollment-periods');
+        this.route('contribution');
+        this.route('eligibility');
+      });
     });
   });
 

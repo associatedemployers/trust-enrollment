@@ -31,8 +31,16 @@ export default Ember.Controller.extend({
       icon:  'fa-gears',
       subLinks: [
         {
-          title: 'Communication Preferences',
+          title: 'Account',
+          path: 'company-account.settings.account'
+        },
+        {
+          title: 'Communications',
           path: 'company-account.settings.communications'
+        },
+        {
+          title: 'Enrollment',
+          path: 'company-account.settings.enrollment'
         }
       ]
     }

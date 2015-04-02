@@ -16,6 +16,7 @@ export default Ember.Controller.extend({
   state: 'MT',
 
   validWith: [
+    [ 'existing' ],
     [ 'firstName', 'lastName', 'middleInitial' ],
     [ 'location' ],
     [ 'legacyClientEmploymentDate' ],
@@ -37,7 +38,10 @@ export default Ember.Controller.extend({
     ssn: function ( value ) {
       return ( value ) ? ( value.length > 9 ) ? value.replace(/\D/g, '').substr(0, 9) : value.length === 9 && !isNaN( value ) : false;
     },
-    city: titleCaseValue
+    city: titleCaseValue,
+    existing: function ( value ) {
+      return value !== undefined && value !== null;
+    }
   },
 
   shouldGetCompanyLocations: function () {

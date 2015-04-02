@@ -30,6 +30,16 @@ export default DS.Model.extend({
   enrollmentPeriods: DS.hasMany('enrollment-period', { async: true }),
   lastLogin:         DS.belongsTo('login', { inverse: false }),
 
+  // Contribution
+  contributionEnable:       attribute('boolean', { defaultValue: true }),
+  contributionOnRates:      attribute('boolean'),
+  contributionEmployee:     attribute('number'), // Amount
+  contributionEmployeeType: attribute('string', { defaultValue: '$' }), // $ or %
+  contributionSpouse:       attribute('number'),
+  contributionSpouseType:   attribute('string', { defaultValue: '$' }),
+  contributionChildren:     attribute('number'),
+  contributionChildrenType: attribute('string', { defaultValue: '$' }),
+
   // Legacy Fields and Flags
   legacyCompanyNumber:     attribute('string'),
   legacyAemMemberId:       attribute('string'),

@@ -4,7 +4,8 @@ import routeContextMixin from 'trust-enrollment/mixins/route-context';
 export default Ember.Controller.extend(routeContextMixin, {
   routeDefinitions: {
     account:        'Account',
-    communications: 'Communication Preferences'
+    communications: 'Communications',
+    enrollment:     'Enrollment'
   },
 
   _saveChanges: function ( model ) {

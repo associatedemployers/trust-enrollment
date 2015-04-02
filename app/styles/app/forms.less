@@ -1,0 +1,48 @@
+/*
+  Overriding Form Styles
+*/
+
+@disabled-overlay-z-index: 3;
+
+form {
+  &.form-horizontal label.control-label {
+    text-align: left;
+    padding-bottom: 6px;
+    border-bottom: 1px dotted @gray-light;
+  }
+
+  label {
+    font-weight: 100;
+  }
+
+  &:not(.form-disabled) .form-disabled-text {
+    display: none;
+    visibility: hidden;
+  }
+
+  &.form-disabled {
+    position: relative;
+    padding: 20px;
+
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      background: fade(@brand-default, 80%);
+      z-index: @disabled-overlay-z-index;
+      .trbl();
+    }
+
+    .form-disabled-text {
+      position: absolute;
+      top: 30%;
+      left: 0;
+      right: 0;
+      color: white;
+      font-size: 200%;
+      text-align: center;
+      text-shadow: 0 1px 3px fade(black, 90%);
+      z-index: @disabled-overlay-z-index + 1;
+    }
+  }
+}

@@ -1,7 +1,27 @@
 <div class="row employee-form-container">
   <div class="col-md-6">
     {{error-display prefix="Error fetching locations" message=locationsError bg=false}}
+
     {{#form-steps class="employee-form" for=this validWith=validWith qualification=validityQualification includeStepNames=true finish="submit"}}
+      {{#form-step title="Select An Employee Type"}}
+        <div class="form-group text-center">
+          {{#radio-button
+            value=false
+            groupValue=existing
+            name="existing-radio"
+            class="radio-btn radio-btn-primary"}}
+            <span class="radio-text"><i class="fa fa-fw fa-user-plus"></i> New Employee</span>
+          {{/radio-button}}
+          {{#radio-button
+            value=true
+            groupValue=existing
+            name="existing-radio"
+            class="radio-btn radio-btn-default"}}
+            <span class="radio-text"><i class="fa fa-fw fa-user"></i> Existing Employee That Is Now Eligible</span>
+          {{/radio-button}}
+        </div>
+      {{/form-step}}
+
       {{#form-step title="Name" allowSkip=true}}
         <div class="row">
           <div class="form-group col-md-5">

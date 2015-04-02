@@ -43,6 +43,19 @@ export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
         delete hash.login;
       }
 
+      if ( hash.contribution ) {
+        hash.contributionEnabled      = hash.contribution.enabled;
+        hash.contributionOnRates      = hash.contribution.onRates;
+        hash.contributionEmployee     = hash.contribution.employee.amount;
+        hash.contributionEmployeeType = hash.contribution.employee.type;
+        hash.contributionSpouse       = hash.contribution.spouse.amount;
+        hash.contributionSpouseType   = hash.contribution.spouse.type;
+        hash.contributionChildren     = hash.contribution.children.amount;
+        hash.contributionChildrenType = hash.contribution.children.type;
+
+        delete hash.contribution;
+      }
+
       return hash;
     }
   }

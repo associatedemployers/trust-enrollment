@@ -4,6 +4,7 @@ import layout from '../templates/components/bound-toggle';
 export default Ember.Component.extend({
   layout: layout,
   classNames: [ 'form-group', 'text-center', 'toggle-view' ],
+  attributeBindings: [ 'title' ],
   theme: 'squish', // default theme
 
   inputId: function () {
