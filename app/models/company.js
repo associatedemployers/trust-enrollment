@@ -32,7 +32,8 @@ export default DS.Model.extend({
 
   // Contribution
   contributionEnable:       attribute('boolean', { defaultValue: true }),
-  contributionOnRates:      attribute('boolean'),
+  contributionOnRates:      attribute('boolean', { defaultValue: false }),
+  contributionNetwork:      DS.belongsTo('medical-plan', { inverse: false }),
   contributionEmployee:     attribute('number'), // Amount
   contributionEmployeeType: attribute('string', { defaultValue: '$' }), // $ or %
   contributionSpouse:       attribute('number'),

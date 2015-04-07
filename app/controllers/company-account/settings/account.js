@@ -5,8 +5,11 @@ export default Ember.Controller.extend({
 
   notAllowChangePassword: Ember.computed.not('allowChangePassword'),
   notAllowChangeEmail:    Ember.computed.not('allowChangeEmail'),
-  allowChangePassword:    Ember.computed.and('currentPassword', 'passwordConfirmed'),
-  passwordConfirmed:      Ember.computed.equal('newPassword', 'newPasswordConfirm'),
+  allowChangePassword:    Ember.computed.and('passwordConfirmed', 'newPassword', 'newPasswordConfirm'),
+
+  passwordConfirmed: function () {
+    return this.get('newPassword') === this.get('newPasswordConfirm');
+  }.property('newPassword', 'newPasswordConfirm'),
 
   allowChangeEmail: function () {
     var model        = this.get('model'),

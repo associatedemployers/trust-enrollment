@@ -52,6 +52,7 @@ export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
         hash.contributionSpouseType   = hash.contribution.spouse.type;
         hash.contributionChildren     = hash.contribution.children.amount;
         hash.contributionChildrenType = hash.contribution.children.type;
+        hash.contributionNetwork      = hash.contribution.network;
 
         delete hash.contribution;
       }

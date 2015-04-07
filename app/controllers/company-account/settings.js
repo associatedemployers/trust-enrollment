@@ -2,6 +2,7 @@ import Ember from 'ember';
 import routeContextMixin from 'trust-enrollment/mixins/route-context';
 
 export default Ember.Controller.extend(routeContextMixin, {
+  root: 'settings',
   routeDefinitions: {
     account:        'Account',
     communications: 'Communications',

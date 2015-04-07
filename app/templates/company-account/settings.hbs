@@ -1,14 +1,16 @@
 <h3 class="page-title">
-  {{#if routeContext}}
+  {{#if inSubRoute}}
     {{#link-to 'company-account.settings.index'}}
       <i class="fa fa-arrow-circle-o-left"></i> Settings
     {{/link-to}}
+  {{else}}
+    Settings
+  {{/if}}  
+  {{#if routeContext}}
     <span class="text-muted">
       <i class="fa fa-angle-right"></i>
       {{routeContext}}
     </span>
-  {{else}}
-    Settings
   {{/if}}
 </h3>
 
