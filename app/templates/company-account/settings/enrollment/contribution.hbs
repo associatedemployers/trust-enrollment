@@ -23,63 +23,95 @@
     <div class="form-disabled-text">Contribution is currently disabled. Please enable it to continue.</div>
 
     <div class="form-group">
-      <a href="#" class="pull-right text-sm" {{action "toggleProperty" "model.contributionOnRates"}}><i class="fa fa-list"></i> Switch to Specify Contributions by Rate</a>
+      <a href="#" class="pull-right text-sm" {{action "toggleProperty" "model.contributionOnRates"}}>
+        <i class="fa fa-list"></i>
+        Switch to Specify Contributions
+        {{#if model.contributionOnRates}}
+          Overall
+        {{else}}  
+          by Rate
+        {{/if}}
+      </a>
     </div>
 
-    <div class="form-group">
-      <label for="contribution-employee" class="col-sm-6 control-label">Contribution Towards Employee</label>
-      <div class="col-sm-6">
-        <div class="input-group">
-          <div class="input-group-addon">
-            {{model.contributionEmployeeType}}
+    {{#if model.contributionOnRates}}
+      {{#if model.medicalRates}}
+        {{#ember-list items=model.medicalRates class="control-width" height=458 rowHeight=87}}
+          <div class="form-group">
+            <label for={{id}} class="col-sm-6 control-label">Contribution Towards {{planNumber}} ({{plan.name}})</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+                <div class="input-group-addon">
+                  {{contributionType}}
+                </div>
+                {{form-input type="number" placeholder="Contribution Amount" id=id value=contribution}}
+                <div class="input-group-addon">
+                  {{#radio-button value="$" groupValue=contributionType name=id}}${{/radio-button}}
+                  {{#radio-button value="%" groupValue=contributionType name=id}}%{{/radio-button}}
+                </div>
+              </div>
+            </div>
           </div>
-          {{form-input type="number" placeholder="Contribution Amount" id="contribution-employee" value=model.contributionEmployee}}
-          <div class="input-group-addon">
-            {{#radio-button value="$" groupValue=model.contributionEmployeeType name="contribution-type-employee"}}${{/radio-button}}
-            {{#radio-button value="%" groupValue=model.contributionEmployeeType name="contribution-type-employee"}}%{{/radio-button}}
+        {{/ember-list}}
+      {{else}}
+        <h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> No Medical Rates found.</h2>
+      {{/if}}
+    {{else}}
+      <div class="form-group">
+        <label for="contribution-employee" class="col-sm-6 control-label">Contribution Towards Employee</label>
+        <div class="col-sm-6">
+          <div class="input-group">
+            <div class="input-group-addon">
+              {{model.contributionEmployeeType}}
+            </div>
+            {{form-input type="number" placeholder="Contribution Amount" id="contribution-employee" value=model.contributionEmployee}}
+            <div class="input-group-addon">
+              {{#radio-button value="$" groupValue=model.contributionEmployeeType name="contribution-type-employee"}}${{/radio-button}}
+              {{#radio-button value="%" groupValue=model.contributionEmployeeType name="contribution-type-employee"}}%{{/radio-button}}
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="contribution-employee" class="col-sm-6 control-label">Contribution Towards Spouse</label>
-      <div class="col-sm-6">
-        <div class="input-group">
-          <div class="input-group-addon">
-            {{model.contributionSpouseType}}
-          </div>
-          {{form-input type="number" placeholder="Contribution Amount" id="contribution-spouse" value=model.contributionSpouse}}
-          <div class="input-group-addon">
-            {{#radio-button value="$" groupValue=model.contributionSpouseType name="contribution-type-spouse"}}${{/radio-button}}
-            {{#radio-button value="%" groupValue=model.contributionSpouseType name="contribution-type-spouse"}}%{{/radio-button}}
+      <div class="form-group">
+        <label for="contribution-employee" class="col-sm-6 control-label">Contribution Towards Spouse</label>
+        <div class="col-sm-6">
+          <div class="input-group">
+            <div class="input-group-addon">
+              {{model.contributionSpouseType}}
+            </div>
+            {{form-input type="number" placeholder="Contribution Amount" id="contribution-spouse" value=model.contributionSpouse}}
+            <div class="input-group-addon">
+              {{#radio-button value="$" groupValue=model.contributionSpouseType name="contribution-type-spouse"}}${{/radio-button}}
+              {{#radio-button value="%" groupValue=model.contributionSpouseType name="contribution-type-spouse"}}%{{/radio-button}}
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="contribution-employee" class="col-sm-6 control-label">Contribution Towards Children</label>
-      <div class="col-sm-6">
-        <div class="input-group">
-          <div class="input-group-addon">
-            {{model.contributionChildrenType}}
-          </div>
-          {{form-input type="number" placeholder="Contribution Amount" id="contribution-children" value=model.contributionChildren}}
-          <div class="input-group-addon">
-            {{#radio-button value="$" groupValue=model.contributionChildrenType name="contribution-type-children"}}${{/radio-button}}
-            {{#radio-button value="%" groupValue=model.contributionChildrenType name="contribution-type-children"}}%{{/radio-button}}
+      <div class="form-group">
+        <label for="contribution-employee" class="col-sm-6 control-label">Contribution Towards Children</label>
+        <div class="col-sm-6">
+          <div class="input-group">
+            <div class="input-group-addon">
+              {{model.contributionChildrenType}}
+            </div>
+            {{form-input type="number" placeholder="Contribution Amount" id="contribution-children" value=model.contributionChildren}}
+            <div class="input-group-addon">
+              {{#radio-button value="$" groupValue=model.contributionChildrenType name="contribution-type-children"}}${{/radio-button}}
+              {{#radio-button value="%" groupValue=model.contributionChildrenType name="contribution-type-children"}}%{{/radio-button}}
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="contribution-network" class="col-sm-6 control-label">Limit By Network</label>
-      <div class="col-sm-6">
-        {{view "select" id="contribution-network" class="form-control" content=medicalPlans value=model.contributionNetwork prompt="All Networks"}}
+      <div class="form-group">
+        <label for="contribution-network" class="col-sm-6 control-label">Limit By Network</label>
+        <div class="col-sm-6">
+          {{view "select" id="contribution-network" class="form-control" content=medicalPlans value=model.contributionNetwork prompt="All Networks"}}
+        </div>
       </div>
-    </div>
+    {{/if}}
     <hr />
     <div class="form-group">
       <button type="submit" class="btn btn-success btn-block">Save Contributions</button>

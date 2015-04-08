@@ -16,6 +16,9 @@ export default RateModel.extend({
   employeeAndChildren: attribute('number'),
   family:              attribute('number'),
 
+  contribution:     attribute('number'),
+  contributionType: attribute('string', { defaultValue: '$' }),
+
   legacyOldEmployeeRate:                   attribute('string'),
   legacyOldEmployeeAndSpouseRate:          attribute('string'),
   legacyOldEmployeeAndChildrenRate:        attribute('string'),
