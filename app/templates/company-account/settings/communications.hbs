@@ -1,20 +1,65 @@
 <div class="container">
-  <h4>Employee Communications</h4>
-  <div class="row">
-    <div class="setting">
+  <section class="setting-section">
+    <h4>Employee Communications</h4>
+    <div class="row">
+      <div class="setting">
+        <div class="col-md-6">
+          <h5>
+            Automatic Notifications To Employees<br />
+            <small>
+              Automatically send employees notifications on your behalf when they are added to your roster, when open enrollment periods occur, when you change company-wide employee settings.
+            </small>
+          </h5>
+        </div>
+        <div class="col-md-6 text-center">
+          {{bound-toggle theme="squish" value=model.notificationsToEmployees}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="setting-section">
+    <h4>Enrollment Communications</h4>
+    <div class="row setting">
       <div class="col-md-6">
         <h5>
-          Automatic Notifications<br />
+          Summary of Benefits Notification<br />
           <small>
-            Automatically send employees notifications on your behalf when they are added to your roster, when open enrollment periods occur, when you change company-wide employee settings.
+            Get a summary of benefits in an email after employees enroll or change coverage.
           </small>
         </h5>
       </div>
       <div class="col-md-6 text-center">
-        {{bound-toggle theme="squish" value=model.automaticEmailNotifications}}
+        {{bound-toggle theme="squish" value=model.notificationsSummaryOfBenefits}}
       </div>
     </div>
-  </div>
+    <div class="row setting">
+      <div class="col-md-6">
+        <h5>
+          Notification of Review<br />
+          <small>
+            Get notified when employees change coverage and have changes pending coverage.
+          </small>
+        </h5>
+      </div>
+      <div class="col-md-6 text-center">
+        {{bound-toggle theme="squish" value=model.notificationsEnrollmentReview}}
+      </div>
+    </div>
+    <div class="row setting">
+      <div class="col-md-6">
+        <h5>
+          Notification of Waiver<br />
+          <small>
+            Get notified when employees waive coverage.
+          </small>
+        </h5>
+      </div>
+      <div class="col-md-6 text-center">
+        {{bound-toggle theme="squish" value=model.notificationsWaiver}}
+      </div>
+    </div>
+  </section>
 
   {{#liquid-if model.isDirty}}
     <hr />
