@@ -35,14 +35,14 @@ export default DS.Model.extend({
   lastName:      attribute('string'),
   suffix:        attribute('string'),
 
-  addressLine1:  attribute('string'),
-  addressLine2:  attribute('string'),
-  city:          attribute('string'),
-  state:         attribute('string'),
-  zipcode:       attribute('string'),
-  ssn:           attribute('string'),
-  gender:        attribute('string'),
-  maritalStatus: attribute('string'),
+  addressLine1:   attribute('string'),
+  addressLine2:   attribute('string'),
+  addressCity:    attribute('string'),
+  addressState:   attribute('string'),
+  addressZipcode: attribute('string'),
+  ssn:            attribute('string'),
+  gender:         attribute('string'),
+  maritalStatus:  attribute('string'),
 
   lastLogin:     DS.belongsTo('login', { inverse: false }),
 
@@ -86,10 +86,10 @@ export default DS.Model.extend({
   }.property('maritalStatus'),
 
   hasAddress: function () {
-    return this.get('addressLine1') && this.get('city') && this.get('state');
-  }.property('addressLine1', 'city', 'state'),
+    return this.get('addressLine1') && this.get('addressCity') && this.get('addressState');
+  }.property('addressLine1', 'addressCity', 'addressState'),
 
-  addressFormatted: addressFormatter.property('addressLine1', 'addressLine2', 'city', 'state', 'zipcode'),
+  addressFormatted: addressFormatter.property('addressLine1', 'addressLine2', 'addressCity', 'addressState', 'addressZipcode'),
 
   // DTs
   dateOfBirth:                 attribute('date'),

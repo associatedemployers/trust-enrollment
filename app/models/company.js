@@ -4,7 +4,7 @@ import addressFormatter from 'trust-enrollment/utils/address-formatter';
 var attribute = DS.attr;
 
 export default DS.Model.extend({
-  companyName: attribute('string'),
+  nameCompany: attribute('string'),
   email:       attribute('string'),
   companyId:   attribute('string'),
 
@@ -12,13 +12,11 @@ export default DS.Model.extend({
   contactPhone: attribute('string'),
   contactFax:   attribute('string'),
 
-  addressLine1: attribute('string'),
-  addressLine2: attribute('string'),
-  city:         attribute('string'),
-  state:        attribute('string'),
-  zipcode:      attribute('string'),
-
-  automaticEmailNotifications: attribute('boolean'),
+  addressLine1:   attribute('string'),
+  addressLine2:   attribute('string'),
+  addressCity:    attribute('string'),
+  addressState:   attribute('string'),
+  addressZipcode: attribute('string'),
 
   // Relational
   medicalRates:      DS.hasMany('medical-rate', { async: true, inverse: 'company' }),
@@ -40,6 +38,12 @@ export default DS.Model.extend({
   contributionSpouseType:   attribute('string', { defaultValue: '$' }),
   contributionChildren:     attribute('number'),
   contributionChildrenType: attribute('string', { defaultValue: '$' }),
+
+  // Notification Settings
+  notificationsToEmployees:       attribute('boolean'),
+  notificationsSummaryOfBenefits: attribute('boolean'),
+  notificationsEnrollmentReview:  attribute('boolean'),
+  notificationsWaiver:            attribute('boolean'),
 
   // Legacy Fields and Flags
   legacyCompanyNumber:     attribute('string'),
@@ -75,14 +79,14 @@ export default DS.Model.extend({
   }),
 
   // Computed
-  addressFormatted: addressFormatter.property('addressLine1', 'addressLine2', 'city', 'state', 'zipcode'),
+  addressFormatted: addressFormatter.property('addressLine1', 'addressLine2', 'addressCity', 'addressState', 'addressZipcode'),
 
   nameAbbreviated: function () {
-    var nameArray = this.get('companyName').split(' ');
+    var nameArray = this.get('nameCompany').split(' ');
 
     return nameArray.reduce(function ( abbrv, namePart ) {
       var addition = ( /([A-Z]){2,}/.test(namePart) ) ? namePart : namePart.charAt(0).toUpperCase();
       return abbrv + addition;
     }, '');
-  }.property('companyName')
+  }.property('nameCompany')
 });

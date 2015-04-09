@@ -1,5 +1,6 @@
 import DS from 'ember-data';
 import ApplicationSerializer from './application';
+import serializeObject from 'trust-enrollment/utils/serialize-object';
 
 export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
   attrs: {
@@ -24,15 +25,7 @@ export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
         delete hash.name;
       }
 
-      if( hash.address ) {
-        hash.addressLine1 = hash.address.line1;
-        hash.addressLine2 = hash.address.line2;
-        hash.city         = hash.address.city;
-        hash.state        = hash.address.state;
-        hash.zipcode      = hash.address.zipcode;
-
-        delete hash.address;
-      }
+      serializeObject(hash, true, 'address');
 
       if( hash.plans ) {
         hash.medicalRates = hash.plans.medical;

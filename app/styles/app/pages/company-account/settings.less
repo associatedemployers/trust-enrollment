@@ -3,15 +3,16 @@
 */
 
 .setting {
-  border-bottom: 1px dotted fade(@brand-default, 10%);
+  border-top: 1px dotted fade(@brand-default, 10%);
 
   .toggle-view {
     padding-top: 20px;
   }
 
   &.form-group {
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+    display: block;
+    margin: 10px 0;
+    padding: 10px 0;
   }
 }
 
@@ -23,10 +24,10 @@ section.setting-section {
     margin-top: 10px;
   }
 
-  &:not(:last-child) {
+  &:not(:last-child):not(.setting-no-sep) {
     border-bottom: 2px dotted fade(@brand-default, 10%);
   }
-  
+
   .section-title {
     margin: 0;
   }

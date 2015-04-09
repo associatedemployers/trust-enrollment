@@ -9,11 +9,11 @@ export default DS.Model.extend({
   embeddedDeductible:  attribute('boolean'),
   legacyInactive:      attribute('boolean'),
 
-  addressLine1: attribute('string'),
-  addressLine2: attribute('string'),
-  city:         attribute('string'),
-  state:        attribute('string'),
-  zipcode:      attribute('string'),
+  addressLine1:   attribute('string'),
+  addressLine2:   attribute('string'),
+  addressCity:    attribute('string'),
+  addressState:   attribute('string'),
+  addressZipcode: attribute('string'),
   
   phone: attribute('string'),
   fax:   attribute('string'),
@@ -26,5 +26,5 @@ export default DS.Model.extend({
   time_stamp:          attribute('date'),
 
   // Computed
-  addressFormatted: addressFormatter.property('addressLine1', 'addressLine2', 'city', 'state', 'zipcode')
+  addressFormatted: addressFormatter.property('addressLine1', 'addressLine2', 'addressCity', 'addressState', 'addressZipcode')
 });

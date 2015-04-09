@@ -87,10 +87,6 @@ export default Ember.Object.extend({
   }.property('content.user', 'authenticated'),
 
   enrollmentPeriods: function () {
-    if ( !this.get('authenticated') ) {
-      return;
-    }
-
     return this.store.find('enrollment-period', { super: true });
-  }.property('currentUser', 'authenticated')
+  }.property()
 });
