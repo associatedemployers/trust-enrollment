@@ -1,0 +1,31 @@
+/*
+  Calendar Light Grid Styles
+*/
+
+.calendar-light-grid {
+  margin: 15px 0 25px 0;
+
+  .grid-block {
+    float: left;
+    border: 2px solid white;
+    width: 20px;
+    height: 20px;
+    background-color: @gray-light;
+    text-align: center;
+    font-size: 11px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: white;
+    cursor: pointer;
+
+    &.selected {
+      cursor: auto !important;
+      border-color: @brand-primary;
+    }
+
+    &.tooltip-trigger {
+      background-color: @brand-success;
+    }
+  }
+}

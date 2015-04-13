@@ -1,38 +1,26 @@
 <section class="setting-section">
   <h4 class="section-title">
-    <i class="fa fa-dollar"></i> Contribution
+    <i class="fa fa-fw fa-dollar"></i> Contribution
   </h4>
   <hr />
   <p class="text-muted text-center">
-    This form allows you to adjust your contributions towards your employees' benefits. If you have more stringent contribution rules, please disable contribution amounts so that employees are not displayed an estimated contribution.
+    This form allows you to adjust your contributions towards your employees' benefits. If you have more stringent contribution rules, please disable contribution display so that employees are not displayed an estimated contribution.
   </p>
   <p class="text-center">
     {{#liquid-if model.contributionEnable}}
       <span class="text-success">
-        <i class="fa fa-fw fa-check"></i> Contribution Display is currently <strong>enabled</strong>.
+        <i class="fa fa-fw fa-check"></i> Contribution display is currently <strong>enabled</strong>.
         <a href="#" {{action "toggleProperty" "model.contributionEnable"}}><i class="fa fa-fw fa-toggle-on"></i> Click to disable</a>
       </span>
     {{else}}
       <span class="text-warning">
-        <i class="fa fa-fw fa-info-circle"></i> Contribution Display is currently <strong>disabled</strong>.
+        <i class="fa fa-fw fa-info-circle"></i> Contribution display is currently <strong>disabled</strong>.
         <a href="#" {{action "toggleProperty" "model.contributionEnable"}}><i class="fa fa-fw fa-toggle-off"></i> Click to enable</a>
       </span>
     {{/liquid-if}}
   </p>
   <form {{bind-attr class=":form-horizontal :text-left model.contributionEnable::form-disabled"}}>
-    <div class="form-disabled-text">Contribution is currently disabled. Please enable it to continue.</div>
-
-    <div class="form-group">
-      <a href="#" class="pull-right text-sm" {{action "toggleProperty" "model.contributionOnRates"}}>
-        <i class="fa fa-list"></i>
-        Switch to Specify Contributions
-        {{#if model.contributionOnRates}}
-          Overall
-        {{else}}  
-          by Rate
-        {{/if}}
-      </a>
-    </div>
+    <div class="form-disabled-text">Contribution display is currently disabled. Please enable it to continue.</div>
 
     {{#if model.contributionOnRates}}
       {{#if model.medicalRates}}
