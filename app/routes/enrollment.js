@@ -2,16 +2,17 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function () {
-    /*
-      TODO:
-        -> After wireframing the data,
-           implement a loader here that,
-           if specified, will take
-           params and request the saved
-           enrollment data.
-    */
+    return this.store.createRecord('employee'); // Development
+    // return this.session.get('currentUser');
+  },
 
-    // Passing without params will create a new enrollment record.
-    return this.store.createRecord('enrollment');
+  actions: {
+    next: function () {
+      this.transitionTo('enrollment.' + this.controller.get('nextRoute.link'));
+    },
+
+    previous: function () {
+      this.transitionTo('enrollment.' + this.controller.get('prevRoute.link'));
+    }
   }
 });

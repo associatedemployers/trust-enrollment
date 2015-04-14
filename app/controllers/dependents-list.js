@@ -111,9 +111,13 @@ export default Ember.ArrayController.extend({
   }.property('relationship', 'enrollment.gender'),
 
   removeRelationships: function () {
-    // Some form logic to control relationship entry
-    var dependents      = this.get('enrollment.dependents'),
-        spouse          = dependents.findBy('relationship', 'Spouse'),
+    var dependents = this.get('enrollment.dependents');
+
+    if ( !dependents ) {
+      return;
+    }
+
+    var spouse          = dependents.findBy('relationship', 'Spouse'),
         domesticPartner = dependents.findBy('relationship', 'Domestic Partner'),
         marital         = this.get('enrollment.marital');
 

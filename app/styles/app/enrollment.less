@@ -2,111 +2,124 @@
   Enrollment Styles
 */
 
-.enrollment-view {
+@enrollment-card-background: white;
 
-  .enrollment-wrapper {
-    width: 80%;
-    margin: 0 auto;
+.enrollment-wrapper {
+  .enrollment-card {
+    padding: 30px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    background: @enrollment-card-background;
 
-    .enrollment-media-queries();
-
-    .scroll-spy-section {
-      padding-top: 20px;
-    }
-
-    .scroll-section {
-      padding-top: 10px;
-      overflow: hidden;
-
-      .enrollment-card {
-        position: relative;
-        padding: 20px;
-        background-color: @enrollment-panel-color;
-        margin-bottom: 20px;
-
-        &.active {
-          background-color: @enrollment-panel-color-active;
-        }
-
-        hr {
-          margin: 0 !important;
-          border-top: 1px solid fade(@brand-default, 30%);
-        }
-
-        .enrollment-subtitle {
-          font-size: 150%;
-        }
-      }
-    }
+    .box-shadow(0 1px 3px fade(@brand-default, 40%));
   }
 }
 
-.enrollment-media-queries() {
-  @media all and (max-width: 1600px) {
-    width: 98% !important;
-  }
-}
+// .enrollment-view {
 
-.enrollment-card[data-section="enroll-personal-information"] {
-  form .row {
-    padding-top: 20px;
-  }
-}
+//   .enrollment-wrapper {
+//     width: 80%;
+//     margin: 0 auto;
 
-.question-overlay {
-  position: absolute;
-  background-color: lighten(@brand-default, 10%);
-  color: @brand-offwhite;
-  text-align: center;
-  padding: 3% 15px 15px 15px;
-  z-index: 1;
+//     .enrollment-media-queries();
 
-  .trbl();
+//     .scroll-spy-section {
+//       padding-top: 20px;
+//     }
 
-  .answer {
-    color: @brand-info;
-    padding: 10px;
-    cursor: pointer;
-    text-decoration: underline;
+//     .scroll-section {
+//       padding-top: 10px;
+//       overflow: hidden;
 
-    .transition-all();
+//       .enrollment-card {
+//         position: relative;
+//         padding: 20px;
+//         background-color: @enrollment-panel-color;
+//         margin-bottom: 20px;
 
-    &:hover {
-      color: @brand-offwhite;
-      text-decoration: none;
-    }
-  }
-}
+//         &.active {
+//           background-color: @enrollment-panel-color-active;
+//         }
 
-.dependent-form {
-  .form-group {
-    text-align: center;
+//         hr {
+//           margin: 0 !important;
+//           border-top: 1px solid fade(@brand-default, 30%);
+//         }
 
-    &.pad-top {
-      margin-top: 10px;
-    }
+//         .enrollment-subtitle {
+//           font-size: 150%;
+//         }
+//       }
+//     }
+//   }
+// }
 
-    label {
-      display: block;
-      font-size: 80%;
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-      font-smoothing: antialiased;
+// .enrollment-media-queries() {
+//   @media all and (max-width: 1600px) {
+//     width: 98% !important;
+//   }
+// }
 
-      &.big {
-        font-size: 120%;
-      }
-    }
-  }
-}
+// .enrollment-card[data-section="enroll-personal-information"] {
+//   form .row {
+//     padding-top: 20px;
+//   }
+// }
 
-.dependent-controls {
-  margin-top: 15px;
-}
+// .question-overlay {
+//   position: absolute;
+//   background-color: lighten(@brand-default, 10%);
+//   color: @brand-offwhite;
+//   text-align: center;
+//   padding: 3% 15px 15px 15px;
+//   z-index: 1;
 
-.dependent-item-controls {
-  font-size: 180%;
-  text-align: right;
-  padding: 12px;
-  color: @brand-default;
-}
+//   .trbl();
+
+//   .answer {
+//     color: @brand-info;
+//     padding: 10px;
+//     cursor: pointer;
+//     text-decoration: underline;
+
+//     .transition-all();
+
+//     &:hover {
+//       color: @brand-offwhite;
+//       text-decoration: none;
+//     }
+//   }
+// }
+
+// .dependent-form {
+//   .form-group {
+//     text-align: center;
+
+//     &.pad-top {
+//       margin-top: 10px;
+//     }
+
+//     label {
+//       display: block;
+//       font-size: 80%;
+//       font-weight: 300;
+//       -webkit-font-smoothing: antialiased;
+//       font-smoothing: antialiased;
+
+//       &.big {
+//         font-size: 120%;
+//       }
+//     }
+//   }
+// }
+
+// .dependent-controls {
+//   margin-top: 15px;
+// }
+
+// .dependent-item-controls {
+//   font-size: 180%;
+//   text-align: right;
+//   padding: 12px;
+//   color: @brand-default;
+// }

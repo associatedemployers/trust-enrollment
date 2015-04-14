@@ -12,7 +12,7 @@
   </div>
   <div class="col-xs-4">
     {{#validation-wrapper formgroup=true valid=validity.addressState}}
-      {{view Ember.Select class="form-control" content=states optionLabelPath="content.l" optionValuePath="content.v" value=enrollment.addressState prompt="--Select a State--"}}
+      {{view 'select' class="form-control" content=states optionLabelPath="content.l" optionValuePath="content.v" value=enrollment.addressState prompt="--Select a State--"}}
     {{/validation-wrapper}}
   </div>
   <div class="col-xs-4">

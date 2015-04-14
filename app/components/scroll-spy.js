@@ -1,16 +1,19 @@
 import Ember from 'ember';
-import windowBinderMixin from '../mixins/window-binder';
+import bindToWindowMixin from '../mixins/bind-to-window';
+import layout from '../templates/components/x-navigation';
 
-export default Ember.View.extend(windowBinderMixin, {
-  classNames: [ 'scroll-spy-view', 'affix' ],
+export default Ember.Component.extend(bindToWindowMixin, {
+  layout: layout,
+  classNames: [ 'scroll-spy', 'affix' ],
 
-  // Bind the window events on view insertion
   didInsertElement: function () {
-    this.setupWindowBindings();
+    this._super.apply(this, arguments);
+    this.setupWindowBindings('scroll', 500);
   },
-  // Teardown the window event bindings on view destruction
+
   willDestroyElement: function () {
-    this.teardownWindowBindings();
+    this._super.apply(this, arguments);
+    this.teardownWindowBindings('scroll');
   },
 
   windowDidScroll: function () {
@@ -18,7 +21,7 @@ export default Ember.View.extend(windowBinderMixin, {
         $this = this.$(),
         spyOffset = $this.offset();
 
-    this.set('controller.content', this.get('controller.content').map(function (section) {
+    this.set('links', this.get('links').map(function ( section ) {
       var $secEl = $('.enrollment-card[data-section="' + section.title + '"]'),
           secOffset = $secEl.offset(),
           // Save the following state for firing scrolledPast hook
@@ -26,7 +29,7 @@ export default Ember.View.extend(windowBinderMixin, {
 
       section.active = (spyOffset.top + 20 > secOffset.top && spyOffset.top < ( $secEl.height() + secOffset.top )) ? true : false;
 
-      if(section.subtitles) {
+      if (section.subtitles) {
         section.subtitles.map(function (subtitle) {
           var $subEl = $secEl.find('#' + subtitle.title),
               subOffset = $subEl.offset();
@@ -35,23 +38,29 @@ export default Ember.View.extend(windowBinderMixin, {
         });
       }
 
-      if(cache && section.active) {
-        self.get('controller.controllers.enrollment').set('section', section.title);
+      if ( cache && section.active ) {
+        self.get('for').set('section', section.title);
       }
-      
-      if(cache && !section.active) {
+
+      if (cache && !section.active) {
         $secEl.removeClass('active');
-        if(typeof section.scrolledPast === 'function') {
+        if (typeof section.scrolledPast === 'function') {
           // Fire scrolledPast hook
-          section.scrolledPast.call(self.get('controller.controllers.enrollment'));
+          section.scrolledPast.call(self.get('for'));
         }
       }
 
-      if(!cache && section.active) {
+      if (!cache && section.active) {
         $secEl.addClass('active');
       }
 
       return section;
     }));
+  },
+
+  actions: {
+    changeActive: function ( param ) {
+      this.sendAction('action', param);
+    }
   }
 });

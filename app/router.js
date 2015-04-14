@@ -45,7 +45,11 @@ Router.map(function() {
     });
   });
 
-  this.route('enrollment', { path: '/enroll' });
+  this.route('enrollment', { path: '/enroll' }, function () {
+    this.route('index', { path: '/' });
+    this.route('about');
+    this.route('dependents');
+  });
   this.route('sign', { path: '/sign/:handoffId' });
 
   this.route('faq', { path: '/frequently-asked-questions' }, function () {

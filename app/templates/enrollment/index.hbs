@@ -1,0 +1,41 @@
+<div class="enrollment-card container">
+  <h2>
+    Welcome to your {{format-moment null "YYYY"}} Enrollment!<br />
+    <small>
+      Here are a few things that you'll want to know before you get started.
+    </small>
+  </h2>
+
+  <div class="row container">
+    <div class="col-md-4">
+      <h3><i class="fa fa-fw fa-spinner"></i> Saving</h3>
+      <p>
+        This form will auto-save at various points. This is indicated by the text at the bottom right of the screen. If you need to pick up the enrollment at a different time, please make sure to save your progress. You can also hand the enrollment off to your smartphone and continue from the comfort of your handheld device by clicking on the <i class="fa fa-fw fa-exchange"></i> handoff icon at the bottom left of the screen.
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h3><i class="fa fa-fw fa-arrows-h"></i> Getting Around</h3>
+      <p>
+        Next &amp; Previous buttons are generally located at the bottom of the page. You may also use the navigation at the top of the page to view your progress and skip to individual sections. You <strong>may</strong> also use your browser's <i>Forward</i> and <i>Backward</i> buttons.
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h3><i class="fa fa-fw fa-life-ring"></i> Help</h3>
+      <p>
+        You may click the "<i class="fa fa-fw fa-life-ring"></i> Get Help" link in the navigation bar at the top right of the screen if you require assistance with this form. Most answers should be available in our <a href="#">Frequently Asked Questions</a> or by your company's HR department. <i>Please contact <strong>your</strong> HR department for questions about enrollment.</i>
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="enrollment-card container">
+  {{#agreement-checkbox value=hippaNoticeAgreed}}
+    {{partial 'hipaa-notice'}}
+  {{/agreement-checkbox}}
+
+  {{#liquid-if hippaNoticeAgreed}}
+    <div class="form-group">
+      <button class="btn btn-success btn-block" {{action "next"}}>Start Enrollment</button>
+    </div>
+  {{/liquid-if}}
+</div>

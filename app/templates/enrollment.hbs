@@ -1,13 +1,20 @@
-<div class="full-background enrollment-full-background">
-  <div class="meshed-overlay"></div>
-</div>
-<div class="row enrollment-wrapper">
+{{!-- <div class="row enrollment-wrapper">
   <div class="col-md-2 scroll-spy-section">
-    {{render "scroll-spy" sections}}
+    {{#scroll-spy links=sections action="changeActive"}}
+      {{progress-bar value=progress}}
+    {{/scroll-spy}}
   </div>
   <div class="col-md-10 scroll-section">
-    {{#each section in sections}}
-      {{render "enrollment-section" section}}
+    {{#each sections as |section|}}
+      {{#enrollment-section data-section=section.title active=section.active}}
+        {{#if section.noForm}}
+          {{partial "enrollment-section-contents"}}
+        {{else}}
+          <form {{action "jumpToNext" on="submit"}}>
+            {{partial "enrollment-section-contents"}}
+          </form>
+        {{/if}}
+      {{/enrollment-section}}
     {{/each}}
   </div>
 </div>
@@ -19,4 +26,24 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-lg btn-primary btn-block" data-dismiss="modal" {{action "changeActive" toActive}}>Ok</button>
   </div>
-{{/bs-modal}}
+{{/bs-modal}} --}}
+<div class="enrollment-wrapper">
+  {{liquid-outlet class="nested-transition-container enrollment-transition-outlet"}}
+
+  {{#liquid-unless currentRoute.hideNav use="toUp"}}
+    <div class="container">
+      <div class="form-group">
+        <button class="btn btn-block btn-success btn-o" {{action "next"}}>
+          Next{{#if nextRoute.name}}: {{nextRoute.name}}{{/if}}
+        </button>
+      </div>
+  
+
+      <div class="form-group">
+        <button class="btn btn-block btn-sm btn-warning btn-o" {{action "previous"}}>
+          Previous{{#if prevRoute.name}}: {{prevRoute.name}}{{/if}}
+        </button>
+      </div>
+    </div>
+  {{/liquid-unless}}
+</div>

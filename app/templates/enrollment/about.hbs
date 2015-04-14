@@ -1,0 +1,59 @@
+<div class="enrollment-card container">
+  <h2>
+    Let's get to know you<br />
+    <small>
+      Here we will collect your name, address, and other basic information
+    </small>
+  </h2>
+  <hr />
+
+  <h3>Name</h3>
+  <div class="row">
+    <div class="col-md-4 form-group">
+      <label for="first-name">First Name</label>
+      {{form-input id="first-name" value=model.firstName placeholder="John"}}
+    </div>
+    <div class="col-md-2 form-group">
+      <label for="first-name">Middle Initial</label>
+      {{form-input id="middle-initial" value=model.middleInitial placeholder="A"}}
+    </div>
+    <div class="col-md-4 form-group">
+      <label for="first-name">Last Name</label>
+      {{form-input id="last-name" value=model.lastName placeholder="Smith"}}
+    </div>
+    <div class="col-md-2 form-group">
+      <label for="suffix">Suffix</label>
+      {{view 'select' id="suffix" class="form-control" content=suffixes value=model.suffix prompt="None"}}
+    </div>
+  </div>
+
+  <h3>{{#liquid-if model.firstName}}Hi, {{model.firstName}}! What's your Address?{{else}}Address{{/liquid-if}}</h3>
+  <div class="form-group">
+    <label for="address-line-1" class="sr-only">Street Address</label>
+    {{form-input id="address-line-1" value=model.addressLine1 placeholder="Street Address"}}
+  </div>
+  <div class="form-group">
+    <label for="address-line-2" class="sr-only">Apartment/Suite</label>
+    {{form-input id="address-line-2" value=model.addressLine2 placeholder="Apt./Suite"}}
+  </div>
+  <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="address-"></label>
+          {{form-input id="" value=model.addressCity placeholder="City"}}
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="address-"></label>
+          {{select-state id="" value=model.addressState placeholder=""}}
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="address-"></label>
+          {{form-input id="" value=model.addressZipcode placeholder=""}}
+        </div>
+      </div>
+    </div>  
+</div>

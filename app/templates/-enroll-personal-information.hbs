@@ -13,7 +13,7 @@
   </div>
   <div class="col-md-3">
     {{#validation-wrapper formgroup=true valid=validity.marital}}
-      {{view Ember.Select class="form-control" content=marital_statuses value=enrollment.marital prompt="Marital Status"}}
+      {{view 'select' class="form-control" content=marital_statuses value=enrollment.marital prompt="Marital Status"}}
       <p class="help-block">Marital Status</p>
     {{/validation-wrapper}}
   </div>

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import BindToWindowMixin from '../mixins/bind-to-window';
+import bindToWindowMixin from '../mixins/bind-to-window';
 import layout from '../templates/components/x-navigation';
 
 var fillMap = {
@@ -7,7 +7,7 @@ var fillMap = {
   dark:    [ 'employee-account' ]
 };
 
-export default Ember.Component.extend(BindToWindowMixin, {
+export default Ember.Component.extend(bindToWindowMixin, {
   layout: layout,
   tagName: 'nav',
   role: 'navigation',
@@ -16,9 +16,13 @@ export default Ember.Component.extend(BindToWindowMixin, {
   attributeBindings: [ 'role' ],
 
   didInsertElement: function () {
-    this._super.apply( this, arguments );
-
+    this._super.apply(this, arguments);
     this.setupWindowBindings('scroll', 20);
+  },
+
+  willDestroyElement: function () {
+    this._super.apply(this, arguments);
+    this.teardownWindowBindings('scroll');
   },
 
   fill: function () {

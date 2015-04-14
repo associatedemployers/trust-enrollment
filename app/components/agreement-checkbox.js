@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: [ 'agreement-checkbox' ]
+  classNames: [ 'agreement-checkbox' ],
+  classNameBindings: [ 'bg:bg' ]
 });

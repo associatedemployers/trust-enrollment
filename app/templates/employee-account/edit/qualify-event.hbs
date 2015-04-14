@@ -7,7 +7,7 @@
     Enrollment changes are allowed up to {{eventSelection.timeAfterEvent}} days after the event has taken place
   </p>
 
-  {{date-picker value=dateSelection textValue=textValue clear=false min=datePickerSettings.min max=datePickerSettings.max}}
+  {{date-picker value=dateSelection textValue=textValue clear=false min=datePickerSettings.min max=datePickerSettings.max pickerContainer="body"}}
 
   {{#link-to 'employee-account.edit.upload-documents' class='animated fadeInUp btn btn-success btn-block'}}
     Next
