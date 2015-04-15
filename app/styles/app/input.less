@@ -42,22 +42,35 @@
     padding-right: 30px; 
   }
 
+  &.with-col {
+    .text-addon, .text-addon-right {
+      right: 15px;
+    }
+  }
+
+  &.with-label {
+    .text-addon, .text-addon-right {
+      top: initial;
+      bottom: 0;
+    }
+  }
+
   span.text-addon, span.text-addon-right {
     position: absolute;
     right: 0;
     top: 0;
     pointer-events: none;
-    padding: 6px 7px;
+    padding: 6px 7px 7px 7px;
     font-weight: 100;
     max-width: 150px;
     overflow: hidden;
 
-    &.success {
-      color: lighten(@brand-success, 20%);
+    &.success, &.text-success {
+      color: lighten(@brand-success, 10%);
     }
 
-    &.danger {
-      color: lighten(@brand-danger, 20%);
+    &.danger, &.text-danger {
+      color: lighten(@brand-danger, 10%);
     }
   }
 }

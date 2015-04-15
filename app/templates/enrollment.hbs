@@ -1,33 +1,21 @@
-{{!-- <div class="row enrollment-wrapper">
-  <div class="col-md-2 scroll-spy-section">
-    {{#scroll-spy links=sections action="changeActive"}}
-      {{progress-bar value=progress}}
-    {{/scroll-spy}}
-  </div>
-  <div class="col-md-10 scroll-section">
-    {{#each sections as |section|}}
-      {{#enrollment-section data-section=section.title active=section.active}}
-        {{#if section.noForm}}
-          {{partial "enrollment-section-contents"}}
-        {{else}}
-          <form {{action "jumpToNext" on="submit"}}>
-            {{partial "enrollment-section-contents"}}
-          </form>
-        {{/if}}
-      {{/enrollment-section}}
-    {{/each}}
-  </div>
-</div>
-
-{{#bs-modal id="validation-modal" dismissible=false title='<h2><i class="fa fa-fw fa-exclamation-triangle"></i> Please complete before continuing</h2>'}}
-  <div class="modal-body">
-    <p>{{{validationText}}}</p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-lg btn-primary btn-block" data-dismiss="modal" {{action "changeActive" toActive}}>Ok</button>
-  </div>
-{{/bs-modal}} --}}
 <div class="enrollment-wrapper">
+  <div class="card-nav container">
+    <button type="button" class="card-nav-toggle" {{action "toggleProperty" "showNav"}}>
+      <span class="sr-only">Toggle enrollment navigation</span>
+      <i class="fa fa-fw {{if showNav 'fa-angle-down' 'fa-angle-up'}}"></i>
+    </button>
+
+    <div class="row card-nav-content {{if showNav 'show'}}">
+      <div class="col-md-12">
+        {{xd-nav routes=routes}}
+      </div>
+    </div>
+
+    <div class="card-progress">
+      <div class="card-progress-bar" style="width: {{progress}}%"></div>
+    </div>
+  </div>
+
   {{liquid-outlet class="nested-transition-container enrollment-transition-outlet"}}
 
   {{#liquid-unless currentRoute.hideNav use="toUp"}}

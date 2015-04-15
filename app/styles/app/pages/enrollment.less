@@ -1,0 +1,71 @@
+/*
+  Enrollment Page Styles
+*/
+
+@enrollment-card-background: white;
+
+.enrollment-wrapper {
+  .enrollment-card {
+    padding: 30px;
+    margin-bottom: 20px;
+    background: @enrollment-card-background;
+
+    .box-shadow(0 1px 3px fade(@brand-default, 40%));
+
+    &:not(:first-child) {
+      margin-top: 30px;
+    }
+  }
+}
+
+.card-nav {
+  text-align: center;
+  margin-top: 10px;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+
+  .card-nav-toggle {
+    background: @brand-primary;
+    color: white;
+    border: none;
+    padding: 0 20px;
+
+    .transition(all 0.3s ease-in-out);
+
+    &:hover {
+      background: lighten(@brand-primary, 20%);
+
+      .box-shadow(0 0 1px fade(@brand-default, 80%));
+    }
+  }
+
+  .card-nav-content {
+    background: @brand-primary;
+    margin: 0;
+    color: white;
+    font-weight: 100;
+    max-height: 0;
+    overflow: hidden;
+
+    .transition(all 1s ease-in-out);
+
+    &.show {
+      padding: 20px;
+      max-height: 150px;
+    }
+  }
+
+  .card-progress {
+    width: 100%;
+    height: 3px;
+    background: @gray;
+
+    .card-progress-bar {
+      height: 100%;
+      background: @brand-success;
+
+      .transition(all 1s ease-in-out);
+    }
+  }
+}

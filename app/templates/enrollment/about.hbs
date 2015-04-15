@@ -9,18 +9,18 @@
 
   <h3>Name</h3>
   <div class="row">
-    <div class="col-md-4 form-group">
+    {{#validated-field class="col-md-4 with-label with-col" valid=validity.firstName}}
       <label for="first-name">First Name</label>
       {{form-input id="first-name" value=model.firstName placeholder="John"}}
-    </div>
-    <div class="col-md-2 form-group">
+    {{/validated-field}}
+    {{#validated-field class="col-md-2 with-label with-col" valid=validity.middleInitial}}
       <label for="first-name">Middle Initial</label>
       {{form-input id="middle-initial" value=model.middleInitial placeholder="A"}}
-    </div>
-    <div class="col-md-4 form-group">
+    {{/validated-field}}
+    {{#validated-field class="col-md-4 with-label with-col" valid=validity.lastName}}
       <label for="first-name">Last Name</label>
       {{form-input id="last-name" value=model.lastName placeholder="Smith"}}
-    </div>
+    {{/validated-field}}
     <div class="col-md-2 form-group">
       <label for="suffix">Suffix</label>
       {{view 'select' id="suffix" class="form-control" content=suffixes value=model.suffix prompt="None"}}
@@ -28,32 +28,46 @@
   </div>
 
   <h3>{{#liquid-if model.firstName}}Hi, {{model.firstName}}! What's your Address?{{else}}Address{{/liquid-if}}</h3>
-  <div class="form-group">
+  {{#validated-field valid=validity.addressLine1}}
     <label for="address-line-1" class="sr-only">Street Address</label>
     {{form-input id="address-line-1" value=model.addressLine1 placeholder="Street Address"}}
-  </div>
+  {{/validated-field}}
   <div class="form-group">
     <label for="address-line-2" class="sr-only">Apartment/Suite</label>
     {{form-input id="address-line-2" value=model.addressLine2 placeholder="Apt./Suite"}}
   </div>
   <div class="row">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="address-"></label>
-          {{form-input id="" value=model.addressCity placeholder="City"}}
-        </div>
+    {{#validated-field class="col-md-4 with-col with-label" valid=validity.addressCity}}
+      <label for="address-city">City</label>
+      {{form-input id="address-city" value=model.addressCity placeholder="Billings"}}
+    {{/validated-field}}
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="address-state">State</label>
+        {{view 'select' id="address-state" class="form-control" content=states optionValuePath="content.v" optionLabelPath="content.l" value=model.addressState}}
       </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="address-"></label>
-          {{select-state id="" value=model.addressState placeholder=""}}
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="address-"></label>
-          {{form-input id="" value=model.addressZipcode placeholder=""}}
-        </div>
-      </div>
-    </div>  
+    </div>
+    {{#validated-field class="col-md-4 with-col with-label" valid=validity.addressZipcode}}
+      <label for="address-zipcode">Zipcode</label>
+      {{form-input id="address-zipcode" value=model.addressZipcode placeholder="59102"}}
+    {{/validated-field}}
+  </div>
+
+  {{#liquid-if invalid}}
+    <hr />
+    <p class="text-center text-danger">
+      {{#liquid-if showInvalid}}
+        The following fields are invalid:
+        <ul class="text-left">
+        {{#each invalid as |field|}}
+          <li>
+            <a href="#" class="text-danger" {{action "focusInput" field.id}}>{{field.name}}</a>
+          </li>
+        {{/each}}
+        </ul>
+      {{else}}
+        <a href="#" class="text-danger" {{action "toggleProperty" "showInvalid"}}><i class="fa fa-fw fa-times-circle"></i> Why is this page invalid?</a>
+      {{/liquid-if}}
+    </p>
+  {{/liquid-if}}
 </div>

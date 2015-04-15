@@ -1,0 +1,9 @@
+<ul class="xd-nav-list" style={{listStyle}}>
+  {{#each _consumedRoutes as |route|}}
+    <li class="xd-nav-item {{route.class}}" style={{route.style}}>
+      {{#link-to route.fullLink classNameBindings="route.complete:complete"}}
+        {{route.name}}{{#if route.complete}} <i class="fa fa-fw fa-check"></i>{{/if}}
+      {{/link-to}}
+    </li>
+  {{/each}}
+</ul>
