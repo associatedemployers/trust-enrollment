@@ -3,7 +3,8 @@ import { genders as staticGenders } from '../utils/defined-data';
 
 export default Ember.Component.extend({
   staticGenders: staticGenders,
-  
+  prompt: 'Please Select',
+
   genders: function () {
     var removeOptions = this.get('removeOptions');
 

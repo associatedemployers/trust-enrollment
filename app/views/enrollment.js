@@ -1,14 +1,10 @@
 import Ember from 'ember';
+import renderTooltipsMixin from 'trust-enrollment/mixins/render-tooltips';
 
-export default Ember.View.extend({
+export default Ember.View.extend(renderTooltipsMixin, {
   classNames: [ 'enrollment-view' ],
-  didInsertElement: function () {
-    Ember.run.scheduleOnce('afterRender', this, function () {
-      var e       = this.get('controller'),
-          section = e.get('section');
-      if(section) {
-        e.send('changeActive', section);
-      }
-    });
-  }
+
+  shouldRenderTooltips: function () {
+    this._renderTooltips();
+  }.observes('controller.currentRoute', 'controller.currentRoute.isValid')
 });

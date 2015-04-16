@@ -10,6 +10,9 @@ export default Ember.Mixin.create({
   validity: Ember.Object.create(),
   __registeredObservers: Ember.A(),
 
+  isValid:    Ember.computed.not('invalid.firstObject'),
+  isNotValid: Ember.computed.not('isValid'),
+
   genericFieldValidator: function ( val ) {
     return val && val.length > 0;
   },
@@ -32,17 +35,19 @@ export default Ember.Mixin.create({
     }
 
     fields.forEach(function ( field ) {
-      self.addObserver(field.key, self, self.__validateValue);
+      self.addObserver(field.key, self, self.__observerHook);
       self.get('__registeredObservers').addObject(field.key);
       console.debug('FV Mixin :: Added observer for field: ', field.key);
     });
+
+    Ember.run.next(this, this.__initValidity);
   }.observes('fields').on('init'),
 
   __removeObservers: function () {
     var self = this;
 
     this.get('__registeredObservers').forEach(function ( key, index, array ) {
-      self.removeObserver(key, self, self.__validateValue);
+      self.removeObserver(key, self, self.__observerHook);
       array.removeObject(key);
     });
   }.on('willDestroy'),
@@ -74,43 +79,56 @@ export default Ember.Mixin.create({
     }
   },
 
+  __observerHook: function ( sender, key ) {
+    Ember.run.debounce(this, function () {
+      this.__validateValue(sender, key);
+    }, 100);
+  },
+
   // Validate/format Value
   __validateValue: function ( sender, key ) {
-    Ember.run.once(this, function () {
-      var field = this.get('fields').findBy('key', key);
+    var field = this.get('fields').findBy('key', key);
 
-      if ( !field ) {
-        return;
-      }
+    if ( !field ) {
+      return;
+    }
 
-      console.debug('FV Mixin :: Setting validity for key:', key);
+    console.debug('FV Mixin :: Setting validity for key:', key);
 
-      var value = this.get(key),
-          validator = ( this.__isFn(field.validate) ) ? field.validate : this.get('genericFieldValidator');
+    var value = this.get(key),
+        validator = ( this.__isFn(field.validate) ) ? field.validate : this.get('genericFieldValidator');
 
+    if ( field.processValidity !== false ) {
       this.get('validity').set(key.split('.').pop(), validator.call(this, value));
+    }
 
-      var genericFormatter = this.get('genericFieldFormatter'),
-          hasGeneric = this.__isFn(genericFormatter),
-          hasPrivate = this.__isFn(field.format);
+    var genericFormatter = this.get('genericFieldFormatter'),
+        hasGeneric = this.__isFn(genericFormatter) && field.useGenericFormatter !== false,
+        hasPrivate = this.__isFn(field.format);
 
+    if ( hasGeneric || hasPrivate ) {
+      console.debug('FV Mixin :: Formatting value for key:', key);
+      var newVal = value;
 
-      if ( hasGeneric || hasPrivate ) {
-        console.debug('FV Mixin :: Formatting value for key:', key);
-        var newVal = value;
-
-        if ( hasGeneric ) {
-          newVal = genericFormatter(newVal);
-        }
-
-        if ( hasPrivate ) {
-          newVal = field.format(newVal);
-        }
-
-        this.set(key, newVal);
+      if ( hasGeneric ) {
+        newVal = genericFormatter(newVal);
       }
 
-      Ember.run.once(this, this.__setInvalid);
+      if ( hasPrivate ) {
+        newVal = field.format(newVal);
+      }
+
+      Ember.set(this, key, newVal);
+    }
+
+    Ember.run.once(this, this.__setInvalid);
+  },
+
+  __initValidity: function () {
+    var self = this;
+
+    this.get('__registeredObservers').forEach(function ( key ) {
+      self.__validateValue(self, key);
     });
   },
 

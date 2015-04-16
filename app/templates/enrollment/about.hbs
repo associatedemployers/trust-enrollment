@@ -13,10 +13,10 @@
       <label for="first-name">First Name</label>
       {{form-input id="first-name" value=model.firstName placeholder="John"}}
     {{/validated-field}}
-    {{#validated-field class="col-md-2 with-label with-col" valid=validity.middleInitial}}
+    <div class="col-md-2 form-group">
       <label for="first-name">Middle Initial</label>
       {{form-input id="middle-initial" value=model.middleInitial placeholder="A"}}
-    {{/validated-field}}
+    </div>
     {{#validated-field class="col-md-4 with-label with-col" valid=validity.lastName}}
       <label for="first-name">Last Name</label>
       {{form-input id="last-name" value=model.lastName placeholder="Smith"}}
@@ -27,10 +27,10 @@
     </div>
   </div>
 
-  <h3>{{#liquid-if model.firstName}}Hi, {{model.firstName}}! What's your Address?{{else}}Address{{/liquid-if}}</h3>
+  <h3>{{#liquid-if model.firstName}}Hi, {{model.firstName}}! What's your Mailing Address?{{else}}Mailing Address{{/liquid-if}}</h3>
   {{#validated-field valid=validity.addressLine1}}
-    <label for="address-line-1" class="sr-only">Street Address</label>
-    {{form-input id="address-line-1" value=model.addressLine1 placeholder="Street Address"}}
+    <label for="address-line-1" class="sr-only">P.O. Box or Street Address</label>
+    {{form-input id="address-line-1" value=model.addressLine1 placeholder="P.O. Box or Street Address"}}
   {{/validated-field}}
   <div class="form-group">
     <label for="address-line-2" class="sr-only">Apartment/Suite</label>
@@ -49,11 +49,27 @@
     </div>
     {{#validated-field class="col-md-4 with-col with-label" valid=validity.addressZipcode}}
       <label for="address-zipcode">Zipcode</label>
-      {{form-input id="address-zipcode" value=model.addressZipcode placeholder="59102"}}
+      {{form-input id="address-zipcode" type="number" value=model.addressZipcode placeholder="59102"}}
     {{/validated-field}}
   </div>
 
-  {{#liquid-if invalid}}
+  <h3>Just a few more things about you</h3>
+  <div class="row">
+    {{#validated-field class="col-md-4 with-col with-label is-select" valid=validity.gender}}
+      <label for="info-gender">Gender</label>
+      {{gender-picker inputId="info-gender" value=model.gender}}
+    {{/validated-field}}
+    {{#validated-field class="col-md-4 with-col with-label is-select" valid=validity.maritalStatus}}
+      <label for="info-marital">Marital Status</label>
+      {{view 'select' id="info-marital" class="form-control" content=maritalStatuses value=model.maritalStatus prompt="Please Select"}}
+    {{/validated-field}}
+    {{#validated-field class="col-md-4 with-col on-label" valid=validity.dateOfBirth}}
+      <label for="info-dob">Date of Birth</label>
+      {{dob-picker id="info-dob" value=model.dateOfBirth}}
+    {{/validated-field}}
+  </div>
+
+  {{#liquid-if isNotValid}}
     <hr />
     <p class="text-center text-danger">
       {{#liquid-if showInvalid}}
@@ -69,5 +85,9 @@
         <a href="#" class="text-danger" {{action "toggleProperty" "showInvalid"}}><i class="fa fa-fw fa-times-circle"></i> Why is this page invalid?</a>
       {{/liquid-if}}
     </p>
+  {{else}}
+    <h3 class="text-center text-success">
+      <i class="fa fa-fw fa-thumbs-o-up"></i> Looks good! Click "Next" below to proceed to the next step.
+    </h3>
   {{/liquid-if}}
 </div>

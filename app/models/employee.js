@@ -39,7 +39,7 @@ export default DS.Model.extend({
   addressLine2:   attribute('string'),
   addressCity:    attribute('string'),
   addressState:   attribute('string', { defaultValue: 'MT' }),
-  addressZipcode: attribute('string'),
+  addressZipcode: attribute('number'),
   ssn:            attribute('string'),
   gender:         attribute('string'),
   maritalStatus:  attribute('string'),
