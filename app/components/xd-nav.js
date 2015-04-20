@@ -2,8 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: [ 'xd-nav' ],
-  degRatio: 100,
-  zTranslate: 200,
+  degRatio: 125,
+  zTranslate: 250,
 
   listStyle: function () {
     var foundIndex;

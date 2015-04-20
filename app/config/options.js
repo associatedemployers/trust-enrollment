@@ -88,4 +88,18 @@ var dependentRelationshipsContext = {
   }
 };
 
-export { states, suffixes, genders, maritalStatuses, dependentRelationships, dependentRelationshipsContext };
+var phoneTypes = [
+  'Home',
+  'Cell',
+  'Work'
+];
+
+export {
+  states,
+  suffixes,
+  genders,
+  maritalStatuses,
+  dependentRelationships,
+  dependentRelationshipsContext,
+  phoneTypes
+};

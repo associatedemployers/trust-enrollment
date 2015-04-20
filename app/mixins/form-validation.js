@@ -99,7 +99,7 @@ export default Ember.Mixin.create({
         validator = ( this.__isFn(field.validate) ) ? field.validate : this.get('genericFieldValidator');
 
     if ( field.processValidity !== false ) {
-      this.get('validity').set(key.split('.').pop(), validator.call(this, value));
+      this.get('validity').set(key.split('.').pop(), !!validator.call(this, value));
     }
 
     var genericFormatter = this.get('genericFieldFormatter'),

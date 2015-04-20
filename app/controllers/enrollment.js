@@ -18,6 +18,11 @@ export default Ember.Controller.extend(scrollToTopMixin, {
       fullLink: 'enrollment.about'
     },
     {
+      name: 'Contact Methods',
+      link: 'contact-methods',
+      fullLink: 'enrollment.contact-methods'
+    },
+    {
       name: 'Dependents',
       link: 'dependents',
       fullLink: 'enrollment.dependents'
