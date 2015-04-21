@@ -79,6 +79,14 @@ export default DS.Model.extend({
     return rel !== 'Spouse' && rel !== 'Child';
   }.property('relationship'),
 
+  isFemale: function () {
+    return this.get('gender') === 'Female';
+  }.property('gender'),
+
+  isMale: function () {
+    return this.get('gender') === 'Male';
+  }.property('gender'),
+
   maskedSSN: function () {
     var ssn = this.get('ssn');
 

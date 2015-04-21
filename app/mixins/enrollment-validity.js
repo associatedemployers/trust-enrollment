@@ -2,6 +2,15 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
   needs: [ 'enrollment' ],
+  validityKey: 'isValid',
+
+  __setupObserver: function () {
+    Ember.addObserver(this, this.get('validityKey'), this.__bubbleValidity);
+  }.on('init'),
+
+  __removeObserver: function () {
+    Ember.removeObserver(this, this.get('validityKey'), this.__bubbleValidity);
+  }.on('willDestroy'),
 
   __bubbleValidity: function () {
     var namespace = this.get('validityNamespace');
@@ -9,7 +18,7 @@ export default Ember.Mixin.create({
 
     var parentController = this.get('controllers.enrollment'),
         route = parentController.get('routes').findBy('link', namespace),
-        isValid = this.get('isValid');
+        isValid = !!this.get(this.get('validityKey'));
 
     Ember.set(route, 'isValid', isValid);
 

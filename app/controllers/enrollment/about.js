@@ -45,7 +45,7 @@ export default Ember.Controller.extend(formValidationMixin, enrollmentValidityMi
         return v && !isNaN(v) && v.length === 5;
       },
       format: function ( v ) {
-        return ( v ) ? v.substr(0, 5) : v;
+        return ( v ) ? v.replace(/\D/g, '').substr(0, 5) : v;
       }
     },
     {

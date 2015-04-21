@@ -111,14 +111,16 @@ export default Ember.Mixin.create({
       var newVal = value;
 
       if ( hasGeneric ) {
-        newVal = genericFormatter(newVal);
+        newVal = genericFormatter.call(this, newVal);
       }
 
       if ( hasPrivate ) {
-        newVal = field.format(newVal);
+        newVal = field.format.call(this, newVal);
       }
 
-      Ember.set(this, key, newVal);
+      if ( value !== newVal ) {
+        Ember.set(this, key, newVal);
+      }
     }
 
     Ember.run.once(this, this.__setInvalid);

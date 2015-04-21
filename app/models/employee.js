@@ -42,7 +42,7 @@ export default DS.Model.extend({
   addressZipcode: attribute('number'),
   ssn:            attribute('string'),
   gender:         attribute('string'),
-  maritalStatus:  attribute('string'),
+  maritalStatus:  attribute('string', { defaultValue: 'Single' }),
 
   lastLogin:     DS.belongsTo('login', { inverse: false }),
 

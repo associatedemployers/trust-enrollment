@@ -1,1 +1,164 @@
-{{outlet}}
+<div class="enrollment-card container">
+  <h2>
+    Let's meet the family<br />
+    <small>
+      If you do not have dependents, you may <a href="#" class="text-info" {{action "next"}}>skip this step</a>.
+    </small>
+  </h2>
+  <hr />
+
+  <ul class="list-group">
+    {{#each model.dependents as |dependent|}}
+      <li class="list-group-item dependent-list-item">
+        <span class="pull-left text-muted">
+          <i class="fa fa-fw {{if dependent.isMale 'fa-male' 'fa-female'}}"></i> {{dependent.contextualRelationship}}
+        </span>
+        {{dependent.fullName}}
+        <span class="pull-right">
+          <a href="#" title="Edit {{dependent.firstName}}..." {{action "editDependent" dependent}}><i class="fa fa-fw fa-pencil-square-o"></i></a>
+          <a href="#" title="Remove {{dependent.firstName}}..." class="text-danger" {{action "removeDependent" dependent}}><i class="fa fa-fw fa-trash-o"></i></a>
+        </span>
+      </li>
+    {{/each}}
+  </ul>
+
+  {{#liquid-if pendingRecord use="toUp"}}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>
+          New Dependent
+          {{#unless pendingRecordIsLive}}
+            <a href="#" class="text-muted pull-right" title="Cancel addition" {{action "removeDependent" pendingRecord}}>
+              <i class="fa fa-fw fa-times"></i>
+            </a>
+          {{/unless}}
+        </h4>
+      </div>
+      <div class="panel-body">
+        <div class="row container-fluid">
+          <h4 class="col-md-12">Basic Information</h4>
+
+          {{#validated-field class="col-md-4 with-label with-col is-select" valid=validity.relationship}}
+            <label for="dependent-relationship">Dependent's Relationship</label>
+            {{relationship-picker inputId="dependent-relationship" value=pendingRecord.relationship removeOptions=removeRelationshipOptions}}
+          {{/validated-field}}
+
+          {{#validated-field class="col-md-4 with-label with-col is-select" valid=validity.gender}}
+            <label for="dependent-gender">{{title-case pendingRecord.relationship}}'s Gender</label>
+            {{gender-picker value=pendingRecord.gender}}
+          {{/validated-field}}
+
+          {{#validated-field class="col-md-4 with-col on-label" valid=validity.dateOfBirth}}
+            <label for="dependent-dob">
+              {{title-case pendingRecord.contextualRelationship}}'s Date of Birth
+            </label>
+            {{dob-picker id="dependent-dob" value=pendingRecord.dateOfBirth}}
+          {{/validated-field}}
+
+          {{! name row }}
+          {{#validated-field class="col-md-4 with-label with-col" valid=validity.firstName}}
+            <label for="dependent-first-name">First Name</label>
+            {{form-input id="dependent-first-name" value=pendingRecord.firstName placeholder="Jimmy"}}
+          {{/validated-field}}
+
+          <div class="col-md-2 form-group">
+            <label for="middle-initial">Middle Initial</label>
+            {{form-input id="middle-initial" value=pendingRecord.middleInitial placeholder="B"}}
+          </div>
+
+          {{#validated-field class="col-md-4 with-label with-col" valid=validity.lastName}}
+            <label for="last-name">Last Name</label>
+            {{form-input id="last-name" value=pendingRecord.lastName placeholder="Smith"}}
+          {{/validated-field}}
+
+          <div class="col-md-2 form-group">
+            <label for="suffix">Suffix</label>
+            {{view 'select' id="suffix" class="form-control" content=suffixes value=pendingRecord.suffix prompt="None"}}
+          </div>
+          {{! ./ name row }}
+
+          {{! address row }}
+          <div class="col-md-12">
+            <h4>Address</h4>
+
+            <label for="dependent-address">{{input type="checkbox" id="dependent-address" checked=dependentSpecificAddress}} {{#if pendingRecord.firstName}}{{pendingRecord.firstName}}{{else}}My {{pendingRecord.contextualRelationship}}{{/if}} lives at a different address than me</label>
+
+            {{#liquid-if dependentSpecificAddress}}
+              <div class="form-group">
+                <label for="address-line-1" class="sr-only">Street Address</label>
+                {{form-input id="address-line-1" value=pendingRecord.addressLine1 placeholder="P.O. Box or Street Address"}}
+              </div>
+
+              <div class="form-group">
+                <label for="address-line-2" class="sr-only">Apartment/Suite</label>
+                {{form-input id="address-line-2" value=pendingRecord.addressLine2 placeholder="Apt./Suite"}}
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="address-city">City</label>
+                  {{form-input id="address-city" value=pendingRecord.addressCity placeholder="Billings"}}
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label for="address-state">State</label>
+                    {{view 'select' id="address-state" class="form-control" content=states optionValuePath="content.v" optionLabelPath="content.l" value=pendingRecord.addressState}}
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <label for="address-zipcode">Zipcode</label>
+                  {{form-input id="address-zipcode" type="number" value=pendingRecord.addressZipcode placeholder="59102"}}
+                </div>
+              </div>
+            {{/liquid-if}}
+          </div>
+          {{! ./ address row }}
+
+          {{! ssn row }}
+          <h4 class="col-md-12">Social Security Number</h4>
+
+          {{#validated-field class="col-md-6 with-col left-inner-addon" valid=validity.ssn}}
+            <label for="dependent-ssn" class="sr-only">SSN</label>
+            <i class="fa fa-fw fa-lock text-addon-left"></i>
+            {{form-input id="dependent-ssn" type="number" value=pendingRecord.ssn placeholder="Social Security Number (ex. 123123123)" readonly=dependentNoSsn}}
+          {{/validated-field}}
+
+          <div class="col-md-6 form-group">
+            <label for="dependent-no-ssn">{{input type="checkbox" id="dependent-no-ssn" checked=dependentNoSsn}} {{#if pendingRecord.firstName}}{{pendingRecord.firstName}}{{else}}My {{pendingRecord.contextualRelationship}}{{/if}} does not have an SSN yet.</label>
+          </div>
+
+          {{#liquid-if dependentNoSsn class="col-md-12"}}
+            {{#bs-alert dismissable=true class="alert-danger"}}
+              <i class="fa fa-fw fa-4x fa-exclamation-triangle pull-left"></i> You have indicated your dependent does not have an SSN yet. This is usually the case of newborns. We still require to have an SSN on file, but you may to choose to send us the SSN after you receive it. You will receive more information at the end of your enrollment.
+            {{/bs-alert}}
+          {{/liquid-if}}
+          {{! ./ ssn row }}
+
+          <h4 class="col-md-12">Existing Coverage</h4>
+
+          <div class="form-group col-md-12">
+            <label for="dependent-other-insurance">If your {{pendingRecord.contexualRelationship}} has existing medical coverage that you do not intend on cancelling, please specify below.</label>
+            {{form-input id="dependent-other-insurance" class="form-control" value=pendingRecord.otherInsuranceCompany placeholder="Other Coverage Provider"}}
+          </div>
+        </div>
+        {{#liquid-if isValid use="toUp"}}
+          <hr />
+          <button type="button" class="btn btn-primary btn-block btn-lg" {{action "saveDependent"}}>
+            {{#if pendingRecordIsLive}}
+              <i class="fa fa-fw fa-check"></i> Done adding changes
+            {{else}}
+              <i class="fa fa-fw fa-user-plus"></i> Add your {{pendingRecord.contextualRelationship}} ({{pendingRecord.firstName}}) to your dependents
+            {{/if}}
+          </button>
+        {{/liquid-if}}
+      </div>
+    </div>
+  {{else}}
+    <button type="button" class="btn btn-primary btn-o btn-lg" {{action "addDependent"}}>
+      <i class="fa fa-fw fa-user-plus"></i>
+      Add a dependent...
+    </button>
+  {{/liquid-if}}
+</div>
