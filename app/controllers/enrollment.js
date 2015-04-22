@@ -26,6 +26,11 @@ export default Ember.Controller.extend(scrollToTopMixin, {
       name: 'Dependents',
       link: 'dependents',
       fullLink: 'enrollment.dependents'
+    },
+    {
+      name: 'Medical',
+      link: 'medical',
+      fullLink: 'enrollment.medical'
     }
   ]),
 

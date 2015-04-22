@@ -50,6 +50,7 @@ Router.map(function() {
     this.route('about');
     this.route('dependents');
     this.route('contact-methods');
+    this.route('medical');
   });
   this.route('sign', { path: '/sign/:handoffId' });
 
