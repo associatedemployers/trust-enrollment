@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   classNames: [ 'xd-nav' ],
-  degRatio: 125,
+  degRatio: 250,
   zTranslate: 250,
 
   listStyle: function () {

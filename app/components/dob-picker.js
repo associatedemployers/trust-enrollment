@@ -1,10 +1,21 @@
 import Ember from 'ember';
 
+var _buildId = function ( suffix ) {
+  return function () {
+    return this.get('elementId') + '-' + suffix;
+  };
+};
+
 export default Ember.Component.extend({
   noDays: Ember.computed.not('days'),
   day: null,
   month: null,
   year: null,
+
+  yearInputId: Ember.computed(_buildId('year-select')),
+  monthInputId: Ember.computed(_buildId('month-select')),
+  dayInputId: Ember.computed(_buildId('day-select')),
+
 
   _shouldCheckValue: function () {
     Ember.run.scheduleOnce('afterRender', this, function () {
@@ -33,6 +44,10 @@ export default Ember.Component.extend({
     var dob = this.getProperties('year', 'month', 'day');
     this.set('value', ( !dob.year || !dob.month || !dob.day ) ? undefined : moment(dob.year + '/' + dob.month + '/' + dob.day, 'YYYY/MM/DD').toDate());
   }.observes('year', 'month', 'day'),
+
+  _buildId: function ( suffix ) {
+    return this.get('elementId') + suffix;
+  },
 
   // Year generator
   years: function () {

@@ -1,14 +1,14 @@
 <div class="row">
   <div class="col-md-4">
-    <label for="dob-year" class="sr-only">Year</label>
-    {{view 'select' id="dob-year" class="form-control" content=years value=year prompt="YYYY"}}
+    <label for={{yearInputId}} class="sr-only">Year</label>
+    {{view 'select' id=yearInputId class="form-control" content=years value=year prompt="YYYY"}}
   </div>
   <div class="col-md-4">
-    <label for="dob-month" class="sr-only">Month</label>
-    {{view 'select' id="dob-month" class="form-control" content=months value=month prompt="MM"}}
+    <label for={{monthInputId}} class="sr-only">Month</label>
+    {{view 'select' id=monthInputId class="form-control" content=months value=month prompt="MM"}}
   </div>
   <div class="col-md-4">
-    <label for="dob-day" class="sr-only">Day</label>
-    {{view 'select' id="dob-day" class="form-control" content=days value=day prompt="DD" disabled=noDays}}
+    <label for={{dayInputId}} class="sr-only">Day</label>
+    {{view 'select' id=dayInputId class="form-control" content=days value=day prompt="DD" disabled=noDays}}
   </div>
 </div>

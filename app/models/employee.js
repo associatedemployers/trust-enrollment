@@ -82,7 +82,7 @@ export default DS.Model.extend({
   }.property('legacyClientTerminationDate'),
 
   isMarried: function () {
-    return this.get('maritalStatus') === 'married';
+    return this.get('maritalStatus') === 'Married';
   }.property('maritalStatus'),
 
   hasAddress: function () {

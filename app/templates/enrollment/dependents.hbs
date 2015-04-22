@@ -2,7 +2,11 @@
   <h2>
     Let's meet the family<br />
     <small>
-      If you do not have dependents, you may <a href="#" class="text-info" {{action "next"}}>skip this step</a>.
+      {{#if model.isMarried}}
+        You must, at least, add your spouse.
+      {{else}}
+        If you do not have dependents, you may <a href="#" class="text-info" {{action "next"}}>skip this step</a>.
+      {{/if}}
     </small>
   </h2>
   <hr />
@@ -62,18 +66,18 @@
           {{/validated-field}}
 
           <div class="col-md-2 form-group">
-            <label for="middle-initial">Middle Initial</label>
-            {{form-input id="middle-initial" value=pendingRecord.middleInitial placeholder="B"}}
+            <label for="dependent-middle-initial">Middle Initial</label>
+            {{form-input id="dependent-middle-initial" value=pendingRecord.middleInitial placeholder="B"}}
           </div>
 
           {{#validated-field class="col-md-4 with-label with-col" valid=validity.lastName}}
-            <label for="last-name">Last Name</label>
-            {{form-input id="last-name" value=pendingRecord.lastName placeholder="Smith"}}
+            <label for="dependent-last-name">Last Name</label>
+            {{form-input id="dependent-last-name" value=pendingRecord.lastName placeholder="Smith"}}
           {{/validated-field}}
 
           <div class="col-md-2 form-group">
             <label for="suffix">Suffix</label>
-            {{view 'select' id="suffix" class="form-control" content=suffixes value=pendingRecord.suffix prompt="None"}}
+            {{view 'select' id="dependent-suffix" class="form-control" content=suffixes value=pendingRecord.suffix prompt="None"}}
           </div>
           {{! ./ name row }}
 
@@ -85,31 +89,31 @@
 
             {{#liquid-if dependentSpecificAddress}}
               <div class="form-group">
-                <label for="address-line-1" class="sr-only">Street Address</label>
+                <label for="dependent-address-line-1" class="sr-only">Street Address</label>
                 {{form-input id="address-line-1" value=pendingRecord.addressLine1 placeholder="P.O. Box or Street Address"}}
               </div>
 
               <div class="form-group">
-                <label for="address-line-2" class="sr-only">Apartment/Suite</label>
-                {{form-input id="address-line-2" value=pendingRecord.addressLine2 placeholder="Apt./Suite"}}
+                <label for="dependent-address-line-2" class="sr-only">Apartment/Suite</label>
+                {{form-input id="dependent-address-line-2" value=pendingRecord.addressLine2 placeholder="Apt./Suite"}}
               </div>
 
               <div class="row">
                 <div class="col-md-4">
-                  <label for="address-city">City</label>
-                  {{form-input id="address-city" value=pendingRecord.addressCity placeholder="Billings"}}
+                  <label for="dependent-address-city">City</label>
+                  {{form-input id="dependent-address-city" value=pendingRecord.addressCity placeholder="Billings"}}
                 </div>
 
                 <div class="col-md-4">
                   <div class="form-group">
-                    <label for="address-state">State</label>
-                    {{view 'select' id="address-state" class="form-control" content=states optionValuePath="content.v" optionLabelPath="content.l" value=pendingRecord.addressState}}
+                    <label for="dependent-address-state">State</label>
+                    {{view 'select' id="dependent-address-state" class="form-control" content=states optionValuePath="content.v" optionLabelPath="content.l" value=pendingRecord.addressState}}
                   </div>
                 </div>
 
                 <div class="col-md-4">
-                  <label for="address-zipcode">Zipcode</label>
-                  {{form-input id="address-zipcode" type="number" value=pendingRecord.addressZipcode placeholder="59102"}}
+                  <label for="dependent-address-zipcode">Zipcode</label>
+                  {{form-input id="dependent-address-zipcode" type="number" value=pendingRecord.addressZipcode placeholder="59102"}}
                 </div>
               </div>
             {{/liquid-if}}

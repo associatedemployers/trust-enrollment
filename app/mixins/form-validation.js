@@ -21,6 +21,8 @@ export default Ember.Mixin.create({
 
   // Private Methods
   __registerValidationObservers: function () {
+    this.__removeObservers();
+
     console.debug('FV Mixin :: Registering validation observers...');
 
     var fields = this.get('fields'),
@@ -50,6 +52,11 @@ export default Ember.Mixin.create({
       self.removeObserver(key, self, self.__observerHook);
       array.removeObject(key);
     });
+
+    this.setProperties({
+      validity: Ember.Object.create(),
+      invalid: Ember.A()
+    });
   }.on('willDestroy'),
 
   __setInvalid: function () {
@@ -59,7 +66,7 @@ export default Ember.Mixin.create({
 
     var fieldMatchingKey = function ( key ) {
       return function ( field ) {
-        return field.key === key || field.key.indexOf(key) > -1;        
+        return ( !field ) ? false : field.key === key || field.key.indexOf(key) > -1;        
       };
     };
 
@@ -69,7 +76,7 @@ export default Ember.Mixin.create({
       }
 
       var found  = fields.find(fieldMatchingKey(key)),
-          exists = invalid.findBy('id', found.id);
+          exists = ( found ) ? invalid.findBy('id', found.id) : false;
 
       if ( validity[key] === true && exists ) {
         invalid.removeObject(exists);

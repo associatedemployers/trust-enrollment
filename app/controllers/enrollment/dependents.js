@@ -1,10 +1,12 @@
 import Ember from 'ember';
 import formValidationMixin from 'trust-enrollment/mixins/form-validation';
-// import enrollmentValidityMixin from 'trust-enrollment/mixins/enrollment-validity';
+import enrollmentValidityMixin from 'trust-enrollment/mixins/enrollment-validity';
 import { suffixes, states } from 'trust-enrollment/config/options';
 import titleCase from 'trust-enrollment/utils/title-case';
 
-export default Ember.Controller.extend(formValidationMixin, {
+export default Ember.Controller.extend(formValidationMixin, enrollmentValidityMixin, {
+  validityNamespace: 'dependents',
+  validityKey: 'formIsValid',
   suffixes: suffixes,
   states: states,
 
@@ -17,7 +19,7 @@ export default Ember.Controller.extend(formValidationMixin, {
     },
     {
       key: 'pendingRecord.middleInitial',
-      id: 'middle-initial',
+      id: 'dependent-middle-initial',
       processValidity: false,
       format: function ( v ) {
         return ( v ) ? v.substr(0, 1) : v;
@@ -45,17 +47,17 @@ export default Ember.Controller.extend(formValidationMixin, {
     },
     {
       key: 'pendingRecord.addressLine1',
-      id: 'address-line-1',
+      id: 'dependent-address-line-1',
       processValidity: false
     },
     {
       key: 'pendingRecord.addressCity',
-      id: 'address-city',
+      id: 'dependent-address-city',
       processValidity: false
     },
     {
       key: 'pendingRecord.addressZipcode',
-      id: 'address-zipcode',
+      id: 'dependent-address-zipcode',
       processValidity: false,
       useGenericFormatter: false,
       format: function ( v ) {
@@ -75,12 +77,21 @@ export default Ember.Controller.extend(formValidationMixin, {
     }
   ],
 
+  formIsValid: function () {
+    if ( !this.get('model.isMarried') ) {
+      return true;
+    }
+
+    return !!this.get('model.dependents').findBy('relationship', 'Spouse');
+  }.property('model.isMarried', 'model.dependents.@each.relationship'),
+
   dependentNoSsnDidChange: function () {
     if ( !this.get('pendingRecord') ) {
       return;
     }
 
-    this.set('pendingRecord.ssn', ( this.get('dependentNoSsn') ) ? undefined : null);
+    this.set('pendingRecord.ssn', null);
+    this.notifyPropertyChange('pendingRecord.ssn');
   }.observes('dependentNoSsn'),
 
   removeRelationshipOptions: function () {
