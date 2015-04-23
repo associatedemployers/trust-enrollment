@@ -3,6 +3,8 @@
 */
 
 @enrollment-card-background: white;
+@psli-bg: linear-gradient( white, transparent ), linear-gradient( 90deg, lighten(@gray-lighter, 20%), transparent ), linear-gradient( -90deg, lighten(@gray-light, 35%), transparent );
+@psli-selected-bg: linear-gradient( lighten(@brand-primary, 20%), transparent ), linear-gradient( 90deg, lighten(@brand-primary, 10%), transparent ), linear-gradient( -90deg, @brand-primary, transparent );
 
 .enrollment-wrapper {
   .enrollment-card {
@@ -72,4 +74,93 @@
 
 .dependent-list-item > .pull-left {
   margin-right: 8px;
+}
+
+.plan-selection-list {
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+  }
+
+  .list-group-item {
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 30px;
+    background: @psli-bg;
+
+    .box-shadow(0 22px 10px -20px rgba(0, 0, 0, 0.15));
+
+    &:hover {
+      border-color: @brand-primary;
+      .box-shadow(0 10px 10px -10px rgba(0, 0, 0, 0.15));
+    }
+
+    &.active {
+      background: @psli-selected-bg;
+    }
+
+    .plan-title {
+      margin-top: 15px;
+    }
+
+    ul.plan-details, ul.plan-costs, ul.plan-costs-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul.plan-details, ul.plan-costs {
+      > li {
+        display: inline-block;
+      }
+    }
+
+    ul.plan-costs {
+      margin: 0;
+      text-align: right;
+
+      > li {
+        text-align: left;
+        max-width: 250px;
+        padding: 15px 35px 15px 15px;
+      }
+
+      ul.plan-costs-list {
+        > li {
+          font-size: 75%;
+          color: @gray-light;
+
+          &:first-child {
+            font-size: 100%;
+          }
+        }
+      }
+
+      .callout-cost {
+        background: fade(@brand-primary, 90%);
+        color: white;
+        border-radius: 5px;
+
+        .box-shadow(0 2px 3px fade(@brand-default, 50%) inset);
+
+        ul.plan-costs-list > li {
+          color: lighten(@gray-light, 15%);
+        }
+      }
+    }
+
+    ul.plan-details {
+      margin-top: 10px;
+
+      > li {
+        padding: 4px 8px 7px 0;
+        margin: 0 8px 0 0;
+        border-right: 1px solid @gray-lighter;
+
+        &:last-child {
+          border-right: none;
+          margin-right: 0;
+          padding-right: 0;
+        }
+      }
+    }
+  }
 }
