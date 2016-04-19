@@ -11,14 +11,14 @@ export default Ember.Controller.extend({
     }
 
     // Make sure the ssn is 9 characters long and a number
-    return ( ssn.length === 9 && !isNaN( ssn ) );
+    return ssn.length === 9 && !isNaN( ssn );
   }.property('ssn'),
 
   ssnFormatted: function () {
     var ssn   = this.get('ssn'),
         valid = this.get('ssnIsValid');
 
-    return ( ssn ) ? ( valid ) ? ssn.replace(/(\d{3})(\d{2})(\d{4})/, '***-**-$3') : ssn.replace(/\S/g, '*') : undefined;
+    return ssn ? valid ? ssn.replace(/(\d{3})(\d{2})(\d{4})/, '***-**-$3') : ssn.replace(/\S/g, '*') : undefined;
   }.property('ssn'),
 
   didChangeSocial: function () {
@@ -30,23 +30,24 @@ export default Ember.Controller.extend({
   }.observes('ssn'),
 
   actions: {
-    toggleProperty: function ( prop ) {
+    toggleProperty ( prop ) {
       this.toggleProperty( prop );
     },
 
-    login: function () {
+    login () {
       var ssn = this.get('ssn'),
-          valid = this.get('ssnIsValid'),
-          self = this;
+          valid = this.get('ssnIsValid');
 
-      var cancel = function ( err ) {
+      var cancel = err => {
+        let _err;
+
         if ( err ) {
-          err = ( typeof err === 'string' ) ? err : ( err.responseText ) ? err.responseText : err.statusText;
+          _err = typeof err === 'string' ? err : err.responseText ? err.responseText : err.statusText;
         }
 
-        self.setProperties({
+        this.setProperties({
           loggingIn: false,
-          loginError: err
+          loginError: _err
         });
       };
 
@@ -54,28 +55,28 @@ export default Ember.Controller.extend({
         return cancel('Invalid SSN');
       }
 
-      self.setProperties({
+      this.setProperties({
         loggingIn: true,
         loginError: null
       });
 
-      Ember.$.post('/client-api/employee/login', { ssn: ssn }).then(function ( res ) {
+      Ember.$.post('/client-api/employee/login', { ssn }).then(res => {
         cancel();
 
         if ( res.verificationRequired === true ) {
-          self.transitionToRoute('employee-login.verify-id', res.token);
+          this.transitionToRoute('employee-login.verify-id', res.token);
           console.debug('Route debug: Verification required.');
         } else {
           console.debug('Route debug: Verification not required.');
 
           var auth = res;
           delete auth.verificationRequired;
-
-          self.session.createSession( auth, 'employee' ).then(function ( /* session */ ) {
-            self.transitionToRoute('employee-account');
+          console.log(this.session);
+          this.get('session').createSession(auth, 'employee').then(( /* session */ ) => {
+            this.transitionToRoute('employee-account');
           });
         }
-      }).fail( cancel );
+      }).fail(cancel);
     }
   }
 });

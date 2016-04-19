@@ -9,21 +9,19 @@ export default Ember.Object.extend({
     var token = this.get('content.token');
 
     if ( token ) {
-      console.debug("Session :: Setting up headers...");
+      console.debug('Session :: Setting up headers...');
       this._setupHeaders( token );
     }
 
     this.set('authenticated', !!token);
   }.observes('content'),
 
-  destroySession: function () {
-    var self = this;
-
+  destroySession () {
     if ( this.get('content.id') ) {
-      this.store.find('session', this.get('content.id')).then(function ( session ) {
+      this.store.find('session', this.get('content.id')).then(session => {
         session.destroyRecord();
 
-        self.setProperties({
+        this.setProperties({
           authenticated: false,
           content: null
         });
@@ -36,35 +34,29 @@ export default Ember.Object.extend({
       }
     });
   },
-  
-  createSession: function ( data, type ) {
-    var self = this;
 
-    return new Ember.RSVP.Promise(function ( resolve, reject ) {
+  createSession ( data, type ) {
+    Ember.assert('Session#createSession must have data object to create a session', typeof data === 'object');
 
-      Ember.assert('Session#createSession must have data object to create a session', typeof data === 'object');
+    var session = this.store.createRecord('session', {
+      token:   data.token,
+      expires: data.expiration,
+      user:    data.user,
+      type:    type || 'employee'
+    });
 
-      var session = self.store.createRecord('session', {
-        token:   data.token,
-        expires: data.expiration,
-        user:    data.user,
-        type:    type || 'employee'
+    return session.save().then(function ( record ) {
+      this.setProperties({
+        content: record,
+        authenticated: true
       });
 
-      session.save().then(function ( record ) {
-        self.setProperties({
-          content: record,
-          authenticated: true
-        });
-
-        self.get('currentUser');
-
-        resolve(record);
-      }).catch( reject );
+      this.get('currentUser');
+      return record;
     });
   },
-  
-  _setupHeaders: function ( token ) {
+
+  _setupHeaders ( token ) {
     Ember.assert('Session must have token to setup headers', !!token);
 
     Ember.$.ajaxSetup({
@@ -78,7 +70,7 @@ export default Ember.Object.extend({
 
   currentUser: function () {
     if ( !this.get('content.user') || !this.get('authenticated') ) {
-      return;
+      return undefined;
     }
 
     Ember.assert('Session must have user id to fetch currentUser', this.get('content.user'));
