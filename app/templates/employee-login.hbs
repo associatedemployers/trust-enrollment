@@ -9,7 +9,7 @@
     <form class="login-form" {{action "login" on="submit"}}>
       <div class="form-group left-inner-addon right-inner-text-addon">
         {{input type="password" class="form-control" value=ssn placeholder="Enter Your SSN"}}
-        <span {{bind-attr class=":text-addon-right ssnIsValid:success:danger"}}>
+        <span class="text-addon-right {{if ssnIsValid 'success' 'danger'}}">
           {{ssnFormatted}}
           {{#if ssnIsValid}}
             <i class="fa fa-fw fa-check"></i>
@@ -20,8 +20,8 @@
 
       {{error-display prefix="Error logging in" message=loginError bg=false}}
 
-      <div {{bind-attr class=":hide-slide ssnIsValid:show"}}>
-        <button type="submit" class="btn btn-success btn-block" {{bind-attr disabled=loginIsNotValid}}>
+      <div class="hide-slide {{if ssnIsValid 'show'}}">
+        <button type="submit" class="btn btn-success btn-block" disabled={{loginIsNotValid}}>
           Log in{{#if loggingIn}}<i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}
         </button>
       </div>

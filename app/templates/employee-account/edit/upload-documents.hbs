@@ -37,7 +37,7 @@
         {{progress-bar class="animated fadeInUp" min=0 max=100 value=uploadProgress striped=true barClass="progress-bar-success"}}
       {{/if}}
 
-      <button class="btn btn-success btn-block btn-lg" {{bind-attr disabled=uploadingFiles}} {{action "upload"}}>Upload Supporting Documents</button>
+      <button class="btn btn-success btn-block btn-lg" disabled={{uploadingFiles}} {{action "upload"}}>Upload Supporting Documents</button>
     {{else}}
       <p class="text-center extra-padding">
         You may choose to send supporting documentation to our office via fax or mail. Click "Skip" below.

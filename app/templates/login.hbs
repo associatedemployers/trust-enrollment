@@ -10,8 +10,8 @@
   {{! card body}}
   <div class="card-dialog">
     {{! sample card}}
-    <div {{bind-attr class=":id-card-dialog showIDCard:show"}}>
-      <div {{bind-attr class=":id-card flipCard:flip"}}>
+    <div class="id-card-dialog {{if showIDCard 'show'}}">
+      <div class="id-card {{if flipCard 'flip'}}">
         <div class="card-front"></div>
         <div class="card-back"></div>
         <div class="card-overlay"></div>
@@ -25,19 +25,19 @@
     {{! ./ sample card}}
 
     <form class="login-form" {{action "login" on="submit"}}>
-      <div {{bind-attr class=":form-group :right-inner-text-addon :hide-slide newEnrollment::show"}}>
+      <div class="form-group right-inner-text-addon hide-slide {{unless newEnrollment 'show'}}">
         {{input class="form-control" value=cid placeholder="ID# from your medical card"}}
-        <span {{bind-attr class=":text-addon idIsValid:success:danger"}}>{{cid_formatted}}{{#if idIsValid}}<i class="fa fa-fw fa-check"></i>{{/if}}</span>
-        <div {{bind-attr class=":helpers :hide-slide idIsValid::show"}}>
+        <span class="text-addon {{if idIsValid 'success' 'danger'}}">{{cid_formatted}}{{#if idIsValid}}<i class="fa fa-fw fa-check"></i>{{/if}}</span>
+        <div class="helpers hide-slide {{if idIsValid 'show'}}">
           {{! Tab index is set below to disable helps from being the next element when the parent element is hidden}}
           <span class="help help-right help-sm tooltip-trigger" data-toggle="tooltip" data-placement="right" data-container="body" title="Enrolling for the first time? Click this to start a new enrollment."><a href="#" tabindex="10" {{action toggleProperty "newEnrollment"}}>I don't have an ID#</a></span>
           <span class="help help-right help-sm"><a href="#" tabindex="11" {{action toggleProperty "showIDCard"}}>Where can I find my ID#?</a></span>
         </div>
       </div>
 
-      <div {{bind-attr class=":form-group :left-inner-addon :right-inner-text-addon :hide-slide idIsValid:show newEnrollment:show"}}>
+      <div class="form-group left-inner-addon right-inner-text-addon hide-slide {{if idIsValid 'show'}} {{if newEnrollment 'show'}}">
         {{input class="form-control" value=ssn placeholder="SSN"}}
-        <span {{bind-attr class=":text-addon ssnIsValid:success:danger"}}>{{ssn_formatted}}{{#if ssnIsValid}}<i class="fa fa-fw fa-check"></i>{{/if}}</span>
+        <span class="text-addon {{if ssnIsValid 'success' 'danger'}}">{{ssn_formatted}}{{#if ssnIsValid}}<i class="fa fa-fw fa-check"></i>{{/if}}</span>
         <i class="fa fa-fw fa-lock"></i>
         {{#if newEnrollment}}
           <p class="help help-right help-sm"><a href="#" tabindex="10" {{action toggleProperty "newEnrollment"}}>I have an ID#</a></p>
@@ -45,7 +45,7 @@
       </div>
 
       <div class="form-group text-right">
-        <button type="submit" class="btn btn-success btn-lg" {{bind-attr disabled=loginIsNotValid}}>{{#if newEnrollment}}Start Enrollment{{else}}Login{{/if}}</button>
+        <button type="submit" class="btn btn-success btn-lg" disabled={{loginIsNotValid}}>{{#if newEnrollment}}Start Enrollment{{else}}Login{{/if}}</button>
       </div>
     </form>
 

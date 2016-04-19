@@ -1,11 +1,11 @@
 {{#each model as |faq|}}
-  <div {{bind-attr class=":faq faq.expanded"}}>
+  <div class="faq" {{faq.expanded}}>
     <div class="faq-title">
       <h4 class="clickable" {{action "toggleProperty" "expanded"}}>
         {{faq.question}}
 
         <span class="pull-right">
-          <i {{bind-attr class=":fa :fa-fw faq.expanded:fa-angle-up:fa-angle-down"}}></i>
+          <i class="fa fa-fw {{if faq.expanded 'fa-angle-up' 'fa-angle-down'}}"></i>
         </span>
       </h4>
     </div>

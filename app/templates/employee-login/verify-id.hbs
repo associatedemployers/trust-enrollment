@@ -5,7 +5,7 @@
 
       <div class="form-group left-inner-addon right-inner-text-addon">
         {{input class="form-control" value=memberId placeholder="Enter your Member ID (ex. 943000000)"}}
-        <span {{bind-attr class=":text-addon-right memberIdIsValid:success:danger"}}>
+        <span class="text-addon-right {{if memberIdIsValid 'success' 'danger'}}">
           {{memberIdFormatted}}
           {{#if memberIdIsValid}}
             <i class="fa fa-fw fa-check"></i>
@@ -23,7 +23,7 @@
           <strong>Error verifying:</strong> {{verifyError}}
         </p>
       {{/if}}
-      <button type="submit" class="btn btn-warning btn-block" {{bind-attr disabled=memberIdIsNotValid}}>
+      <button type="submit" class="btn btn-warning btn-block" disabled={{memberIdIsNotValid}}>
         Verify{{#if verifying}}<i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}
       </button>
       <small class="text-right">

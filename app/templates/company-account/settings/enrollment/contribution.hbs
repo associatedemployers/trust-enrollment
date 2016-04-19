@@ -19,7 +19,7 @@
       </span>
     {{/liquid-if}}
   </p>
-  <form {{bind-attr class=":form-horizontal :text-left model.contributionEnable::form-disabled"}}>
+  <form class="form-horizontal text-left {{unless model.contributionEnable 'form-disabled'}}">
     <div class="form-disabled-text">Contribution display is currently disabled. Please enable it to continue.</div>
 
     {{#if model.contributionOnRates}}
