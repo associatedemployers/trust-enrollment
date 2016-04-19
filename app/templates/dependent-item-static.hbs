@@ -10,17 +10,17 @@
     </div>
     <div class="col-md-6 dependent-item-controls">
       <a href="#" class="tooltip-trigger" title="Show Dependent Details" data-placement="bottom" data-container="body" {{action "toggleProperty" "showingDetails"}}>
-        <i {{bind-attr class=":fa :fa-fw showingDetails:fa-angle-up:fa-angle-down showingDetails:active"}}></i>
+        <i class="fa fa-fw fa-{{if showingDetails 'angle-up' 'angle-down'}} {{if showingDetails 'active'}}"></i>
       </a>
       <a href="#" class="tooltip-trigger" title="Edit Dependent Information" data-placement="bottom" data-container="body" {{action "toggleProperty" "isEditing"}}>
-        <i {{bind-attr class=":fa :fa-fw :fa-edit showingDetails:active"}}></i>
+        <i class="fa fa-fw fa-edit {{if showingDetails 'active'}}"></i>
       </a>
       <a href="#" class="tooltip-trigger" title="Delete Dependent" data-placement="bottom" data-container="body" {{action "toggleProperty" "confirmDelete"}}>
-        <i {{bind-attr class=":text-danger :fa :fa-fw :fa-trash-o confirmDelete:active"}}></i>
+        <i class="text-danger fa fa-fw fa-trash-o {{if confirmDelete 'active'}}"></i>
       </a>
     </div>
   </div>
-  <div {{bind-attr class=":hide-slide :text-center showingDetails:show"}}>
+  <div class="hide-slide text-center {{if showingDetails 'show'}}">
     {{#with content}}
       <p>
         <strong>SSN:</strong> {{maskedSSN}}
@@ -36,7 +36,7 @@
     {{/with}}
   </div>
 
-  <div {{bind-attr class=":dependent-item-delete-confirm :text-center :hide-slide confirmDelete:show"}}>
+  <div class="dependent-item-delete-confirm text-center hide-slide {{if confirmDelete 'show'}}">
     <h3>Are you sure you want to delete this dependent ({{content.fullName}})?</h3>
     <div class="pad-controls">
       <button class="btn btn-danger" {{action "deleteDependent"}}><i class="fa fa-fw fa-trash-o"></i> Delete</button>

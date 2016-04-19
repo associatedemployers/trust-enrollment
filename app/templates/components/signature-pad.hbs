@@ -21,7 +21,7 @@
         Check back here when you are done.
       {{else}}
         <a href="#" {{action "registerHandoff"}} disabled="{{registeringHandoff}}">
-          <i {{bind-attr class=":fa registeringHandoff:fa-spinner:fa-retweet"}}></i> Rather use your smartphone? Click to hand off.
+          <i class="fa fa-{{if registeringHandoff 'spinner' 'retweet'}}"></i> Rather use your smartphone? Click to hand off.
         </a>
       {{/if}}
     </div>
@@ -29,7 +29,7 @@
 
   {{#if allowFullscreenToggle}}
     <div class="fullscreen-toggle">
-      <a href="#" {{action "toggleFullscreen"}}><i {{bind-attr class=":fa fullscreen:fa-compress:fa-expand"}}></i></a>
+      <a href="#" {{action "toggleFullscreen"}}><i class="fa fa-{{if fullscreen 'compress' 'expand'}}"></i></a>
     </div>
   {{/if}}
 

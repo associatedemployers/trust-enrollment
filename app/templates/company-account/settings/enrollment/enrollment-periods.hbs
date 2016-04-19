@@ -9,7 +9,7 @@
   </p>
   <div>
     <span>
-      <button {{bind-attr class=":tooltip-trigger :btn :btn-success :btn-sm addingPeriod:active"}} title="Add Enrollment Period" {{action "toggleAddingPeriod"}}><i class="fa fa-plus"></i></button>
+      <button class="tooltip-trigger btn btn-success btn-sm {{if addingPeriod 'active'}}" title="Add Enrollment Period" {{action "toggleAddingPeriod"}}><i class="fa fa-plus"></i></button>
     </span>
     <span class="text-success">
       {{#if successMessage}}
@@ -41,7 +41,7 @@
       <hr />
       {{error-display message=saveError bg=false}}
       <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-block" disabled={{enrollmentPeriodNotValid}}><i {{bind-attr class=":fa :fa-fw savingEnrollmentPeriod:fa-spin savingEnrollmentPeriod:fa-spinner:fa-floppy-o"}}></i> Save Enrollment Period</button>
+        <button type="submit" class="btn btn-primary btn-block" disabled={{enrollmentPeriodNotValid}}><i class="fa fa-fw fa-{{if savingEnrollmentPeriod 'spin fa-spinner' 'floppy-o'}}"}}></i> Save Enrollment Period</button>
       </div>
     </form>
   {{/liquid-if}}

@@ -42,7 +42,7 @@
   <div class="row employee-account-data">
     {{#with content.medicalRates.firstObject as medicalRate}}
       <div class="col-md-3">
-        <div {{bind-attr class=":data-circle medicalRate::disabled"}}>
+        <div class="data-circle {{unless medicalRate 'disabled'}}">
           <h3>Medical</h3>
           <p>
             {{#if medicalRate}}
@@ -57,7 +57,7 @@
 
     {{#with content.dentalRates.firstObject as dentalRate}}
       <div class="col-md-3">
-        <div {{bind-attr class=":data-circle dentalRate::disabled"}}>
+        <div class="data-circle {{unless dentalRate 'disabled'}}">
           <h3>Dental</h3>
           <p>
             {{#if dentalRate}}
@@ -73,7 +73,7 @@
 
     {{#with content.visionRates.firstObject as visionRate}}
       <div class="col-md-3">
-        <div {{bind-attr class=":data-circle visionRate::disabled"}}>
+        <div class="data-circle {{unless visionRate 'disabled'}}">
           <h3>Vision</h3>
           <p>
             {{#if visionRate}}
@@ -89,7 +89,7 @@
 
     {{#with content.lifeRates.firstObject as lifeRate}}
       <div class="col-md-3">
-        <div {{bind-attr class=":data-circle lifeRate::disabled"}}>
+        <div class="data-circle {{unless lifeRate 'disabled'}}">
           <h3>Life</h3>
           <p>
             {{#if lifeRate}}

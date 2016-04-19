@@ -1,3 +1,3 @@
 {{#each blocks as |block|}}
-  <div title={{{block.tooltip}}} {{bind-attr class=":grid-block block.selected:selected block.tooltip:tooltip-trigger"}} style={{blockStyle}} data-placement="bottom" data-container="body" data-html="true" {{action "selectBlock" block}}>{{block.name}}</div>
+  <div title={{{block.tooltip}}} class="grid-block {{if block.selected 'selected'}} {{if block.tooltip 'tooltip-trigger'}}" style={{blockStyle}} data-placement="bottom" data-container="body" data-html="true" {{action "selectBlock" block}}>{{block.name}}</div>
 {{/each}}

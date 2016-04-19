@@ -1,14 +1,14 @@
 <div class="info-viewer-pane">
   <ul class="info-viewer-tabs">
-    <li {{bind-attr class=":tooltip-trigger employee.selected:selected" title=employee.firstName}} data-placement="left">
+    <li class="tooltip-trigger {{if employee.selected 'selected'}}" title="{{employee.firstName}}" data-placement="left">
       <a href="#" {{action 'selectObject' employee}}>
         <i class="fa fa-fw fa-star"></i>
       </a>
     </li>
     {{#each employee.dependents as |dependent|}}
-      <li {{bind-attr class=":tooltip-trigger dependent.selected:selected" title=dependent.firstName}} data-placement="left">
+      <li class="tooltip-trigger {{if dependent.selected 'selected'}}" title="{{dependent.firstName}}" data-placement="left">
         <a href="#" {{action 'selectObject' dependent}}>
-          <i {{bind-attr class=":fa :fa-fw isChild:fa-child:fa-user"}}></i>
+          <i class="fa fa-fw fa-{{if isChild 'child' 'user'}}"></i>
         </a>
       </li>
     {{/each}}
@@ -16,7 +16,7 @@
 
   <hgroup class="viewer-heading">
     <h2>
-      <i {{bind-attr class=":fa :fa-fw selectedIsMale:fa-male:fa-female"}}></i>
+      <i class="fa fa-fw fa-{{if selectedIsMale 'male' 'female'}}"></i>
       {{selectedInfo.firstName}}
 
       <small class="pull-right">

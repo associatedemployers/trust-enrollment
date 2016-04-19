@@ -4,7 +4,7 @@
       <span class="sr-only">Toggle navigation</span>
       <i class="fa fa-bars"></i>
     </button>
-    <div {{bind-attr class=":logo-container onIndex:show-trust-text"}}>
+    <div class="logo-container {{if onIndex 'show-trust-text'}}">
       {{#link-to 'index' class="logo navbar-brand"}}{{/link-to}}
       <span class="trust-text">Trust Enrollment</span>
     </div>

@@ -85,7 +85,7 @@
   <div class="col-md-6">
     <div class="employee-card">
       <div class="bottom-right-corner text-muted">
-        <i {{bind-attr class=":fa :fa-fw ssn:fa-check-circle:fa-ellipsis-h"}}></i>
+        <i class="fa fa-fw fa-{{if ssn 'check-circle' 'ellipsis-h'}}"></i>
       </div>
 
       {{#if legacyClientEmploymentDate}}

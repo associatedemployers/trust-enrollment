@@ -29,7 +29,7 @@
   </p>
 </div>
 
-<input type="file" class="file-upload-hidden-input" {{bind-attr id=inputId multiple=multi}} {{action "selectFile" on="change"}} />
+<input type="file" class="file-upload-hidden-input" id="{{inputId}}" multiple={{multi}} {{action "selectFile" on="change"}} />
 
 <ul class="file-upload-file-list">
   {{#each files as |file|}}

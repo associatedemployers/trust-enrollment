@@ -22,7 +22,7 @@
     {{#bs-table striped=true}}
       <tr class="headers">
         {{#each columnData.headers as |header|}}
-          <th {{bind-attr class="header.mapsTo::text-warning header.missingFields:text-danger"}}>
+          <th class="{{unless header.mapsTo 'text-warning'}} {{if header.missingFields 'text-danger'}}">
             {{header.originalHeader}}
             {{#if header.matchedWith}}
               ({{header.matchedWith}})

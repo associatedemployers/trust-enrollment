@@ -1,7 +1,7 @@
 <div class="form-wrapper">
-  <div {{bind-attr class=":enrollment-period-info :text-center activeEnrollmentPeriod.isActive:text-success:text-warning"}}>
-    <i {{bind-attr class=":fa :fa-fw activeEnrollmentPeriod.isActive:fa-check:fa-exclamation-triangle"}}></i>
-    Plan changes due to reasons other than the events below are 
+  <div class="enrollment-period-info text-center {{if activeEnrollmentPeriod.isActive 'text-success' 'text-warning'}}">
+    <i class="fa fa-fw {{if activeEnrollmentPeriod.isActive 'fa-check' 'fa-exclamation-triangle'}}"></i>
+    Plan changes due to reasons other than the events below are
     {{#if activeEnrollmentPeriod.isActive}}
       <strong>allowed</strong> as we are in open enrollment<br/>
       <small>Current open enrollment: <i>{{format-moment activeEnrollmentPeriod.start}} - {{format-moment activeEnrollmentPeriod.end}}</i></small>

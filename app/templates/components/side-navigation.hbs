@@ -9,7 +9,7 @@
     <li class="nav-link">
       {{#if link.subLinks}}
         <a href="#" {{action "toggleSubLinks" link}}>
-          <i class="fa fa-fw {{link.icon}}"></i> {{link.title}} <i {{bind-attr class=":fa :fa-fw link.expanded:fa-caret-up:fa-caret-down"}}></i>
+          <i class="fa fa-fw {{link.icon}}"></i> {{link.title}} <i class="fa fa-fw fa-{{if link.expanded 'caret-up' 'caret-down'}}"></i>
         </a>
       {{else}}
         {{#link-to link.path}}

@@ -7,11 +7,11 @@
   </div>
   <div class="card-dialog">
     <form class="login-form" {{action "login" on="submit"}}>
-      <div {{bind-attr class=":form-group key:valid"}}>
+      <div class="form-group {{if key 'valid'}}">
         {{input class="form-control" value=key placeholder="Company ID or Email Address"}}
       </div>
 
-      <div {{bind-attr class=":form-group :left-inner-addon password:valid"}}>
+      <div class="form-group left-inner-addon {{if password 'valid'}}">
         <span class="text-addon-left"><i class="fa fa-lock"></i></span>
         {{input type="password" class="form-control" value=password placeholder="Password"}}
       </div>

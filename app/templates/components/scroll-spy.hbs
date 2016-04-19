@@ -2,14 +2,14 @@
   {{#if showSmallMenu}}Hide{{else}}Show{{/if}}
   Form Menu
 </a>
-<ul {{bind-attr class=":titles showSmallMenu:show-sm-menu"}}>
+<ul class="titles {{if showSmallMenu 'show-sm-menu'}}">
   {{#each links as |link|}}
-    <li {{bind-attr class=":title link.active:active"}}>
+    <li class="title {{if link.active 'active'}}">
       <a href="#" {{action "changeActive" link.title}}>{{link.display}}</a>
       {{#if link.subtitles}}
         <ul class="subtitles">
           {{#each link.subtitles as |subtitle|}}
-            <li {{bind-attr class=":subtitle subtitle.active:active"}}>
+            <li class="subtitle {{if subtitle.active 'active'}}">
               <a href="#" {{action "changeActive" subtitle.title}}>{{subtitle.display}}</a>
             </li>
           {{/each}}
