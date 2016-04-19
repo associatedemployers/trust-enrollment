@@ -23,7 +23,7 @@
     {{/validated-field}}
     <div class="col-md-2 form-group">
       <label for="suffix">Suffix</label>
-      {{view 'select' id="suffix" class="form-control" content=suffixes value=model.suffix prompt="None"}}
+      {{input/x-select inputId="suffix" content=suffixes selection=model.suffix prompt="None" action=(action (mut model.suffix))}}
     </div>
   </div>
 
@@ -44,7 +44,7 @@
     <div class="col-md-4">
       <div class="form-group">
         <label for="address-state">State</label>
-        {{view 'select' id="address-state" class="form-control" content=states optionValuePath="content.v" optionLabelPath="content.l" value=model.addressState}}
+        {{input/x-select inputId="address-state" content=states optionValuePath="v" optionLabelPath="l" selection=model.addressState action=(action (mut model.addressState))}}
       </div>
     </div>
     {{#validated-field class="col-md-4 with-col with-label" valid=validity.addressZipcode}}
@@ -61,7 +61,7 @@
     {{/validated-field}}
     {{#validated-field class="col-md-4 with-col with-label is-select" valid=validity.maritalStatus}}
       <label for="info-marital">Marital Status</label>
-      {{view 'select' id="info-marital" class="form-control" content=maritalStatuses value=model.maritalStatus prompt="Please Select"}}
+      {{input/x-select inputId="info-marital" content=maritalStatuses selection=model.maritalStatus prompt="Please Select" action=(action (mut model.maritalStatus))}}
     {{/validated-field}}
     {{#validated-field class="col-md-4 with-col on-label" valid=validity.dateOfBirth}}
       <label for="info-dob">Date of Birth</label>

@@ -5,7 +5,7 @@
         <i class="fa fa-fw fa-star"></i>
       </a>
     </li>
-    {{#each dependent in employee.dependents}}
+    {{#each employee.dependents as |dependent|}}
       <li {{bind-attr class=":tooltip-trigger dependent.selected:selected" title=dependent.firstName}} data-placement="left">
         <a href="#" {{action 'selectObject' dependent}}>
           <i {{bind-attr class=":fa :fa-fw isChild:fa-child:fa-user"}}></i>
@@ -20,7 +20,7 @@
       {{selectedInfo.firstName}}
 
       <small class="pull-right">
-        {{#each status in coverage}}
+        {{#each coverage as |status|}}
           {{#if status.covered}}
             <span class="label label-success">{{title-case status.type}}</span>
           {{/if}}
@@ -54,11 +54,11 @@
     </div>
 
     <div class="col-md-4">
-      
+
     </div>
 
     <div class="col-md-4">
-      
+
     </div>
   </div>
 </div>

@@ -1,44 +1,46 @@
-<div class="row">
-  <div class="col-md-6">
+<div class="list-group-item dependent">
+  <div class="row">
+    <div class="col-md-6">
+      {{#with content}}
+        <h4>
+          {{fullName}}<br />
+          <small>{{contextualRelationship}}</small>
+        </h4>
+      {{/with}}
+    </div>
+    <div class="col-md-6 dependent-item-controls">
+      <a href="#" class="tooltip-trigger" title="Show Dependent Details" data-placement="bottom" data-container="body" {{action "toggleProperty" "showingDetails"}}>
+        <i {{bind-attr class=":fa :fa-fw showingDetails:fa-angle-up:fa-angle-down showingDetails:active"}}></i>
+      </a>
+      <a href="#" class="tooltip-trigger" title="Edit Dependent Information" data-placement="bottom" data-container="body" {{action "toggleProperty" "isEditing"}}>
+        <i {{bind-attr class=":fa :fa-fw :fa-edit showingDetails:active"}}></i>
+      </a>
+      <a href="#" class="tooltip-trigger" title="Delete Dependent" data-placement="bottom" data-container="body" {{action "toggleProperty" "confirmDelete"}}>
+        <i {{bind-attr class=":text-danger :fa :fa-fw :fa-trash-o confirmDelete:active"}}></i>
+      </a>
+    </div>
+  </div>
+  <div {{bind-attr class=":hide-slide :text-center showingDetails:show"}}>
     {{#with content}}
-      <h4>
-        {{fullName}}<br />
-        <small>{{contextualRelationship}}</small>
-      </h4>
+      <p>
+        <strong>SSN:</strong> {{maskedSSN}}
+      </p>
+      <p>
+        <strong>Date of Birth:</strong> {{dob}}
+      </p>
+      <p>
+        {{#if additionalProvider}}
+          Covered by {{additionalProvider}}
+        {{/if}}
+      </p>
     {{/with}}
   </div>
-  <div class="col-md-6 dependent-item-controls">
-    <a href="#" class="tooltip-trigger" title="Show Dependent Details" data-placement="bottom" data-container="body" {{action "toggleProperty" "showingDetails"}}>
-      <i {{bind-attr class=":fa :fa-fw showingDetails:fa-angle-up:fa-angle-down showingDetails:active"}}></i>
-    </a>
-    <a href="#" class="tooltip-trigger" title="Edit Dependent Information" data-placement="bottom" data-container="body" {{action "toggleProperty" "isEditing"}}>
-      <i {{bind-attr class=":fa :fa-fw :fa-edit showingDetails:active"}}></i>
-    </a>
-    <a href="#" class="tooltip-trigger" title="Delete Dependent" data-placement="bottom" data-container="body" {{action "toggleProperty" "confirmDelete"}}>
-      <i {{bind-attr class=":text-danger :fa :fa-fw :fa-trash-o confirmDelete:active"}}></i>
-    </a>
-  </div>
-</div>
-<div {{bind-attr class=":hide-slide :text-center showingDetails:show"}}>
-  {{#with content}}  
-    <p>
-      <strong>SSN:</strong> {{maskedSSN}}
-    </p>
-    <p>
-      <strong>Date of Birth:</strong> {{dob}}
-    </p>
-    <p>
-      {{#if additionalProvider}}
-        Covered by {{additionalProvider}}
-      {{/if}}
-    </p>
-  {{/with}}
-</div>
 
-<div {{bind-attr class=":dependent-item-delete-confirm :text-center :hide-slide confirmDelete:show"}}>
-  <h3>Are you sure you want to delete this dependent ({{content.fullName}})?</h3>
-  <div class="pad-controls">
-    <button class="btn btn-danger" {{action "deleteDependent"}}><i class="fa fa-fw fa-trash-o"></i> Delete</button>
-    <button class="btn btn-primary close-btn" {{action "toggleProperty" "confirmDelete"}}>Cancel</button>
+  <div {{bind-attr class=":dependent-item-delete-confirm :text-center :hide-slide confirmDelete:show"}}>
+    <h3>Are you sure you want to delete this dependent ({{content.fullName}})?</h3>
+    <div class="pad-controls">
+      <button class="btn btn-danger" {{action "deleteDependent"}}><i class="fa fa-fw fa-trash-o"></i> Delete</button>
+      <button class="btn btn-primary close-btn" {{action "toggleProperty" "confirmDelete"}}>Cancel</button>
+    </div>
   </div>
 </div>

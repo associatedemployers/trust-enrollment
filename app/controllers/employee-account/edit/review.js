@@ -1,10 +1,11 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
-  needs: [ 'employee-account/edit', 'employee-account/edit/qualify-event' ],
+  'employee-account/edit': Ember.inject.controller(),
+  'employee-account/edit/qualify-event': Ember.inject.controller(),
 
-  eventSelection: Ember.computed.alias('controllers.employee-account/edit.eventSelection'),
-  dateSelection:  Ember.computed.alias('controllers.employee-account/edit/qualify-event.dateSelection'),
+  eventSelection: Ember.computed.alias('employee-account/edit.eventSelection'),
+  dateSelection:  Ember.computed.alias('employee-account/edit/qualify-event.dateSelection'),
 
   notAgreed: Ember.computed.not('agreement')
 });

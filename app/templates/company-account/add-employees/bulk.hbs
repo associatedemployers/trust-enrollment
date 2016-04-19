@@ -23,7 +23,7 @@
       <tr class="headers">
         {{#each columnData.headers as |header|}}
           <th {{bind-attr class="header.mapsTo::text-warning header.missingFields:text-danger"}}>
-            {{header.originalHeader}} 
+            {{header.originalHeader}}
             {{#if header.matchedWith}}
               ({{header.matchedWith}})
             {{else}}
@@ -64,12 +64,12 @@
       {{#if uploadingFiles}}
         {{progress-bar class="animated fadeInUp" min=0 max=100 value=uploadProgress striped=true barClass="progress-bar-success"}}
       {{/if}}
-      
+
       {{#liquid-if file}}
         <div class="form-group">
           {{error-display prefix="Error fetching locations" message=locationsError bg=false}}
           <label for="add-to-location">Select a location for these employees</label>
-          {{view "select" id="add-to-location" class="form-control" content=companyLocations optionLabelPath="content.addressFormatted" value=location}}
+          {{input/x-select selectId="add-to-location" content=companyLocations optionLabelPath="addressFormatted" selection=location action=(action (mut location))}}
         </div>
 
         <div class="form-group">
@@ -80,7 +80,7 @@
               <i class="fa fa-fw fa-gear"></i>
             {{/if}}
             Process File
-          </button>      
+          </button>
         </div>
       {{/liquid-if}}
     </form>

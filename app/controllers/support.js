@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: [ 'application' ],
+  application: Ember.inject.controller(),
 
   onSubRoute: function () {
-    return this.get('controllers.application.currentPath') !== 'support.index';
-  }.property('controllers.application.currentPath')
+    return this.get('application.currentPath') !== 'support.index';
+  }.property('application.currentPath')
 });

@@ -1,9 +1,12 @@
-<div {{bind-attr class=":modal-dialog modal-sm modal-lg"}}>
+<div class="modal-dialog {{if modal-sm 'modal-sm'}} {{if modal-lg 'modal-lg'}}">
 	<div class="modal-content">
 		{{#if title}}
 		<div class="modal-header">
 			{{#if dismissable}}
 				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			{{/if}}
+			{{#if dismissLink}}
+				{{#link-to dismissLink class='close'}}<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>{{/link-to}}
 			{{/if}}
 			<h4 class="modal-title">{{{title}}}</h4>
 		</div>

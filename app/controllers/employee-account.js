@@ -1,7 +1,8 @@
 import Ember from 'ember';
+import renderTooltips from 'trust-enrollment/mixins/render-tooltips';
 
 export default Ember.ObjectController.extend({
-  needs: [ 'application' ],
+  application: Ember.inject.controller(),
 
   showNavigation: false,
   navigationLinks: [

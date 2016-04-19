@@ -1,4 +1,4 @@
-{{#each faq in content itemController="faq-item"}}
+{{#each model as |faq|}}
   <div {{bind-attr class=":faq faq.expanded"}}>
     <div class="faq-title">
       <h4 class="clickable" {{action "toggleProperty" "expanded"}}>

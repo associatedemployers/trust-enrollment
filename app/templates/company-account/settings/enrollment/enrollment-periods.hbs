@@ -18,7 +18,7 @@
       {{/if}}
     </span>
     <span class="pull-right">
-      Show enrollment periods for {{view 'select' class="form-control input-sm input-inline" content=years value=year}}
+      Show enrollment periods for {{input/x-select selectClass="form-control input-sm input-inline" content=years selection=year action=(action (mut year))}}
     </span>
   </div>
 

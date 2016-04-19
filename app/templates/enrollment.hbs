@@ -1,36 +1,38 @@
-<div class="enrollment-wrapper">
-  <div class="card-nav container">
-    <button type="button" class="card-nav-toggle" {{action "toggleProperty" "showNav"}}>
-      <span class="sr-only">Toggle enrollment navigation</span>
-      <i class="fa fa-fw {{if showNav 'fa-angle-down' 'fa-angle-up'}}"></i>
-    </button>
+<div class="enrollment">
+  <div class="enrollment-wrapper">
+    <div class="card-nav container">
+      <button type="button" class="card-nav-toggle" {{action "toggleProperty" "showNav"}}>
+        <span class="sr-only">Toggle enrollment navigation</span>
+        <i class="fa fa-fw {{if showNav 'fa-angle-down' 'fa-angle-up'}}"></i>
+      </button>
 
-    <div class="row card-nav-content {{if showNav 'show'}}">
-      <div class="col-md-12">
-        {{xd-nav routes=routes}}
+      <div class="row card-nav-content {{if showNav 'show'}}">
+        <div class="col-md-12">
+          {{xd-nav routes=routes}}
+        </div>
+      </div>
+
+      <div class="card-progress">
+        <div class="card-progress-bar" style="width: {{progress}}%"></div>
       </div>
     </div>
 
-    <div class="card-progress">
-      <div class="card-progress-bar" style="width: {{progress}}%"></div>
-    </div>
+    {{liquid-outlet class="nested-transition-container enrollment-transition-outlet"}}
+
+    {{#liquid-unless currentRoute.hideNav use="toUp"}}
+      <div class="container">
+        <div class="form-group tooltip-trigger" data-placement="top" data-container="body" title={{if currentRoute.isValid 'Go to the next step' 'Please complete the form before continuing'}}>
+          <button class="btn btn-block btn-success btn-o tooltip-trigger" disabled={{if currentRoute.isValid false true}} {{action "next"}}>
+            Next{{#if nextRoute.name}}: {{nextRoute.name}}{{/if}}
+          </button>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-block btn-sm btn-warning btn-o" {{action "previous"}}>
+            Previous{{#if prevRoute.name}}: {{prevRoute.name}}{{/if}}
+          </button>
+        </div>
+      </div>
+    {{/liquid-unless}}
   </div>
-
-  {{liquid-outlet class="nested-transition-container enrollment-transition-outlet"}}
-
-  {{#liquid-unless currentRoute.hideNav use="toUp"}}
-    <div class="container">
-      <div class="form-group tooltip-trigger" data-placement="top" data-container="body" title={{if currentRoute.isValid 'Go to the next step' 'Please complete the form before continuing'}}>
-        <button class="btn btn-block btn-success btn-o tooltip-trigger" disabled={{if currentRoute.isValid false true}} {{action "next"}}>
-          Next{{#if nextRoute.name}}: {{nextRoute.name}}{{/if}}
-        </button>
-      </div>
-
-      <div class="form-group">
-        <button class="btn btn-block btn-sm btn-warning btn-o" {{action "previous"}}>
-          Previous{{#if prevRoute.name}}: {{prevRoute.name}}{{/if}}
-        </button>
-      </div>
-    </div>
-  {{/liquid-unless}}
 </div>

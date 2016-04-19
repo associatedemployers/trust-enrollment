@@ -4,7 +4,7 @@ import enrollmentValidityMixin from 'trust-enrollment/mixins/enrollment-validity
 import { phoneTypes } from 'trust-enrollment/config/options';
 
 export default Ember.Controller.extend(formValidationMixin, enrollmentValidityMixin, {
-  needs: [ 'enrollment' ],
+  enrollment: Ember.inject.controller(),
   validityNamespace: 'contact-methods',
   validityKey: 'stepIsValid',
   phoneTypes: phoneTypes,

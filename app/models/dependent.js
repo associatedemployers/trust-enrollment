@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 import { dependent_relationships_context as depContexts } from '../utils/defined-data';
 
@@ -42,12 +43,23 @@ export default DS.Model.extend({
   employee:       DS.belongsTo('employee', { async: true }),
 
   // Relational Plans
-  medicalRates:   DS.hasMany('medical-rate'),
-  dentalRates:    DS.hasMany('dental-rate'),
-  visionRates:    DS.hasMany('vision-rate'),
-  lifeRates:      DS.hasMany('life-rate'),
+  medicalRate: DS.belongsTo('medical-rate'),
+  dentalRate:  DS.belongsTo('dental-rate'),
+  visionRate:  DS.belongsTo('vision-rate'),
+  lifeRates:   DS.hasMany('life-rate'),
 
   // Computed
+  isSpouse: Ember.computed.equal('relationship', 'Spouse'),
+  isChild:  Ember.computed.equal('relationship', 'Child'),
+
+  isFemale: Ember.computed.equal('gender', 'Female'),
+  isMale:   Ember.computed.equal('gender', 'Male'),
+
+  hasMedical: Ember.computed.bool('medicalRate'),
+  hasDental:  Ember.computed.bool('dentalRate'),
+  hasVision:  Ember.computed.bool('visionRate'),
+  hasLife:    Ember.computed.bool('lifeRates.firstObject'),
+
   fullName: function () {
     var n = this.getProperties('firstName', 'lastName', 'middleInitial', 'suffix');
 
@@ -65,27 +77,11 @@ export default DS.Model.extend({
     return ( m.gender && contextual && contextual[ m.gender ] ) ? contextual[ m.gender ] : m.relationship;
   }.property('relationship', 'gender'),
 
-  isSpouse: function () {
-    return this.get('relationship') === 'Spouse';
-  }.property('relationship'),
-
-  isChild: function () {
-    return this.get('relationship') === 'Child';
-  }.property('relationship'),
-
   isOtherRelationship: function () {
     var rel = this.get('relationship');
 
     return rel !== 'Spouse' && rel !== 'Child';
   }.property('relationship'),
-
-  isFemale: function () {
-    return this.get('gender') === 'Female';
-  }.property('gender'),
-
-  isMale: function () {
-    return this.get('gender') === 'Male';
-  }.property('gender'),
 
   maskedSSN: function () {
     var ssn = this.get('ssn');

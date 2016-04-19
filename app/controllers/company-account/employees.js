@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import RenderTooltipsMixin from 'trust-enrollment/mixins/render-tooltips';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(RenderTooltipsMixin, {
   queryParams: [ 'showingTerminated', 'sortAsc' ],
   showingActive: true,
   showingTerminated: false,

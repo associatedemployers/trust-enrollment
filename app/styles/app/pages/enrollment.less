@@ -8,6 +8,7 @@
 
 .enrollment-wrapper {
   .enrollment-card {
+    position: relative;
     padding: 30px;
     margin-bottom: 20px;
     background: @enrollment-card-background;
@@ -16,6 +17,23 @@
 
     &:not(:first-child) {
       margin-top: 30px;
+    }
+
+    &.disabled .disabled-text {
+      background: fade(@gray-lighter, 75%);
+      position: absolute;
+      text-align: center;
+      padding-top: 20%;
+      z-index: 2;
+      margin: 0;
+      text-shadow: 0 1px 1px fade(@brand-default, 60%);
+
+      .trbl();
+    }
+
+    &:not(.disabled) .disabled-text {
+      display: none;
+      visibility: hidden;
     }
   }
 }
@@ -161,6 +179,26 @@
           padding-right: 0;
         }
       }
+    }
+  }
+}
+
+.dependent-selection-list {
+  > li {
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 30px;
+    background: @psli-bg;
+    cursor: move;
+
+    .transition-all();
+    .box-shadow(0 22px 10px -20px rgba(0, 0, 0, 0.15));
+
+    &.is-dragging {
+      background: @psli-selected-bg;
+      border-color: @brand-primary;
+
+      .box-shadow(0 0 25px 5px fade(@brand-default, 40%));
     }
   }
 }

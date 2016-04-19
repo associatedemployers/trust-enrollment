@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: [ 'company-account/settings' ],
+  'company-account/settings': Ember.inject.controller(),
 
   notAllowChangePassword: Ember.computed.not('allowChangePassword'),
   notAllowChangeEmail:    Ember.computed.not('allowChangeEmail'),
@@ -44,7 +44,7 @@ export default Ember.Controller.extend({
         });
       };
 
-      this.get('controllers.company-account/settings')._saveChanges().then(function ( result ) {
+      this.get('company-account/settings')._saveChanges().then(function ( result ) {
         _end(null, 'Email successfully changed to ' + result.get('email') + '. Any future communications will be sent there.');
       }).catch(_end);
     }

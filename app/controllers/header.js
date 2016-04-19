@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: [ 'application' ],
-  onIndex: Ember.computed.alias('controllers.application.onIndex')
+  application: Ember.inject.controller(),
+  onIndex: Ember.computed.alias('application.onIndex')
 });

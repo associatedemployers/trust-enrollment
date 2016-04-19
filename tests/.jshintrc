@@ -21,16 +21,16 @@
     "andThen",
     "currentURL",
     "currentPath",
-    "currentRouteName",
     "moment",
     "NProgress",
     "SignaturePad",
     "io"
+    "currentRouteName"
   ],
   "node": false,
   "browser": false,
   "boss": true,
-  "curly": false,
+  "curly": true,
   "debug": false,
   "devel": false,
   "eqeqeq": true,
@@ -47,7 +47,8 @@
   "plusplus": false,
   "regexp": false,
   "undef": true,
-  "sub": true,
+  "esnext": true,
+  "unused": true
   "strict": false,
   "white": false,
   "eqnull": true,

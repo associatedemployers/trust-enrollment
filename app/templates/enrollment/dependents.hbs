@@ -77,7 +77,7 @@
 
           <div class="col-md-2 form-group">
             <label for="suffix">Suffix</label>
-            {{view 'select' id="dependent-suffix" class="form-control" content=suffixes value=pendingRecord.suffix prompt="None"}}
+            {{input/x-select inputId="dependent-suffix" content=suffixes selection=pendingRecord.suffix prompt="None" action=(action (mut pendingRecord.suffix))}}
           </div>
           {{! ./ name row }}
 
@@ -107,7 +107,7 @@
                 <div class="col-md-4">
                   <div class="form-group">
                     <label for="dependent-address-state">State</label>
-                    {{view 'select' id="dependent-address-state" class="form-control" content=states optionValuePath="content.v" optionLabelPath="content.l" value=pendingRecord.addressState}}
+                    {{input/x-select inputId="dependent-address-state" content=states optionValuePath="v" optionLabelPath="l" selection=pendingRecord.addressState action=(action (mut pendingRecord.addressState))}}
                   </div>
                 </div>
 

@@ -37,7 +37,7 @@
   {{/if}}
   <div class="row">
     <div class="form-group col-md-3">
-      {{view 'select' class="form-control" value=pendingContactMethod.type content=phoneTypes}}
+      {{input/x-select selection=pendingContactMethod.type content=phoneTypes action=(action (mut pendingContactMethod.type))}}
     </div>
     <div class="col-md-{{if validity.value '6' '9'}}">
       <div class="row">

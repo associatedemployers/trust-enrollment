@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: [ 'employee-account/edit', 'employee-account/edit/qualify-event' ],
+  'employee-account/edit': Ember.inject.controller(),
+  'employee-account/edit/qualify-event': Ember.inject.controller(),
 
-  eventSelection:  Ember.computed.alias('controllers.employee-account/edit.eventSelection'),
+  eventSelection:  Ember.computed.alias('employee-account/edit.eventSelection'),
   supportingFiles: Ember.A(),
   uploadProgress:  0,
 
@@ -71,7 +72,7 @@ export default Ember.Controller.extend({
       employee:   this.session.get('currentUser'),
       eventType:  this.get('eventSelection.code'),
       eventTitle: this.get('eventSelection.title'),
-      eventDate:  this.get('controllers.employee-account/edit/qualify-event.dateSelection')
+      eventDate:  this.get('employee-account/edit/qualify-event.dateSelection')
     });
 
     if ( attachments ) {

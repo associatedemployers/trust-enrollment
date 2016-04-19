@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
-  needs: [ 'enrollment' ],
+  enrollment: Ember.inject.controller(),
   validityKey: 'isValid',
 
   __setupObserver: function () {
@@ -16,7 +16,7 @@ export default Ember.Mixin.create({
     var namespace = this.get('validityNamespace');
     Ember.assert('Enrollment Validity Mixin requires "validityNamespace" to bubble validity status.', !!namespace);
 
-    var parentController = this.get('controllers.enrollment'),
+    var parentController = this.get('enrollment'),
         route = parentController.get('routes').findBy('link', namespace),
         isValid = !!this.get(this.get('validityKey'));
 

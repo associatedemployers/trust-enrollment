@@ -22,7 +22,7 @@
   <p class="text-center text-muted">
     <small>
       Supported file types are
-      {{#each ext in allowedExtensions}}
+      {{#each allowedExtensions as |ext|}}
         <span class="label label-default text-small">{{ext}}</span>
       {{/each}}
     </small>
@@ -32,7 +32,7 @@
 <input type="file" class="file-upload-hidden-input" {{bind-attr id=inputId multiple=multi}} {{action "selectFile" on="change"}} />
 
 <ul class="file-upload-file-list">
-  {{#each file in files}}
+  {{#each files as |file|}}
     <li>
       {{file.name}}
       <a href="#" {{action "removeFile" file}}><i class="fa fa-times-circle"></i></a>

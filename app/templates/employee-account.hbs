@@ -1,14 +1,16 @@
-{{side-navigation links=navigationLinks toggle=showNavigation title="I would like to..." hideWithChange=controllers.application.currentRouteName}}
+<div class="employee-account-view side-navigation-wrapper">
+  {{side-navigation links=navigationLinks toggle=showNavigation title="I would like to..." hideWithChange=application.currentRouteName}}
 
-<hgroup class="employee-account-header">
-  <a href="#" title="Open Account Menu" class="tooltip-trigger employee-account-title" data-placement="bottom" data-container='body' {{action "toggleProperty" "showNavigation"}}>
-    <i class="fa fa-bars"></i>
-    My Account
-  </a>
+  <hgroup class="employee-account-header">
+    <a href="#" title="Open Account Menu" class="tooltip-trigger employee-account-title" data-placement="bottom" data-container='body' {{action "toggleProperty" "showNavigation"}}>
+      <i class="fa fa-bars"></i>
+      My Account
+    </a>
 
-  <span class="pull-right tooltip-trigger" {{bind-attr title=lastLoginDescription}} data-placement="left">
-    <i class="fa fa-fw fa-history"></i>
-  </span>
-</hgroup>
+    <span class="pull-right tooltip-trigger" {{bind-attr title=lastLoginDescription}} data-placement="left">
+      <i class="fa fa-fw fa-history"></i>
+    </span>
+  </hgroup>
 
-{{liquid-outlet class="employee-account--nested-transition-container"}}
+  {{liquid-outlet class="employee-account--nested-transition-container"}}
+</div>

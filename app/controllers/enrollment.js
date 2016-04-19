@@ -1,8 +1,9 @@
 import Ember from 'ember';
+import renderTooltips from 'trust-enrollment/mixins/render-tooltips';
 import scrollToTopMixin from 'trust-enrollment/mixins/scroll-to-top';
 
-export default Ember.Controller.extend(scrollToTopMixin, {
-  needs: [ 'application' ],
+export default Ember.Controller.extend(renderTooltips, scrollToTopMixin, {
+  application: Ember.inject.controller(),
   showNav: false,
 
   routes: Ember.A([
@@ -50,7 +51,7 @@ export default Ember.Controller.extend(scrollToTopMixin, {
   currentPathDidChange: function () {
     var self = this,
         routes = this.get('routes'),
-        path = this.get('controllers.application.currentPath').split('enrollment.').pop();
+        path = this.get('application.currentPath').split('enrollment.').pop();
 
     var setCurrent;
 
@@ -69,7 +70,7 @@ export default Ember.Controller.extend(scrollToTopMixin, {
 
       return route;
     }));
-  }.observes('controllers.application.currentPath'),
+  }.observes('application.currentPath'),
 
   navGlance: function () {
     var showNav = this.get('showNav');

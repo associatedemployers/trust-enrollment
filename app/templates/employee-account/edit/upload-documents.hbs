@@ -12,7 +12,7 @@
         Acceptable supporting documents
       </p>
       <ul>
-        {{#each doc in eventSelection.supportingDocuments}}
+        {{#each eventSelection.supportingDocuments as |doc|}}
           <li>{{doc}}</li>
         {{/each}}
       </ul>
@@ -28,7 +28,7 @@
         What kind of file are you uploading?
       </h4>
       <div class="form-group">
-        {{view 'select' class="form-control" content=eventSelection.supportingDocuments value=selfTag}}
+        {{input/x-select content=eventSelection.supportingDocuments selection=selfTag action=(action (mut selfTag))}}
       </div>
 
       {{error-display prefix="Error uploading file" message=uploadError}}

@@ -38,14 +38,14 @@
 
       {{#form-step title="Select Work Location"}}
         <div class="form-group">
-          {{view "select" class="form-control" content=companyLocations optionLabelPath="content.addressFormatted" value=location}}
+          {{input/x-select content=companyLocations optionLabelPath="addressFormatted" selection=location action=(action (mut location))}}
         </div>
       {{/form-step}}
 
       {{#form-step title="Hire Date" autofocus=false}}
         <div class="form-group left-inner-addon">
           <i class="fa fa-fw fa-calendar text-addon-left"></i>
-          {{date-picker value=legacyClientEmploymentDate textValue=employmentTextValue clear=false min=datePickerSettings.min max=datePickerSettings.max}}          
+          {{date-picker value=legacyClientEmploymentDate textValue=employmentTextValue clear=false min=datePickerSettings.min max=datePickerSettings.max}}
         </div>
       {{/form-step}}
 
@@ -70,7 +70,7 @@
           </div>
           <div class="col-md-4">
             <div class="form-group">
-              {{view "select" content=states optionLabelPath="content.l" optionValuePath="content.v" value=state class="form-control"}}
+              {{input/x-select content=states optionLabelPath="l" optionValuePath="v" selection=state action=(action (mut state))}}
             </div>
           </div>
           <div class="col-md-4">

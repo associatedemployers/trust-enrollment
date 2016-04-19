@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  needs: [ 'employee-account/edit' ],
+  'employee-account/edit': Ember.inject.controller(),
 
-  eventSelection: Ember.computed.alias('controllers.employee-account/edit.eventSelection'),
+  eventSelection: Ember.computed.alias('employee-account/edit.eventSelection'),
   dateSelection:  null,
 
   init: function () {

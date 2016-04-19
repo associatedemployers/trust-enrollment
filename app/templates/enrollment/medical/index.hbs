@@ -1,0 +1,30 @@
+<div class="enrollment-card container {{!unless selectedPlan 'disabled'}}">
+  <h1 class="disabled-text text-warning"><i class="fa fa-fw fa-exclamation-triangle"></i> Make a plan selection</h1>
+  <h2>
+    Who's on the plan?<br />
+    <small>
+      Assign your dependents
+    </small>
+  </h2>
+  <hr />
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="easy-controls text-center">
+        <a href="#" {{action "assignAll"}}>Add All To Plan</a>
+      </div>
+      <hr />
+      <ul class="dependent-selection-list list-group">
+        {{#each dependentsUnassigned as |dependent|}}
+          {{#dependent-draggable class="list-group-item" tagName="li"}}
+            {{dependent.fullName}}
+            <span class="pull-right">
+              <i class="fa fa-fw fa-arrows"></i>
+            </span>
+          {{/dependent-draggable}}
+        {{/each}}
+      </ul>
+    </div>
+    <div class="col-md-8"></div>
+  </div>
+</div>

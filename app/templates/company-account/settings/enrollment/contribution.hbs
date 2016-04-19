@@ -96,7 +96,7 @@
       <div class="form-group">
         <label for="contribution-network" class="col-sm-6 control-label">Limit By Network</label>
         <div class="col-sm-6">
-          {{view "select" id="contribution-network" class="form-control" content=medicalPlans value=model.contributionNetwork prompt="All Networks"}}
+          {{input/x-select selectId="contribution-network" content=medicalPlans selection=model.contributionNetwork prompt="All Networks" action=(action (mut model.contributionNetwork))}}
         </div>
       </div>
     {{/if}}

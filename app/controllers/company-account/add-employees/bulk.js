@@ -1,6 +1,7 @@
 import Ember from 'ember';
+import renderTooltips from 'trust-enrollment/mixins/render-tooltips';
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(renderTooltips, {
   fileExtensions: [ 'csv' ],
   requiredFields: [ 'ssn', 'hiredate' ],
   uploadProgress:  0,

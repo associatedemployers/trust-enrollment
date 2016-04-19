@@ -3,11 +3,11 @@ import events from 'trust-enrollment/config/events';
 import eventFunctions from 'trust-enrollment/config/event-functions';
 
 export default Ember.Controller.extend({
-  needs: [ 'employee-account/edit' ],
+  'employee-account/edit': Ember.inject.controller(),
   events: events,
-  activeEnrollmentPeriod: Ember.computed.alias('controllers.employee-account/edit.activeEnrollmentPeriod'),
-  nextEnrollmentPeriod:   Ember.computed.alias('controllers.employee-account/edit.nextEnrollmentPeriod'),
-  eventSelection:         Ember.computed.alias('controllers.employee-account/edit.eventSelection'),
+  activeEnrollmentPeriod: Ember.computed.alias('employee-account/edit.activeEnrollmentPeriod'),
+  nextEnrollmentPeriod:   Ember.computed.alias('employee-account/edit.nextEnrollmentPeriod'),
+  eventSelection:         Ember.computed.alias('employee-account/edit.eventSelection'),
 
   eventsQualified: function () {
     var employee = this.get('content'),

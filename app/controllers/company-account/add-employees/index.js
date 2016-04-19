@@ -6,9 +6,9 @@ var titleCaseValue = function ( value ) {
 };
 
 export default Ember.Controller.extend({
-  needs: [ 'application' ],
+  application: Ember.inject.controller(),
 
-  states: Ember.computed.alias('controllers.application.states'),
+  states: Ember.computed.alias('application.states'),
   name: Ember.computed.or('firstName', 'lastName'),
   address: Ember.computed.and('addressLine1', 'city'),
 

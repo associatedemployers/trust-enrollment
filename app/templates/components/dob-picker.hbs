@@ -1,14 +1,14 @@
 <div class="row">
   <div class="col-md-4">
     <label for={{yearInputId}} class="sr-only">Year</label>
-    {{view 'select' id=yearInputId class="form-control" content=years value=year prompt="YYYY"}}
+    {{input/x-select selectId=yearInputId content=years selection=year action=(action (mut year)) prompt="YYYY"}}
   </div>
   <div class="col-md-4">
     <label for={{monthInputId}} class="sr-only">Month</label>
-    {{view 'select' id=monthInputId class="form-control" content=months value=month prompt="MM"}}
+    {{input/x-select selectId=monthInputId content=months selection=month action=(action (mut month)) prompt="MM"}}
   </div>
   <div class="col-md-4">
     <label for={{dayInputId}} class="sr-only">Day</label>
-    {{view 'select' id=dayInputId class="form-control" content=days value=day prompt="DD" disabled=noDays}}
+    {{input/x-select selectId=dayInputId content=days selection=day action=(action (mut day)) prompt="DD" selectDisabled=noDays}}
   </div>
 </div>
