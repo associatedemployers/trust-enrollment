@@ -1,6 +1,7 @@
-export var initialize = function ( container, app ) {
+export var initialize = function ( application ) {
   console.debug('Init :: Injecting store');
-  app.inject('modules:session', 'store', 'store:main');
+  application.inject('modules:session', 'store', 'service:store');
+  // app.inject('components', 'store', 'store:main');
 };
 
 export default {

@@ -1,6 +1,7 @@
 /*jshint node:true*/
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-app'),
+    Funnel = require('broccoli-funnel'),
     fs = require('fs-extra'),
     vendorDir = JSON.parse(fs.readFileSync('./.bowerrc')).directory + '/';
 
@@ -9,7 +10,6 @@ var bowerIncludes = [
   'nprogress/nprogress.css',
   'c3js-chart/c3.css',
   'd3/d3.js',
-  'ember-localstorage-adapter/localstorage_adapter.js',
   'bootstrap/dist/js/bootstrap.min.js',
   'moment/moment.js',
   'c3js-chart/c3.js',
@@ -30,7 +30,13 @@ module.exports = function(defaults) {
     // Add options here
   });
 
+  var fonts = new Funnel('bower_components/font-awesome', {
+    srcDir: '/fonts',
+    include: ['*.*'],
+    destDir: '/assets/fonts'
+  });
+
   bowerIncludes.forEach(path => app.import(vendorDir + path));
 
-  return app.toTree();
+  return app.toTree(fonts);
 };

@@ -24,7 +24,7 @@
     "moment",
     "NProgress",
     "SignaturePad",
-    "io"
+    "io",
     "currentRouteName"
   ],
   "node": false,
@@ -48,7 +48,7 @@
   "regexp": false,
   "undef": true,
   "esnext": true,
-  "unused": true
+  "unused": true,
   "strict": false,
   "white": false,
   "eqnull": true,

@@ -6,13 +6,15 @@ import Ember from 'ember';
 import SocketEventManager from 'trust-enrollment/modules/socket-events/event-manager';
 import config from 'trust-enrollment/config/environment';
 
+const { getOwner } = Ember;
+
 export default Ember.Object.extend({
   connected:  false,
   connection: null,
 
   init: function () {
     this._super.apply(this, arguments);
-    this.set('session', this.container.lookup('modules:session'));
+    this.set('session', getOwner(this).lookup('modules:session'));
   },
 
   connect: function () {

@@ -27,7 +27,7 @@ export default Ember.Controller.extend({
     Ember.run.once(this, function () {
       this.set('ssn', format);
     });
-  }.observesImmediately('ssn'),
+  }.observes('ssn'),
 
   actions: {
     toggleProperty: function ( prop ) {
