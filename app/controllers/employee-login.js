@@ -65,14 +65,12 @@ export default Ember.Controller.extend({
 
         if ( res.verificationRequired === true ) {
           this.transitionToRoute('employee-login.verify-id', res.token);
-          console.debug('Route debug: Verification required.');
+          Ember.Logger.debug('Route debug: Verification required.');
         } else {
-          console.debug('Route debug: Verification not required.');
-
+          Ember.Logger.debug('Route debug: Verification not required.');
           var auth = res;
           delete auth.verificationRequired;
-          console.log(this.session);
-          this.get('session').createSession(auth, 'employee').then(( /* session */ ) => {
+          this.session.get('createSession')(auth, 'employee').then(( /* session */ ) => {
             this.transitionToRoute('employee-account');
           });
         }

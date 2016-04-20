@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import renderTooltips from 'trust-enrollment/mixins/render-tooltips';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend(renderTooltips, {
   application: Ember.inject.controller(),
 
   showNavigation: false,
@@ -26,8 +26,7 @@ export default Ember.ObjectController.extend({
   // Computed
   lastLoginDescription: function () {
     var login = this.get('content.lastLogin');
-
-    return ( !login ) ? 'Last Login: Now' : 'Last Login: %@'.fmt( moment(login.time_stamp).format('M/D/YY') );
+    return login ? 'Last Login: %@'.fmt( moment(login.time_stamp).format('M/D/YY') ) : 'Last Login: Now';
   }.property('content.lastLogin.[]'),
 
   actions: {

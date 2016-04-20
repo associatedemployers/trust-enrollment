@@ -2,14 +2,14 @@ import Ember from 'ember';
 
 export default Ember.Object.extend({
   contentDidChange: function () {
-    console.debug('Session :: Content Change');
+    Ember.Logger.debug('Session :: Content Change');
 
     this.set('didSetHeaders', false);
 
     var token = this.get('content.token');
 
     if ( token ) {
-      console.debug('Session :: Setting up headers...');
+      Ember.Logger.debug('Session :: Setting up headers...');
       this._setupHeaders( token );
     }
 
@@ -74,7 +74,7 @@ export default Ember.Object.extend({
     }
 
     Ember.assert('Session must have user id to fetch currentUser', this.get('content.user'));
-    console.log(this.get('content.type'));
+    Ember.Logger.debug(this.get('content.type'));
     return this.store.find(this.get('content.type'), this.get('content.user'));
   }.property('content.user', 'authenticated'),
 
