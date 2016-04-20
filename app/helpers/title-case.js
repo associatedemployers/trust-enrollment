@@ -1,8 +1,12 @@
 import Ember from 'ember';
-import titleCase from 'trust-enrollment/utils/title-case';
+import titleCaseUtil from 'trust-enrollment/utils/title-case';
+
+function titleCase ([value]) {
+  return titleCaseUtil(value);
+}
 
 export {
   titleCase
 };
 
-export default Ember.Handlebars.makeBoundHelper(titleCase);
+export default Ember.Helper.helper(titleCase);

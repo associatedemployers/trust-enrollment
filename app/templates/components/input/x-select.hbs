@@ -6,6 +6,6 @@
   {{/if}}
 
   {{#each content key="@identity" as |item|}}
-    {{inputselect-option item=item optionValuePath=optionValuePath optionLabelPath=optionLabelPath selection=selection compareWithValue=compareSelectionWithValue}}
+    {{input/select-option item=item optionValuePath=optionValuePath optionLabelPath=optionLabelPath selection=selection compareWithValue=compareSelectionWithValue}}
   {{/each}}
 </select>

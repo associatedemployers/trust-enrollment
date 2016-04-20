@@ -1,12 +1,10 @@
 <div class="list-group-item dependent">
   <div class="row">
     <div class="col-md-6">
-      {{#with content}}
-        <h4>
-          {{fullName}}<br />
-          <small>{{contextualRelationship}}</small>
-        </h4>
-      {{/with}}
+      <h4>
+        {{model.fullName}}<br />
+        <small>{{model.contextualRelationship}}</small>
+      </h4>
     </div>
     <div class="col-md-6 dependent-item-controls">
       <a href="#" class="tooltip-trigger" title="Show Dependent Details" data-placement="bottom" data-container="body" {{action "toggleProperty" "showingDetails"}}>
@@ -21,19 +19,17 @@
     </div>
   </div>
   <div class="hide-slide text-center {{if showingDetails 'show'}}">
-    {{#with content}}
-      <p>
-        <strong>SSN:</strong> {{maskedSSN}}
-      </p>
-      <p>
-        <strong>Date of Birth:</strong> {{dob}}
-      </p>
-      <p>
-        {{#if additionalProvider}}
-          Covered by {{additionalProvider}}
-        {{/if}}
-      </p>
-    {{/with}}
+    <p>
+      <strong>SSN:</strong> {{model.maskedSSN}}
+    </p>
+    <p>
+      <strong>Date of Birth:</strong> {{model.dob}}
+    </p>
+    <p>
+      {{#if model.additionalProvider}}
+        Covered by {{model.additionalProvider}}
+      {{/if}}
+    </p>
   </div>
 
   <div class="dependent-item-delete-confirm text-center hide-slide {{if confirmDelete 'show'}}">

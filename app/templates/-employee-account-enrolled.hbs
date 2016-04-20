@@ -40,7 +40,7 @@
   </h1>
 
   <div class="row employee-account-data">
-    {{#with content.medicalRates.firstObject as medicalRate}}
+    {{#with content.medicalRates.firstObject as |medicalRate|}}
       <div class="col-md-3">
         <div class="data-circle {{unless medicalRate 'disabled'}}">
           <h3>Medical</h3>
@@ -55,7 +55,7 @@
       </div>
     {{/with}}
 
-    {{#with content.dentalRates.firstObject as dentalRate}}
+    {{#with content.dentalRates.firstObject as |dentalRate|}}
       <div class="col-md-3">
         <div class="data-circle {{unless dentalRate 'disabled'}}">
           <h3>Dental</h3>
@@ -71,7 +71,7 @@
       </div>
     {{/with}}
 
-    {{#with content.visionRates.firstObject as visionRate}}
+    {{#with content.visionRates.firstObject as |visionRate|}}
       <div class="col-md-3">
         <div class="data-circle {{unless visionRate 'disabled'}}">
           <h3>Vision</h3>
@@ -87,7 +87,7 @@
       </div>
     {{/with}}
 
-    {{#with content.lifeRates.firstObject as lifeRate}}
+    {{#with content.lifeRates.firstObject as |lifeRate|}}
       <div class="col-md-3">
         <div class="data-circle {{unless lifeRate 'disabled'}}">
           <h3>Life</h3>

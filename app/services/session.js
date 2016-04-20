@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
-export default Ember.Object.extend({
+export default Ember.Service.extend({
+  store: Ember.inject.service(),
+
   contentDidChange: function () {
     Ember.Logger.debug('Session :: Content Change');
 
