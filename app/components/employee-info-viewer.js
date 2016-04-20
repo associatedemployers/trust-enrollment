@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import TooltipsMixin from 'trust-enrollment/mixins/render-tooltips';
+import renderTooltips from 'trust-enrollment/mixins/render-tooltips';
 
-export default Ember.Component.extend(TooltipsMixin, {
+export default Ember.Component.extend(renderTooltips, {
   classNames: [ 'employee-info-viewer', 'clearfix' ],
 
   init: function () {

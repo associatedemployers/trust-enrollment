@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import renderTooltips from 'trust-enrollment/mixins/render-tooltips';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend(renderTooltips, {
   promptsChanged: function () {
     var p = this.getProperties('isEditing', 'confirmDelete');
 

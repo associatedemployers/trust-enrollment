@@ -10,6 +10,7 @@ export default Ember.Object.extend({
 
     if ( token ) {
       Ember.Logger.debug('Session :: Setting up headers...');
+
       this._setupHeaders( token );
     }
 

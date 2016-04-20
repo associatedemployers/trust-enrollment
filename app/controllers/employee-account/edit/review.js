@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   'employee-account/edit': Ember.inject.controller(),
   'employee-account/edit/qualify-event': Ember.inject.controller(),
 

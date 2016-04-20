@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.ArrayController.extend({
+export default Ember.Controller.extend({
   enrollment: Ember.inject.controller(),
   progress: Ember.computed.alias('parentController.progress'),
 
