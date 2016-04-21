@@ -42,7 +42,7 @@ export default Ember.Component.extend({
     }
 
     var dob = this.getProperties('year', 'month', 'day');
-    this.set('value', ( !dob.year || !dob.month || !dob.day ) ? undefined : moment(dob.year + '/' + dob.month + '/' + dob.day, 'YYYY/MM/DD').toDate());
+    this.set('value', !dob.year || !dob.month || !dob.day ? undefined : moment(dob.year + '/' + dob.month + '/' + dob.day, 'YYYY/MM/DD').toDate());
   }.observes('year', 'month', 'day'),
 
   _buildId: function ( suffix ) {
@@ -71,9 +71,7 @@ export default Ember.Component.extend({
   days: function () {
     var year = this.get('year'),
         month = this.get('month');
-    
-    return (!year || !month) ? null : Array.apply(null, { length: moment(year + '-' + month, 'YYYY-MM').daysInMonth() }).map(function ( v, index ) {
-      return index + 1;
-    });
-  }.property('month', 'year'),
+
+    return !year || !month ? null : Array.apply(null, { length: moment(year + '-' + month, 'YYYY-MM').daysInMonth() }).map((v, i) => i + 1);
+  }.property('month', 'year')
 });

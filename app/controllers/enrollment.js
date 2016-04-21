@@ -2,6 +2,8 @@ import Ember from 'ember';
 import renderTooltips from 'trust-enrollment/mixins/render-tooltips';
 import scrollToTopMixin from 'trust-enrollment/mixins/scroll-to-top';
 
+const { computed } = Ember;
+
 export default Ember.Controller.extend(renderTooltips, scrollToTopMixin, {
   application: Ember.inject.controller(),
   showNav: false,
@@ -35,42 +37,22 @@ export default Ember.Controller.extend(renderTooltips, scrollToTopMixin, {
     }
   ]),
 
-  _deltaRoute: function ( delta ) {
+  _deltaRoute ( delta ) {
     var routes = this.get('routes');
     return routes.objectAt(routes.indexOf(this.get('currentRoute')) + delta);
   },
 
-  nextRoute: function () {
+  nextRoute: computed('currentRoute', function () {
     return this._deltaRoute(1);
-  }.property('currentRoute'),
+  }),
 
-  prevRoute: function () {
+  prevRoute: computed('currentRoute', function () {
     return this._deltaRoute(-1);
-  }.property('currentRoute'),
+  }),
 
-  currentPathDidChange: function () {
-    var self = this,
-        routes = this.get('routes'),
-        path = this.get('application.currentPath').split('enrollment.').pop();
-
-    var setCurrent;
-
-    this.set('routes', routes.map(function ( route ) {
-      var match = route.link === path;
-
-      Ember.setProperties(route, {
-        complete: !setCurrent && !match,
-        active: match
-      });
-
-      if ( match ) {
-        self.set('currentRoute', route);
-        setCurrent = true;
-      }
-
-      return route;
-    }));
-  }.observes('application.currentPath'),
+  currentRoute: computed('routes.[]', 'application.currentPath', function () {
+    return this.get('routes').findBy('link', this.get('application.currentPath').split('enrollment.').pop());
+  }),
 
   navGlance: function () {
     var showNav = this.get('showNav');
@@ -88,20 +70,12 @@ export default Ember.Controller.extend(renderTooltips, scrollToTopMixin, {
     });
   }.observes('currentRoute'),
 
-  progress: function () {
-    var ret;
-
-    this.get('routes').forEach(function ( route, index ) {
-      if ( route.active ) {
-        ret = index;
-      }
-    });
-
-    return (ret / this.get('routes.length')) * 100;
-  }.property('routes'),
+  progress: computed('routes.[]', 'currentRoute', function () {
+    return this.get('routes').indexOf(this.get('currentRoute')) / this.get('routes.length') * 100;
+  }),
 
   actions: {
-    toggleProperty: function ( prop ) {
+    toggleProperty ( prop ) {
       this.toggleProperty( prop );
     }
   }

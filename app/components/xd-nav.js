@@ -1,30 +1,26 @@
 import Ember from 'ember';
 
+const { computed } = Ember;
+
 export default Ember.Component.extend({
   classNames: [ 'xd-nav' ],
   degRatio: 250,
   zTranslate: 250,
 
-  listStyle: function () {
-    var foundIndex;
-
-    this.get('_consumedRoutes').forEach(function ( route, index ) {
-      if ( route.active ) {
-        foundIndex = index;
-      }
-    });
-
-    var translate = 'rotateY(' + -(this.get('degRatio') / this.get('_consumedRoutes.length') * foundIndex) + 'deg)';
+  listStyle: computed('_consumedRoutes', 'currentRoute', function () {
+    let translate = 'rotateY(' +
+    -(this.get('degRatio') / this.get('_consumedRoutes.length') *
+    this.get('routes').indexOf(this.get('currentRoute'))) + 'deg)';
 
     return this._buildTransform(translate);
-  }.property('_consumedRoutes'),
+  }),
 
-  _consumedRoutes: function () {
+  _consumedRoutes: computed('routes.[]', function () {
     var self = this,
         degRatio = this.get('degRatio');
 
     return Ember.copy(this.get('routes')).map(function ( route, index, array ) {
-      var translate = 'rotateY(' + ((degRatio / array.length) * index) + 'deg) translateZ(' + self.get('zTranslate') + 'px)';
+      let translate = 'rotateY(' + degRatio / array.length * index + 'deg) translateZ(' + self.get('zTranslate') + 'px)';
 
       Ember.setProperties(route, {
         class: 'xd-' + index,
@@ -33,11 +29,15 @@ export default Ember.Component.extend({
 
       return route;
     });
-  }.property('routes.[]'),
+  }),
 
-  _buildTransform: function ( translate ) {
-    return [ '-webkit-transform', '-moz-transform', '-ms-transform', '-o-transform', 'transform' ].reduce(function ( ret, prefix ) {
-      return ret + prefix + ': ' + translate + ';';
-    }, '');
+  _buildTransform ( translate ) {
+    return [
+      '-webkit-transform',
+      '-moz-transform',
+      '-ms-transform',
+      '-o-transform',
+      'transform'
+    ].reduce((ret, prefix) => ret + prefix + ': ' + translate + ';', '');
   }
 });

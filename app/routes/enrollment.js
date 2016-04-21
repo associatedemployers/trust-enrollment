@@ -1,17 +1,17 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model: function () {
+  model () {
     return this.store.createRecord('employee'); // Development
     // return this.session.get('currentUser');
   },
 
   actions: {
-    next: function () {
+    next () {
       this.transitionTo('enrollment.' + this.controller.get('nextRoute.link'));
     },
 
-    previous: function () {
+    previous () {
       this.transitionTo('enrollment.' + this.controller.get('prevRoute.link'));
     }
   }

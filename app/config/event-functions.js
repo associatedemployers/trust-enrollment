@@ -9,21 +9,21 @@
 */
 
 var __defaults = {
-  mustBeMarried: function ( employee ) {
+  mustBeMarried ( employee ) {
     return employee.get('maritalStatus') === 'married';
   },
-  mustBeSingle: function ( employee ) {
+  mustBeSingle ( employee ) {
     return employee.get('maritalStatus') === 'single';
   },
-  mustHaveDependents: function ( employee ) {
-    return employee._data.dependents.length > 0;
+  mustHaveDependents ( employee ) {
+    return employee.hasMany('dependents').value().length > 0;
   }
 };
 
 export default {
   marriage: {
     qualify: __defaults.mustBeSingle,
-    setupEmployee: function ( employee ) {
+    setupEmployee ( employee ) {
       employee.set('maritalStatus', 'married');
     }
   },
@@ -35,7 +35,7 @@ export default {
   },
   spouseDeath: {
     qualify: __defaults.mustBeMarried,
-    setupEmployee: function ( employee ) {
+    setupEmployee ( employee ) {
       var dependents = employee.get('dependents'),
           spouse     = dependents.findBy('relationship', 'spouse');
 

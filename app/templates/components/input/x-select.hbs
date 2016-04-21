@@ -1,4 +1,4 @@
-<select id="{{selectId}}" class="{{selectClass}}" disabled="{{selectDisabled}}" {{action 'change' on='change'}}>
+<select id="{{selectId}}" class="{{selectClass}}" disabled={{selectDisabled}} {{action 'change' on='change'}}>
   {{#if prompt}}
     <option selected={{is-not selection}}>
       {{prompt}}

@@ -1,23 +1,10 @@
 import Ember from 'ember';
 
+const { computed } = Ember;
+
 export default Ember.Service.extend({
   store: Ember.inject.service(),
-
-  contentDidChange: function () {
-    Ember.Logger.debug('Session :: Content Change');
-
-    this.set('didSetHeaders', false);
-
-    var token = this.get('content.token');
-
-    if ( token ) {
-      Ember.Logger.debug('Session :: Setting up headers...');
-
-      this._setupHeaders( token );
-    }
-
-    this.set('authenticated', !!token);
-  }.observes('content'),
+  authenticated: computed.bool('content.token'),
 
   destroySession () {
     if ( this.get('content.id') ) {
@@ -25,8 +12,8 @@ export default Ember.Service.extend({
         session.destroyRecord();
 
         this.setProperties({
-          authenticated: false,
-          content: null
+          content: null,
+          didSetHeaders: false
         });
       });
     }
@@ -55,6 +42,7 @@ export default Ember.Service.extend({
       });
 
       this.get('currentUser');
+      this._setupHeaders(data.token);
       return record;
     });
   },
@@ -71,7 +59,7 @@ export default Ember.Service.extend({
     this.set('didSetHeaders', true);
   },
 
-  currentUser: function () {
+  currentUser: computed('content.user', 'authenticated', function () {
     if ( !this.get('content.user') || !this.get('authenticated') ) {
       return undefined;
     }
@@ -79,9 +67,9 @@ export default Ember.Service.extend({
     Ember.assert('Session must have user id to fetch currentUser', this.get('content.user'));
     Ember.Logger.debug(this.get('content.type'));
     return this.get('store').find(this.get('content.type'), this.get('content.user'));
-  }.property('content.user', 'authenticated'),
+  }),
 
-  enrollmentPeriods: function () {
-    return this.get('store').find('enrollment-period', { super: true });
-  }.property()
+  enrollmentPeriods: computed(function () {
+    return this.get('store').query('enrollment-period', { super: true });
+  })
 });

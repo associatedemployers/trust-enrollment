@@ -1,12 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model: function () {
-    return this.store.find('enrollment-period');
+  model () {
+    return this.store.findAll('enrollment-period');
   },
 
   actions: {
-    refresh: function () {
+    refresh () {
       this.refresh();
     }
   }

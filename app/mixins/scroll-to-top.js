@@ -1,9 +1,11 @@
 import Ember from 'ember';
 
-export default Ember.Mixin.create({
-  needs: [ 'application' ],
+const { observer } = Ember;
 
-  _shouldScrollToTop: function () {
-    $('html,body').scrollTop(0);
-  }.observes('controllers.application.currentPath')
+export default Ember.Mixin.create({
+  application: Ember.inject.controller(),
+
+  _scrollToTop: observer('application.currentPath', function () {
+    Ember.$('html,body').scrollTop(0);
+  })
 });

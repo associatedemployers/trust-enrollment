@@ -20,7 +20,7 @@
         <i class="fa fa-mobile"></i> Visit <a href="#" href="http://aetrust.org/sign/{{handoffId}}">http://aetrust.org/sign/{{handoffId}}</a> on your mobile device.<br />
         Check back here when you are done.
       {{else}}
-        <a href="#" {{action "registerHandoff"}} disabled="{{registeringHandoff}}">
+        <a href="#" {{action "registerHandoff"}} disabled={{registeringHandoff}}>
           <i class="fa fa-{{if registeringHandoff 'spinner' 'retweet'}}"></i> Rather use your smartphone? Click to hand off.
         </a>
       {{/if}}

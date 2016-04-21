@@ -27,7 +27,7 @@ export default Ember.Controller.extend({
     var company = this.get('content'),
         self    = this;
 
-    this.store.find('employee', { select: 'legacyClientEmploymentDate legacyClientTerminationDate waived' }).then(function ( employees ) {
+    this.store.query('employee', { select: 'legacyClientEmploymentDate legacyClientTerminationDate waived' }).then(function ( employees ) {
       if ( !company || !employees ) {
         return Ember.A();
       }

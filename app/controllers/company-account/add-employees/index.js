@@ -49,7 +49,7 @@ export default Ember.Controller.extend({
 
     this.set('locationsError', null);
 
-    return this.store.find('location').then(function ( locations ) {
+    return this.store.findAll('location').then(function ( locations ) {
       self.set('companyLocations', locations.get('content'));
     }).catch(function ( err ) {
       console.error(err);
